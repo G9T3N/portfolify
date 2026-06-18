@@ -24,7 +24,7 @@ const socialPosts=[ <motion.div
         <img
           src="/favicon.svg"
           alt="Mr.Err"
-          className="w-24 h-24 md:w-48 md:h-48 opacity-30"
+          className="w-48 h-48 opacity-30"
         />
       </div>
       <div className="absolute inset-0 border rounded-4xl pointer-events-none border-border" />
