@@ -19,7 +19,7 @@ const Footer = () => {
             © {currentYear} Mr.Err. All rights reserved.
           </p>
           <Link
-            to="/admin/login"
+            to="/login"
             className="text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors opacity-50 hover:opacity-100 ml-2"
             title="Admin Login"
           >

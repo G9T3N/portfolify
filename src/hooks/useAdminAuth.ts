@@ -23,7 +23,7 @@ export const useAdminAuth = () => {
       async (event, session) => {
         if (event === 'SIGNED_OUT') {
           setAuthState({ user: null, isAdmin: false, isLoading: false });
-          navigate('/admin/login', { replace: true });
+          navigate('/login', { replace: true });
         } else if (session?.user) {
           // Check admin role
           const { data: roles } = await supabase
@@ -38,7 +38,7 @@ export const useAdminAuth = () => {
           if (!isAdmin) {
             await supabase.auth.signOut();
             setAuthState({ user: null, isAdmin: false, isLoading: false });
-            navigate('/admin/login', { replace: true });
+            navigate('/login', { replace: true });
           } else {
             setAuthState({ user: session.user, isAdmin: true, isLoading: false });
           }
@@ -52,7 +52,7 @@ export const useAdminAuth = () => {
       
       if (!session) {
         setAuthState({ user: null, isAdmin: false, isLoading: false });
-        navigate('/admin/login', { replace: true });
+        navigate('/login', { replace: true });
         return;
       }
 
@@ -69,7 +69,7 @@ export const useAdminAuth = () => {
       if (!isAdmin) {
         await supabase.auth.signOut();
         setAuthState({ user: null, isAdmin: false, isLoading: false });
-        navigate('/admin/login', { replace: true });
+        navigate('/login', { replace: true });
       } else {
         setAuthState({ user: session.user, isAdmin: true, isLoading: false });
       }
