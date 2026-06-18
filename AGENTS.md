@@ -37,13 +37,13 @@ Lint order: `pnpm lint:oxc` (fastest) → `pnpm lint` (ESLint — `react-hooks`/
 - **`react-router.config.ts`** — `ssr: false`, `appDirectory: "src"`
 - **`src/routes/_index/route.tsx`** — home page (Hero, Projects, About, Skills, Contact, Footer)
 - **`src/routes/admin/route.tsx`** — admin sidebar layout with `<Outlet/>`
-- **Admin auth** — `useAdminAuth` hook checks Supabase `user_roles` table for `admin` role; redirects to `/admin/login` if unauthenticated
+- **Admin auth** — `useAdminAuth` hook checks Supabase `user_roles` table for `admin` role; redirects to `/login` if unauthenticated
 - **`src/components/`** — reusable UI (Navbar, HeroSection, etc.) + `ui/` (shadcn) + `portfolio/`
 - **`src/queries/`** — TanStack Query hooks (one file per entity: `projects.ts`, `skills.ts`, etc.)
 - **`src/integrations/supabase/`** — Supabase client + hand-written Database types
 - **`src/lib/utils.ts`** — `cn()` utility (clsx + tailwind-merge)
 - **`@/`** path alias → `./src/`
-- **`.env`** is committed (Supabase keys); `.env.local` / `.env.*.local` are gitignored
+- **`.env.example`** should contain template/placeholder values without actual secrets; all `.env` and `.env.*.local` files are gitignored
 - **`vite.config.ts`** — includes `**/*.glb` as assets
 
 ## Design System

@@ -75,12 +75,12 @@ const SwipeableCards = ({
         ))}
         {showNavigation && (
           <div>
-            <div className="swiper-button-next after:hidden">
+            <button className="swiper-button-next after:hidden">
               <ChevronRightIcon className="h-6 w-6 text-white" />
-            </div>
-            <div className="swiper-button-prev after:hidden">
+            </button>
+            <button className="swiper-button-prev after:hidden">
               <ChevronLeftIcon className="h-6 w-6 text-white" />
-            </div>
+            </button>
           </div>
         )}
       </Swiper>
