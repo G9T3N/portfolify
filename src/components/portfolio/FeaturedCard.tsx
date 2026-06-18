@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Fullscreen } from "lucide-react";
-import PostSwiper from '/ui/components/PostSwiper'
+import PostSwiper from '@/components/ui/PostSwiper'
+import lanyardImage from '@/assets/lanyard/lanyard.jpg'
 
 export const FeaturedCard = () => {
 const socialPosts=[ <motion.div
@@ -54,7 +55,7 @@ const socialPosts=[ <motion.div
         <div className="flex-grow rounded-4xl overflow-hidden relative">
           <div className="w-full h-full flex items-center justify-center">
             <img
-              src="/src/assets/lanyard/lanyard.jpg"
+              src={lanyardImage}
               alt="Mr.Err"
               className=" rounded-3xl opacity-80"
             />
