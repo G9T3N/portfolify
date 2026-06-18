@@ -32,7 +32,9 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               <h1 className="text-3xl word-break sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-[var(--color-text-primary)]">
-                Equal parts creative
+                Wael Alamrany AKA Mr.Err
+                <br />
+                Problem Solver
                 <br />
                 developer & designer
               </h1>

@@ -1,9 +1,9 @@
 { pkgs, ... }: {
   # Updated to unstable to support Node 24
   channel = "unstable"; 
-
   packages = [
     pkgs.nodejs_24
+    pkgs.opencode       # Adds OpenCode natively into your workspace PATH
   ];
 
   idx.extensions = [
