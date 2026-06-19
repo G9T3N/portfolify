@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 
-import { useExperienceManager } from '../hooks/use-experience-form';
+import { useExperienceManager } from '../utils/hooks/use-experience-form';
 
 const ExperienceManager = () => {
   const {

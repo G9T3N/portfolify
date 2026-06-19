@@ -6,7 +6,7 @@ import {
   useUpdateExperienceMutation,
   useDeleteExperienceMutation,
   useToggleExperienceVisibilityMutation,
-} from '../queries';
+} from '../../queries';
 
 /**
  * Manages state and handlers for creating, editing, and submitting work experience entries in an admin UI.
