@@ -26,24 +26,32 @@ const HeroSection = () => {
           <div className="relative flex flex-col justify-start h-full">
             {/* Bottom text overlay */}
             <motion.div
-              className="inverted-border-card ps-0 p-7 md:pt-16"
+              className="inverted-border-card ps-6 md:ps-8 p-7 md:pt-16"
               initial={{ opacity: 0, y: -40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <h1 className="text-3xl word-break sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-[var(--color-text-primary)]">
-                Wael Alamrany AKA Mr.Err
-                <br />
-                Problem Solver
-                <br />
-                developer & designer
-              </h1>
+              <div className="flex flex-col gap-4 max-w-2xl pr-4">
+                <div className="space-y-1">
+                  <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-primary)] uppercase font-mono">
+                    Full-Stack Developer & UI Specialist
+                  </span>
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight text-[var(--color-text-primary)]">
+                    Wael Alamrany
+                    <span className="block text-xl sm:text-2xl md:text-3xl font-medium text-[var(--color-text-secondary)] mt-1 font-mono">
+                      — Mr.Err
+                    </span>
+                  </h1>
+                </div>
+                <p className="text-sm sm:text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-lg font-sans">
+                  Bridging the gap between robust system architecture and seamless, high-performance user interfaces.
+                </p>
+              </div>
             </motion.div>
           </div>
 
           <motion.div
-            className="absolute end-0 bottom-0   ;
- "
+            className="absolute end-0 bottom-0"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
