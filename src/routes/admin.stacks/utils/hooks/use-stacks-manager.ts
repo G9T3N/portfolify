@@ -10,7 +10,7 @@ import {
   useToggleSkillVisibilityMutation,
   useCategoryMutation,
   useDeleteCategoryMutation,
-} from '../queries';
+} from '../../queries';
 
 /**
  * Manages UI state, controlled form data, and mutation-backed handlers for skill categories and skills in the admin "stacks" interface.
