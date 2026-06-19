@@ -19,14 +19,14 @@ export function PermissionsWrapper({
                 <Tooltip>
                     <Tooltip.Trigger asChild>
                         {/*
-              - inline-block & relative so tooltip can position itself
-              - cursor-not-allowed for the 🚫 cursor
-            */}
+              - inline-block & relative so tooltip can position itself
+              - cursor-not-allowed for the 🚫 cursor
+            */}
                         <span className={`${className} h-full cursor-not-allowed relative`}>
                             {/*
-                - opacity-50 dims the child
-                - pointer-events-none makes it truly inert
-              */}
+                - opacity-50 dims the child
+                - pointer-events-none makes it truly inert
+              */}
                             <span className="opacity-50 cursor-not-allowed pointer-events-none">
                                 {children}
                             </span>
