@@ -1,7 +1,7 @@
 import { Upload, Loader2, Plus } from 'lucide-react';
 import { AnimatedDialog } from '@/components/common/animated-dialog';
 import { useImageUpload } from '@/utils/hooks/use-image-upload';
-import { useProjectForm } from '../hooks/use-project-form';
+import { useProjectForm } from '../utils/hooks/use-project-form';
 
 
 
