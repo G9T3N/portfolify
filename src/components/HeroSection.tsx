@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Gauge } from "./portfolio/Gauge";
@@ -34,17 +35,17 @@ const HeroSection = () => {
               <div className="flex flex-col gap-4 max-w-2xl pr-4">
                 <div className="space-y-1">
                   <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-primary)] uppercase font-mono">
-                    Full-Stack Developer & UI Specialist
+                    <Trans>Full-Stack Developer & UI Specialist</Trans>
                   </span>
                   <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight text-[var(--color-text-primary)]">
-                    Wael Alamrany
+                    <Trans>Wael Alamrany</Trans>
                     <span className="block text-xl sm:text-2xl md:text-3xl font-medium text-[var(--color-text-secondary)] mt-1 font-mono">
-                      — Mr.Err
+                      <Trans>— Mr.Err</Trans>
                     </span>
                   </h1>
                 </div>
                 <p className="text-sm sm:text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-lg font-sans">
-                  Bridging the gap between robust system architecture and seamless, high-performance user interfaces.
+                  <Trans>Bridging the gap between robust system architecture and seamless, high-performance user interfaces.</Trans>
                 </p>
               </div>
             </motion.div>
