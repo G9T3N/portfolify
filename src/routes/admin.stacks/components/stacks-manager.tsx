@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Plus, Pencil, Trash2, Eye, EyeOff, Loader2, FolderPlus } from 'lucide-react';
 import { AnimatedDialog } from '@/components/common/animated-dialog';
-import { useStacksManager } from '../hooks/use-stacks-manager';
+import { useStacksManager } from '../utils/hooks/use-stacks-manager';
 import { Skill } from '../queries';
 
 const proficiencyColors = {

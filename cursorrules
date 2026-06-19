@@ -1,0 +1,55 @@
+{
+  "rules": [
+    {
+      "name": "Folder Architecture",
+      "description": "Maintain domain-driven splitting within routes.",
+      "pattern": "src/routes/**/*",
+      "instruction": "Each feature route MUST include: components/ (JSX), utils/ (constants, functions, hooks), queries.ts (API hooks), and route.tsx (Entry point). Follow Reference: src/routes/_home.main.statistics."
+    },
+    {
+      "name": "SOLID Separation",
+      "description": "Separate concerns into dedicated files/folders.",
+      "instruction": "JSX goes in components/, TanStack Query hooks in queries.ts, and logic in utils/ (subdirectories: constants, functions, hooks). Use src/stores/ for Zustand state."
+    },
+    {
+      "name": "API Response Handling",
+      "description": "Always use the Body helper component.",
+      "instruction": "Use the <Body /> component from '@/utils/generator/BodyComponent' to manage loading, errors (400, 401, 403, 404, 500+), and empty states. Use status, hasData, loading, and Skeleton props."
+    },
+    {
+      "name": "Design System Strictness",
+      "description": "Only use the @design-system package.",
+      "instruction": "NEVER use external component libraries or hardcoded UI. Only import from '@design-system/yeds-components'. Reference .npmrc for private registry."
+    },
+    {
+      "name": "Auto-Imports (unimport)",
+      "description": "Avoid redundant imports for commonly used libraries.",
+      "instruction": "Presets include: React (hooks), React Router (Link, useNavigate, etc.), TanStack Query (useQuery, etc.), Zustand (create), and some design system components (Skeleton). Check vite.config.ts for full list."
+    },
+    {
+      "name": "ESLint & Perfectionist",
+      "description": "Maintain strict sorting and naming conventions.",
+      "instruction": "Follow eslint.config.js rules. Use Alphabetical sorting for imports and object properties. Use CamelCase for variables and PascalCase for components/types. DO NOT use wildcard imports (import * as ...); always use named imports."
+    },
+    {
+      "name": "Strict Typing",
+      "description": "Ensure type safety by avoiding 'any'.",
+      "instruction": "DO NOT use 'any'. Use explicit types, interfaces, or generated schemas from 'src/config/api-schema.d.ts'."
+    },
+    {
+      "name": "Phosphor Icons Only",
+      "description": "Always use Phosphor Icons via UnoCSS Iconify integration.",
+      "instruction": "ALWAYS use Phosphor Icons with the pattern 'i-ph:<icon-name>' (e.g., 'i-ph:fingerprint', 'i-ph:plus-circle', 'i-ph:user', 'i-ph:gear'). Phosphor supports weight variants: regular (default) 'i-ph:house', bold 'i-ph:house-bold', fill 'i-ph:house-fill', duotone 'i-ph:house-duotone', thin 'i-ph:house-thin', light 'i-ph:house-light'. Do NOT use icons from other collections (mdi, lucide, prime, etc.). Phosphor is the single source for all icons. Reference 'uno.config.ts' for configuration and safelist."
+    },
+    {
+      "name": "i18n (LinguiJS)",
+      "description": "Ensure all user-facing strings are translatable.",
+      "instruction": "Wrap text with <Trans> or use the t macro. Imports MUST be: 'import { Trans } from \"@lingui/react/macro\"' and 'import { t } from \"@lingui/core/macro\"'."
+    },
+    {
+      "name": "Routing & Navigation",
+      "description": "Guidelines for Link, NavLink, and useNavigate.",
+      "instruction": "Use <Link> for normal navigation. Use <NavLink> when you need the 'active' state styling. Reserve useNavigate() STRICTLY for programmatic navigation without user interaction (e.g., timeouts, inactivity logouts, post-fetch redirects)."
+    }
+  ]
+}

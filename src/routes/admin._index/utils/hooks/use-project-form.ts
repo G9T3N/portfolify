@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { toast } from '@/hooks/use-toast';
-import { useSaveProjectMutation } from '../queries';
+import { useSaveProjectMutation } from '../../queries';
 
 export interface ProjectFormData {
   title: string;

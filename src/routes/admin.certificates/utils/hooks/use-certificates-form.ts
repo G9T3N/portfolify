@@ -6,7 +6,7 @@ import {
   useUpdateCertificateMutation,
   useDeleteCertificateMutation,
   useToggleCertificateVisibilityMutation,
-} from '../queries';
+} from '../../queries';
 
 /**
  * Manages state and handlers for creating, editing, deleting, and toggling visibility of certificates in an admin UI.

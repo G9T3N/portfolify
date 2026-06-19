@@ -1,69 +1,80 @@
-# Mr.Err Portfolio — AGENTS.md
+# wosol-web-console — Agent Instructions
 
-## Stack
+## Quick Start
+- Package manager: **pnpm** (v10.33.0). Do not use npm.
+- `pnpm dev` — port **5188**, HTTPS (certs in `certs/`), proxy `/api` → `VITE_GATEWAY_BASE_URL`
+- `pnpm build` = `react-router build && tsc -b` — typecheck is part of build
+- `pnpm lint` — ESLint with `--quiet`
+- `pnpm test` — Vitest (jsdom + Testing Library + MSW)
+- `pnpm format` — Prettier (no standalone install needed)
+- `pnpm msg:extract` / `pnpm msg:compile` — Lingui i18n
+- `pnpm codegen` — GraphQL Codegen
+- `pnpm update-schema` — openapi-typescript → `src/config/api-schema.d.ts`
 
-- **React 19** + **React Router v7** (file-system routes via `@react-router/fs-routes`, **SSR disabled**)
-- **Vite 8**, **TypeScript 6**, **pnpm**
-- **Tailwind CSS v4** (`@tailwindcss/vite` plugin, `@theme inline` for tokens, `@custom-variant dark`)
-- **shadcn/ui** (`style: base-nova`, `rsc: false`), icons: lucide-react
-- **Supabase** (auth + database, hand-typed in `src/integrations/supabase/types.ts`)
-- **TanStack React Query** (all data fetching)
-- **react-hook-form** + **zod** (forms)
-- **Three.js / R3F / drei / rapier** (3D)
-- **Framer Motion** (animations)
-- **next-themes** (theme toggle)
-- **Oxlint** (fast linting), **Oxfmt** (Prettier-compatible formatter), **React Doctor** (codebase health)
+## Pre-commit Pipeline (`.husky/pre-commit`)
+1. `pnpm lint-staged` (ESLint + Prettier on staged files)
+2. `pnpm build` (includes typecheck)
+No automatic test stage.
 
-## Commands
+## Project Structure
+Each route at `src/routes/_home.*/` MUST follow:
+- `components/` — JSX
+- `queries.ts` — TanStack Query hooks
+- `utils/` with subdirs: `constants/`, `functions/`, `hooks/`
+- `route.tsx` — entry point
 
-| Command             | Action                                                                                                             |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `pnpm dev`          | Dev server on `http://localhost:3000`                                                                              |
-| `pnpm build`        | Production build                                                                                                   |
-| `pnpm preview`      | Preview production build                                                                                           |
-| `pnpm lint`         | ESLint (flat config in `eslint.config.js`) — only catches `react-hooks`/`react-refresh` rules oxlint doesn't cover |
-| `pnpm lint:oxc`     | Oxlint (fast Rust-based linter, primary linting tool)                                                              |
-| `pnpm format`       | Oxfmt (format all files in place)                                                                                  |
-| `pnpm format:check` | Oxfmt check-only (CI use)                                                                                          |
-| `pnpm typecheck`    | TypeScript type checking (`tsc --noEmit`)                                                                          |
-| `pnpm doctor`       | React Doctor scan (health score + diagnostics)                                                                     |
+See `.cursorrules` and `PROJECT_RULES.md` for detailed folder conventions.
 
-Lint order: `pnpm lint:oxc` (fastest) → `pnpm lint` (ESLint — `react-hooks`/`react-refresh` rules only) → `pnpm typecheck`.
+## Auto-imports (unimport)
+Many common imports are auto-resolved. Do NOT manually import:
+- React hooks (`useState`, `useEffect`, etc.)
+- React Router (`Link`, `useNavigate`, `Outlet`, `useSearchParams`)
+- TanStack Query (`useQuery`, `useMutation`, `useQueryClient`)
+- Zustand `create`, `clsx`, `axios`, `format` (date-fns)
+- `Skeleton` from `@design-system/yeds-components`
+See `vite.config.ts` / `vitest.config.ts` for full preset list. Auto-imports do NOT apply in test files.
 
-## Key Structure
+## TypeScript (from `tsconfig.app.json`)
+- `@/` → `src/`
+- `strict: true`, `noUnusedLocals`, `noUnusedParameters`, `noUncheckedIndexedAccess`
+- `verbatimModuleSyntax: true` — must use `import type` for type-only imports
+- `noEmit: true` (typecheck only)
 
-- **`src/root.tsx`** — app shell: QueryClientProvider (staleTime 5min, retry 1), Layout, ErrorBoundary
-- **`src/routes.ts`** — `flatRoutes()` auto-discovers pages under `src/routes/`
-- **`react-router.config.ts`** — `ssr: false`, `appDirectory: "src"`
-- **`src/routes/_index/route.tsx`** — home page (Hero, Projects, About, Skills, Contact, Footer)
-- **`src/routes/admin/route.tsx`** — admin sidebar layout with `<Outlet/>`
-- **Admin auth** — `useAdminAuth` hook checks Supabase `user_roles` table for `admin` role; redirects to `/login` if unauthenticated
-- **`src/components/`** — reusable UI (Navbar, HeroSection, etc.) + `ui/` (shadcn) + `portfolio/`
-- **`src/queries/`** — TanStack Query hooks (one file per entity: `projects.ts`, `skills.ts`, etc.)
-- **`src/integrations/supabase/`** — Supabase client + hand-written Database types
-- **`src/lib/utils.ts`** — `cn()` utility (clsx + tailwind-merge)
-- **`@/`** path alias → `./src/`
-- **`.env.example`** should contain template/placeholder values without actual secrets; all `.env` and `.env.*.local` files are gitignored
-- **`vite.config.ts`** — includes `**/*.glb` as assets
+## ESLint Enforcement
+- Alphabetical import/object-property ordering via `perfectionist/sort-imports`
+- File names: camelCase, PascalCase, or kebabCase only
+- `react-hooks/react-compiler: 'error'` — React Compiler rules enforced
+- `@tanstack/query/exhaustive-deps: 'error'`
+- `@unocss/blocklist`, `@unocss/order`, `@unocss/enforce-class-compile: 'error'`
+- `no-console: 'warn'`, `unicorn/better-regex: 'error'`
+- No wildcard imports (`import * as ...`), no `any`
+
+## API Pattern
+Wrap page content with `<Body>` from `@/utils/generator/BodyComponent` using `status`, `hasData`, `loading`, `error`, and `Skeleton` props. Handles 400/401/403/404/500+ states consistently.
 
 ## Design System
+Only `@design-system/yeds-components` (private registry at `git.sofa.io` — see `.npmrc`). Do not import Radix UI, shadcn, or external component libraries directly.
 
-- **PRODUCT.md** — strategic context (register, audience, brand personality, design principles)
-- **DESIGN.md** — visual design system (colors, typography, elevation, components, tokens)
-- **`.opencode/skills/impeccable/`** — impeccable design skill (run `/impeccable [command]` for craft, critique, polish, layout, etc.)
-- **`.impeccable/design.json`** — machine-readable design token sidecar for live mode
-- CSS tokens in `@theme inline` blocks in `src/index.css`; dark mode via `data-theme="dark"`
-- Creative North Star: **"The Lab"** — dark cybernetic aesthetic, green primary, multi-accent palette
+## Icons
+**Phosphor** via UnoCSS: `i-ph:<icon-name>` (e.g., `i-ph:user`, `i-ph:gear-bold`). Variants: `-bold`, `-fill`, `-duotone`, `-thin`, `-light`. Do NOT use `lucide-react` JSX components, `mdi`, or `prime` collections. See `uno.config.ts` safelist.
 
-## Database Tables
+## Styling
+UnoCSS with RTL. Use logical properties: `ms-*`/`me-*` over `ml-*`/`mr-*`, `start-*`/`end-*` over `left-*`/`right-*`. See README.md migration table.
 
-`certificates`, `contact_messages`, `project_images`, `projects`, `site_settings`, `skill_categories`, `skills`, `user_roles`, `work_experiences`
+## i18n (LinguiJS)
+- `import { Trans } from '@lingui/react/macro'` / `import { t } from '@lingui/core/macro'`
+- Locales: Arabic (`ar`, default) and English (`en`)
+- After adding messages: `pnpm msg:extract` then `pnpm msg:compile`
 
-## Conventions
+## Navigation
+- `<Link>` for normal nav, `<NavLink>` for active-state styling
+- `useNavigate()` only for non-interaction navigation (timeouts, post-fetch redirects)
 
-- CSS custom properties are defined in `@theme inline` blocks in `src/index.css`
-- `cn()` utility from `@/lib/utils` for class merging (clsx + tailwind-merge)
-- Dark mode via `data-theme="dark"` attribute on `<html>`
-- Route files use `export default function` for the page component
-- Queries export custom hooks named `use{Entity}` (e.g. `useProjects`, `useSkills`)
-- Supabase client typed via `createClient<Database>(...)`
+## Generated Files (DO NOT edit)
+- `src/graphql/` — from GraphQL Codegen (`pnpm codegen`)
+- `src/config/api-schema.d.ts` — from openapi-typescript (`pnpm update-schema`)
+- `.react-router/types/` — from React Router
+- `unimport.d.ts` — from unimport
+
+## CI/CD (`.gitlab-ci.yml`)
+Stages: test → release → build. Docker multi-stage build. Vite build-args injected via Docker. Semantic release for version bump. See `makefile` for local Docker commands.

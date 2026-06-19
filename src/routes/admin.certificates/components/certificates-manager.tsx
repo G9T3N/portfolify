@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { useCertificatesManager } from '../hooks/use-certificates-form';
+import { useCertificatesManager } from '../utils/hooks/use-certificates-form';
 
 const CertificatesManager = () => {
   const {
