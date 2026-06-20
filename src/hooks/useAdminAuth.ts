@@ -31,7 +31,7 @@ export const useAdminAuth = () => {
             .select('role')
             .eq('user_id', session.user.id)
             .eq('role', 'admin')
-            .single();
+            .maybeSingle();
 
           const isAdmin = !!roles;
           
@@ -62,7 +62,7 @@ export const useAdminAuth = () => {
         .select('role')
         .eq('user_id', session.user.id)
         .eq('role', 'admin')
-        .single();
+        .maybeSingle();
 
       const isAdmin = !!roles;
 

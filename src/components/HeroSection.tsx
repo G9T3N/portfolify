@@ -1,13 +1,20 @@
-import { Trans } from "@lingui/react/macro";
+import { lazy, Suspense } from "react";
+import { Trans } from "@lingui/react";
+
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { Gauge } from "./portfolio/Gauge";
-import { FeaturedCard } from "./portfolio/FeaturedCard";
-import LogoCarousel from "./LogoCarousel";
+
+// Lazy load the heavy widgets so they don't block the initial text/gradient render
+const Gauge = lazy(() => import("./portfolio/Gauge").then(m => ({ default: m.Gauge })));
+const FeaturedCard = lazy(() => import("./portfolio/FeaturedCard").then(m => ({ default: m.FeaturedCard })));
+const LogoCarousel = lazy(() => import("./LogoCarousel"));
+
+// Skeletons to prevent layout shift
+const CardSkeleton = () => <div className="h-[40vh] w-full bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]" />;
+const GaugeSkeleton = () => <div className="h-[35vh] w-full bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]" />;
+const CarouselSkeleton = () => <div className="h-[60px] w-full bg-transparent mt-8" />;
 
 const HeroSection = () => {
-
-
 
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
@@ -35,17 +42,17 @@ const HeroSection = () => {
               <div className="flex flex-col gap-4 max-w-2xl pr-4">
                 <div className="space-y-1">
                   <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-primary)] uppercase font-mono">
-                    <Trans>Full-Stack Developer & UI Specialist</Trans>
+                    <Trans id="Full-Stack Developer & UI Specialist">Full-Stack Developer & UI Specialist</Trans>
                   </span>
                   <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight text-[var(--color-text-primary)]">
-                    <Trans>Wael Alamrany</Trans>
+                    <Trans id="Wael Alamrany">Wael Alamrany</Trans>
                     <span className="block text-xl sm:text-2xl md:text-3xl font-medium text-[var(--color-text-secondary)] mt-1 font-mono">
-                      <Trans>— Mr.Err</Trans>
+                      <Trans id="— Mr.Err">— Mr.Err</Trans>
                     </span>
                   </h1>
                 </div>
                 <p className="text-sm sm:text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-lg font-sans">
-                  <Trans>Bridging the gap between robust system architecture and seamless, high-performance user interfaces.</Trans>
+                  <Trans id="Bridging the gap between robust system architecture and seamless, high-performance user interfaces.">Bridging the gap between robust system architecture and seamless, high-performance user interfaces.</Trans>
                 </p>
               </div>
             </motion.div>
@@ -77,17 +84,20 @@ const HeroSection = () => {
         {/* Right sidebar */}
         <div className="flex lg:flex-col gap-10 lg:w-[320px]">
           {/* Featured card */}
-          <FeaturedCard />
+          <Suspense fallback={<CardSkeleton />}>
+            <FeaturedCard />
+          </Suspense>
 
           {/* Stat circle */}
-
-          <Gauge />
+          <Suspense fallback={<GaugeSkeleton />}>
+            <Gauge />
+          </Suspense>
         </div>
 
-
       </div>
-      <LogoCarousel />
-
+      <Suspense fallback={<CarouselSkeleton />}>
+        <LogoCarousel />
+      </Suspense>
 
     </section>
   );

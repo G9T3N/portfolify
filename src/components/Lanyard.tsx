@@ -1,4 +1,6 @@
-/* eslint-disable react/no-unknown-property */
+/* eslint-disable @typescript-eslint/no-namespace */
+/* eslint-disable react-hooks/immutability */
+ 
 'use client';
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
@@ -38,9 +40,9 @@ interface LanyardProps {
 }
 
 export default function Lanyard({
-  position = [0, 0, 15],
+  position = [0, 0, 10],
   gravity = [0, -40, 0],
-  fov = 15,
+  fov = 20,
   transparent = true
 }: LanyardProps) {
   return (

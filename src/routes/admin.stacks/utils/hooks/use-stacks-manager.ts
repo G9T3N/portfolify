@@ -137,6 +137,7 @@ export function useStacksManager() {
     skillMutation,
     deleteSkillMutation,
     toggleVisibilityMutation,
+    categoryMutation,
     deleteCategoryMutation
   };
 }

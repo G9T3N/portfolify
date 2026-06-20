@@ -38,12 +38,13 @@ const StacksManager = () => {
     skillMutation,
     deleteSkillMutation,
     toggleVisibilityMutation,
+    categoryMutation,
     deleteCategoryMutation
   } = useStacksManager();
 
   const filteredSkills = activeCategory
     ? skills?.filter((s) => s.category_id === activeCategory)
-    : [];
+    : skills || [];
 
   const activeCategoryData = categories?.find((c) => c.id === activeCategory);
 
@@ -70,6 +71,19 @@ const StacksManager = () => {
 
       {/* Category Tabs */}
       <div className="flex flex-wrap gap-2 mb-6">
+        <button
+          onClick={() => setActiveCategory(null)}
+          className={`px-4 py-2 rounded-lg font-mono text-sm transition-all flex items-center gap-2 ${
+            activeCategory === null
+              ? 'bg-primary text-primary-foreground'
+              : 'bg-muted/30 text-muted-foreground hover:bg-muted/50'
+          }`}
+        >
+          All
+          <span className="text-xs opacity-70">
+            ({skills?.length || 0})
+          </span>
+        </button>
         {categories?.map((category) => (
           <button
             key={category.id}
@@ -89,32 +103,38 @@ const StacksManager = () => {
       </div>
 
       {/* Selected Category Content */}
-      {activeCategory ? (
-        <motion.div
-          key={activeCategory}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
-            <div className="flex items-center gap-3 flex-wrap">
-              <h2 className="text-lg font-mono font-bold break-all">{activeCategoryData?.name}</h2>
-              <button
-                onClick={() => handleEditCategory(activeCategoryData!)}
-                className="p-1.5 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Pencil className="w-3.5 h-3.5" />
-              </button>
-              <button
-                onClick={() => {
-                  if (confirm(`Delete category "${activeCategoryData?.name}" and all its skills?`)) {
-                    deleteCategoryMutation.mutate(activeCategory);
-                  }
-                }}
-                className="p-1.5 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-              </button>
-            </div>
+      <motion.div
+        key={activeCategory || 'all'}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+          <div className="flex items-center gap-3 flex-wrap">
+            <h2 className="text-lg font-mono font-bold break-all">
+              {activeCategory ? activeCategoryData?.name : 'All Skills'}
+            </h2>
+            {activeCategory && (
+              <>
+                <button
+                  onClick={() => handleEditCategory(activeCategoryData!)}
+                  className="p-1.5 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <Pencil className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => {
+                    if (confirm(`Delete category "${activeCategoryData?.name}" and all its skills?`)) {
+                      deleteCategoryMutation.mutate(activeCategory);
+                    }
+                  }}
+                  className="p-1.5 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              </>
+            )}
+          </div>
+          {activeCategory && (
             <button
               onClick={() => setIsSkillFormOpen(true)}
               className="cyber-button-outline flex items-center justify-center gap-2 text-sm py-2 w-full sm:w-auto"
@@ -122,7 +142,8 @@ const StacksManager = () => {
               <Plus className="w-4 h-4" />
               Add Skill
             </button>
-          </div>
+          )}
+        </div>
 
           {skillsLoading ? (
             <div className="flex items-center justify-center py-12">
@@ -197,18 +218,15 @@ const StacksManager = () => {
             </div>
           ) : (
             <div className="glass-card p-12 text-center">
-              <p className="text-muted-foreground font-mono mb-4">No skills in this category yet</p>
+            <p className="text-muted-foreground font-mono mb-4">No skills to display</p>
+            {activeCategory && (
               <button onClick={() => setIsSkillFormOpen(true)} className="cyber-button-outline">
                 Add your first skill
               </button>
-            </div>
-          ))}
-        </motion.div>
-      ) : (
-        <div className="glass-card p-12 text-center">
-          <p className="text-muted-foreground font-mono">Select a category to manage skills</p>
-        </div>
-      )}
+            )}
+          </div>
+        ))}
+      </motion.div>
 
       {/* Skill Form Modal */}
       <AnimatedDialog
