@@ -15,7 +15,9 @@
     "typecheck": "tsc --noEmit",
     "doctor": "npx react-doctor@latest",
     "msg:extract": "lingui extract",
-    "msg:compile": "lingui compile"
+    "msg:compile": "lingui compile",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -92,9 +94,13 @@
     "@lingui/vite-plugin": "^6.4.0",
     "@react-router/dev": "^7.16.0",
     "@tailwindcss/vite": "^4.3.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^24.12.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
     "autoprefixer": "^10.5.0",
     "babel-plugin-macros": "^3.1.0",
     "babel-plugin-react-compiler": "^1.0.0",
@@ -102,6 +108,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "jsdom": "^29.1.1",
     "oxfmt": "^0.55.0",
     "oxlint": "^1.70.0",
     "postcss": "^8.5.15",
@@ -110,6 +117,7 @@
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.12",
-    "vite-plugin-babel": "^1.7.3"
+    "vite-plugin-babel": "^1.7.3",
+    "vitest": "^4.1.9"
   }
 }
