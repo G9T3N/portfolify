@@ -1,8 +1,7 @@
 import { lazy, Suspense } from "react";
-import { Trans } from "@lingui/react";
+import { Trans } from "@lingui/react/macro";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 
 // Lazy load the heavy widgets so they don't block the initial text/gradient render
 const Gauge = lazy(() => import("./portfolio/Gauge").then(m => ({ default: m.Gauge })));
@@ -74,7 +73,7 @@ const HeroSection = () => {
                 transition={{ delay: 0, duration: 0.3 }}
                 whileHover={{ scale: 1.02 }}
               >
-                <p>Let's Build</p> <ArrowRight />
+                <p>Let's Build</p> <span className="i-ph:arrow-right" />
               </motion.button>
             </div>
           </motion.div>

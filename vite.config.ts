@@ -12,7 +12,7 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     babel({
-      filter: /\.[jt]sx?$/,
+      include: ['src/**/*.[jt]s?(x)'],
       babelConfig: {
         presets: ["@babel/preset-typescript"], // if you use TypeScript
         plugins: [

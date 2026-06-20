@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { Plus, Pencil, Trash2, Eye, EyeOff, Loader2, FolderPlus } from 'lucide-react';
+import { Trans } from '@lingui/react/macro';
+import { t } from '@lingui/core/macro';
 import { AnimatedDialog } from '@/components/common/animated-dialog';
 import { useStacksManager } from '../utils/hooks/use-stacks-manager';
 import { Skill } from '../queries';
@@ -51,7 +52,7 @@ const StacksManager = () => {
   if (categoriesLoading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 text-primary animate-spin" />
+        <span className="i-ph:spinner w-8 h-8 text-primary animate-spin" />
       </div>
     );
   }
@@ -59,13 +60,13 @@ const StacksManager = () => {
   return (
     <div>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-        <h1 className="text-2xl font-mono font-bold">Skills & Stacks</h1>
+        <h1 className="text-2xl font-mono font-bold"><Trans>Skills & Stacks</Trans></h1>
         <button
           onClick={() => setIsCategoryFormOpen(true)}
           className="cyber-button flex items-center justify-center gap-2 w-full sm:w-auto"
         >
-          <FolderPlus className="w-4 h-4" />
-          Add Category
+          <span className="i-ph:folder-plus w-4 h-4" />
+          <Trans>Add Category</Trans>
         </button>
       </div>
 
@@ -79,7 +80,7 @@ const StacksManager = () => {
               : 'bg-muted/30 text-muted-foreground hover:bg-muted/50'
           }`}
         >
-          All
+          <Trans>All</Trans>
           <span className="text-xs opacity-70">
             ({skills?.length || 0})
           </span>
@@ -111,25 +112,25 @@ const StacksManager = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
           <div className="flex items-center gap-3 flex-wrap">
             <h2 className="text-lg font-mono font-bold break-all">
-              {activeCategory ? activeCategoryData?.name : 'All Skills'}
+              {activeCategory ? activeCategoryData?.name : t`All Skills`}
             </h2>
-            {activeCategory && (
+            {activeCategory && activeCategoryData && (
               <>
                 <button
-                  onClick={() => handleEditCategory(activeCategoryData!)}
+                  onClick={() => handleEditCategory(activeCategoryData)}
                   className="p-1.5 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
                 >
-                  <Pencil className="w-3.5 h-3.5" />
+                  <span className="i-ph:pencil w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => {
-                    if (confirm(`Delete category "${activeCategoryData?.name}" and all its skills?`)) {
+                    if (confirm(t`Delete category "${activeCategoryData?.name}" and all its skills?`)) {
                       deleteCategoryMutation.mutate(activeCategory);
                     }
                   }}
                   className="p-1.5 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
                 >
-                  <Trash2 className="w-3.5 h-3.5" />
+                  <span className="i-ph:trash w-3.5 h-3.5" />
                 </button>
               </>
             )}
@@ -139,15 +140,15 @@ const StacksManager = () => {
               onClick={() => setIsSkillFormOpen(true)}
               className="cyber-button-outline flex items-center justify-center gap-2 text-sm py-2 w-full sm:w-auto"
             >
-              <Plus className="w-4 h-4" />
-              Add Skill
+              <span className="i-ph:plus w-4 h-4" />
+              <Trans>Add Skill</Trans>
             </button>
           )}
         </div>
 
           {skillsLoading ? (
             <div className="flex items-center justify-center py-12">
-              <Loader2 className="w-6 h-6 text-primary animate-spin" />
+              <span className="i-ph:spinner w-6 h-6 text-primary animate-spin" />
             </div>
           ) : (filteredSkills && filteredSkills.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -194,23 +195,23 @@ const StacksManager = () => {
                       }
                       className="p-2 rounded-lg hover:bg-muted/30 text-muted-foreground transition-colors"
                     >
-                      {skill.is_visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                      {skill.is_visible ? <span className="i-ph:eye w-4 h-4" /> : <span className="i-ph:eye-slash w-4 h-4" />}
                     </button>
                     <button
                       onClick={() => handleEditSkill(skill)}
                       className="p-2 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition-colors"
                     >
-                      <Pencil className="w-4 h-4" />
+                      <span className="i-ph:pencil w-4 h-4" />
                     </button>
                     <button
                       onClick={() => {
-                        if (confirm(`Delete skill "${skill.name}"?`)) {
+                        if (confirm(t`Delete skill "${skill.name}"?`)) {
                           deleteSkillMutation.mutate(skill.id);
                         }
                       }}
                       className="p-2 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <span className="i-ph:trash w-4 h-4" />
                     </button>
                   </div>
                 </div>
@@ -218,10 +219,10 @@ const StacksManager = () => {
             </div>
           ) : (
             <div className="glass-card p-12 text-center">
-            <p className="text-muted-foreground font-mono mb-4">No skills to display</p>
+            <p className="text-muted-foreground font-mono mb-4"><Trans>No skills to display</Trans></p>
             {activeCategory && (
               <button onClick={() => setIsSkillFormOpen(true)} className="cyber-button-outline">
-                Add your first skill
+                <Trans>Add your first skill</Trans>
               </button>
             )}
           </div>
@@ -232,26 +233,26 @@ const StacksManager = () => {
       <AnimatedDialog
         isOpen={isSkillFormOpen}
         onClose={handleCloseSkillForm}
-        title={editingSkill ? 'Edit Skill' : 'Add Skill'}
+        title={editingSkill ? t`Edit Skill` : t`Add Skill`}
         className="max-w-md"
       >
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-mono text-muted-foreground mb-2">
-              Skill Name *
+              <Trans>Skill Name *</Trans>
             </label>
             <input
               type="text"
               value={skillForm.name}
               onChange={(e) => setSkillForm({ ...skillForm, name: e.target.value })}
               className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border/50 focus:border-primary/50 focus:outline-none font-mono"
-              placeholder="e.g., React, Django, Docker"
+              placeholder={t`e.g., React, Django, Docker`}
             />
           </div>
 
           <div>
             <label className="block text-sm font-mono text-muted-foreground mb-2">
-              Logo URL
+              <Trans>Logo URL</Trans>
             </label>
             <input
               type="text"
@@ -261,13 +262,13 @@ const StacksManager = () => {
               placeholder="https://cdn.simpleicons.org/react/61DAFB"
             />
             <p className="text-xs text-muted-foreground mt-1">
-              Use simpleicons.org: https://cdn.simpleicons.org/[icon]/[color]
+              <Trans>Use simpleicons.org: https://cdn.simpleicons.org/[icon]/[color]</Trans>
             </p>
           </div>
 
           <div>
             <label className="block text-sm font-mono text-muted-foreground mb-2">
-              Proficiency
+              <Trans>Proficiency</Trans>
             </label>
             <select
               value={skillForm.proficiency}
@@ -276,16 +277,16 @@ const StacksManager = () => {
               }
               className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border/50 focus:border-primary/50 focus:outline-none font-mono"
             >
-              <option value="beginner">Beginner</option>
-              <option value="intermediate">Intermediate</option>
-              <option value="advanced">Advanced</option>
-              <option value="expert">Expert</option>
+              <option value="beginner">{t`Beginner`}</option>
+              <option value="intermediate">{t`Intermediate`}</option>
+              <option value="advanced">{t`Advanced`}</option>
+              <option value="expert">{t`Expert`}</option>
             </select>
           </div>
 
           <div>
             <label className="block text-sm font-mono text-muted-foreground mb-2">
-              Display Order
+              <Trans>Display Order</Trans>
             </label>
             <input
               type="number"
@@ -302,15 +303,15 @@ const StacksManager = () => {
               onClick={handleCloseSkillForm}
               className="flex-1 px-4 py-3 rounded-lg border border-border/50 text-muted-foreground hover:bg-muted/30 font-mono w-full sm:w-auto"
             >
-              Cancel
+              <Trans>Cancel</Trans>
             </button>
             <button
               onClick={handleSubmitSkill}
               disabled={skillMutation.isPending}
               className="flex-1 cyber-button flex items-center justify-center gap-2"
             >
-              {skillMutation.isPending && <Loader2 className="w-4 h-4 animate-spin" />}
-              {editingSkill ? 'Update' : 'Add'} Skill
+              {skillMutation.isPending && <span className="i-ph:spinner w-4 h-4 animate-spin" />}
+              {editingSkill ? t`Update` : t`Add`} <Trans>Skill</Trans>
             </button>
           </div>
         </div>
@@ -320,26 +321,26 @@ const StacksManager = () => {
       <AnimatedDialog
         isOpen={isCategoryFormOpen}
         onClose={handleCloseCategoryForm}
-        title={editingCategory ? 'Edit Category' : 'Add Category'}
+        title={editingCategory ? t`Edit Category` : t`Add Category`}
         className="max-w-md"
       >
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-mono text-muted-foreground mb-2">
-              Category Name *
+              <Trans>Category Name *</Trans>
             </label>
             <input
               type="text"
               value={categoryForm.name}
               onChange={(e) => setCategoryForm({ ...categoryForm, name: e.target.value })}
               className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border/50 focus:border-primary/50 focus:outline-none font-mono"
-              placeholder="e.g., Frontend, Backend, DevOps"
+              placeholder={t`e.g., Frontend, Backend, DevOps`}
             />
           </div>
 
           <div>
             <label className="block text-sm font-mono text-muted-foreground mb-2">
-              Display Order
+              <Trans>Display Order</Trans>
             </label>
             <input
               type="number"
@@ -356,15 +357,15 @@ const StacksManager = () => {
               onClick={handleCloseCategoryForm}
               className="flex-1 px-4 py-3 rounded-lg border border-border/50 text-muted-foreground hover:bg-muted/30 font-mono w-full sm:w-auto"
             >
-              Cancel
+              <Trans>Cancel</Trans>
             </button>
             <button
               onClick={handleSubmitCategory}
               disabled={categoryMutation.isPending}
               className="flex-1 cyber-button flex items-center justify-center gap-2"
             >
-              {categoryMutation.isPending && <Loader2 className="w-4 h-4 animate-spin" />}
-              {editingCategory ? 'Update' : 'Add'} Category
+              {categoryMutation.isPending && <span className="i-ph:spinner w-4 h-4 animate-spin" />}
+              {editingCategory ? t`Update` : t`Add`} <Trans>Category</Trans>
             </button>
           </div>
         </div>

@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
-import { FileText, FolderKanban, Mail, MessageSquare, Users, Layout, Award } from "lucide-react";
+import { t } from "@lingui/core/macro";
 import { Card, CardContent } from "@/components/ui/card";
 import { useDashboardStats } from "./queries";
 
 const statCards = [
-  { label: "Total Projects", key: "totalProjects" as const, icon: Layout, color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" },
-  { label: "Work Experiences", key: "totalExperiences" as const, icon: Users, color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" },
-  { label: "Certificates", key: "totalCertificates" as const, icon: Award, color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" },
-  { label: "Messages", key: "totalMessages" as const, icon: MessageSquare, color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" }
+  { label: t`Total Projects`, key: "totalProjects" as const, icon: "i-ph:layout", color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" },
+  { label: t`Work Experiences`, key: "totalExperiences" as const, icon: "i-ph:users", color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" },
+  { label: t`Certificates`, key: "totalCertificates" as const, icon: "i-ph:medal", color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" },
+  { label: t`Messages`, key: "totalMessages" as const, icon: "i-ph:chat-square", color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" }
 ];
 
 /**
@@ -36,7 +36,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {statCards.map(({ label, key, icon: Icon, color }) => (
+        {statCards.map(({ label, key, icon, color }) => (
           <Card key={label} className={`bg-gradient-to-br ${color} border`}>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
@@ -45,7 +45,7 @@ export default function AdminDashboard() {
                   <p className="text-3xl font-mono font-bold text-foreground">{value(key)}</p>
                 </div>
                 <div className="w-12 h-12 rounded-lg bg-background/50 flex items-center justify-center">
-                  <Icon className="w-6 h-6 text-foreground/70" />
+                  <span className={`${icon} w-6 h-6 text-foreground/70`} />
                 </div>
               </div>
             </CardContent>

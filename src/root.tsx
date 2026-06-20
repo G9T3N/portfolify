@@ -4,6 +4,7 @@ import "./index.css";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { messages as enMessages } from "./locales/en/messages";
+import { messages as arMessages } from "./locales/ar/messages";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,7 +18,8 @@ const queryClient = new QueryClient({
 
 // Initialize Lingui
 i18n.load("en", enMessages);
-i18n.activate("en");
+i18n.load("ar", arMessages);
+i18n.activate("ar");
 
 export default function App() {
   return (
