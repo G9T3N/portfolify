@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Fullscreen } from "lucide-react";
 import PostSwiper from '@/components/ui/PostSwiper'
-import lanyardImage from '@/assets/lanyard/lanyard.jpg'
+import lanyardImage from '@/assets/lanyard/lanyard.png'
 
 export const FeaturedCard = () => {
   const socialPosts = [<motion.div

@@ -1,14 +1,13 @@
 import { motion } from "framer-motion";
-import { FileText, FolderKanban, Mail, MessageSquare, Users } from "lucide-react";
+import { FileText, FolderKanban, Mail, MessageSquare, Users, Layout, Award } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useDashboardStats } from "./queries";
 
 const statCards = [
-  { label: "Total Projects", key: "totalProjects" as const, icon: FolderKanban, color: "from-blue-500/20 to-blue-600/10 border-blue-500/30" },
-  { label: "All Messages", key: "totalMessages" as const, icon: Mail, color: "from-purple-500/20 to-purple-600/10 border-purple-500/30" },
-  { label: "Unread Messages", key: "unreadMessages" as const, icon: MessageSquare, color: "from-orange-500/20 to-orange-600/10 border-orange-500/30" },
-  { label: "Certificates", key: "totalCertificates" as const, icon: FileText, color: "from-green-500/20 to-green-600/10 border-green-500/30" },
-  { label: "Work Experiences", key: "totalExperiences" as const, icon: Users, color: "from-cyan-500/20 to-cyan-600/10 border-cyan-500/30" },
+  { label: "Total Projects", key: "totalProjects" as const, icon: Layout, color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" },
+  { label: "Work Experiences", key: "totalExperiences" as const, icon: Users, color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" },
+  { label: "Certificates", key: "totalCertificates" as const, icon: Award, color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" },
+  { label: "Messages", key: "totalMessages" as const, icon: MessageSquare, color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" }
 ];
 
 /**

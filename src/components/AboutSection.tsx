@@ -1,21 +1,22 @@
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import Lanyard from "./Lanyard";
-
+import { lazy, Suspense } from "react";
+const Lanyard=lazy(()=>import("./Lanyard"))
 const AboutSection = () => {
   return (
     <section id="about" className="px-4 md:px-8 lg:px-12 py-24 md:py-32">
       <div className="max-w-[1400px] mx-auto">
         <div className="flex flex-col lg:flex-row items-center ">
           {/* Photo */}
-          <div className="flex-1">
-
-            <Lanyard />
+          <div className="flex-2 w-full h-full min-h-[50vh]">
+            <Suspense fallback={<div className="w-full h-full min-h-[50vh] animate-pulse bg-[var(--color-bg-card)] rounded-4xl" />}>
+              <Lanyard />
+            </Suspense>
           </div>
 
           {/* Text */}
           <motion.div
-            className=" flex-1"
+            className=" flex-3"
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
