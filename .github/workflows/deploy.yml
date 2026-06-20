@@ -1,0 +1,70 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      packages: write 
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          # github.repository_owner automatically injects the Org name (lowercased)
+          tags: ghcr.io/${{ github.repository_owner }}/new-spark-landing-page:latest
+
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          envs: CR_PAT
+          script: |
+            cd /root/new-spark-landing-page
+            
+            git fetch origin main
+            git reset --hard origin/main
+            
+            if [ -z "$CR_PAT" ]; then
+              echo "ERROR: CR_PAT secret is not set. Add it in GitHub repo settings."
+              exit 1
+            fi
+            
+            echo "$CR_PAT" | docker login ghcr.io -u G9T3N --password-stdin
+            
+            docker compose down || true
+            
+            docker compose pull
+            docker compose up -d
+            
+            # Clean up dangling images
+            docker image prune -f || true
+            
+            # Reload system nginx to pick up any config changes
+            sudo systemctl reload nginx || true
+        env:
+          CR_PAT: ${{ secrets.CR_PAT }}
