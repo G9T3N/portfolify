@@ -20,7 +20,7 @@ export const useAdminAuth = () => {
             .select('role')
             .eq('user_id', session.user.id)
             .eq('role', 'admin')
-            .single();
+            .maybeSingle();
 
           if (roles) {
             navigate('/admin', { replace: true });
@@ -38,7 +38,7 @@ export const useAdminAuth = () => {
           .select('role')
           .eq('user_id', session.user.id)
           .eq('role', 'admin')
-          .single();
+          .maybeSingle();
 
         if (roles) {
           navigate('/admin', { replace: true });
@@ -111,7 +111,7 @@ export const useAdminAuth = () => {
             .select('role')
             .eq('user_id', data.session.user.id)
             .eq('role', 'admin')
-            .single();
+            .maybeSingle();
 
           if (rolesError || !roles) {
             await supabase.auth.signOut();
