@@ -1,23 +1,8 @@
 import { motion } from "framer-motion";
-import { Sparkles, Send } from "lucide-react";
-import { useState } from "react";
-import { useSendMessage } from "@/queries";
+import { Sparkles, Mail, Phone, MessageCircle } from "lucide-react";
+import { ContactForm } from "./ContactForm";
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const sendMessage = useSendMessage();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await sendMessage.mutateAsync(formData);
-      setSubmitted(true);
-      setFormData({ name: "", email: "", message: "" });
-    } catch {
-      console.error("Failed to send message");
-    }
-  };
 
   return (
     <section id="contact" className="relative min-h-screen flex flex-col">
@@ -50,52 +35,7 @@ const ContactSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            {submitted ? (
-              <motion.div
-                className="text-xl font-medium text-[var(--color-text-primary)]"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-              >
-                ✨ Message sent! I&apos;ll get back to you soon.
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <input
-                    type="text"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={(e) => { setFormData((prev) => ({ ...prev, name: e.target.value })); }}
-                    required
-                    className="form-input flex-1 rounded-xl"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Your email"
-                    value={formData.email}
-                    onChange={(e) => { setFormData((prev) => ({ ...prev, email: e.target.value })); }}
-                    required
-                    className="form-input flex-1 rounded-xl"
-                  />
-                </div>
-                <textarea
-                  placeholder="Tell me about your project..."
-                  value={formData.message}
-                  onChange={(e) => { setFormData((prev) => ({ ...prev, message: e.target.value })); }}
-                  required
-                  rows={4}
-                  className="form-input resize-none rounded-xl"
-                />
-                <button
-                  type="submit"
-                  disabled={sendMessage.isPending}
-                  className="bg-[var(--color-mp-text-primary)] cursor-pointer text-[var(--color-bg-primary)] px-10 h-12 rounded-xl border flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Send className="w-4 h-4" />
-                  {sendMessage.isPending ? "Sending..." : "Send message"}
-                </button>
-              </form>
-            )}
+            <ContactForm />
           </motion.div>
 
           {/* Bottom area */}
@@ -106,18 +46,63 @@ const ContactSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              Don&apos;t like forms? Reach out at{" "}
-              <a
-                href="mailto:contact@mrerr.dev"
-                className="font-semibold text-[var(--color-text-primary)] hover:underline"
-              >
-                contact@mrerr.dev
-              </a>
-            </p>
+            <div className="flex flex-col gap-5 max-w-sm">
+              <div className="space-y-1">
+                <p className="text-sm text-[var(--color-text-secondary)]">
+                  Don&apos;t like forms? Reach out directly:
+                </p>
+              </div>
+              
+              <div className="flex flex-col gap-3">
+                <a
+                  href="mailto:waelamrany@gmail.com"
+                  className="group flex items-center gap-3 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+                >
+                  <span className="flex items-center justify-center min-w-8 h-8 rounded-full border border-[var(--color-border-default)] group-hover:border-[var(--color-text-primary)] transition-colors">
+                    <Mail className="w-4 h-4" />
+                  </span>
+                  waelamrany@gmail.com
+                </a>
+                
+                <a
+                  href="tel:+967770826486"
+                  className="group flex items-center gap-3 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+                >
+                  <span className="flex items-center justify-center min-w-8 h-8 rounded-full border border-[var(--color-border-default)] group-hover:border-[var(--color-text-primary)] transition-colors">
+                    <Phone className="w-4 h-4" />
+                  </span>
+                  <span className="flex flex-col">
+                    <span>+967 770 826 486</span>
+                    <span className="text-xs text-[var(--color-text-muted)]">Call / WhatsApp / SMS</span>
+                  </span>
+                </a>
+                
+                <a
+                  href="https://wa.me/994409197608"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+                >
+                  <span className="flex items-center justify-center min-w-8 h-8 rounded-full border border-[var(--color-border-default)] group-hover:border-[var(--color-text-primary)] transition-colors">
+                    <MessageCircle className="w-4 h-4" />
+                  </span>
+                  <span className="flex flex-col">
+                    <span>+994 409 197 608</span>
+                    <span className="text-xs text-[var(--color-text-muted)]">Business WhatsApp</span>
+                  </span>
+                </a>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mt-2">
+                <a href="https://instagram.com/g9t3n" target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 text-xs rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)] transition-all">Instagram</a>
+                <a href="https://www.linkedin.com/in/wael-alamrany-1557a5288" target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 text-xs rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)] transition-all">LinkedIn</a>
+                <a href="https://github.com/G9T3N" target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 text-xs rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)] transition-all">GitHub</a>
+                <a href="https://www.npmjs.com/~g9t3n" target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 text-xs rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)] transition-all">npm</a>
+              </div>
+            </div>
 
             <a
-              href="mailto:contact@mrerr.dev"
+              href="mailto:waelamrany@gmail.com"
               className="bg-[var(--color-mp-text-primary)] text-[var(--color-bg-primary)] px-10 h-12 rounded-xl border flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
             >
               <Sparkles className="w-4 h-4" />
