@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
 import { defineConfig } from "vite";
 import babel from "vite-plugin-babel";
+import { lingui } from "@lingui/vite-plugin";
 
 export default defineConfig({
   server: {
@@ -10,17 +11,19 @@ export default defineConfig({
     port: 3000,
   },
   plugins: [
+    reactRouter(),
     tailwindcss(),
     babel({
       filter: /\.[jt]sx?$/,
       babelConfig: {
         presets: ["@babel/preset-typescript"], // if you use TypeScript
         plugins: [
-          ["babel-plugin-react-compiler"]
+          "babel-plugin-react-compiler",
+          "@lingui/babel-plugin-lingui-macro"
         ],
       },
     }),
-    reactRouter(),
+    lingui(),
   ],
   resolve: {
     alias: {
