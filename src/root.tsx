@@ -59,20 +59,27 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function ErrorBoundary() {
+export function ErrorBoundary({ error }: { error: unknown }) {
+  let details;
+  if (error instanceof Error) {
+    details = error.message;
+  } else {
+    details = "Unknown error";
+  }
+
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <h1>Error</h1>
-        <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
+    <div className="min-h-screen flex items-center justify-center bg-background p-4 text-center">
+      <div className="glass-card p-8 max-w-md w-full">
+        <h1 className="text-2xl font-mono font-bold text-destructive mb-4">Oops! Something went wrong.</h1>
+        <p className="text-sm text-muted-foreground mb-4">
+          An unexpected error occurred. Please try refreshing the page.
+        </p>
+        {details && (
+          <div className="bg-muted/50 p-4 rounded-lg overflow-x-auto text-left">
+            <pre className="text-xs font-mono text-muted-foreground">{details}</pre>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
