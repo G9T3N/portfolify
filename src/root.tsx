@@ -1,9 +1,12 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
+import { Toaster } from "@/components/ui/sonner";
 import "./index.css";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { messages as enMessages } from "./locales/en/messages";
+import {messages as messagesEn} from "./locales/en/messages";
+import {messages as messagesAr} from "./locales/ar/messages";
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,8 +18,10 @@ const queryClient = new QueryClient({
 });
 
 
+
 // Initialize Lingui
-i18n.load("en", enMessages);
+i18n.load("en",messagesEn);
+i18n.load("ar",messagesAr);
 i18n.activate("en");
 
 export default function App() {
@@ -46,6 +51,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <Toaster />
         <ScrollRestoration />
         <Scripts />
       </body>
