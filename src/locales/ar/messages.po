@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2026-06-21 00:33+0300\n"
+"POT-Creation-Date: 2026-06-23 22:18+0300\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: cs\n"
+"Language: ar\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -14,88 +14,72 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:41
+#: src/components/HeroSection.tsx:45
 msgid "Full-Stack Developer & UI Specialist"
-msgstr ""
+msgstr "مطور full-stack ومتخصص واجهات المستخدم"
 
 #. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:44
+#: src/components/HeroSection.tsx:48
 msgid "Wael Alamrany"
-msgstr ""
+msgstr "وائل العمراني"
 
 #. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:46
+#: src/components/HeroSection.tsx:50
 msgid "— Mr.Err"
-msgstr ""
+msgstr "— Mr.Err"
 
 #. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:51
+#: src/components/HeroSection.tsx:55
 msgid "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
-msgstr ""
-
-#: src/components/HeroSection.tsx:46
-#~ msgid "— Mr.Err"
-#~ msgstr ""
+msgstr "سد الفجوة بين بنية النظام القوية وواجهات المستخدم السلسة عالية الأداء."
 
 #: src/utils/helpers/ApiErrorHandler.tsx:98
 msgid "Access Denied!"
-msgstr ""
+msgstr "تم رفض الوصول!"
 
 #: src/utils/helpers/ApiErrorHandler.tsx:83
 msgid "An error occurred while Sending the Request"
-msgstr ""
+msgstr "حدث خطأ أثناء إرسال الطلب"
 
 #: src/utils/helpers/ApiErrorHandler.tsx:149
 msgid "An unexpected error occurred"
-msgstr ""
-
-#: src/components/HeroSection.tsx:51
-#~ msgid "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
-#~ msgstr ""
+msgstr "حدث خطأ غير متوقع"
 
 #: src/utils/helpers/ApiErrorHandler.tsx:64
 msgid "Continue"
-msgstr ""
+msgstr "متابعة"
 
 #: src/utils/helpers/ApiErrorHandler.tsx:138
 msgid "data will be displayed when available"
-msgstr ""
+msgstr "سيتم عرض البيانات عند توفرها"
 
 #: src/utils/helpers/ApiErrorHandler.tsx:61
 msgid "Error"
-msgstr ""
-
-#: src/components/HeroSection.tsx:41
-#~ msgid "Full-Stack Developer & UI Specialist"
-#~ msgstr ""
+msgstr "خطأ"
 
 #: src/utils/helpers/ApiErrorHandler.tsx:113
 #: src/utils/helpers/ApiErrorHandler.tsx:137
 msgid "The page is not found"
-msgstr ""
+msgstr "الصفحة غير موجودة"
 
 #: src/utils/helpers/ApiErrorHandler.tsx:137
 msgid "There is no data to display at the moment"
-msgstr ""
-
-#: src/components/HeroSection.tsx:44
-#~ msgid "Wael Alamrany"
-#~ msgstr ""
+msgstr "لا توجد بيانات لعرضها في الوقت الحالي"
 
 #: src/utils/helpers/ApiErrorHandler.tsx:84
 #: src/utils/helpers/ApiErrorHandler.tsx:150
 msgid "We were unable to load the data. Please try again later"
-msgstr ""
+msgstr "لم نتمكن من تحميل البيانات. يرجى المحاولة مرة أخرى لاحقًا"
 
 #: src/utils/helpers/ApiErrorHandler.tsx:114
 #: src/utils/helpers/ApiErrorHandler.tsx:138
 msgid "Wrong Page Path or URL or Data is Not Found"
-msgstr ""
+msgstr "مسار الصفحة أو الرابط أو البيانات غير صحيح"
 
 #: src/utils/helpers/ApiErrorHandler.tsx:99
 msgid "You Are Not Allowed To Access This Content!"
-msgstr ""
+msgstr "ليس لديك صلاحية الوصول إلى هذا المحتوى!"
 
 #: src/utils/helpers/ApiErrorHandler.tsx:99
 msgid "You Are Not Allowed To Access This Page!"
-msgstr ""
+msgstr "ليس لديك صلاحية الوصول إلى هذه الصفحة!"

@@ -14,22 +14,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:41
+#: src/components/HeroSection.tsx:45
 msgid "Full-Stack Developer & UI Specialist"
 msgstr "Full-Stack Developer & UI Specialist"
 
 #. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:44
+#: src/components/HeroSection.tsx:48
 msgid "Wael Alamrany"
 msgstr "Wael Alamrany"
 
 #. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:46
+#: src/components/HeroSection.tsx:50
 msgid "— Mr.Err"
 msgstr "— Mr.Err"
 
 #. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:51
+#: src/components/HeroSection.tsx:55
 msgid "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
 msgstr "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
 

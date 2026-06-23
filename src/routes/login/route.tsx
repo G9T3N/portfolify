@@ -4,15 +4,11 @@ import { AuthForm } from './components/AuthForm';
 
 const AdminLogin = () => {
   const {
-    email,
-    setEmail,
-    password,
-    setPassword,
     isLoading,
     isCheckingSession,
     isSignUp,
     setIsSignUp,
-    handleSubmit
+    submitAuth
   } = useAdminAuth();
 
   if (isCheckingSession) {
@@ -25,14 +21,10 @@ const AdminLogin = () => {
 
   return (
     <AuthForm
-      email={email}
-      setEmail={setEmail}
-      password={password}
-      setPassword={setPassword}
       isLoading={isLoading}
       isSignUp={isSignUp}
       setIsSignUp={setIsSignUp}
-      handleSubmit={handleSubmit}
+      onSubmitAuth={submitAuth}
     />
   );
 };

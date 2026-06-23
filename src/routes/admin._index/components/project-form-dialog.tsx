@@ -1,4 +1,4 @@
-import { Upload, Loader2, Plus } from 'lucide-react';
+import { Upload, Loader2, Plus, X } from 'lucide-react';
 import { AnimatedDialog } from '@/components/common/animated-dialog';
 import { useImageUpload } from '@/utils/hooks/use-image-upload';
 import { useProjectForm } from '../utils/hooks/use-project-form';
@@ -13,17 +13,20 @@ interface ProjectFormDialogProps {
 
 const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps) => {
   const {
-    formData,
+    form,
     techInput,
     isSubmitting,
     setTechInput,
-    handleChange,
     addTech,
     removeTech,
     handleTechKeyDown,
-    handleSubmit,
+    onSubmit,
     setThumbnailUrl
   } = useProjectForm(project, onClose);
+
+  const { register, formState: { errors }, watch } = form;
+  const currentThumbnailUrl = watch('thumbnail_url');
+  const currentTechStack = watch('tech_stack') || [];
 
   const { uploadImage, isUploading } = useImageUpload('project-images');
 
@@ -43,7 +46,7 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
       title={project ? 'Edit Project' : 'Add New Project'}
     >
           {/* Form */}
-          <form onSubmit={handleSubmit} className="p-6 space-y-6">
+          <form onSubmit={onSubmit} className="p-6 space-y-6">
             {/* Title */}
             <div>
               <label className="block text-sm font-mono text-muted-foreground mb-2">
@@ -51,12 +54,12 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
               </label>
               <input
                 type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border/50 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                id="title"
+                {...register("title")}
+                className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.title ? 'border-destructive/50 focus:ring-destructive/50 focus:border-destructive' : 'border-border/50 focus:ring-primary/50 focus:border-primary'} font-mono text-sm focus:outline-none focus:ring-2`}
                 placeholder="Project title"
               />
+              {errors.title && <p className="text-destructive text-xs mt-1">{errors.title.message}</p>}
             </div>
 
             {/* Description */}
@@ -65,13 +68,13 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
                 Short Description <span className="text-destructive">*</span>
               </label>
               <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
+                id="description"
+                {...register("description")}
                 rows={2}
-                className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border/50 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.description ? 'border-destructive/50 focus:ring-destructive/50 focus:border-destructive' : 'border-border/50 focus:ring-primary/50 focus:border-primary'} font-mono text-sm resize-none focus:outline-none focus:ring-2`}
                 placeholder="Brief project description"
               />
+              {errors.description && <p className="text-destructive text-xs mt-1">{errors.description.message}</p>}
             </div>
 
             {/* Full Content */}
@@ -80,13 +83,13 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
                 Full Content
               </label>
               <textarea
-                name="full_content"
-                value={formData.full_content}
-                onChange={handleChange}
+                id="full_content"
+                {...register("full_content")}
                 rows={5}
-                className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border/50 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.full_content ? 'border-destructive/50 focus:ring-destructive/50 focus:border-destructive' : 'border-border/50 focus:ring-primary/50 focus:border-primary'} font-mono text-sm resize-none focus:outline-none focus:ring-2`}
                 placeholder="Detailed project description..."
               />
+              {errors.full_content && <p className="text-destructive text-xs mt-1">{errors.full_content.message}</p>}
             </div>
 
             {/* Category & Status */}
@@ -96,28 +99,28 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
                   Category
                 </label>
                 <select
-                  name="category"
-                  value={formData.category}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border/50 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                  id="category"
+                  {...register("category")}
+                  className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.category ? 'border-destructive/50 focus:ring-destructive/50 focus:border-destructive' : 'border-border/50 focus:ring-primary/50 focus:border-primary'} font-mono text-sm focus:outline-none focus:ring-2`}
                 >
                   <option value="web">Web App</option>
                   <option value="mobile">Mobile App</option>
                 </select>
+                {errors.category && <p className="text-destructive text-xs mt-1">{errors.category.message}</p>}
               </div>
               <div>
                 <label className="block text-sm font-mono text-muted-foreground mb-2">
                   Status
                 </label>
                 <select
-                  name="status"
-                  value={formData.status}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border/50 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                  id="status"
+                  {...register("status")}
+                  className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.status ? 'border-destructive/50 focus:ring-destructive/50 focus:border-destructive' : 'border-border/50 focus:ring-primary/50 focus:border-primary'} font-mono text-sm focus:outline-none focus:ring-2`}
                 >
                   <option value="draft">Draft</option>
                   <option value="live">Live</option>
                 </select>
+                {errors.status && <p className="text-destructive text-xs mt-1">{errors.status.message}</p>}
               </div>
             </div>
 
@@ -127,10 +130,10 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
                 Thumbnail
               </label>
               <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-                {formData.thumbnail_url && (
+                {currentThumbnailUrl && (
                   <div className="w-24 h-16 rounded-lg overflow-hidden bg-muted/30">
                     <img
-                      src={formData.thumbnail_url}
+                      src={currentThumbnailUrl}
                       alt="Thumbnail"
                       className="w-full h-full object-cover"
                     />
@@ -150,12 +153,12 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
                   <p className="text-xs text-muted-foreground mt-1">Or paste URL below</p>
                   <input
                     type="url"
-                    name="thumbnail_url"
-                    value={formData.thumbnail_url}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 mt-2 rounded-lg bg-muted/30 border border-border/50 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    id="thumbnail_url"
+                    {...register("thumbnail_url")}
+                    className={`w-full px-4 py-2 mt-2 rounded-lg bg-muted/30 border ${errors.thumbnail_url ? 'border-destructive/50 focus:ring-destructive/50 focus:border-destructive' : 'border-border/50 focus:ring-primary/50 focus:border-primary'} font-mono text-sm focus:outline-none focus:ring-2`}
                     placeholder="https://..."
                   />
+                  {errors.thumbnail_url && <p className="text-destructive text-xs mt-1">{errors.thumbnail_url.message}</p>}
                 </div>
               </div>
             </div>
@@ -168,12 +171,12 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
                 </label>
                 <input
                   type="url"
-                  name="live_url"
-                  value={formData.live_url}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border/50 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                  id="live_url"
+                  {...register("live_url")}
+                  className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.live_url ? 'border-destructive/50 focus:ring-destructive/50 focus:border-destructive' : 'border-border/50 focus:ring-primary/50 focus:border-primary'} font-mono text-sm focus:outline-none focus:ring-2`}
                   placeholder="https://..."
                 />
+                {errors.live_url && <p className="text-destructive text-xs mt-1">{errors.live_url.message}</p>}
               </div>
               <div>
                 <label className="block text-sm font-mono text-muted-foreground mb-2">
@@ -181,12 +184,12 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
                 </label>
                 <input
                   type="url"
-                  name="code_url"
-                  value={formData.code_url}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border/50 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                  id="code_url"
+                  {...register("code_url")}
+                  className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.code_url ? 'border-destructive/50 focus:ring-destructive/50 focus:border-destructive' : 'border-border/50 focus:ring-primary/50 focus:border-primary'} font-mono text-sm focus:outline-none focus:ring-2`}
                   placeholder="https://github.com/..."
                 />
+                {errors.code_url && <p className="text-destructive text-xs mt-1">{errors.code_url.message}</p>}
               </div>
             </div>
 
@@ -197,12 +200,12 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
               </label>
               <input
                 type="url"
-                name="embed_url"
-                value={formData.embed_url}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg bg-muted/30 border border-border/50 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                id="embed_url"
+                {...register("embed_url")}
+                className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.embed_url ? 'border-destructive/50 focus:ring-destructive/50 focus:border-destructive' : 'border-border/50 focus:ring-primary/50 focus:border-primary'} font-mono text-sm focus:outline-none focus:ring-2`}
                 placeholder="URL for iframe embed preview"
               />
+              {errors.embed_url && <p className="text-destructive text-xs mt-1">{errors.embed_url.message}</p>}
             </div>
 
             {/* Tech Stack */}
@@ -228,7 +231,7 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
                 </button>
               </div>
               <div className="flex flex-wrap gap-2">
-                {formData.tech_stack.map((tech) => (
+                {currentTechStack.map((tech) => (
                   <span
                     key={tech}
                     className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono bg-primary/10 text-primary border border-primary/30"
@@ -253,11 +256,11 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
               </label>
               <input
                 type="number"
-                name="display_order"
-                value={formData.display_order}
-                onChange={handleChange}
-                className="w-24 px-4 py-3 rounded-lg bg-muted/30 border border-border/50 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                id="display_order"
+                {...register("display_order")}
+                className={`w-24 px-4 py-3 rounded-lg bg-muted/30 border ${errors.display_order ? 'border-destructive/50 focus:ring-destructive/50 focus:border-destructive' : 'border-border/50 focus:ring-primary/50 focus:border-primary'} font-mono text-sm focus:outline-none focus:ring-2`}
               />
+              {errors.display_order && <p className="text-destructive text-xs mt-1">{errors.display_order.message}</p>}
             </div>
 
             {/* Actions */}

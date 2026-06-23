@@ -1,10 +1,11 @@
 import { GitMerge, Dock, Mail, Lock } from "lucide-react";
 import { Link } from "react-router";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const SOCIAL_LINKS = [
-  { icon: GitMerge, href: "https://github.com/mrerr", label: "GitHub" },
-  { icon: Dock, href: "https://linkedin.com/in/mrerr", label: "LinkedIn" },
-  { icon: Mail, href: "mailto:contact@mrerr.dev", label: "Email" },
+  { icon: GitMerge, href: "https://github.com/G9T3N", label: "GitHub" },
+  { icon: Dock, href: "https://www.linkedin.com/in/wael-alamrany-1557a5288", label: "LinkedIn" },
+  { icon: Mail, href: "mailto:waelamrany@gmail.com", label: "Email" },
 ] as const;
 
 const Footer = () => {
@@ -16,7 +17,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="flex items-center gap-2">
           <p className="text-sm text-[var(--color-text-muted)]">
-            © {currentYear} Mr.Err. All rights reserved.
+            © {currentYear} Wael Alamrany. All rights reserved.
           </p>
           <Link
             to="/login"
@@ -28,20 +29,28 @@ const Footer = () => {
         </div>
 
         {/* Social links */}
-        <div className="flex items-center gap-4">
-          {SOCIAL_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={link.label}
-              className="w-10 h-10 rounded-4xl border border-[var(--color-border-default)] flex items-center justify-center text-[var(--color-text-muted)] transition-all hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)] hover:scale-110"
-            >
-              <link.icon className="w-4 h-4" />
-            </a>
-          ))}
-        </div>
+        <TooltipProvider delayDuration={100}>
+          <div className="flex items-center gap-4">
+            {SOCIAL_LINKS.map((link) => (
+              <Tooltip key={link.label}>
+                <TooltipTrigger asChild>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    className="w-10 h-10 rounded-4xl border border-[var(--color-border-default)] flex items-center justify-center text-[var(--color-text-muted)] transition-all hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)] hover:scale-110"
+                  >
+                    <link.icon className="w-4 h-4" />
+                  </a>
+                </TooltipTrigger>
+                <TooltipContent side="top" align="center" className="bg-[var(--color-bg-card)] text-[var(--color-text-primary)] border border-[var(--color-border-default)] rounded-xl text-xs px-3 py-1.5 shadow-lg">
+                  <p>{link.label}</p>
+                </TooltipContent>
+              </Tooltip>
+            ))}
+          </div>
+        </TooltipProvider>
       </div>
     </footer>
   );
