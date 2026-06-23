@@ -1,22 +1,27 @@
-import { useState } from 'react';
-import { toast } from '@/hooks/use-toast';
+import { useState, useEffect } from 'react';
+import { toast } from 'sonner';
 import { useSaveProjectMutation } from '../../queries';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-export interface ProjectFormData {
-  title: string;
-  description: string;
-  full_content: string;
-  category: string;
-  status: string;
-  thumbnail_url: string;
-  live_url: string;
-  code_url: string;
-  embed_url: string;
-  tech_stack: string[];
-  display_order: number;
-}
+export const projectSchema = z.object({
+  title: z.string().min(1, 'Title is required').max(100, 'Title is too long'),
+  description: z.string().min(1, 'Description is required'),
+  full_content: z.string().optional(),
+  category: z.string().min(1, 'Category is required'),
+  status: z.string().min(1, 'Status is required'),
+  thumbnail_url: z.string().url('Must be a valid URL').or(z.literal('')).optional(),
+  live_url: z.string().url('Must be a valid URL').or(z.literal('')).optional(),
+  code_url: z.string().url('Must be a valid URL').or(z.literal('')).optional(),
+  embed_url: z.string().url('Must be a valid URL').or(z.literal('')).optional(),
+  tech_stack: z.array(z.string()).default([]),
+  display_order: z.coerce.number().int().default(0),
+});
 
-const getInitialFormData = (project?: Record<string, unknown>): ProjectFormData => ({
+export type ProjectFormValues = z.infer<typeof projectSchema>;
+
+const getInitialFormData = (project?: Record<string, unknown>): ProjectFormValues => ({
   title: (project?.title as string) || '',
   description: (project?.description as string) || '',
   full_content: (project?.full_content as string) || '',
@@ -30,56 +35,33 @@ const getInitialFormData = (project?: Record<string, unknown>): ProjectFormData 
   display_order: (project?.display_order as number) || 0,
 });
 
-/**
- * Manages state and handlers for a project edit/create form.
- *
- * Initializes form state from an optional `project`, keeps state in sync when `project` changes, and provides handlers for field updates, tech-stack editing, thumbnail updates, and form submission.
- *
- * @param project - Optional project record used to populate initial form values and to include `id` when submitting.
- * @param onSuccess - Optional callback invoked after a successful save operation.
- * @returns An object with:
- *  - `formData` — current `ProjectFormData` state.
- *  - `techInput` — current text input for adding a tech-stack entry.
- *  - `isSubmitting` — `true` while a save is in progress.
- *  - `setTechInput` — setter for `techInput`.
- *  - `handleChange` — change handler for text/select/textarea inputs that updates `formData` by `name`.
- *  - `addTech` — appends the trimmed `techInput` to `formData.tech_stack` if non-empty and not a duplicate.
- *  - `removeTech` — removes a tech string from `formData.tech_stack`.
- *  - `handleTechKeyDown` — keyboard handler that adds a tech on Enter.
- *  - `handleSubmit` — form submit handler that validates required fields and triggers the save mutation.
- *  - `setThumbnailUrl` — updates `formData.thumbnail_url`.
- */
 export function useProjectForm(project?: Record<string, unknown>, onSuccess?: () => void) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState<ProjectFormData>(getInitialFormData(project));
   const [techInput, setTechInput] = useState('');
-  const [prevProject, setPrevProject] = useState(project);
 
-  if (project !== prevProject) {
-    setPrevProject(project);
-    setFormData(getInitialFormData(project));
-  }
+  const form = useForm<ProjectFormValues>({
+    resolver: zodResolver(projectSchema),
+    mode: "onTouched",
+    delayError: 500,
+    defaultValues: getInitialFormData(project),
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  // Reset form when project prop changes (e.g., opening a different project)
+  useEffect(() => {
+    form.reset(getInitialFormData(project));
+  }, [project, form]);
 
   const addTech = () => {
-    if (techInput.trim() && !formData.tech_stack.includes(techInput.trim())) {
-      setFormData((prev) => ({
-        ...prev,
-        tech_stack: [...prev.tech_stack, techInput.trim()],
-      }));
+    const currentStack = form.getValues('tech_stack') || [];
+    if (techInput.trim() && !currentStack.includes(techInput.trim())) {
+      form.setValue('tech_stack', [...currentStack, techInput.trim()], { shouldValidate: true, shouldDirty: true });
       setTechInput('');
     }
   };
 
   const removeTech = (tech: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      tech_stack: prev.tech_stack.filter((t) => t !== tech),
-    }));
+    const currentStack = form.getValues('tech_stack') || [];
+    form.setValue('tech_stack', currentStack.filter((t) => t !== tech), { shouldValidate: true, shouldDirty: true });
   };
 
   const handleTechKeyDown = (e: React.KeyboardEvent) => {
@@ -91,39 +73,33 @@ export function useProjectForm(project?: Record<string, unknown>, onSuccess?: ()
 
   const saveMutation = useSaveProjectMutation(
     () => {
-      toast({ title: project ? 'Project updated successfully' : 'Project created successfully' });
+      toast.success(project ? 'Project updated successfully' : 'Project created successfully');
       onSuccess?.();
     },
     (error) => {
-      toast({ title: 'Failed to save project', description: String(error), variant: 'destructive' });
+      toast.error('Failed to save project', { description: String(error) });
     }
   );
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.title.trim() || !formData.description.trim()) {
-      toast({ title: 'Please fill in required fields', variant: 'destructive' });
-      return;
-    }
+  const onSubmit = async (data: ProjectFormValues) => {
     setIsSubmitting(true);
-    await saveMutation.mutateAsync({ ...formData, id: project?.id as string | undefined });
+    await saveMutation.mutateAsync({ ...data, id: project?.id as string | undefined });
     setIsSubmitting(false);
   };
 
   const setThumbnailUrl = (url: string) => {
-    setFormData((prev) => ({ ...prev, thumbnail_url: url }));
+    form.setValue('thumbnail_url', url, { shouldValidate: true, shouldDirty: true });
   };
 
   return {
-    formData,
+    form,
     techInput,
     isSubmitting,
     setTechInput,
-    handleChange,
     addTech,
     removeTech,
     handleTechKeyDown,
-    handleSubmit,
+    onSubmit: form.handleSubmit(onSubmit),
     setThumbnailUrl
   };
 }
