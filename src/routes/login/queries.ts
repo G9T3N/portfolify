@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { supabase } from '@/integrations/supabase/client';
-import { toast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 
 export const useAdminAuth = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isCheckingSession, setIsCheckingSession] = useState(true);
   const [isSignUp, setIsSignUp] = useState(false);
@@ -55,25 +53,8 @@ export const useAdminAuth = () => {
     };
   }, [navigate]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!email || !password) {
-      toast({
-        title: 'Please fill in all fields',
-        variant: 'destructive',
-      });
-      return;
-    }
-
-    if (password.length < 6) {
-      toast({
-        title: 'Password must be at least 6 characters',
-        variant: 'destructive',
-      });
-      return;
-    }
-
+  const submitAuth = async (data: { email: string; password: string }) => {
+    const { email, password } = data;
     setIsLoading(true);
 
     try {
@@ -90,10 +71,7 @@ export const useAdminAuth = () => {
         if (error) { throw error; }
 
         if (data.user) {
-          toast({
-            title: 'Account created!',
-            description: 'Please wait while admin privileges are being granted...',
-          });
+          toast.success('Account created! Please wait while admin privileges are being granted...');
           // User created, they need to be granted admin role via database
         }
       } else {
@@ -118,34 +96,23 @@ export const useAdminAuth = () => {
             throw new Error('Access denied. You do not have admin privileges.');
           }
 
-          toast({
-            title: 'Welcome back!',
-            description: 'Successfully logged in as admin.',
-          });
+          toast.success('Welcome back! Successfully logged in as admin.');
           navigate('/admin', { replace: true });
         }
       }
     } catch (error) {
       const err = error as Error;
-      toast({
-        title: isSignUp ? 'Sign up failed' : 'Login failed',
-        description: err.message || 'An error occurred',
-        variant: 'destructive',
-      });
+      toast.error(isSignUp ? 'Sign up failed: ' + (err.message || 'An error occurred') : 'Login failed: ' + (err.message || 'An error occurred'));
     } finally {
       setIsLoading(false);
     }
   };
 
   return {
-    email,
-    setEmail,
-    password,
-    setPassword,
     isLoading,
     isCheckingSession,
     isSignUp,
     setIsSignUp,
-    handleSubmit
+    submitAuth
   };
 };
