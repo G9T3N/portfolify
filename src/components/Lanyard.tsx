@@ -42,7 +42,7 @@ interface LanyardProps {
 export default function Lanyard({
   position = [0, 0, 10],
   gravity = [0, -40, 0],
-  fov = 20,
+  fov = 21,
   transparent = true
 }: LanyardProps) {
   return (
