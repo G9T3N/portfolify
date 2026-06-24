@@ -6,6 +6,16 @@ const AboutSection = () => {
   return (
     <section id="about" className="px-4 md:px-8 lg:px-12 py-24 md:py-32">
       <div className="max-w-[1400px] mx-auto">
+          <div className="  z-10 flex justify-center">
+          <motion.span
+            className="section-label  text-center  "
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            About Me
+          </motion.span>
+        </div>
         <div className="flex flex-col lg:flex-row items-center ">
           {/* Photo */}
           <div className="flex-2 w-full h-full min-h-[50vh]">
@@ -22,7 +32,7 @@ const AboutSection = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="text-2xl sm:text-3xl md:text-4xl leading-[1.3] font-light text-[var(--color-text-secondary)]">
+            <p className="text-2xl sm:text-3xl md:text-4xl leading-[1.3] text-center md:font-light text-[var(--color-text-secondary)]">
               I&apos;m a{" "}
               <strong className="font-bold text-[var(--color-text-primary)]">
                 Full Stack Developer
@@ -47,7 +57,7 @@ const AboutSection = () => {
 
             {/* CTA button */}
             <motion.div
-              className="mt-12"
+              className="mt-12 flex justify-center md:justify-start  "
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -59,7 +69,7 @@ const AboutSection = () => {
                   e.preventDefault();
                   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="btn-pill"
+                className="btn-pill "
               >
                 <Sparkles className="w-4 h-4" />
                 Get in touch
