@@ -18,7 +18,7 @@ export default function HomeRoute() {
   const { scrollYProgress } = useScroll();
 
   return (
-    <div className=" relative min-h-screen max-w-[85vw] mx-auto bg-[var(--color-bg-primary)]">
+    <div className=" relative min-h-screen max-w-[95vw] lg:max-w-[85vw] mx-auto bg-[var(--color-bg-primary)]">
       <motion.div
         className="scroll-progress"
         style={{ scaleX: scrollYProgress }}
