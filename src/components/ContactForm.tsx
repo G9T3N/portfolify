@@ -88,7 +88,7 @@ export const ContactForm = () => {
       <button
         type="submit"
         disabled={sendMessage.isPending || isSubmitting}
-        className="bg-[var(--color-mp-text-primary)] cursor-pointer text-[var(--color-bg-primary)] px-10 h-12 rounded-xl border flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-[var(--color-mp-primary)] cursor-pointer text-white px-10 h-12 rounded-xl border flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <Send className="w-4 h-4" />
         {sendMessage.isPending || isSubmitting ? "Sending..." : "Send message"}

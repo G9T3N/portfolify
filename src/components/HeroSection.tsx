@@ -3,6 +3,7 @@ import { Trans } from "@lingui/react";
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { ImageCardStack } from "./card-swapping/features/ImageStack";
 
 // Lazy load the heavy widgets so they don't block the initial text/gradient render
 const Gauge = lazy(() => import("./portfolio/Gauge").then(m => ({ default: m.Gauge })));
@@ -85,7 +86,8 @@ const HeroSection = () => {
         <div className="flex lg:flex-col gap-10 lg:w-[320px]">
           {/* Featured card */}
           <Suspense fallback={<CardSkeleton />}>
-            <FeaturedCard />
+            {/* <FeaturedCard /> */}
+            <ImageCardStack/>
           </Suspense>
 
           {/* Stat circle */}

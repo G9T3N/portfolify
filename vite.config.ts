@@ -13,17 +13,22 @@ export default defineConfig({
   plugins: [
     reactRouter(),
     tailwindcss(),
-    babel({
-      filter: /\.[jt]sx?$/,
-      babelConfig: {
-        presets: ["@babel/preset-typescript"], // if you use TypeScript
-        plugins: [
-          "babel-plugin-react-compiler",
-          "@lingui/babel-plugin-lingui-macro"
-        ],
-      },
-    }),
     lingui(),
+
+    babel({
+      filter: /\.[jt]sx?$/, // Targets JS, TS, JSX, and TSX files
+      babelConfig: {
+        presets: [
+          // Required so Babel can parse TypeScript types safely before macro execution
+          ["@babel/preset-typescript", { isTSX: true, allExtensions: true }]
+        ],
+        plugins: [
+          "@lingui/babel-plugin-lingui-macro", // 1. Translates Lingui tags
+          ["babel-plugin-react-compiler", { target: "19" }] // 2. Optimizes React
+        ],
+        sourceMaps: true // Prevents breakages in browser debugging tools
+      }
+    })
   ],
   resolve: {
     alias: {
