@@ -49,7 +49,7 @@ const SkillsSection = () => {
             }}
           >
             {/* First word */}
-            <span className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-[var(--color-text-primary)]">
+            <span className="text-5xl sm:text-6xl md:text-8xl  font-bold tracking-tight text-[var(--color-text-primary)]">
               {skill.label}
             </span>
 
@@ -63,7 +63,7 @@ const SkillsSection = () => {
             </motion.div>
 
             {/* Second word */}
-            <span className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-[var(--color-text-primary)]">
+            <span className="text-5xl sm:text-6xl md:text-8xl  font-bold tracking-tight text-[var(--color-text-primary)]">
               {skill.suffix}
             </span>
           </motion.div>
