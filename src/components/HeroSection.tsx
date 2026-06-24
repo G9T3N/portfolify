@@ -7,7 +7,7 @@ import { ImageCardStack } from "./card-swapping/features/ImageStack";
 
 // Lazy load the heavy widgets so they don't block the initial text/gradient render
 const Gauge = lazy(() => import("./portfolio/Gauge").then(m => ({ default: m.Gauge })));
-const FeaturedCard = lazy(() => import("./portfolio/FeaturedCard").then(m => ({ default: m.FeaturedCard })));
+// const FeaturedCard = lazy(() => import("./portfolio/FeaturedCard").then(m => ({ default: m.FeaturedCard })));
 const LogoCarousel = lazy(() => import("./LogoCarousel"));
 
 // Skeletons to prevent layout shift
