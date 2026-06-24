@@ -18,7 +18,7 @@ stackConfig ?: Partial<StackConfig>;
 }
 const defaultConfig: StackConfig = {
 rotation: 5,
-scale: 0.06,
+scale: 0.00,
 perspective: 600,
 }
 export function CardStack<T extends StackableItem>({
