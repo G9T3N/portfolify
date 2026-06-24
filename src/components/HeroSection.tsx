@@ -83,7 +83,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Right sidebar */}
-        <div className="flex flex-col gap-15 lg:w-[320px]">
+        <div className="flex flex-col gap-15 pt-5 md:pt-0 lg:w-[320px]">
           {/* Featured card */}
           <Suspense fallback={<CardSkeleton />}>
             {/* <FeaturedCard /> */}

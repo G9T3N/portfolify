@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
 
     <motion.header
-      className="absolute top-5 left-0 right-0 z-50 mx-auto w-full max-w-[95vw] md:w-fit"
+      className="absolute top-5 sticky start-0 w-full md:w-fit z-1   "
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
