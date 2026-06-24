@@ -24,7 +24,7 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-[90vh] flex flex-col">
       {/* Main content area */}
-      <div className="flex-1 flex flex-col lg:flex-row gap-6 pt-5 pb-8">
+      <div className="flex-1 flex flex-col lg:flex-row gap-6 pt-24 lg:pt-5 pb-8">
         {/* Left — Gradient mesh hero image */}
         <motion.div
           className="relative flex-1 gradient-mesh rounded-4xl rounded-ee-none overflow-hidden min-h-[50vh] lg:min-h-0 "
@@ -83,10 +83,11 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Right sidebar */}
-        <div className="flex lg:flex-col gap-10 lg:w-[320px]">
+        <div className="flex flex-col gap-15 lg:w-[320px]">
           {/* Featured card */}
           <Suspense fallback={<CardSkeleton />}>
             {/* <FeaturedCard /> */}
+            
             <ImageCardStack/>
           </Suspense>
 
