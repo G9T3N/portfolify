@@ -10,7 +10,7 @@ const ContactSection = () => {
       <div className="relative flex-1 bg-[var(--color-bg-card)] border border-[var(--color-border-default)] rounded-4xl mx-4 md:mx-8 lg:mx-12 mb-4 md:mb-8 lg:mb-12 overflow-hidden">
         <div className="relative  flex flex-col justify-between h-full p-8 md:p-12 lg:p-20">
            {/* Main CTA text */}
-       <div className="flex items-center">
+       <div className="flex lg:flex-row flex-col items-center">
           <motion.div
             className="max-w-3xl mt-8"
             initial={{ opacity: 0, y: 60 }}

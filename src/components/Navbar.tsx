@@ -31,27 +31,27 @@ const Navbar = () => {
   return (
 
     <motion.header
-      className="absolute top-5 sticky  w-fit z-1   "
+      className="absolute top-5 left-0 right-0 z-50 mx-auto w-full max-w-[95vw] md:w-fit"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
     >
       <nav
         className={cn(
-          "glass-nav flex items-center gap-1 rounded-4xl px-2 py-2 transition-all duration-500",
+          "glass-nav flex justify-between md:justify-center items-center gap-1 rounded-4xl px-2 py-2 transition-all duration-500",
           scrolled && "shadow-lg shadow-black/20"
         )}
       >
 
 
         {/* Nav links */}
-        <div className="flex items-center">
+        <div className="flex items-center overflow-x-auto no-scrollbar w-full md:w-auto">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => { handleNavClick(e, link.href); }}
-              className="px-4 py-2 text-sm font-medium text-[var(--color-text-secondary)] rounded-4xl transition-colors hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)]"
+              className="px-3 md:px-4 py-2 text-sm font-medium text-[var(--color-text-secondary)] rounded-4xl transition-colors hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] whitespace-nowrap"
             >
               {link.label}
             </a>
