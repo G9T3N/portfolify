@@ -2,7 +2,9 @@
 # Stage 1: deps — install dependencies
 # ─────────────────────────────────────────────
 FROM node:22-alpine AS deps
-RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Install pnpm directly — avoids corepack/packageManager version issues
+RUN npm install -g pnpm@10.33.0
 
 WORKDIR /app
 
@@ -17,7 +19,8 @@ RUN pnpm install --frozen-lockfile --ignore-scripts
 # Stage 2: builder — compile the Vite/React Router SPA
 # ─────────────────────────────────────────────
 FROM node:22-alpine AS builder
-RUN corepack enable && corepack prepare pnpm@latest --activate
+
+RUN npm install -g pnpm@10.33.0
 
 WORKDIR /app
 
