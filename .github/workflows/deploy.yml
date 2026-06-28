@@ -1,7 +1,6 @@
 name: Deploy to Production
 
 on:
-  # Triggers after ci.yml finishes successfully on main
   workflow_run:
     workflows: ["CI"]
     types: [completed]
@@ -13,17 +12,24 @@ concurrency:
 
 jobs:
   deploy:
-    # Only deploy when CI passed (not on failure)
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read   # allows GITHUB_TOKEN to pull from GHCR
 
     steps:
       - name: Deploy to VPS via SSH
         uses: appleboy/ssh-action@v1.2.2
+        env:
+          # Pass GITHUB_TOKEN into the SSH session via envs — no PAT needed
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER: ${{ github.repository_owner }}
         with:
           host: 13.222.172.60
           username: admin
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: GHCR_TOKEN,REPO_OWNER
           script: |
             set -euo pipefail
 
@@ -31,8 +37,8 @@ jobs:
             cd /opt/portfolify
 
             echo "🔑 Logging into GitHub Container Registry"
-            echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io \
-              -u ${{ github.repository_owner }} \
+            echo "${GHCR_TOKEN}" | docker login ghcr.io \
+              -u "${REPO_OWNER}" \
               --password-stdin
 
             echo "⬇️  Pulling latest image"
