@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/G9T3N/portfolify/compare/v1.1.0...v1.1.1) (2026-06-28)
+
+
+### Bug Fixes
+
+* update healthcheck host from localhost to 127.0.0.1 in docker-co… ([70c31ca](https://github.com/G9T3N/portfolify/commit/70c31ca45687fce412017e5c2a837594f23b6889))
+* update healthcheck host from localhost to 127.0.0.1 in docker-compose.yml ([e920ad9](https://github.com/G9T3N/portfolify/commit/e920ad9f1459b29e97aa002076d3d97b38060def))
+
 ## [1.1.0](https://github.com/G9T3N/portfolify/compare/v1.0.0...v1.1.0) (2026-06-28)
 
 
