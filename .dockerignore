@@ -27,11 +27,9 @@ coverage
 .DS_Store
 Thumbs.db
 
-# Docker files themselves
+# Docker files themselves (not needed in build context)
 Dockerfile*
 docker-compose*.yml
-nginx.conf
-.dockerignore
 
 # Docs / misc
 *.md
