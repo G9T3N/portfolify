@@ -22,7 +22,7 @@ export default function AdminMessages() {
     messages,
     isLoading,
     markAsRead,
-    deleteMessage
+    deleteMessage,
   } = useAdminMessagesState();
 
   return (
@@ -42,10 +42,16 @@ export default function AdminMessages() {
         <CardContent className="p-4 space-y-3">
           {(() => {
             if (isLoading) {
-              return <p className="text-center font-mono text-muted-foreground py-8">Loading messages...</p>;
+              return (
+                <p className="text-center font-mono text-muted-foreground py-8">
+                  Loading messages...
+                </p>
+              );
             }
             if (!messages || messages.length === 0) {
-              return <p className="text-center font-mono text-muted-foreground py-8">No messages yet.</p>;
+              return (
+                <p className="text-center font-mono text-muted-foreground py-8">No messages yet.</p>
+              );
             }
             return messages.map((msg) => (
               <MessageItem
@@ -54,7 +60,9 @@ export default function AdminMessages() {
                 isExpanded={expandedId === msg.id}
                 onToggle={(id) => {
                   setExpandedId(expandedId === id ? null : id);
-                  if (!msg.is_read) {markAsRead(id);}
+                  if (!msg.is_read) {
+                    markAsRead(id);
+                  }
                 }}
                 onDelete={(id) => setDeleteId(id)}
               />
@@ -67,7 +75,9 @@ export default function AdminMessages() {
         id={deleteId}
         onClose={() => setDeleteId(null)}
         onConfirm={async () => {
-          if (deleteId) {await deleteMessage(deleteId);}
+          if (deleteId) {
+            await deleteMessage(deleteId);
+          }
           setDeleteId(null);
         }}
       />

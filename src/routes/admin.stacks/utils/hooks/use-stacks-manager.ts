@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { toast } from '@/hooks/use-toast';
+import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 import {
   SkillCategory,
   Skill,
@@ -10,7 +10,7 @@ import {
   useToggleSkillVisibilityMutation,
   useCategoryMutation,
   useDeleteCategoryMutation,
-} from '../../queries';
+} from "../../queries";
 
 /**
  * Manages UI state, controlled form data, and mutation-backed handlers for skill categories and skills in the admin "stacks" interface.
@@ -35,27 +35,27 @@ export function useStacksManager() {
 
   // Form states
   const [skillForm, setSkillForm] = useState({
-    name: '',
-    logo_url: '',
-    proficiency: 'intermediate' as Skill['proficiency'],
+    name: "",
+    logo_url: "",
+    proficiency: "intermediate" as Skill["proficiency"],
     display_order: 0,
   });
 
   const [categoryForm, setCategoryForm] = useState({
-    name: '',
+    name: "",
     display_order: 0,
   });
 
   const handleCloseSkillForm = () => {
     setIsSkillFormOpen(false);
     setEditingSkill(null);
-    setSkillForm({ name: '', logo_url: '', proficiency: 'intermediate', display_order: 0 });
+    setSkillForm({ name: "", logo_url: "", proficiency: "intermediate", display_order: 0 });
   };
 
   const handleCloseCategoryForm = () => {
     setIsCategoryFormOpen(false);
     setEditingCategory(null);
-    setCategoryForm({ name: '', display_order: 0 });
+    setCategoryForm({ name: "", display_order: 0 });
   };
 
   const { data: categories, isLoading: categoriesLoading } = useSkillCategories();
@@ -70,7 +70,7 @@ export function useStacksManager() {
     setEditingSkill(skill);
     setSkillForm({
       name: skill.name,
-      logo_url: skill.logo_url || '',
+      logo_url: skill.logo_url || "",
       proficiency: skill.proficiency,
       display_order: skill.display_order,
     });
@@ -88,7 +88,7 @@ export function useStacksManager() {
 
   const handleSubmitSkill = () => {
     if (!skillForm.name) {
-      toast({ title: 'Please enter a skill name', variant: 'destructive' });
+      toast({ title: "Please enter a skill name", variant: "destructive" });
       return;
     }
     skillMutation.mutate({
@@ -101,7 +101,7 @@ export function useStacksManager() {
 
   const handleSubmitCategory = () => {
     if (!categoryForm.name) {
-      toast({ title: 'Please enter a category name', variant: 'destructive' });
+      toast({ title: "Please enter a category name", variant: "destructive" });
       return;
     }
     categoryMutation.mutate({
@@ -138,6 +138,6 @@ export function useStacksManager() {
     deleteSkillMutation,
     toggleVisibilityMutation,
     categoryMutation,
-    deleteCategoryMutation
+    deleteCategoryMutation,
   };
 }

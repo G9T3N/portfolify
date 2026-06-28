@@ -10,7 +10,10 @@ import { motion } from "framer-motion";
 const contactSchema = z.object({
   name: z.string().min(1, "Please enter your name").max(25, "Name must be at most 25 characters"),
   email: z.string().email("Please enter a valid email address"),
-  message: z.string().min(1, "Please enter a message").max(250, "Message must be at most 250 characters"),
+  message: z
+    .string()
+    .min(1, "Please enter a message")
+    .max(250, "Message must be at most 250 characters"),
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
@@ -23,12 +26,12 @@ export const ContactForm = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     mode: "onTouched",
     delayError: 500,
-    defaultValues: { name: "", email: "", message: "" }
+    defaultValues: { name: "", email: "", message: "" },
   });
 
   const onSubmit = async (data: ContactFormValues) => {
@@ -63,7 +66,7 @@ export const ContactForm = () => {
             type="text"
             placeholder="Your name"
             {...register("name")}
-            className={`form-input w-full rounded-xl ${errors.name ? 'border-red-500/50 focus:border-red-500' : ''}`}
+            className={`form-input w-full rounded-xl ${errors.name ? "border-red-500/50 focus:border-red-500" : ""}`}
           />
           {errors.name && <p className="text-red-500 text-xs px-1">{errors.name.message}</p>}
         </div>
@@ -71,7 +74,7 @@ export const ContactForm = () => {
           <input
             placeholder="Your email"
             {...register("email")}
-            className={`form-input w-full rounded-xl ${errors.email ? 'border-red-500/50 focus:border-red-500' : ''}`}
+            className={`form-input w-full rounded-xl ${errors.email ? "border-red-500/50 focus:border-red-500" : ""}`}
           />
           {errors.email && <p className="text-red-500 text-xs px-1">{errors.email.message}</p>}
         </div>
@@ -81,7 +84,7 @@ export const ContactForm = () => {
           placeholder="Tell me about your project..."
           {...register("message")}
           rows={4}
-          className={`form-input w-full resize-none rounded-xl ${errors.message ? 'border-red-500/50 focus:border-red-500' : ''}`}
+          className={`form-input w-full resize-none rounded-xl ${errors.message ? "border-red-500/50 focus:border-red-500" : ""}`}
         />
         {errors.message && <p className="text-red-500 text-xs px-1">{errors.message.message}</p>}
       </div>

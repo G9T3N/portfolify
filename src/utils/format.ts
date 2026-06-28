@@ -7,7 +7,9 @@
  * @returns The formatted stat string
  */
 export function formatStatValue(value: number): string {
-  if (value >= 1000) {return `${(value / 1000).toFixed(1)}k`;}
+  if (value >= 1000) {
+    return `${(value / 1000).toFixed(1)}k`;
+  }
   return String(value);
 }
 
@@ -23,9 +25,15 @@ export function formatMessageDate(dateString: string) {
   const diffMs = now.getTime() - date.getTime();
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-  if (diffDays === 0) {return "Today";}
-  if (diffDays === 1) {return "Yesterday";}
-  if (diffDays < 7) {return `${diffDays} days ago`;}
+  if (diffDays === 0) {
+    return "Today";
+  }
+  if (diffDays === 1) {
+    return "Yesterday";
+  }
+  if (diffDays < 7) {
+    return `${diffDays} days ago`;
+  }
 
   return date.toLocaleDateString("en-US", {
     month: "short",

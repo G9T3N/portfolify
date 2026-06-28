@@ -1,18 +1,13 @@
-import { Plus, Pencil, Trash2, Eye, EyeOff, Loader2, Briefcase } from 'lucide-react';
+import { Plus, Pencil, Trash2, Eye, EyeOff, Loader2, Briefcase } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 
-import { useExperienceManager } from '../utils/hooks/use-experience-form';
+import { useExperienceManager } from "../utils/hooks/use-experience-form";
 
 const ExperienceManager = () => {
   const {
@@ -27,16 +22,17 @@ const ExperienceManager = () => {
     experiences,
     isLoading,
     toggleVisibilityMutation,
-    deleteMutation
+    deleteMutation,
   } = useExperienceManager();
-
-
 
   return (
     <div>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <h1 className="text-2xl font-mono font-bold">Work Experience</h1>
-        <button onClick={() => handleOpenForm()} className="cyber-button flex items-center justify-center gap-2 w-full sm:w-auto">
+        <button
+          onClick={() => handleOpenForm()}
+          className="cyber-button flex items-center justify-center gap-2 w-full sm:w-auto"
+        >
           <Plus className="w-4 h-4" />
           Add Experience
         </button>
@@ -46,7 +42,7 @@ const ExperienceManager = () => {
         <div className="flex items-center justify-center py-20">
           <Loader2 className="w-8 h-8 text-primary animate-spin" />
         </div>
-      ) : (experiences && experiences.length > 0 ? (
+      ) : experiences && experiences.length > 0 ? (
         <div className="space-y-4">
           {experiences.map((exp) => (
             <div key={exp.id} className="glass-card p-4 sm:p-6">
@@ -59,19 +55,25 @@ const ExperienceManager = () => {
                     <h3 className="font-mono font-bold text-foreground">{exp.position}</h3>
                     <p className="text-primary">{exp.company}</p>
                     <p className="text-sm text-muted-foreground">
-                      {exp.start_date} - {exp.is_current ? 'Present' : exp.end_date}
+                      {exp.start_date} - {exp.is_current ? "Present" : exp.end_date}
                       {exp.location && ` • ${exp.location}`}
                     </p>
                     {exp.description && (
-                      <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{exp.description}</p>
+                      <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
+                        {exp.description}
+                      </p>
                     )}
                   </div>
                 </div>
                 <div className="flex items-center gap-2 w-full sm:w-auto justify-end mt-2 sm:mt-0">
                   <button
-                    onClick={() => toggleVisibilityMutation.mutate({ id: exp.id, is_visible: exp.is_visible })}
+                    onClick={() =>
+                      toggleVisibilityMutation.mutate({ id: exp.id, is_visible: exp.is_visible })
+                    }
                     className={`p-2 rounded-lg transition-colors ${
-                      exp.is_visible ? 'text-primary hover:bg-primary/10' : 'text-muted-foreground hover:bg-muted/20'
+                      exp.is_visible
+                        ? "text-primary hover:bg-primary/10"
+                        : "text-muted-foreground hover:bg-muted/20"
                     }`}
                   >
                     {exp.is_visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
@@ -84,7 +86,7 @@ const ExperienceManager = () => {
                   </button>
                   <button
                     onClick={() => {
-                      if (confirm('Are you sure you want to delete this experience?')) {
+                      if (confirm("Are you sure you want to delete this experience?")) {
                         deleteMutation.mutate(exp.id);
                       }
                     }}
@@ -104,13 +106,13 @@ const ExperienceManager = () => {
             Add your first experience
           </button>
         </div>
-      ))}
+      )}
 
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="font-mono">
-              {editingExperience ? 'Edit Experience' : 'Add Experience'}
+              {editingExperience ? "Edit Experience" : "Add Experience"}
             </DialogTitle>
           </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -203,7 +205,12 @@ const ExperienceManager = () => {
                 <Input
                   type="number"
                   value={formData.display_order}
-                  onChange={(e) => setFormData({ ...formData, display_order: Number.parseInt(e.target.value) || 0 })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      display_order: Number.parseInt(e.target.value) || 0,
+                    })
+                  }
                 />
               </div>
               <div className="flex items-center gap-2 pt-6">
@@ -215,11 +222,16 @@ const ExperienceManager = () => {
               </div>
             </div>
             <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4">
-              <Button type="button" variant="outline" onClick={handleCloseForm} className="w-full sm:w-auto">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleCloseForm}
+                className="w-full sm:w-auto"
+              >
                 Cancel
               </Button>
               <Button type="submit" className="cyber-button w-full sm:w-auto">
-                {editingExperience ? 'Update' : 'Add'} Experience
+                {editingExperience ? "Update" : "Add"} Experience
               </Button>
             </div>
           </form>

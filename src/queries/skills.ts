@@ -9,7 +9,9 @@ export function useSkills() {
         .from("skills")
         .select("*")
         .order("display_order", { ascending: true });
-      if (error) { throw error; }
+      if (error) {
+        throw error;
+      }
       return data;
     },
   });
@@ -23,7 +25,9 @@ export function useSkillCategories() {
         .from("skill_categories")
         .select("*")
         .order("display_order", { ascending: true });
-      if (error) { throw error; }
+      if (error) {
+        throw error;
+      }
       return data;
     },
   });

@@ -26,9 +26,7 @@ export default function MessageItem({ msg, isExpanded, onToggle, onDelete }: Mes
   return (
     <div
       className={`rounded-lg border transition-colors ${
-        isUnread
-          ? "border-primary/30 bg-primary/5"
-          : "border-sidebar-border bg-sidebar"
+        isUnread ? "border-primary/30 bg-primary/5" : "border-sidebar-border bg-sidebar"
       }`}
     >
       <button
@@ -41,12 +39,12 @@ export default function MessageItem({ msg, isExpanded, onToggle, onDelete }: Mes
           <MailOpen className="w-4 h-4 text-muted-foreground flex-shrink-0" />
         )}
         <div className="flex-1 min-w-0">
-          <p className={`text-sm font-mono truncate ${isUnread ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
+          <p
+            className={`text-sm font-mono truncate ${isUnread ? "text-foreground font-semibold" : "text-muted-foreground"}`}
+          >
             {msg.name as string}
           </p>
-          <p className="text-xs font-mono text-muted-foreground truncate">
-            {msg.email as string}
-          </p>
+          <p className="text-xs font-mono text-muted-foreground truncate">{msg.email as string}</p>
         </div>
         <span className="text-xs font-mono text-muted-foreground flex-shrink-0">
           {format(new Date(msg.created_at as string), "MMM d, yyyy")}

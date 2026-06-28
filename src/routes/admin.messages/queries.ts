@@ -15,7 +15,9 @@ export function useMessages() {
         .from("contact_messages")
         .select("*")
         .order("created_at", { ascending: false });
-      if (error) {throw error;}
+      if (error) {
+        throw error;
+      }
       return data;
     },
   });
@@ -79,6 +81,6 @@ export function useAdminMessagesState() {
     messages,
     isLoading,
     markAsRead,
-    deleteMessage
+    deleteMessage,
   };
 }

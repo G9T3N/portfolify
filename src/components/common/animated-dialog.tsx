@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
-import React from 'react';
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
+import React from "react";
 
 interface AnimatedDialogProps {
   isOpen: boolean;
@@ -23,7 +23,13 @@ interface AnimatedDialogProps {
  * @param className - Additional classes applied to the dialog container (default: `"max-w-4xl"`)
  * @returns A React element that mounts the animated dialog when `isOpen` is `true`, otherwise `null`
  */
-export function AnimatedDialog({ isOpen, onClose, title, children, className = "max-w-4xl" }: AnimatedDialogProps) {
+export function AnimatedDialog({
+  isOpen,
+  onClose,
+  title,
+  children,
+  className = "max-w-4xl",
+}: AnimatedDialogProps) {
   return (
     <AnimatePresence>
       {isOpen && (

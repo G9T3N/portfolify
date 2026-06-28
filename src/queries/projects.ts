@@ -9,7 +9,9 @@ export function useProjects() {
         .from("projects")
         .select("*")
         .order("display_order", { ascending: true });
-      if (error) { throw error; }
+      if (error) {
+        throw error;
+      }
       return data;
     },
   });
@@ -24,7 +26,9 @@ export function useProject(id: string) {
         .select("*")
         .eq("id", id)
         .maybeSingle();
-      if (error) { throw error; }
+      if (error) {
+        throw error;
+      }
       return data;
     },
     enabled: !!id,
@@ -40,7 +44,9 @@ export function useProjectImages(projectId: string) {
         .select("*")
         .eq("project_id", projectId)
         .order("display_order", { ascending: true });
-      if (error) { throw error; }
+      if (error) {
+        throw error;
+      }
       return data;
     },
     enabled: !!projectId,

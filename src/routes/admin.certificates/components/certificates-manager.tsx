@@ -1,9 +1,9 @@
-import { Plus, Pencil, Trash2, Eye, EyeOff, Loader2, Award, ExternalLink } from 'lucide-react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { useCertificatesManager } from '../utils/hooks/use-certificates-form';
+import { Plus, Pencil, Trash2, Eye, EyeOff, Loader2, Award, ExternalLink } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { useCertificatesManager } from "../utils/hooks/use-certificates-form";
 
 const CertificatesManager = () => {
   const {
@@ -18,10 +18,8 @@ const CertificatesManager = () => {
     certificates,
     isLoading,
     toggleVisibilityMutation,
-    deleteMutation
+    deleteMutation,
   } = useCertificatesManager();
-
-
 
   return (
     <div>
@@ -30,7 +28,10 @@ const CertificatesManager = () => {
           <Award className="w-6 h-6 text-primary" />
           <h2 className="text-xl font-mono font-bold">Certificates</h2>
         </div>
-        <button onClick={() => handleOpenForm()} className="cyber-button flex items-center justify-center gap-2 w-full sm:w-auto">
+        <button
+          onClick={() => handleOpenForm()}
+          className="cyber-button flex items-center justify-center gap-2 w-full sm:w-auto"
+        >
           <Plus className="w-4 h-4" />
           Add Certificate
         </button>
@@ -40,13 +41,13 @@ const CertificatesManager = () => {
         <div className="flex items-center justify-center py-12">
           <Loader2 className="w-6 h-6 text-primary animate-spin" />
         </div>
-      ) : (certificates && certificates.length > 0 ? (
+      ) : certificates && certificates.length > 0 ? (
         <div className="space-y-4">
           {certificates.map((cert) => (
             <div
               key={cert.id}
               className={`glass-card p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
-                cert.is_visible ? '' : 'opacity-60'
+                cert.is_visible ? "" : "opacity-60"
               }`}
             >
               <div className="flex items-center gap-4 flex-1 min-w-0 w-full">
@@ -61,7 +62,9 @@ const CertificatesManager = () => {
                 )}
                 <div className="flex-1 min-w-0">
                   <p className="font-mono font-medium text-foreground truncate">{cert.title}</p>
-                  <p className="text-sm text-muted-foreground">{cert.issuer} • {new Date(cert.issue_date).toLocaleDateString()}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {cert.issuer} • {new Date(cert.issue_date).toLocaleDateString()}
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-2 w-full sm:w-auto justify-end mt-2 sm:mt-0">
@@ -76,7 +79,9 @@ const CertificatesManager = () => {
                   </a>
                 )}
                 <button
-                  onClick={() => toggleVisibilityMutation.mutate({ id: cert.id, is_visible: cert.is_visible })}
+                  onClick={() =>
+                    toggleVisibilityMutation.mutate({ id: cert.id, is_visible: cert.is_visible })
+                  }
                   className="p-2 rounded-lg hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {cert.is_visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
@@ -89,7 +94,7 @@ const CertificatesManager = () => {
                 </button>
                 <button
                   onClick={() => {
-                    if (confirm('Delete this certificate?')) {
+                    if (confirm("Delete this certificate?")) {
                       deleteMutation.mutate(cert.id);
                     }
                   }}
@@ -109,13 +114,13 @@ const CertificatesManager = () => {
             Add your first certificate
           </button>
         </div>
-      ))}
+      )}
 
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
             <DialogTitle className="font-mono">
-              {editingCert ? 'Edit Certificate' : 'Add Certificate'}
+              {editingCert ? "Edit Certificate" : "Add Certificate"}
             </DialogTitle>
           </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -198,11 +203,15 @@ const CertificatesManager = () => {
               />
             </div>
             <div className="flex flex-col-reverse sm:flex-row gap-3 pt-4">
-              <button type="button" onClick={handleCloseForm} className="flex-1 cyber-button-outline w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={handleCloseForm}
+                className="flex-1 cyber-button-outline w-full sm:w-auto"
+              >
                 Cancel
               </button>
               <button type="submit" className="flex-1 cyber-button w-full sm:w-auto">
-                {editingCert ? 'Update' : 'Add'} Certificate
+                {editingCert ? "Update" : "Add"} Certificate
               </button>
             </div>
           </form>

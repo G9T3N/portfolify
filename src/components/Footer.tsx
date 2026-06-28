@@ -44,7 +44,11 @@ const Footer = () => {
                     <link.icon className="w-4 h-4" />
                   </a>
                 </TooltipTrigger>
-                <TooltipContent side="top" align="center" className="bg-[var(--color-bg-card)] text-[var(--color-text-primary)] border border-[var(--color-border-default)] rounded-xl text-xs px-3 py-1.5 shadow-lg">
+                <TooltipContent
+                  side="top"
+                  align="center"
+                  className="bg-[var(--color-bg-card)] text-[var(--color-text-primary)] border border-[var(--color-border-default)] rounded-xl text-xs px-3 py-1.5 shadow-lg"
+                >
                   <p>{link.label}</p>
                 </TooltipContent>
               </Tooltip>

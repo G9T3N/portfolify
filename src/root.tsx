@@ -4,9 +4,8 @@ import { Toaster } from "@/components/ui/sonner";
 import "./index.css";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import {messages as messagesEn} from "./locales/en/messages";
-import {messages as messagesAr} from "./locales/ar/messages";
-
+import { messages as messagesEn } from "./locales/en/messages";
+import { messages as messagesAr } from "./locales/ar/messages";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,11 +16,9 @@ const queryClient = new QueryClient({
   },
 });
 
-
-
 // Initialize Lingui
-i18n.load("en",messagesEn);
-i18n.load("ar",messagesAr);
+i18n.load("en", messagesEn);
+i18n.load("ar", messagesAr);
 i18n.activate("en");
 
 export default function App() {
@@ -70,7 +67,9 @@ export function ErrorBoundary({ error }: { error: unknown }) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4 text-center">
       <div className="glass-card p-8 max-w-md w-full">
-        <h1 className="text-2xl font-mono font-bold text-destructive mb-4">Oops! Something went wrong.</h1>
+        <h1 className="text-2xl font-mono font-bold text-destructive mb-4">
+          Oops! Something went wrong.
+        </h1>
         <p className="text-sm text-muted-foreground mb-4">
           An unexpected error occurred. Please try refreshing the page.
         </p>

@@ -25,7 +25,14 @@ type DeleteMessageDialogProps = {
  */
 export default function DeleteMessageDialog({ id, onClose, onConfirm }: DeleteMessageDialogProps) {
   return (
-    <AlertDialog open={id !== null} onOpenChange={(open) => { if (!open) {onClose();} }}>
+    <AlertDialog
+      open={id !== null}
+      onOpenChange={(open) => {
+        if (!open) {
+          onClose();
+        }
+      }}
+    >
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="font-mono">Delete Message</AlertDialogTitle>
@@ -35,7 +42,10 @@ export default function DeleteMessageDialog({ id, onClose, onConfirm }: DeleteMe
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel className="font-mono">Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm} className="font-mono bg-destructive text-destructive-foreground hover:bg-destructive/90">
+          <AlertDialogAction
+            onClick={onConfirm}
+            className="font-mono bg-destructive text-destructive-foreground hover:bg-destructive/90"
+          >
             Delete
           </AlertDialogAction>
         </AlertDialogFooter>

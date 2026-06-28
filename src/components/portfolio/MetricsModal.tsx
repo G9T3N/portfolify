@@ -32,12 +32,22 @@ export const MetricsModal = ({ isOpen, onClose, metrics }: MetricsModalProps) =>
             className="relative rounded-4xl border border-border p-6  shadow-2xl max-w-2xl w-full z-10 glass-card"
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold tracking-tight text-[var(--color-text-primary)]">All Metrics</h2>
-              <button onClick={onClose} className="w-8 h-8 flex items-center justify-center hover:bg-white/10 rounded-full transition-colors text-[var(--color-text-primary)] cursor-pointer">✕</button>
+              <h2 className="text-2xl font-bold tracking-tight text-[var(--color-text-primary)]">
+                All Metrics
+              </h2>
+              <button
+                onClick={onClose}
+                className="w-8 h-8 flex items-center justify-center hover:bg-white/10 rounded-full transition-colors text-[var(--color-text-primary)] cursor-pointer"
+              >
+                ✕
+              </button>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {metrics.map((stat, i) => (
-                <div key={i} className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white/5 border border-border/50 hover:bg-white/10 transition-colors">
+                <div
+                  key={i}
+                  className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white/5 border border-border/50 hover:bg-white/10 transition-colors"
+                >
                   <span className="text-3xl font-bold text-[var(--color-text-primary)] flex items-baseline">
                     {stat.value}
                     {stat.unit && <span className="text-xl ml-1">{stat.unit}</span>}

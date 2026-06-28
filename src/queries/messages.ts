@@ -15,7 +15,9 @@ export function useSendMessage() {
         .insert(input)
         .select()
         .single();
-      if (error) { throw error; }
+      if (error) {
+        throw error;
+      }
       return data;
     },
   });

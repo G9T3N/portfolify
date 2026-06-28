@@ -17,7 +17,9 @@ const Navbar = () => {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => { window.removeEventListener("scroll", handleScroll); };
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -29,7 +31,6 @@ const Navbar = () => {
   };
 
   return (
-
     <motion.header
       className="absolute top-5 sticky start-0 w-full md:w-fit z-1   "
       initial={{ opacity: 0, y: -20 }}
@@ -39,18 +40,18 @@ const Navbar = () => {
       <nav
         className={cn(
           "glass-nav flex justify-between md:justify-center items-center gap-1 rounded-4xl px-2 py-2 transition-all duration-500",
-          scrolled && "shadow-lg shadow-black/20"
+          scrolled && "shadow-lg shadow-black/20",
         )}
       >
-
-
         {/* Nav links */}
         <div className="flex items-center overflow-x-auto no-scrollbar w-full md:w-auto">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              onClick={(e) => { handleNavClick(e, link.href); }}
+              onClick={(e) => {
+                handleNavClick(e, link.href);
+              }}
               className="px-3 md:px-4 py-2 text-sm font-medium text-[var(--color-text-secondary)] rounded-4xl transition-colors hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] whitespace-nowrap"
             >
               {link.label}
@@ -74,7 +75,6 @@ const Navbar = () => {
         </button>
       </nav>
     </motion.header>
-
   );
 };
 

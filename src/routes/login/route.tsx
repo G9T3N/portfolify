@@ -1,15 +1,9 @@
-import { Loader2 } from 'lucide-react';
-import { useAdminAuth } from './queries';
-import { AuthForm } from './components/AuthForm';
+import { Loader2 } from "lucide-react";
+import { useAdminAuth } from "./queries";
+import { AuthForm } from "./components/AuthForm";
 
 const AdminLogin = () => {
-  const {
-    isLoading,
-    isCheckingSession,
-    isSignUp,
-    setIsSignUp,
-    submitAuth
-  } = useAdminAuth();
+  const { isLoading, isCheckingSession, isSignUp, setIsSignUp, submitAuth } = useAdminAuth();
 
   if (isCheckingSession) {
     return (

@@ -1,0 +1,22 @@
+services:
+  web:
+    # On the VPS: pulls the pre-built image from GHCR (pushed by CI)
+    # For local dev/build: comment out 'image' and uncomment 'build'
+    image: ghcr.io/${GITHUB_REPOSITORY:-mrerr/portfolify}:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    #   args:
+    #     VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
+    #     VITE_SUPABASE_PROJECT_ID: ${VITE_SUPABASE_PROJECT_ID}
+    #     VITE_SUPABASE_PUBLISHABLE_KEY: ${VITE_SUPABASE_PUBLISHABLE_KEY}
+    container_name: portfolify
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

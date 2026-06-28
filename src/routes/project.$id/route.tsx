@@ -19,14 +19,13 @@ export default function ProjectDetails() {
   if (isError || !project) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[var(--color-bg-primary)] p-4 text-center">
-        <h1 className="text-3xl font-bold font-mono text-[var(--color-text-primary)] mb-4">Project Not Found</h1>
+        <h1 className="text-3xl font-bold font-mono text-[var(--color-text-primary)] mb-4">
+          Project Not Found
+        </h1>
         <p className="text-[var(--color-text-secondary)] mb-8 max-w-md">
           The project you are looking for does not exist or has been removed.
         </p>
-        <button
-          onClick={() => navigate("/")}
-          className="cyber-button flex items-center gap-2"
-        >
+        <button onClick={() => navigate("/")} className="cyber-button flex items-center gap-2">
           <ArrowLeft className="w-4 h-4" />
           Back to Home
         </button>
@@ -46,7 +45,7 @@ export default function ProjectDetails() {
             <ArrowLeft className="w-4 h-4" />
             Go Back
           </button>
-          
+
           <div className="flex items-center gap-3">
             {project.code_url && (
               <a
@@ -84,10 +83,10 @@ export default function ProjectDetails() {
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-4">
               <span className="px-3 py-1 text-xs font-mono uppercase tracking-wider rounded-full bg-[var(--color-bg-card)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)]">
-                {project.category as string || "Project"}
+                {(project.category as string) || "Project"}
               </span>
               <span className="px-3 py-1 text-xs font-mono uppercase tracking-wider rounded-full bg-[var(--color-bg-card)] border border-[var(--color-border-default)] text-primary">
-                {project.status as string || "Live"}
+                {(project.status as string) || "Live"}
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
@@ -118,12 +117,12 @@ export default function ProjectDetails() {
                 About this project
               </h2>
               <div className="text-[var(--color-text-secondary)] whitespace-pre-wrap leading-relaxed">
-                {project.full_content as string || (project.description as string)}
+                {(project.full_content as string) || (project.description as string)}
               </div>
-              
+
               {project.embed_url && (
                 <div className="mt-12 rounded-2xl overflow-hidden border border-[var(--color-border-default)]">
-                  <iframe 
+                  <iframe
                     src={project.embed_url as string}
                     className="w-full aspect-video"
                     allowFullScreen
@@ -146,7 +145,9 @@ export default function ProjectDetails() {
                       </span>
                     ))
                   ) : (
-                    <span className="text-sm text-[var(--color-text-muted)]">No technologies listed</span>
+                    <span className="text-sm text-[var(--color-text-muted)]">
+                      No technologies listed
+                    </span>
                   )}
                 </div>
               </div>

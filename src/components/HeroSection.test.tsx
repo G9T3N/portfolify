@@ -52,7 +52,7 @@ describe("HeroSection – lazy loading with Suspense (PR change)", () => {
     render(
       <Suspense fallback={<div>Loading...</div>}>
         <HeroSection />
-      </Suspense>
+      </Suspense>,
     );
     const card = await screen.findByTestId("featured-card-component");
     expect(card).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe("HeroSection – lazy loading with Suspense (PR change)", () => {
     render(
       <Suspense fallback={<div>Loading...</div>}>
         <HeroSection />
-      </Suspense>
+      </Suspense>,
     );
     const gauge = await screen.findByTestId("gauge-component");
     expect(gauge).toBeInTheDocument();
@@ -72,7 +72,7 @@ describe("HeroSection – lazy loading with Suspense (PR change)", () => {
     render(
       <Suspense fallback={<div>Loading...</div>}>
         <HeroSection />
-      </Suspense>
+      </Suspense>,
     );
     const carousel = await screen.findByTestId("logo-carousel-component");
     expect(carousel).toBeInTheDocument();
@@ -82,9 +82,7 @@ describe("HeroSection – lazy loading with Suspense (PR change)", () => {
 describe("HeroSection – explicit Trans IDs (PR change)", () => {
   it("renders Trans component with explicit ID for Full-Stack Developer title", () => {
     render(<HeroSection />);
-    expect(
-      screen.getByTestId("trans-Full-Stack Developer & UI Specialist")
-    ).toBeInTheDocument();
+    expect(screen.getByTestId("trans-Full-Stack Developer & UI Specialist")).toBeInTheDocument();
   });
 
   it("renders Trans component with explicit ID for name", () => {
@@ -101,8 +99,8 @@ describe("HeroSection – explicit Trans IDs (PR change)", () => {
     render(<HeroSection />);
     expect(
       screen.getByTestId(
-        "trans-Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
-      )
+        "trans-Bridging the gap between robust system architecture and seamless, high-performance user interfaces.",
+      ),
     ).toBeInTheDocument();
   });
 });

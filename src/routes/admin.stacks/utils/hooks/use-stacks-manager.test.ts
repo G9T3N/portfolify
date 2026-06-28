@@ -45,13 +45,33 @@ const sampleCategory: SkillCategory = {
 describe("useStacksManager – PR change: categoryMutation now exported", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(queries.useSkillCategories).mockReturnValue({ data: [], isLoading: false } as ReturnType<typeof queries.useSkillCategories>);
-    vi.mocked(queries.useSkills).mockReturnValue({ data: [], isLoading: false } as ReturnType<typeof queries.useSkills>);
-    vi.mocked(queries.useSkillMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useSkillMutation>);
-    vi.mocked(queries.useDeleteSkillMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useDeleteSkillMutation>);
-    vi.mocked(queries.useToggleSkillVisibilityMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useToggleSkillVisibilityMutation>);
-    vi.mocked(queries.useCategoryMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useCategoryMutation>);
-    vi.mocked(queries.useDeleteCategoryMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useDeleteCategoryMutation>);
+    vi.mocked(queries.useSkillCategories).mockReturnValue({
+      data: [],
+      isLoading: false,
+    } as ReturnType<typeof queries.useSkillCategories>);
+    vi.mocked(queries.useSkills).mockReturnValue({ data: [], isLoading: false } as ReturnType<
+      typeof queries.useSkills
+    >);
+    vi.mocked(queries.useSkillMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useSkillMutation>);
+    vi.mocked(queries.useDeleteSkillMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useDeleteSkillMutation>);
+    vi.mocked(queries.useToggleSkillVisibilityMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useToggleSkillVisibilityMutation>);
+    vi.mocked(queries.useCategoryMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useCategoryMutation>);
+    vi.mocked(queries.useDeleteCategoryMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useDeleteCategoryMutation>);
   });
 
   it("returns categoryMutation in the result object (new export added in this PR)", () => {
@@ -61,7 +81,9 @@ describe("useStacksManager – PR change: categoryMutation now exported", () => 
 
   it("categoryMutation is the object returned by useCategoryMutation()", () => {
     const fakeMutation = { mutate: vi.fn(), isPending: false };
-    vi.mocked(queries.useCategoryMutation).mockReturnValue(fakeMutation as unknown as ReturnType<typeof queries.useCategoryMutation>);
+    vi.mocked(queries.useCategoryMutation).mockReturnValue(
+      fakeMutation as unknown as ReturnType<typeof queries.useCategoryMutation>,
+    );
     const { result } = renderHook(() => useStacksManager());
     expect(result.current.categoryMutation).toBe(fakeMutation);
   });
@@ -83,18 +105,41 @@ describe("useStacksManager – PR change: categoryMutation now exported", () => 
 describe("useStacksManager – handleSubmitSkill validation", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(queries.useSkillCategories).mockReturnValue({ data: [], isLoading: false } as ReturnType<typeof queries.useSkillCategories>);
-    vi.mocked(queries.useSkills).mockReturnValue({ data: [], isLoading: false } as ReturnType<typeof queries.useSkills>);
-    vi.mocked(queries.useSkillMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useSkillMutation>);
-    vi.mocked(queries.useDeleteSkillMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useDeleteSkillMutation>);
-    vi.mocked(queries.useToggleSkillVisibilityMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useToggleSkillVisibilityMutation>);
-    vi.mocked(queries.useCategoryMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useCategoryMutation>);
-    vi.mocked(queries.useDeleteCategoryMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useDeleteCategoryMutation>);
+    vi.mocked(queries.useSkillCategories).mockReturnValue({
+      data: [],
+      isLoading: false,
+    } as ReturnType<typeof queries.useSkillCategories>);
+    vi.mocked(queries.useSkills).mockReturnValue({ data: [], isLoading: false } as ReturnType<
+      typeof queries.useSkills
+    >);
+    vi.mocked(queries.useSkillMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useSkillMutation>);
+    vi.mocked(queries.useDeleteSkillMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useDeleteSkillMutation>);
+    vi.mocked(queries.useToggleSkillVisibilityMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useToggleSkillVisibilityMutation>);
+    vi.mocked(queries.useCategoryMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useCategoryMutation>);
+    vi.mocked(queries.useDeleteCategoryMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useDeleteCategoryMutation>);
   });
 
   it("shows toast and does NOT mutate when skill name is empty", () => {
     const mutateFn = vi.fn();
-    vi.mocked(queries.useSkillMutation).mockReturnValue({ mutate: mutateFn, isPending: false } as unknown as ReturnType<typeof queries.useSkillMutation>);
+    vi.mocked(queries.useSkillMutation).mockReturnValue({
+      mutate: mutateFn,
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useSkillMutation>);
 
     const { result } = renderHook(() => useStacksManager());
     act(() => {
@@ -102,14 +147,17 @@ describe("useStacksManager – handleSubmitSkill validation", () => {
     });
 
     expect(mockToast).toHaveBeenCalledWith(
-      expect.objectContaining({ title: "Please enter a skill name", variant: "destructive" })
+      expect.objectContaining({ title: "Please enter a skill name", variant: "destructive" }),
     );
     expect(mutateFn).not.toHaveBeenCalled();
   });
 
   it("calls mutate with correct args when skill name is provided", () => {
     const mutateFn = vi.fn();
-    vi.mocked(queries.useSkillMutation).mockReturnValue({ mutate: mutateFn, isPending: false } as unknown as ReturnType<typeof queries.useSkillMutation>);
+    vi.mocked(queries.useSkillMutation).mockReturnValue({
+      mutate: mutateFn,
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useSkillMutation>);
 
     const { result } = renderHook(() => useStacksManager());
 
@@ -135,7 +183,10 @@ describe("useStacksManager – handleSubmitSkill validation", () => {
 
   it("passes activeCategory as categoryId to mutate when a category is selected", () => {
     const mutateFn = vi.fn();
-    vi.mocked(queries.useSkillMutation).mockReturnValue({ mutate: mutateFn, isPending: false } as unknown as ReturnType<typeof queries.useSkillMutation>);
+    vi.mocked(queries.useSkillMutation).mockReturnValue({
+      mutate: mutateFn,
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useSkillMutation>);
 
     const { result } = renderHook(() => useStacksManager());
 
@@ -152,27 +203,48 @@ describe("useStacksManager – handleSubmitSkill validation", () => {
       result.current.handleSubmitSkill();
     });
 
-    expect(mutateFn).toHaveBeenCalledWith(
-      expect.objectContaining({ categoryId: "cat-1" })
-    );
+    expect(mutateFn).toHaveBeenCalledWith(expect.objectContaining({ categoryId: "cat-1" }));
   });
 });
 
 describe("useStacksManager – handleSubmitCategory validation", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(queries.useSkillCategories).mockReturnValue({ data: [], isLoading: false } as ReturnType<typeof queries.useSkillCategories>);
-    vi.mocked(queries.useSkills).mockReturnValue({ data: [], isLoading: false } as ReturnType<typeof queries.useSkills>);
-    vi.mocked(queries.useSkillMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useSkillMutation>);
-    vi.mocked(queries.useDeleteSkillMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useDeleteSkillMutation>);
-    vi.mocked(queries.useToggleSkillVisibilityMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useToggleSkillVisibilityMutation>);
-    vi.mocked(queries.useCategoryMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useCategoryMutation>);
-    vi.mocked(queries.useDeleteCategoryMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useDeleteCategoryMutation>);
+    vi.mocked(queries.useSkillCategories).mockReturnValue({
+      data: [],
+      isLoading: false,
+    } as ReturnType<typeof queries.useSkillCategories>);
+    vi.mocked(queries.useSkills).mockReturnValue({ data: [], isLoading: false } as ReturnType<
+      typeof queries.useSkills
+    >);
+    vi.mocked(queries.useSkillMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useSkillMutation>);
+    vi.mocked(queries.useDeleteSkillMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useDeleteSkillMutation>);
+    vi.mocked(queries.useToggleSkillVisibilityMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useToggleSkillVisibilityMutation>);
+    vi.mocked(queries.useCategoryMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useCategoryMutation>);
+    vi.mocked(queries.useDeleteCategoryMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useDeleteCategoryMutation>);
   });
 
   it("shows toast and does NOT mutate when category name is empty", () => {
     const mutateFn = vi.fn();
-    vi.mocked(queries.useCategoryMutation).mockReturnValue({ mutate: mutateFn, isPending: false } as unknown as ReturnType<typeof queries.useCategoryMutation>);
+    vi.mocked(queries.useCategoryMutation).mockReturnValue({
+      mutate: mutateFn,
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useCategoryMutation>);
 
     const { result } = renderHook(() => useStacksManager());
     act(() => {
@@ -180,14 +252,17 @@ describe("useStacksManager – handleSubmitCategory validation", () => {
     });
 
     expect(mockToast).toHaveBeenCalledWith(
-      expect.objectContaining({ title: "Please enter a category name", variant: "destructive" })
+      expect.objectContaining({ title: "Please enter a category name", variant: "destructive" }),
     );
     expect(mutateFn).not.toHaveBeenCalled();
   });
 
   it("calls categoryMutation.mutate with correct args when category name is provided", () => {
     const mutateFn = vi.fn();
-    vi.mocked(queries.useCategoryMutation).mockReturnValue({ mutate: mutateFn, isPending: false } as unknown as ReturnType<typeof queries.useCategoryMutation>);
+    vi.mocked(queries.useCategoryMutation).mockReturnValue({
+      mutate: mutateFn,
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useCategoryMutation>);
 
     const { result } = renderHook(() => useStacksManager());
 
@@ -209,13 +284,33 @@ describe("useStacksManager – handleSubmitCategory validation", () => {
 describe("useStacksManager – handleCloseSkillForm and handleCloseCategoryForm", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(queries.useSkillCategories).mockReturnValue({ data: [], isLoading: false } as ReturnType<typeof queries.useSkillCategories>);
-    vi.mocked(queries.useSkills).mockReturnValue({ data: [], isLoading: false } as ReturnType<typeof queries.useSkills>);
-    vi.mocked(queries.useSkillMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useSkillMutation>);
-    vi.mocked(queries.useDeleteSkillMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useDeleteSkillMutation>);
-    vi.mocked(queries.useToggleSkillVisibilityMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useToggleSkillVisibilityMutation>);
-    vi.mocked(queries.useCategoryMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useCategoryMutation>);
-    vi.mocked(queries.useDeleteCategoryMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useDeleteCategoryMutation>);
+    vi.mocked(queries.useSkillCategories).mockReturnValue({
+      data: [],
+      isLoading: false,
+    } as ReturnType<typeof queries.useSkillCategories>);
+    vi.mocked(queries.useSkills).mockReturnValue({ data: [], isLoading: false } as ReturnType<
+      typeof queries.useSkills
+    >);
+    vi.mocked(queries.useSkillMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useSkillMutation>);
+    vi.mocked(queries.useDeleteSkillMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useDeleteSkillMutation>);
+    vi.mocked(queries.useToggleSkillVisibilityMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useToggleSkillVisibilityMutation>);
+    vi.mocked(queries.useCategoryMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useCategoryMutation>);
+    vi.mocked(queries.useDeleteCategoryMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useDeleteCategoryMutation>);
   });
 
   it("handleCloseSkillForm resets isSkillFormOpen and skillForm", () => {
@@ -264,13 +359,33 @@ describe("useStacksManager – handleCloseSkillForm and handleCloseCategoryForm"
 describe("useStacksManager – handleEditSkill and handleEditCategory", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(queries.useSkillCategories).mockReturnValue({ data: [], isLoading: false } as ReturnType<typeof queries.useSkillCategories>);
-    vi.mocked(queries.useSkills).mockReturnValue({ data: [], isLoading: false } as ReturnType<typeof queries.useSkills>);
-    vi.mocked(queries.useSkillMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useSkillMutation>);
-    vi.mocked(queries.useDeleteSkillMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useDeleteSkillMutation>);
-    vi.mocked(queries.useToggleSkillVisibilityMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useToggleSkillVisibilityMutation>);
-    vi.mocked(queries.useCategoryMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useCategoryMutation>);
-    vi.mocked(queries.useDeleteCategoryMutation).mockReturnValue({ mutate: vi.fn(), isPending: false } as unknown as ReturnType<typeof queries.useDeleteCategoryMutation>);
+    vi.mocked(queries.useSkillCategories).mockReturnValue({
+      data: [],
+      isLoading: false,
+    } as ReturnType<typeof queries.useSkillCategories>);
+    vi.mocked(queries.useSkills).mockReturnValue({ data: [], isLoading: false } as ReturnType<
+      typeof queries.useSkills
+    >);
+    vi.mocked(queries.useSkillMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useSkillMutation>);
+    vi.mocked(queries.useDeleteSkillMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useDeleteSkillMutation>);
+    vi.mocked(queries.useToggleSkillVisibilityMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useToggleSkillVisibilityMutation>);
+    vi.mocked(queries.useCategoryMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useCategoryMutation>);
+    vi.mocked(queries.useDeleteCategoryMutation).mockReturnValue({
+      mutate: vi.fn(),
+      isPending: false,
+    } as unknown as ReturnType<typeof queries.useDeleteCategoryMutation>);
   });
 
   it("handleEditSkill populates skillForm from the skill and opens modal", () => {

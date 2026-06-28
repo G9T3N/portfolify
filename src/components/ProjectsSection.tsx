@@ -39,7 +39,7 @@ const ProjectsSection = () => {
   const x = useTransform(
     scrollYProgress,
     [0, pauseRatio, endRatio, 1],
-    [0, 0, -scrollRange, -scrollRange]
+    [0, 0, -scrollRange, -scrollRange],
   );
 
   return (
@@ -50,7 +50,6 @@ const ProjectsSection = () => {
       className="relative bg-[var(--color-bg-primary)]"
     >
       <div className="sticky  top-0 flex flex-col h-screen items-center overflow-hidden ">
-
         {/* Section label */}
         <div className=" m-10 z-10">
           <motion.span
@@ -68,14 +67,14 @@ const ProjectsSection = () => {
           {isLoading ? (
             <div className="flex gap-6 overflow-hidden">
               {[0, 1, 2].map((i) => (
-                <div key={i} className="shrink-0 w-[85vw]  h-[70vh] bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]" />
+                <div
+                  key={i}
+                  className="shrink-0 w-[85vw]  h-[70vh] bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]"
+                />
               ))}
             </div>
           ) : (
-            <motion.div
-              style={{ x }}
-              className="flex gap-6 items-center w-max"
-            >
+            <motion.div style={{ x }} className="flex gap-6 items-center w-max">
               {displayProjects.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} />
               ))}

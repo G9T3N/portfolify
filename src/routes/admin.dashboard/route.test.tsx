@@ -37,7 +37,9 @@ describe("AdminDashboard statCards configuration", () => {
   });
 
   it("renders exactly 4 stat cards (PR change: removed Unread Messages and All Messages)", () => {
-    mockUseDashboardStats.mockReturnValue({ data: undefined } as ReturnType<typeof useDashboardStats>);
+    mockUseDashboardStats.mockReturnValue({ data: undefined } as ReturnType<
+      typeof useDashboardStats
+    >);
     render(<AdminDashboard />);
 
     // There should be 4 stat card labels
@@ -48,7 +50,9 @@ describe("AdminDashboard statCards configuration", () => {
   });
 
   it("does NOT render old stat card labels removed in this PR", () => {
-    mockUseDashboardStats.mockReturnValue({ data: undefined } as ReturnType<typeof useDashboardStats>);
+    mockUseDashboardStats.mockReturnValue({ data: undefined } as ReturnType<
+      typeof useDashboardStats
+    >);
     render(<AdminDashboard />);
 
     expect(screen.queryByText("All Messages")).not.toBeInTheDocument();
@@ -56,7 +60,9 @@ describe("AdminDashboard statCards configuration", () => {
   });
 
   it("displays 0 for all stats when data is undefined", () => {
-    mockUseDashboardStats.mockReturnValue({ data: undefined } as ReturnType<typeof useDashboardStats>);
+    mockUseDashboardStats.mockReturnValue({ data: undefined } as ReturnType<
+      typeof useDashboardStats
+    >);
     render(<AdminDashboard />);
 
     const zeros = screen.getAllByText("0");
@@ -99,7 +105,9 @@ describe("AdminDashboard statCards configuration", () => {
   });
 
   it("renders the dashboard header text", () => {
-    mockUseDashboardStats.mockReturnValue({ data: undefined } as ReturnType<typeof useDashboardStats>);
+    mockUseDashboardStats.mockReturnValue({ data: undefined } as ReturnType<
+      typeof useDashboardStats
+    >);
     render(<AdminDashboard />);
 
     expect(screen.getByText("Dashboard Overview")).toBeInTheDocument();

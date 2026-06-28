@@ -26,20 +26,34 @@ type DeleteProjectDialogProps = {
  * @param onConfirm - Callback invoked when the user confirms deletion by clicking "Delete"
  * @returns The AlertDialog React element for confirming project deletion
  */
-export default function DeleteProjectDialog({ project, onClose, onConfirm }: DeleteProjectDialogProps) {
+export default function DeleteProjectDialog({
+  project,
+  onClose,
+  onConfirm,
+}: DeleteProjectDialogProps) {
   return (
-    <AlertDialog open={project !== null} onOpenChange={(open) => { if (!open) {onClose();} }}>
+    <AlertDialog
+      open={project !== null}
+      onOpenChange={(open) => {
+        if (!open) {
+          onClose();
+        }
+      }}
+    >
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="font-mono">Delete Project</AlertDialogTitle>
           <AlertDialogDescription className="font-mono text-muted-foreground">
-            Are you sure you want to delete "{project?.title as string}"?
-            This action cannot be undone.
+            Are you sure you want to delete "{project?.title as string}"? This action cannot be
+            undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel className="font-mono">Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm} className="font-mono bg-destructive text-destructive-foreground hover:bg-destructive/90">
+          <AlertDialogAction
+            onClick={onConfirm}
+            className="font-mono bg-destructive text-destructive-foreground hover:bg-destructive/90"
+          >
             Delete
           </AlertDialogAction>
         </AlertDialogFooter>

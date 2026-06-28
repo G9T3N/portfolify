@@ -16,7 +16,9 @@ export function useAdminProjects() {
         .from("projects")
         .select("*")
         .order("created_at", { ascending: false });
-      if (error) {throw error;}
+      if (error) {
+        throw error;
+      }
       return data;
     },
   });
@@ -73,7 +75,7 @@ export function useAdminProjectsState() {
     setDeleteProject,
     projects,
     isLoading,
-    deleteProjectFn
+    deleteProjectFn,
   };
 }
 
@@ -90,19 +92,20 @@ export function useSaveProjectMutation(onSuccess: () => void, onError: (error: u
   return useMutation({
     mutationFn: async (data: Record<string, unknown> & { id?: string }) => {
       if (data.id) {
-        const { error } = await supabase
-          .from('projects')
-          .update(data)
-          .eq('id', data.id);
-        if (error) {throw error;}
+        const { error } = await supabase.from("projects").update(data).eq("id", data.id);
+        if (error) {
+          throw error;
+        }
       } else {
-        const { error } = await supabase.from('projects').insert(data);
-        if (error) {throw error;}
+        const { error } = await supabase.from("projects").insert(data);
+        if (error) {
+          throw error;
+        }
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['admin-projects'] });
-      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      queryClient.invalidateQueries({ queryKey: ["admin-projects"] });
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
       onSuccess();
     },
     onError: (error) => {
