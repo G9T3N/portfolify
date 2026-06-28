@@ -34,7 +34,7 @@ jobs:
           script: |
             set -euo pipefail
 
-            APP_DIR="/opt/portfolify"
+            APP_DIR="/home/admin/portfolify"
             REPO_URL="https://${REPO_OWNER}:${GHCR_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 
             echo "📂 Setting up app directory"
