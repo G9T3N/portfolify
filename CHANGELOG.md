@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/G9T3N/portfolify/compare/v1.0.0...v1.1.0) (2026-06-28)
+
+
+### Features
+
+* add GitHub Actions workflow to automate deployment to VPS via SSH ([d9a3c3a](https://github.com/G9T3N/portfolify/commit/d9a3c3a3045570e21f769e78796ea543cc2e711f))
+* add GitHub Actions workflow to automate deployment to VPS via SSH ([7acc35f](https://github.com/G9T3N/portfolify/commit/7acc35f805a1c61b41d68a530e7f0f94b7e7b19b))
+
 ## 1.0.0 (2026-06-28)
 
 
