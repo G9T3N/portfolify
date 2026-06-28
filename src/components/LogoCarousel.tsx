@@ -9,7 +9,7 @@ import {
   Monitor,
   Smartphone,
   Cloud,
-  Shield
+  Shield,
 } from "lucide-react";
 
 const LOGOS = [
@@ -43,7 +43,6 @@ export default function LogoCarousel() {
           ))}
         </div>
       </div>
-
     </div>
   );
 }

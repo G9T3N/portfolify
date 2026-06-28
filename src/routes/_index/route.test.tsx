@@ -59,7 +59,7 @@ describe("HomeRoute – lazy loading below-fold sections with Suspense (PR chang
     render(
       <Suspense fallback={<div>loading...</div>}>
         <HomeRoute />
-      </Suspense>
+      </Suspense>,
     );
     const el = await screen.findByTestId("projects-section");
     expect(el).toBeInTheDocument();
@@ -69,7 +69,7 @@ describe("HomeRoute – lazy loading below-fold sections with Suspense (PR chang
     render(
       <Suspense fallback={<div>loading...</div>}>
         <HomeRoute />
-      </Suspense>
+      </Suspense>,
     );
     const el = await screen.findByTestId("about-section");
     expect(el).toBeInTheDocument();
@@ -79,7 +79,7 @@ describe("HomeRoute – lazy loading below-fold sections with Suspense (PR chang
     render(
       <Suspense fallback={<div>loading...</div>}>
         <HomeRoute />
-      </Suspense>
+      </Suspense>,
     );
     const el = await screen.findByTestId("skills-section");
     expect(el).toBeInTheDocument();
@@ -89,7 +89,7 @@ describe("HomeRoute – lazy loading below-fold sections with Suspense (PR chang
     render(
       <Suspense fallback={<div>loading...</div>}>
         <HomeRoute />
-      </Suspense>
+      </Suspense>,
     );
     const el = await screen.findByTestId("contact-section");
     expect(el).toBeInTheDocument();
@@ -99,7 +99,7 @@ describe("HomeRoute – lazy loading below-fold sections with Suspense (PR chang
     render(
       <Suspense fallback={<div>loading...</div>}>
         <HomeRoute />
-      </Suspense>
+      </Suspense>,
     );
     const el = await screen.findByTestId("footer");
     expect(el).toBeInTheDocument();

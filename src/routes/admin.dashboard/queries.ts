@@ -24,7 +24,10 @@ export function useDashboardStats() {
       ] = await Promise.all([
         supabase.from("projects").select("*", { count: "exact", head: true }),
         supabase.from("contact_messages").select("*", { count: "exact", head: true }),
-        supabase.from("contact_messages").select("*", { count: "exact", head: true }).eq("is_read", false),
+        supabase
+          .from("contact_messages")
+          .select("*", { count: "exact", head: true })
+          .eq("is_read", false),
         supabase.from("certificates").select("*", { count: "exact", head: true }),
         supabase.from("work_experiences").select("*", { count: "exact", head: true }),
       ]);

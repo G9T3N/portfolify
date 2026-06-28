@@ -9,7 +9,9 @@ export function useCertificates() {
         .from("certificates")
         .select("*")
         .order("issue_date", { ascending: false });
-      if (error) { throw error; }
+      if (error) {
+        throw error;
+      }
       return data;
     },
   });

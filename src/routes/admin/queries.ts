@@ -17,7 +17,10 @@ export function useAdminStats() {
       ] = await Promise.all([
         supabase.from("projects").select("*", { count: "exact", head: true }),
         supabase.from("contact_messages").select("*", { count: "exact", head: true }),
-        supabase.from("contact_messages").select("*", { count: "exact", head: true }).eq("is_read", false),
+        supabase
+          .from("contact_messages")
+          .select("*", { count: "exact", head: true })
+          .eq("is_read", false),
       ]);
       if (projectsError || messagesError || unreadError) {
         throw projectsError || messagesError || unreadError;

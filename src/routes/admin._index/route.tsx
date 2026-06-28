@@ -24,7 +24,7 @@ export default function AdminProjects() {
     setDeleteProject,
     projects,
     isLoading,
-    deleteProjectFn
+    deleteProjectFn,
   } = useAdminProjectsState();
 
   return (
@@ -40,7 +40,13 @@ export default function AdminProjects() {
             Manage your portfolio projects
           </p>
         </div>
-        <Button onClick={() => { setEditingProject(null); setProjectDialogOpen(true); }} className="gap-2">
+        <Button
+          onClick={() => {
+            setEditingProject(null);
+            setProjectDialogOpen(true);
+          }}
+          className="gap-2"
+        >
           + New Project
         </Button>
       </div>
@@ -51,7 +57,10 @@ export default function AdminProjects() {
             projects={projects}
             isLoading={isLoading}
             onView={(project) => navigate(`/project/${project.id}`)}
-            onEdit={(project) => { setEditingProject(project); setProjectDialogOpen(true); }}
+            onEdit={(project) => {
+              setEditingProject(project);
+              setProjectDialogOpen(true);
+            }}
             onDelete={(project) => setDeleteProject(project)}
           />
         </CardContent>
@@ -70,7 +79,9 @@ export default function AdminProjects() {
         project={deleteProject}
         onClose={() => setDeleteProject(null)}
         onConfirm={async () => {
-          if (deleteProject) {await deleteProjectFn(deleteProject.id as string);}
+          if (deleteProject) {
+            await deleteProjectFn(deleteProject.id as string);
+          }
           setDeleteProject(null);
         }}
       />

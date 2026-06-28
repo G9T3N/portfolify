@@ -65,8 +65,16 @@
   width: calc(var(--radius-4xl));
   height: calc(var(--radius-4xl));
   background-color: var(--color-bg-primary);
-  mask-image: radial-gradient(circle at bottom right, transparent var(--radius-4xl), black calc(var(--radius-4xl) + 1px));
-  -webkit-mask-image: radial-gradient(circle at bottom right, transparent var(--radius-4xl), black calc(var(--radius-4xl) + 1px));
+  mask-image: radial-gradient(
+    circle at bottom right,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at bottom right,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
   pointer-events: none;
 }
 
@@ -78,8 +86,16 @@
   width: calc(var(--radius-4xl));
   height: calc(var(--radius-4xl));
   background-color: var(--color-bg-primary);
-  mask-image: radial-gradient(circle at bottom right, transparent var(--radius-4xl), black calc(var(--radius-4xl) + 1px));
-  -webkit-mask-image: radial-gradient(circle at bottom right, transparent var(--radius-4xl), black calc(var(--radius-4xl) + 1px));
+  mask-image: radial-gradient(
+    circle at bottom right,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at bottom right,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
   pointer-events: none;
 }
 
@@ -99,10 +115,17 @@
   width: calc(var(--radius-4xl));
   height: calc(var(--radius-4xl));
   background-color: var(--color-bg-primary);
-  mask-image: radial-gradient(circle at top left, transparent var(--radius-4xl), black calc(var(--radius-4xl) + 1px));
-  -webkit-mask-image: radial-gradient(circle at top left, transparent var(--radius-4xl), black calc(var(--radius-4xl) + 1px));
+  mask-image: radial-gradient(
+    circle at top left,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at top left,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
   pointer-events: none;
-
 }
 
 .inverted-border-button::after {
@@ -113,8 +136,16 @@
   width: calc(var(--radius-4xl));
   height: calc(var(--radius-4xl));
   background-color: var(--color-bg-primary);
-  mask-image: radial-gradient(circle at top left, transparent var(--radius-4xl), black calc(var(--radius-4xl) + 1px));
-  -webkit-mask-image: radial-gradient(circle at top left, transparent var(--radius-4xl), black calc(var(--radius-4xl) + 1px));
+  mask-image: radial-gradient(
+    circle at top left,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at top left,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
   pointer-events: none;
 }
 
@@ -127,7 +158,6 @@
 
   html {
     scroll-behavior: smooth;
-
   }
 
   body {
@@ -146,7 +176,6 @@
 }
 
 @layer utilities {
-
   /* === Glass Navbar === */
   .glass-nav {
     background: color-mix(in srgb, var(--color-bg-primary), transparent 40%);
@@ -242,7 +271,6 @@
 
   /* === Stat circle === */
 
-
   /* === Section label === */
   .section-label {
     font-size: 12px;
@@ -260,7 +288,6 @@
     position: relative;
     overflow: hidden;
   }
-
 
   /* === Form input === */
   .form-input {
@@ -323,7 +350,6 @@
   scrollbar-width: thin;
   scrollbar-color: var(--color-border-hover) var(--color-bg-primary);
 }
-
 
 @theme inline {
   --color-background: hsl(var(--background));
@@ -485,7 +511,6 @@
 }
 
 @layer utilities {
-
   /* === Monumental Precision Typography === */
   .mp-display-hero {
     font-family: var(--font-display);
@@ -561,20 +586,23 @@
   /* === Card Styles === */
   .glass {
     @apply bg-card/80 backdrop-blur-xl border border-border/50;
-    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.06),
+    box-shadow:
+      0 4px 24px -1px rgba(0, 0, 0, 0.06),
       0 2px 8px -1px rgba(0, 0, 0, 0.04);
   }
 
   .glass-card {
     @apply bg-card/80 backdrop-blur-xl border border-border/60;
-    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.06),
+    box-shadow:
+      0 4px 24px -1px rgba(0, 0, 0, 0.06),
       0 2px 8px -1px rgba(0, 0, 0, 0.04);
     transition: all 0.3s ease;
   }
 
   .glass-card:hover {
     border-color: hsl(var(--primary) / 0.25);
-    box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.12),
+    box-shadow:
+      0 12px 40px -8px rgba(0, 0, 0, 0.12),
       0 4px 12px -2px rgba(0, 0, 0, 0.06);
     transform: translateY(-2px);
   }
@@ -604,10 +632,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
     transition: left 0.5s;
   }
 
@@ -647,10 +672,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
     transition: left 0.5s;
   }
 
@@ -701,7 +723,6 @@
   }
 
   @keyframes float {
-
     0%,
     100% {
       transform: translateY(0);
@@ -740,7 +761,6 @@
   }
 
   @keyframes blink {
-
     0%,
     100% {
       opacity: 1;

@@ -22,7 +22,12 @@ vi.mock("@/components/common/animated-dialog", () => ({
     isOpen: boolean;
     children: React.ReactNode;
     title: string;
-  }) => isOpen ? <div role="dialog" aria-label={title}>{children}</div> : null,
+  }) =>
+    isOpen ? (
+      <div role="dialog" aria-label={title}>
+        {children}
+      </div>
+    ) : null,
 }));
 
 // Mock lucide icons to avoid SVG rendering issues
@@ -96,9 +101,36 @@ const sampleCategories: SkillCategory[] = [
 ];
 
 const sampleSkills: Skill[] = [
-  { id: "s1", category_id: "cat-1", name: "React", logo_url: null, proficiency: "advanced", display_order: 1, is_visible: true, created_at: "2024-01-01" },
-  { id: "s2", category_id: "cat-1", name: "Vue", logo_url: null, proficiency: "intermediate", display_order: 2, is_visible: false, created_at: "2024-01-01" },
-  { id: "s3", category_id: "cat-2", name: "Django", logo_url: null, proficiency: "expert", display_order: 1, is_visible: true, created_at: "2024-01-01" },
+  {
+    id: "s1",
+    category_id: "cat-1",
+    name: "React",
+    logo_url: null,
+    proficiency: "advanced",
+    display_order: 1,
+    is_visible: true,
+    created_at: "2024-01-01",
+  },
+  {
+    id: "s2",
+    category_id: "cat-1",
+    name: "Vue",
+    logo_url: null,
+    proficiency: "intermediate",
+    display_order: 2,
+    is_visible: false,
+    created_at: "2024-01-01",
+  },
+  {
+    id: "s3",
+    category_id: "cat-2",
+    name: "Django",
+    logo_url: null,
+    proficiency: "expert",
+    display_order: 1,
+    is_visible: true,
+    created_at: "2024-01-01",
+  },
 ];
 
 describe("StacksManager – 'All' tab (new in this PR)", () => {
@@ -121,7 +153,12 @@ describe("StacksManager – 'All' tab (new in this PR)", () => {
   });
 
   it("'All' tab is active (primary style) when activeCategory is null", () => {
-    hookState = { ...defaultHookState, activeCategory: null, categories: sampleCategories, skills: sampleSkills };
+    hookState = {
+      ...defaultHookState,
+      activeCategory: null,
+      categories: sampleCategories,
+      skills: sampleSkills,
+    };
     render(<StacksManager />);
 
     const allButton = screen.getByRole("button", { name: /All/i });
@@ -129,7 +166,12 @@ describe("StacksManager – 'All' tab (new in this PR)", () => {
   });
 
   it("clicking 'All' tab calls setActiveCategory(null)", () => {
-    hookState = { ...defaultHookState, activeCategory: "cat-1", categories: sampleCategories, skills: sampleSkills };
+    hookState = {
+      ...defaultHookState,
+      activeCategory: "cat-1",
+      categories: sampleCategories,
+      skills: sampleSkills,
+    };
     render(<StacksManager />);
 
     const allButton = screen.getByRole("button", { name: /All/i });
@@ -138,7 +180,12 @@ describe("StacksManager – 'All' tab (new in this PR)", () => {
   });
 
   it("'All' tab is NOT active when a category is selected", () => {
-    hookState = { ...defaultHookState, activeCategory: "cat-1", categories: sampleCategories, skills: sampleSkills };
+    hookState = {
+      ...defaultHookState,
+      activeCategory: "cat-1",
+      categories: sampleCategories,
+      skills: sampleSkills,
+    };
     render(<StacksManager />);
 
     const allButton = screen.getByRole("button", { name: /All/i });
@@ -186,7 +233,12 @@ describe("StacksManager – filteredSkills behavior (PR fix: null -> empty array
   });
 
   it("displays 'All Skills' heading when activeCategory is null", () => {
-    hookState = { ...defaultHookState, activeCategory: null, categories: sampleCategories, skills: sampleSkills };
+    hookState = {
+      ...defaultHookState,
+      activeCategory: null,
+      categories: sampleCategories,
+      skills: sampleSkills,
+    };
     render(<StacksManager />);
     expect(screen.getByText("All Skills")).toBeInTheDocument();
   });
@@ -208,7 +260,12 @@ describe("StacksManager – filteredSkills behavior (PR fix: null -> empty array
   });
 
   it("does NOT show 'Add Skill' button in header when activeCategory is null", () => {
-    hookState = { ...defaultHookState, activeCategory: null, categories: sampleCategories, skills: sampleSkills };
+    hookState = {
+      ...defaultHookState,
+      activeCategory: null,
+      categories: sampleCategories,
+      skills: sampleSkills,
+    };
     render(<StacksManager />);
     expect(screen.queryByText("Add Skill")).not.toBeInTheDocument();
   });

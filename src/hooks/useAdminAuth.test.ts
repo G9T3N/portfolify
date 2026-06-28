@@ -8,13 +8,15 @@ vi.mock("react-router", () => ({
 }));
 
 // Build a reusable supabase mock factory
-const makeSupabaseMock = (overrides: {
-  sessionData?: object | null;
-  rolesData?: object | null;
-  rolesError?: object | null;
-  onAuthStateChangeCb?: ((event: string, session: object | null) => void) | null;
-  onAuthStateChangeUnsubscribe?: () => void;
-} = {}) => {
+const makeSupabaseMock = (
+  overrides: {
+    sessionData?: object | null;
+    rolesData?: object | null;
+    rolesError?: object | null;
+    onAuthStateChangeCb?: ((event: string, session: object | null) => void) | null;
+    onAuthStateChangeUnsubscribe?: () => void;
+  } = {},
+) => {
   const {
     sessionData = null,
     rolesData = null,

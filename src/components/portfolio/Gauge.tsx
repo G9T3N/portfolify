@@ -2,9 +2,13 @@ import { motion } from "framer-motion";
 import { EllipsisVertical } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Metric, MetricsModal } from "./MetricsModal";
-import { useCertificates, useGithubStats, useProjects, useSkills, useWorkExperiences } from "@/queries";
-
-
+import {
+  useCertificates,
+  useGithubStats,
+  useProjects,
+  useSkills,
+  useWorkExperiences,
+} from "@/queries";
 
 export const Gauge = () => {
   const { data: githubData } = useGithubStats("G9t3n");
@@ -16,9 +20,16 @@ export const Gauge = () => {
 
   const [currentStat, setCurrentStat] = useState(0);
 
-  const yearsExperience = experiences && experiences.length > 0
-    ? Math.max(1, new Date().getFullYear() - new Date(Math.min(...experiences.map(e => new Date(e.start_date).getTime()))).getFullYear())
-    : 0;
+  const yearsExperience =
+    experiences && experiences.length > 0
+      ? Math.max(
+          1,
+          new Date().getFullYear() -
+            new Date(
+              Math.min(...experiences.map((e) => new Date(e.start_date).getTime())),
+            ).getFullYear(),
+        )
+      : 0;
   const radius = 80;
   const circumference = Math.PI * radius;
 
@@ -27,12 +38,30 @@ export const Gauge = () => {
   const skillCount = skills?.length ?? 0;
   const certificateCount = certificates?.length ?? 0;
   const coreStats: Metric[] = [
-    { label: "Projects Delivered", value: projectCount > 0 ? projectCount : 25, unit: "+", max: 100 },
-    { label: "Years Experience", value: yearsExperience > 0 ? yearsExperience : 10, unit: "+", max: 20 },
+    {
+      label: "Projects Delivered",
+      value: projectCount > 0 ? projectCount : 25,
+      unit: "+",
+      max: 100,
+    },
+    {
+      label: "Years Experience",
+      value: yearsExperience > 0 ? yearsExperience : 10,
+      unit: "+",
+      max: 20,
+    },
     { label: "Skills Mastered", value: skillCount > 0 ? skillCount : 40, unit: "+", max: 100 },
-    { label: "Certificates Earned", value: certificateCount > 0 ? certificateCount : 5, unit: "", max: 20 },
+    {
+      label: "Certificates Earned",
+      value: certificateCount > 0 ? certificateCount : 5,
+      unit: "",
+      max: 20,
+    },
   ];
-  const percentage = Math.max(0, Math.min(Number(coreStats[currentStat].value) / (coreStats[currentStat].max || 1), 1));
+  const percentage = Math.max(
+    0,
+    Math.min(Number(coreStats[currentStat].value) / (coreStats[currentStat].max || 1), 1),
+  );
   const strokeDashoffset = circumference - percentage * circumference;
 
   const allMetrics: Metric[] = [
@@ -41,7 +70,12 @@ export const Gauge = () => {
     { label: "Lines of Code", value: githubData?.linesOfCode ?? 5000, unit: "", max: 10000 },
     { label: "Hours Debugging", value: githubData?.hoursDebugging ?? 999, unit: "h+", max: 1000 },
     { label: "Coffee Cups", value: githubData?.coffeeCups ?? 1250, unit: "", max: 2000 },
-    { label: "Happy Clients", value: projectCount > 0 ? Math.max(1, Math.floor(projectCount * 0.9)) : 24, unit: "", max: 50 }
+    {
+      label: "Happy Clients",
+      value: projectCount > 0 ? Math.max(1, Math.floor(projectCount * 0.9)) : 24,
+      unit: "",
+      max: 50,
+    },
   ];
 
   useEffect(() => {
@@ -57,18 +91,23 @@ export const Gauge = () => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, delay: 0.4 }}
     >
-
       <div className="flex items-center justify-between mb-4 ">
         <span className="text-sm text-[var(--color-text-secondary)] mt-0 font-medium">
           {"Metrics"}
         </span>
         <div className="flex gap-2">
-          <EllipsisVertical className="text-[var(--color-text-muted)] cursor-pointer" onClick={() => setIsModalOpen(true)} />
+          <EllipsisVertical
+            className="text-[var(--color-text-muted)] cursor-pointer"
+            onClick={() => setIsModalOpen(true)}
+          />
         </div>
       </div>
       <div className="flex-grow rounded-4xl overflow-hidden relative">
         <div className="w-full h-full flex items-center justify-center">
-          <svg className="w-full max-w-[240px] drop-shadow-2xl overflow-visible" viewBox="0 0 200 120">
+          <svg
+            className="w-full max-w-[240px] drop-shadow-2xl overflow-visible"
+            viewBox="0 0 200 120"
+          >
             {/* Background Arc */}
 
             <path
@@ -102,7 +141,9 @@ export const Gauge = () => {
               >
                 {Number(coreStats[currentStat].value)}
               </motion.span>
-              <span className="text-4xl text-[var(--color-text-primary)]">{coreStats[currentStat].unit}</span>
+              <span className="text-4xl text-[var(--color-text-primary)]">
+                {coreStats[currentStat].unit}
+              </span>
             </div>
             <span className="text-sm text-[var(--color-text-secondary)] mt-0 font-medium">
               {coreStats[currentStat].label}
@@ -117,10 +158,9 @@ export const Gauge = () => {
           {coreStats.map((_, i) => (
             <div
               key={i}
-              className={`w-2 h-2 rounded-4xl transition-colors cursor-pointer ${i === currentStat
-                ? "bg-[var(--color-primary)]"
-                : "bg-[var(--color-border-default)]"
-                }`}
+              className={`w-2 h-2 rounded-4xl transition-colors cursor-pointer ${
+                i === currentStat ? "bg-[var(--color-primary)]" : "bg-[var(--color-border-default)]"
+              }`}
               onClick={() => setCurrentStat(i)}
             />
           ))}
@@ -131,6 +171,6 @@ export const Gauge = () => {
         onClose={() => setIsModalOpen(false)}
         metrics={allMetrics}
       />
-    </motion.div >
+    </motion.div>
   );
 };

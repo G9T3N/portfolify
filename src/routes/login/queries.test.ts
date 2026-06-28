@@ -122,7 +122,7 @@ describe("login/queries useAdminAuth – maybeSingle() usage (PR change)", () =>
     });
 
     expect(mockToast).toHaveBeenCalledWith(
-      expect.objectContaining({ title: "Please fill in all fields" })
+      expect.objectContaining({ title: "Please fill in all fields" }),
     );
   });
 
@@ -130,7 +130,9 @@ describe("login/queries useAdminAuth – maybeSingle() usage (PR change)", () =>
     supabaseMock = buildAuthMock({ sessionData: null });
     const { result } = renderHook(() => useAdminAuth());
 
-    act(() => { result.current.setEmail("admin@test.com"); });
+    act(() => {
+      result.current.setEmail("admin@test.com");
+    });
 
     const fakeEvent = { preventDefault: vi.fn() } as unknown as React.FormEvent;
     await act(async () => {
@@ -138,7 +140,7 @@ describe("login/queries useAdminAuth – maybeSingle() usage (PR change)", () =>
     });
 
     expect(mockToast).toHaveBeenCalledWith(
-      expect.objectContaining({ title: "Please fill in all fields" })
+      expect.objectContaining({ title: "Please fill in all fields" }),
     );
   });
 
@@ -157,7 +159,7 @@ describe("login/queries useAdminAuth – maybeSingle() usage (PR change)", () =>
     });
 
     expect(mockToast).toHaveBeenCalledWith(
-      expect.objectContaining({ title: "Password must be at least 6 characters" })
+      expect.objectContaining({ title: "Password must be at least 6 characters" }),
     );
   });
 
@@ -206,9 +208,7 @@ describe("login/queries useAdminAuth – maybeSingle() usage (PR change)", () =>
     });
 
     expect(supabaseMock.auth.signOut).toHaveBeenCalled();
-    expect(mockToast).toHaveBeenCalledWith(
-      expect.objectContaining({ variant: "destructive" })
-    );
+    expect(mockToast).toHaveBeenCalledWith(expect.objectContaining({ variant: "destructive" }));
     expect(mockNavigate).not.toHaveBeenCalledWith("/admin", expect.anything());
   });
 
@@ -230,9 +230,7 @@ describe("login/queries useAdminAuth – maybeSingle() usage (PR change)", () =>
       await result.current.handleSubmit(fakeEvent);
     });
 
-    expect(mockToast).toHaveBeenCalledWith(
-      expect.objectContaining({ variant: "destructive" })
-    );
+    expect(mockToast).toHaveBeenCalledWith(expect.objectContaining({ variant: "destructive" }));
   });
 
   it("setIsSignUp toggles the sign-up mode", () => {
@@ -240,7 +238,9 @@ describe("login/queries useAdminAuth – maybeSingle() usage (PR change)", () =>
     const { result } = renderHook(() => useAdminAuth());
 
     expect(result.current.isSignUp).toBe(false);
-    act(() => { result.current.setIsSignUp(true); });
+    act(() => {
+      result.current.setIsSignUp(true);
+    });
     expect(result.current.isSignUp).toBe(true);
   });
 });

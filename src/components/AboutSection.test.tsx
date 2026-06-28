@@ -44,7 +44,7 @@ describe("AboutSection – lazy loading Lanyard with Suspense (PR change)", () =
     render(
       <Suspense fallback={<div data-testid="lanyard-fallback">Loading...</div>}>
         <AboutSection />
-      </Suspense>
+      </Suspense>,
     );
 
     // With the mock, Lanyard should resolve immediately

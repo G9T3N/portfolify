@@ -29,10 +29,7 @@ const SwipeableCards = ({
   spaceBetween?: number;
 }) => {
   return (
-    <div
-      className={cn("relative w-full max-w-3xl", className)}
-    >
-
+    <div className={cn("relative w-full max-w-3xl", className)}>
       <Swiper
         spaceBetween={spaceBetween}
         autoplay={
@@ -66,11 +63,7 @@ const SwipeableCards = ({
       >
         {images.map((image, index) => (
           <SwiperSlide key={index} className="rounded-3xl">
-            <img
-              className="h-full w-full object-cover"
-              src={image.src}
-              alt={image.alt}
-            />
+            <img className="h-full w-full object-cover" src={image.src} alt={image.alt} />
           </SwiperSlide>
         ))}
         {showNavigation && (

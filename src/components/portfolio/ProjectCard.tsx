@@ -96,14 +96,16 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 rel="noopener noreferrer"
                 className="ml-auto w-9 h-9 rounded-full bg-card flex items-center justify-center border border-border group-hover:bg-[var(--color-text-primary)] group-hover:text-[var(--color-bg-primary)] transition-colors"
               >
-                <ArrowRight className="group-hover:rotate-[-45deg] transition-all duration-300" size={16} />
+                <ArrowRight
+                  className="group-hover:rotate-[-45deg] transition-all duration-300"
+                  size={16}
+                />
               </a>
             </div>
           )}
-
         </div>
       </div>
       <div className="absolute inset-0 border rounded-4xl pointer-events-none border-border" />
-    </motion.div >
+    </motion.div>
   );
 }

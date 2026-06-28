@@ -11,16 +11,14 @@ export function useProject(id: string | undefined) {
   return useQuery({
     queryKey: ["project", id],
     queryFn: async () => {
-      if (!id) {return null;}
-      
-      const { data, error } = await supabase
-        .from("projects")
-        .select("*")
-        .eq("id", id)
-        .single();
-        
+      if (!id) {
+        return null;
+      }
+
+      const { data, error } = await supabase.from("projects").select("*").eq("id", id).single();
+
       if (error) {
-        if (error.code === 'PGRST116') {
+        if (error.code === "PGRST116") {
           return null; // Not found
         }
         throw error;

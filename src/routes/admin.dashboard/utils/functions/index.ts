@@ -5,6 +5,8 @@
  * @returns The formatted string: values >= 1000 are shown with one decimal place and a trailing `k` (e.g., `1200` → `1.2k`), otherwise the number as a string (e.g., `999` → `999`).
  */
 export function formatStatValue(value: number): string {
-  if (value >= 1000) {return `${(value / 1000).toFixed(1)}k`;}
+  if (value >= 1000) {
+    return `${(value / 1000).toFixed(1)}k`;
+  }
   return String(value);
 }

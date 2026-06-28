@@ -9,7 +9,9 @@ export function useWorkExperiences() {
         .from("work_experiences")
         .select("*")
         .order("start_date", { ascending: false });
-      if (error) { throw error; }
+      if (error) {
+        throw error;
+      }
       return data;
     },
   });

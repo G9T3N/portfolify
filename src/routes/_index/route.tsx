@@ -11,32 +11,43 @@ const ContactSection = lazy(() => import("@/components/ContactSection"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 // Fallback skeleton or empty block to prevent layout shift
-const SectionFallback = () => <div className="min-h-screen bg-[var(--color-bg-primary)] animate-pulse" />;
-const FooterFallback = () => <div className="min-h-[20vh] bg-[var(--color-bg-primary)] animate-pulse" />;
+const SectionFallback = () => (
+  <div className="min-h-screen bg-[var(--color-bg-primary)] animate-pulse" />
+);
+const FooterFallback = () => (
+  <div className="min-h-[20vh] bg-[var(--color-bg-primary)] animate-pulse" />
+);
 
 export default function HomeRoute() {
   const { scrollYProgress } = useScroll();
 
   return (
     <div className=" relative min-h-screen max-w-[95vw] lg:max-w-[85vw] mx-auto bg-[var(--color-bg-primary)]">
-      <motion.div
-        className="scroll-progress"
-        style={{ scaleX: scrollYProgress }}
-      />
+      <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
       <Navbar />
       <main>
-        <div className="snap-section"><HeroSection /></div>
+        <div className="snap-section">
+          <HeroSection />
+        </div>
         <Suspense fallback={<SectionFallback />}>
-          <div className="snap-section"><ProjectsSection /></div>
+          <div className="snap-section">
+            <ProjectsSection />
+          </div>
         </Suspense>
         <Suspense fallback={<SectionFallback />}>
-          <div className="snap-section"><AboutSection /></div>
+          <div className="snap-section">
+            <AboutSection />
+          </div>
         </Suspense>
         <Suspense fallback={<SectionFallback />}>
-          <div className="snap-section"><SkillsSection /></div>
+          <div className="snap-section">
+            <SkillsSection />
+          </div>
         </Suspense>
         <Suspense fallback={<SectionFallback />}>
-          <div className="snap-section"><ContactSection /></div>
+          <div className="snap-section">
+            <ContactSection />
+          </div>
         </Suspense>
       </main>
       <Suspense fallback={<FooterFallback />}>

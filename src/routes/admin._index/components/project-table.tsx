@@ -31,7 +31,13 @@ type ProjectTableProps = {
  * @param onDelete - Called with a project when the row's Delete action is triggered.
  * @returns The table element representing the current state (loading, empty, or list of project rows).
  */
-export default function ProjectTable({ projects, isLoading, onView, onEdit, onDelete }: ProjectTableProps) {
+export default function ProjectTable({
+  projects,
+  isLoading,
+  onView,
+  onEdit,
+  onDelete,
+}: ProjectTableProps) {
   if (isLoading) {
     return (
       <Table>
@@ -41,7 +47,9 @@ export default function ProjectTable({ projects, isLoading, onView, onEdit, onDe
             <TableHead className="font-mono text-xs text-muted-foreground">Category</TableHead>
             <TableHead className="font-mono text-xs text-muted-foreground">Status</TableHead>
             <TableHead className="font-mono text-xs text-muted-foreground">Date</TableHead>
-            <TableHead className="font-mono text-xs text-muted-foreground text-right">Actions</TableHead>
+            <TableHead className="font-mono text-xs text-muted-foreground text-right">
+              Actions
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -64,7 +72,9 @@ export default function ProjectTable({ projects, isLoading, onView, onEdit, onDe
             <TableHead className="font-mono text-xs text-muted-foreground">Category</TableHead>
             <TableHead className="font-mono text-xs text-muted-foreground">Status</TableHead>
             <TableHead className="font-mono text-xs text-muted-foreground">Date</TableHead>
-            <TableHead className="font-mono text-xs text-muted-foreground text-right">Actions</TableHead>
+            <TableHead className="font-mono text-xs text-muted-foreground text-right">
+              Actions
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -86,12 +96,17 @@ export default function ProjectTable({ projects, isLoading, onView, onEdit, onDe
           <TableHead className="font-mono text-xs text-muted-foreground">Category</TableHead>
           <TableHead className="font-mono text-xs text-muted-foreground">Status</TableHead>
           <TableHead className="font-mono text-xs text-muted-foreground">Date</TableHead>
-          <TableHead className="font-mono text-xs text-muted-foreground text-right">Actions</TableHead>
+          <TableHead className="font-mono text-xs text-muted-foreground text-right">
+            Actions
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {projects.map((project) => (
-          <TableRow key={project.id as string} className="border-sidebar-border hover:bg-sidebar-accent/50">
+          <TableRow
+            key={project.id as string}
+            className="border-sidebar-border hover:bg-sidebar-accent/50"
+          >
             <TableCell className="font-mono text-sm">{project.title as string}</TableCell>
             <TableCell>
               <Badge variant="outline" className="font-mono text-xs">
@@ -99,11 +114,13 @@ export default function ProjectTable({ projects, isLoading, onView, onEdit, onDe
               </Badge>
             </TableCell>
             <TableCell>
-              <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${
-                project.status === "live"
-                  ? "bg-green-500/20 text-green-400"
-                  : "bg-yellow-500/20 text-yellow-400"
-              }`}>
+              <span
+                className={`text-xs font-mono px-2 py-0.5 rounded-full ${
+                  project.status === "live"
+                    ? "bg-green-500/20 text-green-400"
+                    : "bg-yellow-500/20 text-yellow-400"
+                }`}
+              >
                 {project.status as string}
               </span>
             </TableCell>
@@ -112,13 +129,28 @@ export default function ProjectTable({ projects, isLoading, onView, onEdit, onDe
             </TableCell>
             <TableCell className="text-right">
               <div className="flex items-center justify-end gap-1">
-                <Button variant="ghost" size="icon" onClick={() => onView(project)} title="View project">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => onView(project)}
+                  title="View project"
+                >
                   <ExternalLink className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="icon" onClick={() => onEdit(project)} title="Edit project">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => onEdit(project)}
+                  title="Edit project"
+                >
                   <Edit3 className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="icon" onClick={() => onDelete(project)} title="Delete project">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => onDelete(project)}
+                  title="Delete project"
+                >
                   <Trash2 className="w-4 h-4 text-destructive" />
                 </Button>
               </div>

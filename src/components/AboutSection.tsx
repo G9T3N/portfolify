@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { lazy, Suspense } from "react";
-const Lanyard=lazy(()=>import("./Lanyard"))
+const Lanyard = lazy(() => import("./Lanyard"));
 const AboutSection = () => {
   return (
     <section id="about" className="px-4 md:px-8 lg:px-12 py-24 md:py-32">
       <div className="max-w-[1400px] mx-auto">
-          <div className="  z-10 flex justify-center">
+        <div className="  z-10 flex justify-center">
           <motion.span
             className="section-label  text-center  "
             initial={{ opacity: 0 }}
@@ -19,7 +19,11 @@ const AboutSection = () => {
         <div className="flex flex-col lg:flex-row items-center ">
           {/* Photo */}
           <div className="flex-2 w-full h-full min-h-[50vh]">
-            <Suspense fallback={<div className="w-full h-full min-h-[50vh] animate-pulse bg-[var(--color-bg-card)] rounded-4xl" />}>
+            <Suspense
+              fallback={
+                <div className="w-full h-full min-h-[50vh] animate-pulse bg-[var(--color-bg-card)] rounded-4xl" />
+              }
+            >
               <Lanyard />
             </Suspense>
           </div>
@@ -37,19 +41,13 @@ const AboutSection = () => {
               <strong className="font-bold text-[var(--color-text-primary)]">
                 Full Stack Developer
               </strong>{" "}
-              &{" "}
-              <strong className="font-bold text-[var(--color-text-primary)]">
-                designer
-              </strong>{" "}
+              & <strong className="font-bold text-[var(--color-text-primary)]">designer</strong>{" "}
               specializing in{" "}
               <strong className="font-bold text-[var(--color-text-primary)]">
                 Frontend Engineering,
               </strong>{" "}
               focusing on building high quality web experiences through{" "}
-              <strong className="font-bold text-[var(--color-text-primary)]">
-                clean code
-              </strong>{" "}
-              and{" "}
+              <strong className="font-bold text-[var(--color-text-primary)]">clean code</strong> and{" "}
               <strong className="font-bold text-[var(--color-text-primary)]">
                 thoughtful design.
               </strong>

@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Lock, Mail, Loader2, Eye, EyeOff, UserPlus } from 'lucide-react';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Lock, Mail, Loader2, Eye, EyeOff, UserPlus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const authSchema = z.object({
-  email: z.string().min(1, 'Please enter your email').email('Please enter a valid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  email: z.string().min(1, "Please enter your email").email("Please enter a valid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 type AuthFormValues = z.infer<typeof authSchema>;
@@ -33,7 +33,7 @@ const AuthFormInner = ({ isLoading, isSignUp, onSubmitAuth }: AuthFormInnerProps
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<AuthFormValues>({
     resolver: zodResolver(authSchema),
     delayError: 500,
@@ -51,7 +51,7 @@ const AuthFormInner = ({ isLoading, isSignUp, onSubmitAuth }: AuthFormInnerProps
             id="email"
             {...register("email")}
             placeholder="admin@example.com"
-            className={`pl-10 ${errors.email ? 'border-red-500/50 focus-visible:ring-red-500' : ''}`}
+            className={`pl-10 ${errors.email ? "border-red-500/50 focus-visible:ring-red-500" : ""}`}
             disabled={isLoading}
           />
         </div>
@@ -66,10 +66,10 @@ const AuthFormInner = ({ isLoading, isSignUp, onSubmitAuth }: AuthFormInnerProps
           <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
           <Input
             id="password"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             {...register("password")}
             placeholder="••••••••"
-            className={`pl-10 pr-10 ${errors.password ? 'border-red-500/50 focus-visible:ring-red-500' : ''}`}
+            className={`pl-10 pr-10 ${errors.password ? "border-red-500/50 focus-visible:ring-red-500" : ""}`}
             disabled={isLoading}
           />
           <button
@@ -83,31 +83,23 @@ const AuthFormInner = ({ isLoading, isSignUp, onSubmitAuth }: AuthFormInnerProps
         {errors.password && <p className="text-red-500 text-xs px-1">{errors.password.message}</p>}
       </div>
 
-      <Button
-        type="submit"
-        className="w-full cyber-button"
-        disabled={isLoading}
-      >
+      <Button type="submit" className="w-full cyber-button" disabled={isLoading}>
         {isLoading ? (
           <>
             <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            {isSignUp ? 'Creating account...' : 'Signing in...'}
+            {isSignUp ? "Creating account..." : "Signing in..."}
           </>
+        ) : isSignUp ? (
+          "Create Account"
         ) : (
-          isSignUp ? 'Create Account' : 'Sign In'
+          "Sign In"
         )}
       </Button>
     </form>
   );
 };
 
-export const AuthForm = ({
-  isLoading,
-  isSignUp,
-  setIsSignUp,
-  onSubmitAuth
-}: AuthFormProps) => {
-
+export const AuthForm = ({ isLoading, isSignUp, setIsSignUp, onSubmitAuth }: AuthFormProps) => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <motion.div
@@ -125,25 +117,23 @@ export const AuthForm = ({
               )}
             </div>
             <h1 className="text-2xl font-mono font-bold text-foreground">
-              {isSignUp ? 'Create Admin Account' : 'Admin Login'}
+              {isSignUp ? "Create Admin Account" : "Admin Login"}
             </h1>
             <p className="text-muted-foreground text-sm mt-2">
-              {isSignUp ? 'Sign up to create your admin account' : 'Sign in to access the dashboard'}
+              {isSignUp
+                ? "Sign up to create your admin account"
+                : "Sign in to access the dashboard"}
             </p>
           </div>
 
-          <AuthFormInner 
-            isLoading={isLoading} 
-            isSignUp={isSignUp} 
-            onSubmitAuth={onSubmitAuth} 
-          />
+          <AuthFormInner isLoading={isLoading} isSignUp={isSignUp} onSubmitAuth={onSubmitAuth} />
 
           <div className="mt-6 text-center space-y-4">
             <button
               onClick={() => setIsSignUp(!isSignUp)}
               className="text-sm text-primary hover:underline transition-colors font-mono"
             >
-              {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
+              {isSignUp ? "Already have an account? Sign in" : "Don't have an account? Sign up"}
             </button>
             <div>
               <a

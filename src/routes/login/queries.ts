@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import { supabase } from '@/integrations/supabase/client';
-import { toast } from 'sonner';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export const useAdminAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,36 +10,38 @@ export const useAdminAuth = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        if (event === 'SIGNED_IN' && session) {
-          const { data: roles } = await supabase
-            .from('user_roles')
-            .select('role')
-            .eq('user_id', session.user.id)
-            .eq('role', 'admin')
-            .maybeSingle();
-
-          if (roles) {
-            navigate('/admin', { replace: true });
-          }
-        }
-      }
-    );
-
-    const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-
-      if (session) {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === "SIGNED_IN" && session) {
         const { data: roles } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', session.user.id)
-          .eq('role', 'admin')
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", session.user.id)
+          .eq("role", "admin")
           .maybeSingle();
 
         if (roles) {
-          navigate('/admin', { replace: true });
+          navigate("/admin", { replace: true });
+        }
+      }
+    });
+
+    const checkSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (session) {
+        const { data: roles } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", session.user.id)
+          .eq("role", "admin")
+          .maybeSingle();
+
+        if (roles) {
+          navigate("/admin", { replace: true });
           return;
         }
       }
@@ -68,10 +70,12 @@ export const useAdminAuth = () => {
           },
         });
 
-        if (error) { throw error; }
+        if (error) {
+          throw error;
+        }
 
         if (data.user) {
-          toast.success('Account created! Please wait while admin privileges are being granted...');
+          toast.success("Account created! Please wait while admin privileges are being granted...");
           // User created, they need to be granted admin role via database
         }
       } else {
@@ -81,28 +85,34 @@ export const useAdminAuth = () => {
           password,
         });
 
-        if (error) { throw error; }
+        if (error) {
+          throw error;
+        }
 
         if (data.session) {
           const { data: roles, error: rolesError } = await supabase
-            .from('user_roles')
-            .select('role')
-            .eq('user_id', data.session.user.id)
-            .eq('role', 'admin')
+            .from("user_roles")
+            .select("role")
+            .eq("user_id", data.session.user.id)
+            .eq("role", "admin")
             .maybeSingle();
 
           if (rolesError || !roles) {
             await supabase.auth.signOut();
-            throw new Error('Access denied. You do not have admin privileges.');
+            throw new Error("Access denied. You do not have admin privileges.");
           }
 
-          toast.success('Welcome back! Successfully logged in as admin.');
-          navigate('/admin', { replace: true });
+          toast.success("Welcome back! Successfully logged in as admin.");
+          navigate("/admin", { replace: true });
         }
       }
     } catch (error) {
       const err = error as Error;
-      toast.error(isSignUp ? 'Sign up failed: ' + (err.message || 'An error occurred') : 'Login failed: ' + (err.message || 'An error occurred'));
+      toast.error(
+        isSignUp
+          ? "Sign up failed: " + (err.message || "An error occurred")
+          : "Login failed: " + (err.message || "An error occurred"),
+      );
     } finally {
       setIsLoading(false);
     }
@@ -113,6 +123,6 @@ export const useAdminAuth = () => {
     isCheckingSession,
     isSignUp,
     setIsSignUp,
-    submitAuth
+    submitAuth,
   };
 };

@@ -1,9 +1,9 @@
-import { FileText, Upload, Trash2, Download, Loader2, ExternalLink } from 'lucide-react';
-import { useState, useRef } from 'react';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { toast } from '@/hooks/use-toast';
-import { useCVSetting, useUpdateCVMutation } from '../queries';
+import { FileText, Upload, Trash2, Download, Loader2, ExternalLink } from "lucide-react";
+import { useState, useRef } from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { toast } from "@/hooks/use-toast";
+import { useCVSetting, useUpdateCVMutation } from "../queries";
 
 const CVManager = () => {
   const [isUploading, setIsUploading] = useState(false);
@@ -14,15 +14,17 @@ const CVManager = () => {
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) {return;}
+    if (!file) {
+      return;
+    }
 
-    if (file.type !== 'application/pdf') {
-      toast({ title: 'Please upload a PDF file', variant: 'destructive' });
+    if (file.type !== "application/pdf") {
+      toast({ title: "Please upload a PDF file", variant: "destructive" });
       return;
     }
 
     if (file.size > 10 * 1024 * 1024) {
-      toast({ title: 'File size must be less than 10MB', variant: 'destructive' });
+      toast({ title: "File size must be less than 10MB", variant: "destructive" });
       return;
     }
 
@@ -31,51 +33,53 @@ const CVManager = () => {
     try {
       // Delete old file if exists
       if (cvSetting?.value) {
-        const oldPath = cvSetting.value.split('/').pop();
+        const oldPath = cvSetting.value.split("/").pop();
         if (oldPath) {
-          await supabase.storage.from('cv-files').remove([oldPath]);
+          await supabase.storage.from("cv-files").remove([oldPath]);
         }
       }
 
       // Upload new file
       const fileName = `cv-${Date.now()}.pdf`;
-      const { error: uploadError } = await supabase.storage
-        .from('cv-files')
-        .upload(fileName, file);
+      const { error: uploadError } = await supabase.storage.from("cv-files").upload(fileName, file);
 
-      if (uploadError) {throw uploadError;}
+      if (uploadError) {
+        throw uploadError;
+      }
 
       // Get public URL
-      const { data: urlData } = supabase.storage
-        .from('cv-files')
-        .getPublicUrl(fileName);
+      const { data: urlData } = supabase.storage.from("cv-files").getPublicUrl(fileName);
 
       // Update setting
       await updateCVMutation.mutateAsync(urlData.publicUrl);
     } catch (error) {
-      console.error('Upload error:', error);
-      toast({ title: 'Failed to upload CV', variant: 'destructive' });
+      console.error("Upload error:", error);
+      toast({ title: "Failed to upload CV", variant: "destructive" });
     } finally {
       setIsUploading(false);
       if (fileInputRef.current) {
-        fileInputRef.current.value = '';
+        fileInputRef.current.value = "";
       }
     }
   };
 
   const handleRemoveCV = async () => {
-    if (!cvSetting?.value) {return;}
-    
-    if (!confirm('Are you sure you want to remove the CV?')) {return;}
+    if (!cvSetting?.value) {
+      return;
+    }
+
+    if (!confirm("Are you sure you want to remove the CV?")) {
+      return;
+    }
 
     try {
-      const fileName = cvSetting.value.split('/').pop();
+      const fileName = cvSetting.value.split("/").pop();
       if (fileName) {
-        await supabase.storage.from('cv-files').remove([fileName]);
+        await supabase.storage.from("cv-files").remove([fileName]);
       }
       await updateCVMutation.mutateAsync(null);
     } catch {
-      toast({ title: 'Failed to remove CV', variant: 'destructive' });
+      toast({ title: "Failed to remove CV", variant: "destructive" });
     }
   };
 
@@ -90,7 +94,7 @@ const CVManager = () => {
         <div className="flex items-center justify-center py-8">
           <Loader2 className="w-6 h-6 text-primary animate-spin" />
         </div>
-      ) : (cvSetting?.value ? (
+      ) : cvSetting?.value ? (
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-muted/20 rounded-lg border border-border/50">
             <div className="flex items-center gap-3 w-full">
@@ -157,7 +161,7 @@ const CVManager = () => {
               ) : (
                 <Upload className="w-4 h-4" />
               )}
-              {isUploading ? 'Uploading...' : 'Upload CV (PDF)'}
+              {isUploading ? "Uploading..." : "Upload CV (PDF)"}
             </div>
             <Input
               id="cv-upload"
@@ -171,7 +175,7 @@ const CVManager = () => {
           </Label>
           <p className="text-xs text-muted-foreground mt-3">Maximum file size: 10MB</p>
         </div>
-      ))}
+      )}
     </div>
   );
 };

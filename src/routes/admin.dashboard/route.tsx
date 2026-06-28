@@ -4,10 +4,34 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useDashboardStats } from "./queries";
 
 const statCards = [
-  { label: "Total Projects", key: "totalProjects" as const, icon: Layout, color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" },
-  { label: "Work Experiences", key: "totalExperiences" as const, icon: Users, color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" },
-  { label: "Certificates", key: "totalCertificates" as const, icon: Award, color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" },
-  { label: "Messages", key: "totalMessages" as const, icon: MessageSquare, color: "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30" }
+  {
+    label: "Total Projects",
+    key: "totalProjects" as const,
+    icon: Layout,
+    color:
+      "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30",
+  },
+  {
+    label: "Work Experiences",
+    key: "totalExperiences" as const,
+    icon: Users,
+    color:
+      "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30",
+  },
+  {
+    label: "Certificates",
+    key: "totalCertificates" as const,
+    icon: Award,
+    color:
+      "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30",
+  },
+  {
+    label: "Messages",
+    key: "totalMessages" as const,
+    icon: MessageSquare,
+    color:
+      "from-[var(--color-primary)]/20 to-[var(--color-secondary)]/10 border-[var(--color-primary)]/30",
+  },
 ];
 
 /**
@@ -20,7 +44,7 @@ const statCards = [
  */
 export default function AdminDashboard() {
   const { data: stats } = useDashboardStats();
-  const value = (k: typeof statCards[number]["key"]) => stats?.[k] ?? 0;
+  const value = (k: (typeof statCards)[number]["key"]) => stats?.[k] ?? 0;
 
   return (
     <motion.div

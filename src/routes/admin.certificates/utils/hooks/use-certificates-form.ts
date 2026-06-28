@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Certificate,
   useAdminCertificates,
@@ -6,7 +6,7 @@ import {
   useUpdateCertificateMutation,
   useDeleteCertificateMutation,
   useToggleCertificateVisibilityMutation,
-} from '../../queries';
+} from "../../queries";
 
 /**
  * Manages state and handlers for creating, editing, deleting, and toggling visibility of certificates in an admin UI.
@@ -31,13 +31,13 @@ export function useCertificatesManager() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingCert, setEditingCert] = useState<Certificate | null>(null);
   const [formData, setFormData] = useState({
-    title: '',
-    issuer: '',
-    issue_date: '',
-    expiry_date: '',
-    credential_id: '',
-    credential_url: '',
-    logo_url: '',
+    title: "",
+    issuer: "",
+    issue_date: "",
+    expiry_date: "",
+    credential_id: "",
+    credential_url: "",
+    logo_url: "",
     is_visible: true,
   });
 
@@ -59,22 +59,22 @@ export function useCertificatesManager() {
         title: cert.title,
         issuer: cert.issuer,
         issue_date: cert.issue_date,
-        expiry_date: cert.expiry_date || '',
-        credential_id: cert.credential_id || '',
-        credential_url: cert.credential_url || '',
-        logo_url: cert.logo_url || '',
+        expiry_date: cert.expiry_date || "",
+        credential_id: cert.credential_id || "",
+        credential_url: cert.credential_url || "",
+        logo_url: cert.logo_url || "",
         is_visible: cert.is_visible,
       });
     } else {
       setEditingCert(null);
       setFormData({
-        title: '',
-        issuer: '',
-        issue_date: '',
-        expiry_date: '',
-        credential_id: '',
-        credential_url: '',
-        logo_url: '',
+        title: "",
+        issuer: "",
+        issue_date: "",
+        expiry_date: "",
+        credential_id: "",
+        credential_url: "",
+        logo_url: "",
         is_visible: true,
       });
     }

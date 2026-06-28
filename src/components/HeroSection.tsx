@@ -6,17 +6,20 @@ import { ArrowRight } from "lucide-react";
 import { ImageCardStack } from "./card-swapping/features/ImageStack";
 
 // Lazy load the heavy widgets so they don't block the initial text/gradient render
-const Gauge = lazy(() => import("./portfolio/Gauge").then(m => ({ default: m.Gauge })));
+const Gauge = lazy(() => import("./portfolio/Gauge").then((m) => ({ default: m.Gauge })));
 // const FeaturedCard = lazy(() => import("./portfolio/FeaturedCard").then(m => ({ default: m.FeaturedCard })));
 const LogoCarousel = lazy(() => import("./LogoCarousel"));
 
 // Skeletons to prevent layout shift
-const CardSkeleton = () => <div className="h-[40vh] w-full bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]" />;
-const GaugeSkeleton = () => <div className="h-[35vh] w-full bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]" />;
+const CardSkeleton = () => (
+  <div className="h-[40vh] w-full bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]" />
+);
+const GaugeSkeleton = () => (
+  <div className="h-[35vh] w-full bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]" />
+);
 const CarouselSkeleton = () => <div className="h-[60px] w-full bg-transparent mt-8" />;
 
 const HeroSection = () => {
-
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -43,7 +46,9 @@ const HeroSection = () => {
               <div className="flex flex-col gap-4 max-w-2xl pr-4">
                 <div className="space-y-1">
                   <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-primary)] uppercase font-mono">
-                    <Trans id="Full-Stack Developer & UI Specialist">Full-Stack Developer & UI Specialist</Trans>
+                    <Trans id="Full-Stack Developer & UI Specialist">
+                      Full-Stack Developer & UI Specialist
+                    </Trans>
                   </span>
                   <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight text-[var(--color-text-primary)]">
                     <Trans id="Wael Alamrany">Wael Alamrany</Trans>
@@ -53,7 +58,10 @@ const HeroSection = () => {
                   </h1>
                 </div>
                 <p className="text-sm sm:text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-lg font-sans">
-                  <Trans id="Bridging the gap between robust system architecture and seamless, high-performance user interfaces.">Bridging the gap between robust system architecture and seamless, high-performance user interfaces.</Trans>
+                  <Trans id="Bridging the gap between robust system architecture and seamless, high-performance user interfaces.">
+                    Bridging the gap between robust system architecture and seamless,
+                    high-performance user interfaces.
+                  </Trans>
                 </p>
               </div>
             </motion.div>
@@ -66,7 +74,6 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <div className="inverted-border-button rounded-ss-4xl rounded-ee-none! flex flex-col justify-start h-full">
-
               <motion.button
                 className="bg-[var(--color-mp-text-primary)] cursor-pointer text-[var(--color-bg-primary)] px-10 h-12 m-5 mb-1 me-0 rounded-xl border flex items-center gap-2   "
                 onClick={scrollToProjects}
@@ -79,7 +86,6 @@ const HeroSection = () => {
               </motion.button>
             </div>
           </motion.div>
-
         </motion.div>
 
         {/* Right sidebar */}
@@ -87,8 +93,8 @@ const HeroSection = () => {
           {/* Featured card */}
           <Suspense fallback={<CardSkeleton />}>
             {/* <FeaturedCard /> */}
-            
-            <ImageCardStack/>
+
+            <ImageCardStack />
           </Suspense>
 
           {/* Stat circle */}
@@ -96,12 +102,10 @@ const HeroSection = () => {
             <Gauge />
           </Suspense>
         </div>
-
       </div>
       <Suspense fallback={<CarouselSkeleton />}>
         <LogoCarousel />
       </Suspense>
-
     </section>
   );
 };

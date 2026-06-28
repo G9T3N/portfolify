@@ -35,7 +35,10 @@ const PostSwiper = ({
         }}
       >
         {slides.map((slide, index) => (
-          <SwiperSlide key={index} className="!flex !items-start w-full !justify-center bg-transparent">
+          <SwiperSlide
+            key={index}
+            className="!flex !items-start w-full !justify-center bg-transparent"
+          >
             {slide}
           </SwiperSlide>
         ))}
@@ -45,4 +48,3 @@ const PostSwiper = ({
 };
 
 export default PostSwiper;
-

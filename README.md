@@ -26,19 +26,19 @@ pnpm preview    # preview production build
 
 ## Available Scripts
 
-| Command           | Description                                     |
-| ----------------- | ----------------------------------------------- |
-| `pnpm dev`        | Start dev server on port 3000                   |
-| `pnpm build`      | Production build (react-router build + tsc)     |
-| `pnpm preview`    | Preview production build                        |
-| `pnpm lint`       | Run ESLint                                      |
-| `pnpm lint:fix`   | Fix ESLint issues                               |
-| `pnpm lint:oxc`   | Run oxlint                                      |
-| `pnpm format`     | Format code with oxfmt                          |
-| `pnpm typecheck`  | TypeScript type checking                        |
-| `pnpm test`       | Run Vitest tests                                |
-| `pnpm test:watch` | Run tests in watch mode                         |
-| `pnpm doctor`     | Run React Doctor                                |
+| Command           | Description                                 |
+| ----------------- | ------------------------------------------- |
+| `pnpm dev`        | Start dev server on port 3000               |
+| `pnpm build`      | Production build (react-router build + tsc) |
+| `pnpm preview`    | Preview production build                    |
+| `pnpm lint`       | Run ESLint                                  |
+| `pnpm lint:fix`   | Fix ESLint issues                           |
+| `pnpm lint:oxc`   | Run oxlint                                  |
+| `pnpm format`     | Format code with oxfmt                      |
+| `pnpm typecheck`  | TypeScript type checking                    |
+| `pnpm test`       | Run Vitest tests                            |
+| `pnpm test:watch` | Run tests in watch mode                     |
+| `pnpm doctor`     | Run React Doctor                            |
 
 ## Project Structure
 
