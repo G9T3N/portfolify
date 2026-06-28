@@ -16,37 +16,37 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: read   # allows GITHUB_TOKEN to pull from GHCR
+      packages: read
 
     steps:
-      - name: Deploy to VPS via SSH
-        uses: appleboy/ssh-action@v1.2.2
-        env:
-          # Pass GITHUB_TOKEN into the SSH session via envs — no PAT needed
-          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO_OWNER: ${{ github.repository_owner }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
+      - name: Checkout (needed to get docker-compose.yml)
+        uses: actions/checkout@v4
+
+      # ── Copy docker-compose.yml to the VPS ──────────────────────────────
+      - name: Copy docker-compose.yml to VPS
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: 13.222.172.60
           username: admin
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          envs: GHCR_TOKEN,REPO_OWNER,GITHUB_REPOSITORY
+          source: "docker-compose.yml"
+          target: "/home/admin/portfolify"
+
+      # ── Pull new image & restart ─────────────────────────────────────────
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.2
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER: ${{ github.repository_owner }}
+        with:
+          host: 13.222.172.60
+          username: admin
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: GHCR_TOKEN,REPO_OWNER
           script: |
             set -euo pipefail
 
-            APP_DIR="/home/admin/portfolify"
-            REPO_URL="https://${REPO_OWNER}:${GHCR_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-
-            echo "📂 Setting up app directory"
-            if [ -d "${APP_DIR}/.git" ]; then
-              echo "   → Pulling latest changes"
-              git -C "${APP_DIR}" pull origin main
-            else
-              echo "   → Cloning repository"
-              git clone "${REPO_URL}" "${APP_DIR}"
-            fi
-
-            cd "${APP_DIR}"
+            cd /home/admin/portfolify
 
             echo "🔑 Logging into GitHub Container Registry"
             echo "${GHCR_TOKEN}" | docker login ghcr.io \
