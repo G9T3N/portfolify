@@ -44,8 +44,12 @@ export default function AdminLayout() {
                 <FileText className="w-5 h-5 text-[var(--color-mp-primary)]" />
               </div>
               <div>
-                <p className="text-base font-bold tracking-tight text-[var(--color-text-primary)]">Mr.Err</p>
-                <p className="text-xs text-[var(--color-text-muted)] font-mono tracking-wider uppercase mt-0.5">Admin Panel</p>
+                <p className="text-base font-bold tracking-tight text-[var(--color-text-primary)]">
+                  Mr.Err
+                </p>
+                <p className="text-xs text-[var(--color-text-muted)] font-mono tracking-wider uppercase mt-0.5">
+                  Admin Panel
+                </p>
               </div>
             </NavLink>
           </div>
@@ -66,13 +70,17 @@ export default function AdminLayout() {
               >
                 {({ isActive }) => (
                   <>
-                    <Icon className={`w-5 h-5 flex-shrink-0 transition-colors ${isActive ? "text-[var(--color-mp-primary)]" : ""}`} />
+                    <Icon
+                      className={`w-5 h-5 flex-shrink-0 transition-colors ${isActive ? "text-[var(--color-mp-primary)]" : ""}`}
+                    />
                     <span className="flex-1 font-sans">{label}</span>
-                    {to === "/admin/messages" && stats?.unreadMessages && stats.unreadMessages > 0 && (
-                      <span className="px-2 py-0.5 rounded-full bg-[var(--color-mp-primary)]/20 text-[var(--color-mp-primary)] text-[10px] font-bold">
-                        {stats.unreadMessages}
-                      </span>
-                    )}
+                    {to === "/admin/messages" &&
+                      stats?.unreadMessages &&
+                      stats.unreadMessages > 0 && (
+                        <span className="px-2 py-0.5 rounded-full bg-[var(--color-mp-primary)]/20 text-[var(--color-mp-primary)] text-[10px] font-bold">
+                          {stats.unreadMessages}
+                        </span>
+                      )}
                   </>
                 )}
               </NavLink>
@@ -136,7 +144,9 @@ export default function AdminLayout() {
                     <div className="w-8 h-8 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border-default)] flex items-center justify-center">
                       <FileText className="w-4 h-4 text-[var(--color-mp-primary)]" />
                     </div>
-                    <p className="text-sm font-bold text-[var(--color-text-primary)]">Mr.Err Admin</p>
+                    <p className="text-sm font-bold text-[var(--color-text-primary)]">
+                      Mr.Err Admin
+                    </p>
                   </div>
                   <button
                     onClick={() => setMobileMenuOpen(false)}
@@ -164,13 +174,17 @@ export default function AdminLayout() {
                     >
                       {({ isActive }) => (
                         <>
-                          <Icon className={`w-5 h-5 flex-shrink-0 transition-colors ${isActive ? "text-[var(--color-mp-primary)]" : ""}`} />
+                          <Icon
+                            className={`w-5 h-5 flex-shrink-0 transition-colors ${isActive ? "text-[var(--color-mp-primary)]" : ""}`}
+                          />
                           <span className="flex-1 font-sans">{label}</span>
-                          {to === "/admin/messages" && stats?.unreadMessages && stats.unreadMessages > 0 && (
-                            <span className="px-2 py-0.5 rounded-full bg-[var(--color-mp-primary)]/20 text-[var(--color-mp-primary)] text-[10px] font-bold">
-                              {stats.unreadMessages}
-                            </span>
-                          )}
+                          {to === "/admin/messages" &&
+                            stats?.unreadMessages &&
+                            stats.unreadMessages > 0 && (
+                              <span className="px-2 py-0.5 rounded-full bg-[var(--color-mp-primary)]/20 text-[var(--color-mp-primary)] text-[10px] font-bold">
+                                {stats.unreadMessages}
+                              </span>
+                            )}
                         </>
                       )}
                     </NavLink>

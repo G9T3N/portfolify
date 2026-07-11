@@ -41,14 +41,16 @@ export default function GithubSyncDialog({ isOpen = true, onClose }: GithubSyncD
   const handleFetch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!username) return;
-    
+
     setIsFetching(true);
     setError(null);
     setRepos([]);
     setSelectedRepos(new Set());
-    
+
     try {
-      const res = await fetch(`https://api.github.com/users/${encodeURIComponent(username)}/repos?type=public&per_page=100&sort=updated`);
+      const res = await fetch(
+        `https://api.github.com/users/${encodeURIComponent(username)}/repos?type=public&per_page=100&sort=updated`,
+      );
       if (!res.ok) {
         throw new Error("Failed to fetch repositories. Please check the username.");
       }
@@ -82,10 +84,10 @@ export default function GithubSyncDialog({ isOpen = true, onClose }: GithubSyncD
   const handleImport = async () => {
     if (selectedRepos.size === 0) return;
     setIsImporting(true);
-    
+
     try {
       const reposToImport = repos.filter((r) => selectedRepos.has(r.id));
-      
+
       const projectsToInsert = reposToImport.map((repo) => ({
         title: repo.name,
         description: repo.description || "No description provided.",
@@ -99,7 +101,7 @@ export default function GithubSyncDialog({ isOpen = true, onClose }: GithubSyncD
 
       // Insert all selected projects
       const { error: insertError } = await supabase.from("projects").insert(projectsToInsert);
-      
+
       if (insertError) {
         throw insertError;
       }
@@ -120,7 +122,6 @@ export default function GithubSyncDialog({ isOpen = true, onClose }: GithubSyncD
   return (
     <AnimatedDialog isOpen={isOpen} onClose={onClose} title="Sync from GitHub">
       <div className="p-6 space-y-6">
-        
         {/* Fetch Form */}
         <form onSubmit={handleFetch} className="flex gap-2">
           <div className="flex-1 relative">
@@ -229,7 +230,11 @@ export default function GithubSyncDialog({ isOpen = true, onClose }: GithubSyncD
                   disabled={selectedRepos.size === 0 || isImporting}
                   className="cyber-button flex items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  {isImporting ? <div className="i-ph:spinner w-4 h-4 animate-spin" /> : <div className="i-ph:git-commit w-4 h-4" />}
+                  {isImporting ? (
+                    <div className="i-ph:spinner w-4 h-4 animate-spin" />
+                  ) : (
+                    <div className="i-ph:git-commit w-4 h-4" />
+                  )}
                   Import {selectedRepos.size} Projects
                 </button>
               </div>

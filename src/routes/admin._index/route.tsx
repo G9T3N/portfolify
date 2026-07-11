@@ -90,9 +90,7 @@ export default function AdminProjects() {
         project={editingProject || undefined}
       />
 
-      {githubSyncOpen && (
-        <GithubSyncDialog onClose={() => setGithubSyncOpen(false)} />
-      )}
+      {githubSyncOpen && <GithubSyncDialog onClose={() => setGithubSyncOpen(false)} />}
 
       <DeleteProjectDialog
         project={deleteProject}

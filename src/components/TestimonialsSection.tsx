@@ -60,9 +60,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
         </div>
       )}
       <div>
-        <p className="text-sm font-semibold text-[var(--color-text-primary)]">
-          {testimonial.name}
-        </p>
+        <p className="text-sm font-semibold text-[var(--color-text-primary)]">{testimonial.name}</p>
         <p className="text-xs text-[var(--color-text-muted)]">
           {testimonial.role}
           {testimonial.company ? ` at ${testimonial.company}` : ""}

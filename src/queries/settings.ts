@@ -40,4 +40,3 @@ export function useSiteSetting(key: string) {
     enabled: !!key,
   });
 }
-

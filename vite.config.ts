@@ -34,12 +34,24 @@ export default defineConfig({
       enforce: "post",
       transformIndexHtml(html) {
         return html
-          .replace(/<link[^>]*rel="modulepreload"[^>]*href="\/assets\/rapier-[^"]+\.js"[^>]*\/?>/gi, "")
-          .replace(/<link[^>]*href="\/assets\/rapier-[^"]+\.js"[^>]*rel="modulepreload"[^>]*\/?>/gi, "")
-          .replace(/<link[^>]*rel="modulepreload"[^>]*href="\/assets\/react-three-[^"]+\.js"[^>]*\/?>/gi, "")
-          .replace(/<link[^>]*href="\/assets\/react-three-[^"]+\.js"[^>]*rel="modulepreload"[^>]*\/?>/gi, "");
-      }
-    }
+          .replace(
+            /<link[^>]*rel="modulepreload"[^>]*href="\/assets\/rapier-[^"]+\.js"[^>]*\/?>/gi,
+            "",
+          )
+          .replace(
+            /<link[^>]*href="\/assets\/rapier-[^"]+\.js"[^>]*rel="modulepreload"[^>]*\/?>/gi,
+            "",
+          )
+          .replace(
+            /<link[^>]*rel="modulepreload"[^>]*href="\/assets\/react-three-[^"]+\.js"[^>]*\/?>/gi,
+            "",
+          )
+          .replace(
+            /<link[^>]*href="\/assets\/react-three-[^"]+\.js"[^>]*rel="modulepreload"[^>]*\/?>/gi,
+            "",
+          );
+      },
+    },
   ],
   resolve: {
     alias: {

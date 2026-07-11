@@ -17,7 +17,10 @@ const Navbar = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("theme") as "dark" | "light" | null;
-      const initialTheme = saved ?? (document.documentElement.getAttribute("data-theme") as "dark" | "light") ?? "dark";
+      const initialTheme =
+        saved ??
+        (document.documentElement.getAttribute("data-theme") as "dark" | "light") ??
+        "dark";
       setTheme(initialTheme);
       if (saved) {
         document.documentElement.setAttribute("data-theme", saved);

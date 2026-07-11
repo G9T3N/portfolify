@@ -43,7 +43,6 @@ export function ProjectCard({ project, index, total = 3 }: ProjectCardProps) {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="absolute inset-0 bg-[var(--color-bg-card)] rounded-[2rem] border border-[var(--color-border-default)] shadow-2xl overflow-hidden flex flex-col md:flex-row transition-transform duration-500 ease-out origin-top hover:scale-[1.01]">
-        
         {/* Left: Thumbnail Section */}
         <div className="w-full md:w-[55%] h-[45%] md:h-full relative overflow-hidden bg-gradient-to-br from-[var(--color-bg-elevated)] to-[var(--color-bg-card)] border-b md:border-b-0 md:border-r border-[var(--color-border-default)]">
           {project.thumbnail_url ? (
@@ -71,9 +70,8 @@ export function ProjectCard({ project, index, total = 3 }: ProjectCardProps) {
 
         {/* Right: Content Section */}
         <div className="w-full md:w-[45%] h-[55%] md:h-full flex flex-col p-8 md:p-12 relative z-10 bg-[var(--color-bg-card)]">
-          
           <div className="text-[var(--color-text-muted)] text-sm font-mono mb-4 opacity-50">
-            {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+            {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
           </div>
 
           <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--color-text-primary)] mb-4">

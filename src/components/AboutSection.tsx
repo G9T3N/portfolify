@@ -36,9 +36,11 @@ const AboutSection = () => {
         <div className="flex flex-col lg:flex-row items-center ">
           {/* Photo */}
           <div className="flex-2 w-full h-full min-h-[50vh]">
-            <LazyInView 
-              margin="300px" 
-              fallback={<div className="w-full h-full min-h-[50vh] animate-pulse bg-[var(--color-bg-card)] rounded-4xl border border-[var(--color-border-default)]" />}
+            <LazyInView
+              margin="300px"
+              fallback={
+                <div className="w-full h-full min-h-[50vh] animate-pulse bg-[var(--color-bg-card)] rounded-4xl border border-[var(--color-border-default)]" />
+              }
             >
               <Suspense
                 fallback={

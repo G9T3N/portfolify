@@ -57,11 +57,12 @@ export default function AdminDashboard() {
           Dashboard Overview
         </h1>
         <p className="text-base text-[var(--color-text-muted)] mt-2 font-sans max-w-xl">
-          Welcome to the control center. Here is a high-level view of your portfolio's metrics and data.
+          Welcome to the control center. Here is a high-level view of your portfolio's metrics and
+          data.
         </p>
       </div>
 
-      <motion.div 
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="show"
@@ -72,7 +73,7 @@ export default function AdminDashboard() {
             <div className="group relative bg-[var(--color-bg-card)] rounded-3xl p-6 border border-[var(--color-border-default)] hover:border-[var(--color-border-hover)] transition-all duration-300 overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.03)]">
               {/* Subtle background glow effect on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-mp-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              
+
               <div className="relative z-10 flex flex-col gap-4">
                 <div className="flex items-center justify-between">
                   <div className="w-12 h-12 rounded-2xl bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] flex items-center justify-center group-hover:scale-110 group-hover:border-[var(--color-mp-primary)]/40 transition-all duration-500">
