@@ -16,9 +16,7 @@ const Navbar = () => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("theme") as "dark" | "light" | null;
       return (
-        saved ??
-        (document.documentElement.getAttribute("data-theme") as "dark" | "light") ??
-        "dark"
+        saved ?? (document.documentElement.getAttribute("data-theme") as "dark" | "light") ?? "dark"
       );
     }
     return "dark";
