@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.2.0](https://github.com/G9T3N/portfolify/compare/v1.1.1...v1.2.0) (2026-07-11)
+
+
+### Features
+
+* add LazyInView component for intersection-based deferred rendering ([8d6e393](https://github.com/G9T3N/portfolify/commit/8d6e393969577f2cf06a59452ebad130a1b4d341))
+* add privacy toggle for phone numbers and CV download button to ContactSection ([8bb26e8](https://github.com/G9T3N/portfolify/commit/8bb26e87beee57b6d31577b677817fb914edb726))
+* add SEO meta tags, deferred section loading via LazyInView, and TestimonialsSection ([bea856f](https://github.com/G9T3N/portfolify/commit/bea856f2f3702a6ab2a56381fa991b9d05160692))
+* add useSiteSetting query hook for fetching individual settings by key ([9070a49](https://github.com/G9T3N/portfolify/commit/9070a497cbbf01c8b3eaa5f2371fa913df464ffa))
+* enhance AboutSection with quick stats, CV download link, and lazy-loaded 3D card ([46cc374](https://github.com/G9T3N/portfolify/commit/46cc374297ba235bed97390af5a6d8cebef49f69))
+* implement admin dashboard layout, add reusable components, and integrate Vite preload striping directly into configuration. ([b86efc7](https://github.com/G9T3N/portfolify/commit/b86efc73224d59da5a6f3fe67440c82ba93031e6))
+* implement core portfolio components including Lanyard, About, a… ([135d860](https://github.com/G9T3N/portfolify/commit/135d86032a7e47358d9229af0714c4c6ffaf3087))
+* implement core portfolio components including Lanyard, About, and project display sections ([67b27e1](https://github.com/G9T3N/portfolify/commit/67b27e10dd29ac31d58956493d6e0cae57883386))
+* implement dark/light theme toggle and active section scroll spy in Navbar ([4407eff](https://github.com/G9T3N/portfolify/commit/4407eff9083daf134e35036e5264758450476c90))
+* implement Navbar component with scroll-spy navigation and theme toggle, and initialize i18n message files. ([aa46075](https://github.com/G9T3N/portfolify/commit/aa460755d6515f490cfef75a0adf4d9a212780a4))
+* implement Navbar component with scroll-spy navigation and theme… ([e6bd585](https://github.com/G9T3N/portfolify/commit/e6bd5859c0a15400f55c9f0412d42878f48673de))
+* implement sticky navigation bar, project GitHub synchronization dialog, and localized message files ([0ed01d8](https://github.com/G9T3N/portfolify/commit/0ed01d88f96450fa8b458ef7ec2019a63185de9d))
+* implement sticky navigation bar, project GitHub synchronization… ([ae4e09a](https://github.com/G9T3N/portfolify/commit/ae4e09a7c05a98890616194c6887f49b24ceac58))
+* redesign admin panel with floating sidebar, add GitHub repo sync dialog, and optimize build preload stripping ([b131e7b](https://github.com/G9T3N/portfolify/commit/b131e7b87a5445abe0d68a5a26c6a2b379594791))
+* redesign ProjectCard with split layout, dynamic LogoCarousel from skills, and optimize portfolio images ([cfa7e7c](https://github.com/G9T3N/portfolify/commit/cfa7e7c2cefd45a18ca0395523ca3b6fa869a1e4))
+* responsive HeroSection layout and optimized Lanyard for mobile performance ([1529f98](https://github.com/G9T3N/portfolify/commit/1529f98160f8334c31cbcf5238bd1c21bb37673e))
+
+
+### Bug Fixes
+
+* apply CodeRabbit auto-fixes ([aaf22d9](https://github.com/G9T3N/portfolify/commit/aaf22d9e976b18dafae978cc3dedc80dc6c09594))
+
 ## [1.1.1](https://github.com/G9T3N/portfolify/compare/v1.1.0...v1.1.1) (2026-06-28)
 
 
