@@ -62,7 +62,7 @@ export function ProjectCard({ project, index, total = 3 }: ProjectCardProps) {
             </div>
           )}
           {/* Category Badge overlay on image */}
-          <div className="absolute top-6 left-6 z-10">
+          <div className="absolute top-6 start-6 z-10">
             <span className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-white shadow-lg">
               {project.category}
             </span>

@@ -5,7 +5,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface GithubSyncDialogProps {
-  isOpen: boolean;
   onClose: () => void;
 }
 
@@ -18,7 +17,7 @@ interface GithubRepo {
   language: string | null;
 }
 
-export default function GithubSyncDialog({ isOpen, onClose }: GithubSyncDialogProps) {
+export default function GithubSyncDialog({ onClose }: GithubSyncDialogProps) {
   const [username, setUsername] = useState("");
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -108,17 +107,14 @@ export default function GithubSyncDialog({ isOpen, onClose }: GithubSyncDialogPr
     }
   };
 
-  // Reset state when closed
-  if (!isOpen) return null;
-
   return (
-    <AnimatedDialog isOpen={isOpen} onClose={onClose} title="Sync from GitHub">
+    <AnimatedDialog isOpen onClose={onClose} title="Sync from GitHub">
       <div className="p-6 space-y-6">
         
         {/* Fetch Form */}
         <form onSubmit={handleFetch} className="flex gap-2">
           <div className="flex-1 relative">
-            <GitCommit className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <GitCommit className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               value={username}

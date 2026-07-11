@@ -1,6 +1,6 @@
 import { GitMerge, Dock, Mail } from "lucide-react";
 import { useNavigate } from "react-router";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const SOCIAL_LINKS = [
@@ -13,20 +13,33 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const navigate = useNavigate();
   const [clickCount, setClickCount] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Hidden admin access: triple-click the copyright text
+  // Hidden admin access: 5-click the copyright text
   const handleCopyrightClick = useCallback(() => {
+    if (timerRef.current !== null) {
+      clearTimeout(timerRef.current);
+    }
+
     setClickCount((prev) => {
       const next = prev + 1;
       if (next >= 5) {
         navigate("/login");
         return 0;
       }
-      // Reset after 2 seconds of inactivity
-      setTimeout(() => setClickCount(0), 2000);
       return next;
     });
+
+    timerRef.current = setTimeout(() => setClickCount(0), 2000);
   }, [navigate]);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current !== null) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <footer className="px-4 md:px-8 lg:px-12 py-12 border-t border-[var(--color-border-default)]">

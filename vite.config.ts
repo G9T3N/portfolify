@@ -33,7 +33,9 @@ export default defineConfig({
       name: "strip-rapier-preload",
       enforce: "post",
       transformIndexHtml(html) {
-        return html.replace(/<link rel="modulepreload" href="\/assets\/rapier-[^"]+\.js"\/>/g, "");
+        return html
+          .replace(/<link[^>]*href="\/assets\/rapier-[^"]+\.js"[^>]*>/g, "")
+          .replace(/<link[^>]*href="\/assets\/react-three-[^"]+\.js"[^>]*>/g, "");
       }
     }
   ],

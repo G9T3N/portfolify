@@ -32,7 +32,7 @@ export default function AdminLayout() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] flex font-sans selection:bg-[var(--color-mp-primary)]/30">
       {/* Floating Sidebar */}
-      <aside className="w-64 fixed inset-y-0 left-0 z-30 p-4 lg:p-6 hidden lg:flex flex-col">
+      <aside className="w-64 fixed inset-y-0 start-0 z-30 p-4 lg:p-6 hidden lg:flex flex-col">
         <div className="flex-1 rounded-3xl bg-[var(--color-bg-elevated)]/40 backdrop-blur-xl border border-[var(--color-border-default)] shadow-2xl flex flex-col overflow-hidden">
           <div className="p-6 border-b border-[var(--color-border-default)]/50">
             <NavLink to="/admin" end className="flex items-center gap-4 group">

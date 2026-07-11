@@ -146,6 +146,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
   );
   const [dragged, drag] = useState<false | THREE.Vector3>(false);
   const [hovered, hover] = useState(false);
+  const priorOverflow = useRef<string>("");
 
   const [isSmall, setIsSmall] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
@@ -181,6 +182,12 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
       };
     }
   }, [hovered, dragged]);
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = priorOverflow.current;
+    };
+  }, []);
 
   useFrame((state, delta) => {
     if (dragged && typeof dragged !== "boolean") {
@@ -283,10 +290,16 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
             onPointerUp={(e: any) => {
               e.target.releasePointerCapture(e.pointerId);
               drag(false);
-              document.body.style.overflow = '';
+              document.body.style.overflow = priorOverflow.current;
+            }}
+            onPointerCancel={(e: any) => {
+              e.target.releasePointerCapture(e.pointerId);
+              drag(false);
+              document.body.style.overflow = priorOverflow.current;
             }}
             onPointerDown={(e: any) => {
               e.target.setPointerCapture(e.pointerId);
+              priorOverflow.current = document.body.style.overflow;
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
               document.body.style.overflow = 'hidden';
             }}
