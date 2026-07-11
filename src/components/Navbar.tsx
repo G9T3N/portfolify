@@ -12,16 +12,21 @@ const NAV_LINKS = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("theme") as "dark" | "light" | null;
+      return (
+        saved ??
+        (document.documentElement.getAttribute("data-theme") as "dark" | "light") ??
+        "dark"
+      );
+    }
+    return "dark";
+  });
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("theme") as "dark" | "light" | null;
-      const initialTheme =
-        saved ??
-        (document.documentElement.getAttribute("data-theme") as "dark" | "light") ??
-        "dark";
-      setTheme(initialTheme);
+      const saved = localStorage.getItem("theme");
       if (saved) {
         document.documentElement.setAttribute("data-theme", saved);
       }

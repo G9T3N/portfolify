@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { AnimatedDialog } from "@/components/common/animated-dialog";
 import { supabase } from "@/integrations/supabase/client";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface GithubSyncDialogProps {
   isOpen?: boolean;
@@ -27,8 +28,10 @@ export default function GithubSyncDialog({ isOpen = true, onClose }: GithubSyncD
 
   const queryClient = useQueryClient();
 
-  // Reset state when dialog opens
-  useEffect(() => {
+  // Reset state when dialog opens without cascading renders
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+  if (isOpen !== prevIsOpen) {
+    setPrevIsOpen(isOpen);
     if (isOpen) {
       setUsername("");
       setError(null);
@@ -36,7 +39,7 @@ export default function GithubSyncDialog({ isOpen = true, onClose }: GithubSyncD
       setSelectedRepos(new Set());
       setImportStatus("draft");
     }
-  }, [isOpen]);
+  }
 
   const handleFetch = async (e: React.FormEvent) => {
     e.preventDefault();
