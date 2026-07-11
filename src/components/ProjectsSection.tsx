@@ -7,7 +7,10 @@ import { ProjectCard } from "./portfolio/ProjectCard";
 const PLACEHOLDER_PATTERNS = /^(test|asdasd|asd|placeholder|lorem|untitled|example)$/i;
 
 function isPlaceholder(project: { title: string; description: string }): boolean {
-  return PLACEHOLDER_PATTERNS.test(project.title.trim()) || PLACEHOLDER_PATTERNS.test(project.description.trim());
+  return (
+    PLACEHOLDER_PATTERNS.test(project.title.trim()) ||
+    PLACEHOLDER_PATTERNS.test(project.description.trim())
+  );
 }
 
 const ProjectsSection = () => {

@@ -23,7 +23,13 @@ export const FeaturedCard = () => {
         </div>
         <div className="flex-grow rounded-4xl overflow-hidden relative">
           <div className="w-full h-full flex items-center justify-center">
-            <img src="/favicon.svg" alt="Mr.Err" className="w-32 h-32 opacity-30" loading="lazy" decoding="async" />
+            <img
+              src="/favicon.svg"
+              alt="Mr.Err"
+              className="w-32 h-32 opacity-30"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div className="absolute inset-0 border rounded-4xl pointer-events-none border-border" />
         </div>
@@ -53,7 +59,13 @@ export const FeaturedCard = () => {
         </div>
         <div className="flex-grow rounded-4xl overflow-hidden relative">
           <div className="w-full h-full flex items-center justify-center">
-            <img src={lanyardImage} alt="Mr.Err" className=" w-32 h-32 rounded-3xl opacity-80" loading="lazy" decoding="async" />
+            <img
+              src={lanyardImage}
+              alt="Mr.Err"
+              className=" w-32 h-32 rounded-3xl opacity-80"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div className="absolute inset-0 border rounded-4xl pointer-events-none border-border" />
         </div>

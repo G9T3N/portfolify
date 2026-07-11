@@ -38,7 +38,6 @@ interface LanyardProps {
   transparent?: boolean;
 }
 
-
 export default function Lanyard({
   position = [0, 0, 10],
   gravity = [0, -40, 0],
@@ -51,8 +50,8 @@ export default function Lanyard({
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   return (
@@ -64,7 +63,7 @@ export default function Lanyard({
         onCreated={({ gl }) => {
           gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1);
           // Allow page scrolling on canvas touch by default
-          gl.domElement.style.touchAction = 'auto';
+          gl.domElement.style.touchAction = "auto";
         }}
       >
         <ambientLight intensity={Math.PI} />
@@ -185,7 +184,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
 
   useEffect(() => {
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, []);
 
@@ -301,7 +300,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
               e.target.setPointerCapture(e.pointerId);
               priorOverflow.current = document.body.style.overflow;
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
-              document.body.style.overflow = 'hidden';
+              document.body.style.overflow = "hidden";
             }}
           >
             <mesh geometry={nodes.card.geometry} userData={{ isCard: true }}>
@@ -320,7 +319,11 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
               material-roughness={0.3}
               userData={{ isCard: true }}
             />
-            <mesh geometry={nodes.clamp.geometry} material={materials.metal} userData={{ isCard: true }} />
+            <mesh
+              geometry={nodes.clamp.geometry}
+              material={materials.metal}
+              userData={{ isCard: true }}
+            />
           </group>
         </RigidBody>
       </group>

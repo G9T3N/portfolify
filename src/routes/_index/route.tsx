@@ -49,7 +49,7 @@ export default function HomeRoute() {
         <div className="snap-section">
           <HeroSection />
         </div>
-        
+
         <LazyInView margin="300px" fallback={<SectionFallback />}>
           <Suspense fallback={<SectionFallback />}>
             <div className="snap-section">
@@ -57,7 +57,7 @@ export default function HomeRoute() {
             </div>
           </Suspense>
         </LazyInView>
-        
+
         <LazyInView margin="300px" fallback={<SectionFallback />}>
           <Suspense fallback={<SectionFallback />}>
             <div className="snap-section">
@@ -65,7 +65,7 @@ export default function HomeRoute() {
             </div>
           </Suspense>
         </LazyInView>
-        
+
         <LazyInView margin="300px" fallback={<SectionFallback />}>
           <Suspense fallback={<SectionFallback />}>
             <div className="snap-section">
@@ -73,13 +73,13 @@ export default function HomeRoute() {
             </div>
           </Suspense>
         </LazyInView>
-        
+
         <LazyInView margin="300px" fallback={<div className="min-h-[30vh] animate-pulse" />}>
           <Suspense fallback={null}>
             <TestimonialsSection />
           </Suspense>
         </LazyInView>
-        
+
         <LazyInView margin="300px" fallback={<SectionFallback />}>
           <Suspense fallback={<SectionFallback />}>
             <div className="snap-section">
@@ -88,7 +88,7 @@ export default function HomeRoute() {
           </Suspense>
         </LazyInView>
       </main>
-      
+
       <LazyInView margin="300px" fallback={<FooterFallback />}>
         <Suspense fallback={<FooterFallback />}>
           <div className="snap-section">
@@ -99,4 +99,3 @@ export default function HomeRoute() {
     </div>
   );
 }
-
