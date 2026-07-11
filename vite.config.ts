@@ -29,6 +29,13 @@ export default defineConfig({
         sourceMaps: true, // Prevents breakages in browser debugging tools
       },
     }),
+    {
+      name: "strip-rapier-preload",
+      enforce: "post",
+      transformIndexHtml(html) {
+        return html.replace(/<link rel="modulepreload" href="\/assets\/rapier-[^"]+\.js"\/>/g, "");
+      }
+    }
   ],
   resolve: {
     alias: {
@@ -37,6 +44,7 @@ export default defineConfig({
   },
   assetsInclude: ["**/*.glb"],
   build: {
+    modulePreload: false,
     chunkSizeWarningLimit: 4000,
     rolldownOptions: {
       output: {

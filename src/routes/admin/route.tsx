@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { NavLink, Outlet } from "react-router";
 import { useAdminStats } from "./queries";
+import { motion } from "framer-motion";
 
 const sidebarItems = [
   { to: "/admin/dashboard", label: "Dashboard", icon: BarChart3 },
@@ -24,67 +25,94 @@ const sidebarItems = [
 
 /**
  * Renders the admin page layout with a fixed left sidebar and a main content area.
- *
- * The sidebar contains branding, navigation links (from `sidebarItems`), and a conditional unread-messages badge driven by admin stats. The main area hosts nested route content via an `Outlet`.
- *
- * @returns A React element representing the admin layout with sidebar navigation and an Outlet for nested routes.
  */
 export default function AdminLayout() {
   const { data: stats } = useAdminStats();
 
   return (
-    <div className="min-h-screen bg-background flex">
-      <aside className="w-60 bg-sidebar border-r border-sidebar-border flex flex-col fixed inset-y-0 left-0 z-30">
-        <div className="p-5 border-b border-sidebar-border">
-          <NavLink to="/admin" end className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
-              <FileText className="w-4 h-4 text-primary" />
-            </div>
-            <div>
-              <p className="text-sm font-mono font-bold text-sidebar-foreground">Mr.Err</p>
-              <p className="text-xs text-sidebar-foreground/60 font-mono">Admin Panel</p>
-            </div>
-          </NavLink>
-        </div>
-
-        <nav className="flex-1 p-3 space-y-1">
-          {sidebarItems.map(({ to, label, icon: Icon, end }) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={end}
-              className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-mono transition-colors ${
-                  isActive
-                    ? "bg-primary/10 text-primary border border-primary/20"
-                    : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground border border-transparent"
-                }`
-              }
-            >
-              <Icon className="w-4 h-4 flex-shrink-0" />
-              <span className="flex-1">{label}</span>
-              {to === "/admin/messages" && stats?.unreadMessages && stats.unreadMessages > 0 && (
-                <span className="px-1.5 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-mono">
-                  {stats.unreadMessages}
-                </span>
-              )}
+    <div className="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] flex font-sans selection:bg-[var(--color-mp-primary)]/30">
+      {/* Floating Sidebar */}
+      <aside className="w-64 fixed inset-y-0 left-0 z-30 p-4 lg:p-6 hidden lg:flex flex-col">
+        <div className="flex-1 rounded-3xl bg-[var(--color-bg-elevated)]/40 backdrop-blur-xl border border-[var(--color-border-default)] shadow-2xl flex flex-col overflow-hidden">
+          <div className="p-6 border-b border-[var(--color-border-default)]/50">
+            <NavLink to="/admin" end className="flex items-center gap-4 group">
+              <div className="w-10 h-10 rounded-xl bg-[var(--color-bg-card)] border border-[var(--color-border-default)] flex items-center justify-center group-hover:border-[var(--color-mp-primary)]/50 transition-colors">
+                <FileText className="w-5 h-5 text-[var(--color-mp-primary)]" />
+              </div>
+              <div>
+                <p className="text-base font-bold tracking-tight text-[var(--color-text-primary)]">Mr.Err</p>
+                <p className="text-xs text-[var(--color-text-muted)] font-mono tracking-wider uppercase mt-0.5">Admin Panel</p>
+              </div>
             </NavLink>
-          ))}
-        </nav>
+          </div>
 
-        <div className="p-3 border-t border-sidebar-border">
-          <NavLink
-            to="/"
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-mono text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground transition-colors"
-          >
-            <Home className="w-4 h-4" />
-            Back to Site
-          </NavLink>
+          <nav className="flex-1 p-4 space-y-2 overflow-y-auto custom-scrollbar">
+            {sidebarItems.map(({ to, label, icon: Icon, end }) => (
+              <NavLink
+                key={to}
+                to={to}
+                end={end}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-300 ${
+                    isActive
+                      ? "bg-[var(--color-bg-card)] text-[var(--color-text-primary)] border border-[var(--color-border-hover)] shadow-md"
+                      : "text-[var(--color-text-muted)] hover:bg-[var(--color-bg-card)]/50 hover:text-[var(--color-text-secondary)] border border-transparent"
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    <Icon className={`w-5 h-5 flex-shrink-0 transition-colors ${isActive ? "text-[var(--color-mp-primary)]" : ""}`} />
+                    <span className="flex-1 font-sans">{label}</span>
+                    {to === "/admin/messages" && stats?.unreadMessages && stats.unreadMessages > 0 && (
+                      <span className="px-2 py-0.5 rounded-full bg-[var(--color-mp-primary)]/20 text-[var(--color-mp-primary)] text-[10px] font-bold">
+                        {stats.unreadMessages}
+                      </span>
+                    )}
+                  </>
+                )}
+              </NavLink>
+            ))}
+          </nav>
+
+          <div className="p-4 border-t border-[var(--color-border-default)]/50">
+            <NavLink
+              to="/"
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-2xl text-sm font-bold text-[var(--color-bg-primary)] bg-[var(--color-text-primary)] hover:bg-[var(--color-mp-primary)] hover:text-white transition-colors duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(0,128,0,0.3)]"
+            >
+              <Home className="w-4 h-4" />
+              Back to Site
+            </NavLink>
+          </div>
         </div>
       </aside>
 
-      <main className="ml-60 flex-1 p-8 overflow-auto">
-        <Outlet />
+      {/* Main Content */}
+      <main className="flex-1 lg:pl-[18rem] min-w-0 flex flex-col">
+        {/* Mobile Header */}
+        <div className="lg:hidden p-4 border-b border-[var(--color-border-default)] bg-[var(--color-bg-elevated)]/80 backdrop-blur-md sticky top-0 z-20 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border-default)] flex items-center justify-center">
+              <FileText className="w-4 h-4 text-[var(--color-mp-primary)]" />
+            </div>
+            <p className="text-sm font-bold text-[var(--color-text-primary)]">Mr.Err Admin</p>
+          </div>
+          {/* Note: Mobile menu toggle logic could go here, for now it relies on users navigating from dashboard */}
+          <NavLink to="/" className="text-[var(--color-text-muted)] p-2">
+            <Home className="w-5 h-5" />
+          </NavLink>
+        </div>
+
+        <div className="flex-1 p-6 lg:p-10 lg:pt-12">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="max-w-7xl mx-auto"
+          >
+            <Outlet />
+          </motion.div>
+        </div>
       </main>
     </div>
   );
