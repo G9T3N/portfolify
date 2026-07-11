@@ -86,7 +86,7 @@ export const Gauge = () => {
   }, [coreStats.length]);
   return (
     <motion.div
-      className="relative rounded-4xl p-4 border shadow-2xl overflow-hidden flex flex-col h-[35vh] bg-card border-border"
+      className="relative rounded-4xl p-4 border shadow-2xl overflow-hidden flex flex-col flex-1 min-h-60 bg-card border-border"
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, delay: 0.4 }}

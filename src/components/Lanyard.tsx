@@ -17,7 +17,6 @@ import {
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
 import * as THREE from "three";
 
-// replace with your own imports, see the usage snippet for details
 import cardGLB from "../assets/lanyard/card.glb";
 import lanyard from "../assets/lanyard/wael.svg";
 
@@ -39,24 +38,40 @@ interface LanyardProps {
   transparent?: boolean;
 }
 
+
 export default function Lanyard({
   position = [0, 0, 10],
   gravity = [0, -40, 0],
   fov = 21,
   transparent = true,
 }: LanyardProps) {
+  // Determine if it's a small screen to adjust fov or scale
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
-    <div className="relative z-0 w-full h-screen flex justify-center items-center transform scale-100 origin-center">
+    <div className="relative z-0 w-full h-[65vh] md:h-[80vh] flex justify-center items-center">
       <Canvas
-        camera={{ position, fov }}
-        gl={{ alpha: transparent }}
-        onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
+        camera={{ position, fov: isMobile ? fov * 1.6 : fov }}
+        gl={{ alpha: transparent, antialias: !isMobile }}
+        dpr={isMobile ? [1, 1] : [1, 2]}
+        onCreated={({ gl }) => {
+          gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1);
+          // Allow page scrolling on canvas touch by default
+          gl.domElement.style.touchAction = 'auto';
+        }}
       >
         <ambientLight intensity={Math.PI} />
         <Physics gravity={gravity} timeStep={1 / 60}>
           <Band />
         </Physics>
-        <Environment blur={0.75}>
+        <Environment blur={isMobile ? 0.1 : 0.75} resolution={isMobile ? 64 : 256}>
           <Lightformer
             intensity={2}
             color="white"
@@ -131,6 +146,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
   );
   const [dragged, drag] = useState<false | THREE.Vector3>(false);
   const [hovered, hover] = useState(false);
+  const priorOverflow = useRef<string>("");
 
   const [isSmall, setIsSmall] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
@@ -148,6 +164,8 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
     return (): void => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const isTablet = isSmall; // checks for < 1024px (tablet/mobile)
+
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
@@ -164,6 +182,12 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
       };
     }
   }, [hovered, dragged]);
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   useFrame((state, delta) => {
     if (dragged && typeof dragged !== "boolean") {
@@ -210,14 +234,14 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
     const mat: any = new MeshLineMaterial({
       color: "white",
       depthTest: false,
-      resolution: new THREE.Vector2(isSmall ? 1000 : 1000, isSmall ? 2000 : 1000),
+      resolution: new THREE.Vector2(isTablet ? 500 : 1000, isTablet ? 500 : 1000),
       useMap: true,
       map: texture,
       repeat: new THREE.Vector2(-4, 1),
       lineWidth: 1,
     } as any);
     return mat;
-  }, [texture, isSmall]);
+  }, [texture, isTablet]);
 
   return (
     <>
@@ -266,17 +290,25 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
             onPointerUp={(e: any) => {
               e.target.releasePointerCapture(e.pointerId);
               drag(false);
+              document.body.style.overflow = priorOverflow.current;
+            }}
+            onPointerCancel={(e: any) => {
+              e.target.releasePointerCapture(e.pointerId);
+              drag(false);
+              document.body.style.overflow = priorOverflow.current;
             }}
             onPointerDown={(e: any) => {
               e.target.setPointerCapture(e.pointerId);
+              priorOverflow.current = document.body.style.overflow;
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
+              document.body.style.overflow = 'hidden';
             }}
           >
-            <mesh geometry={nodes.card.geometry}>
+            <mesh geometry={nodes.card.geometry} userData={{ isCard: true }}>
               <meshPhysicalMaterial
                 map={materials.base.map}
-                map-anisotropy={16}
-                clearcoat={1}
+                map-anisotropy={isTablet ? 1 : 16}
+                clearcoat={isTablet ? 0 : 1}
                 clearcoatRoughness={0.15}
                 roughness={0.9}
                 metalness={0.8}
@@ -286,8 +318,9 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
               geometry={nodes.clip.geometry}
               material={materials.metal}
               material-roughness={0.3}
+              userData={{ isCard: true }}
             />
-            <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
+            <mesh geometry={nodes.clamp.geometry} material={materials.metal} userData={{ isCard: true }} />
           </group>
         </RigidBody>
       </group>

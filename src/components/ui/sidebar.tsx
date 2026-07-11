@@ -82,7 +82,7 @@ const SidebarProvider = React.forwardRef<
           _setOpen(openState);
         }
       },
-      [setOpenProp, open],
+      [setOpenProp],
     );
 
     // Sync sidebar state to cookie.

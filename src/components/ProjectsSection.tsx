@@ -1,84 +1,102 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useState, useMemo } from "react";
 import { useProjects } from "@/queries";
 import { ProjectCard } from "./portfolio/ProjectCard";
 
+/** Titles that look like placeholder/test content */
+const PLACEHOLDER_PATTERNS = /^(test|asdasd|asd|placeholder|lorem|untitled|example)$/i;
+
+function isPlaceholder(project: { title: string; description: string }): boolean {
+  return PLACEHOLDER_PATTERNS.test(project.title.trim()) || PLACEHOLDER_PATTERNS.test(project.description.trim());
+}
+
 const ProjectsSection = () => {
   const { data: projects, isLoading } = useProjects();
-  const targetRef = useRef<HTMLDivElement>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [scrollRange, setScrollRange] = useState(0);
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start start", "end end"],
-  });
+  // Filter out placeholder projects and ensure they are 'live'
+  const validProjects = useMemo(() => {
+    return (projects ?? []).filter((p) => !isPlaceholder(p) && p.status === "live");
+  }, [projects]);
 
-  const displayProjects = projects ?? [];
+  // Get unique categories
+  const categories = useMemo(() => {
+    const cats = new Set(validProjects.map((p) => p.category.toLowerCase()));
+    return ["all", ...Array.from(cats)];
+  }, [validProjects]);
 
-  useEffect(() => {
-    if (carouselRef.current) {
-      const updateRange = () => {
-        if (carouselRef.current) {
-          const scrollWidth = carouselRef.current.scrollWidth;
-          const clientWidth = carouselRef.current.clientWidth;
-          setScrollRange(Math.max(0, scrollWidth - clientWidth));
-        }
-      };
-
-      updateRange();
-      window.addEventListener("resize", updateRange);
-      return () => window.removeEventListener("resize", updateRange);
-    }
-  }, [displayProjects]);
-
-  const totalSections = displayProjects.length > 0 ? displayProjects.length + 1 : 2;
-  const pauseRatio = 1 / totalSections;
-  const endRatio = 1 - pauseRatio;
-
-  const x = useTransform(
-    scrollYProgress,
-    [0, pauseRatio, endRatio, 1],
-    [0, 0, -scrollRange, -scrollRange],
-  );
+  // Filter by active category
+  const displayProjects = useMemo(() => {
+    if (activeCategory === "all") return validProjects;
+    return validProjects.filter((p) => p.category.toLowerCase() === activeCategory);
+  }, [validProjects, activeCategory]);
 
   return (
-    <section
-      ref={targetRef}
-      id="projects"
-      style={{ height: isLoading ? "100vh" : `calc(${displayProjects.length * 100}vh + 100vh)` }}
-      className="relative bg-[var(--color-bg-primary)]"
-    >
-      <div className="sticky  top-0 flex flex-col h-screen items-center overflow-hidden ">
-        {/* Section label */}
-        <div className=" m-10 z-10">
+    <section id="projects" className="relative min-h-screen bg-[var(--color-bg-primary)] py-32">
+      <div className="container mx-auto px-4 md:px-8">
+        {/* Section label + category filters */}
+        <div className="flex flex-col items-center gap-6 mb-24">
           <motion.span
-            className="section-label "
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            className="section-label"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             Selected Work
           </motion.span>
+
+          {/* Category filter tabs */}
+          {categories.length > 2 && (
+            <motion.div
+              className="flex items-center gap-2 flex-wrap justify-center"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-6 py-2 text-sm font-medium rounded-full border transition-all cursor-pointer capitalize ${
+                    activeCategory === cat
+                      ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] border-[var(--color-text-primary)]"
+                      : "border-[var(--color-border-default)] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)]"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </motion.div>
+          )}
         </div>
 
         {/* Projects list */}
-        <div className="w-full mt-12 md:mt-0 overflow-hidden" ref={carouselRef}>
+        <div className="flex flex-col gap-8 relative pb-32">
           {isLoading ? (
-            <div className="flex gap-6 overflow-hidden">
+            <div className="flex flex-col gap-12">
               {[0, 1, 2].map((i) => (
                 <div
                   key={i}
-                  className="shrink-0 w-[85vw]  h-[70vh] bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]"
+                  className="w-full h-[60vh] bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]"
                 />
               ))}
             </div>
+          ) : displayProjects.length === 0 ? (
+            <div className="flex items-center justify-center h-[50vh] text-[var(--color-text-muted)]">
+              <p className="text-lg">No projects to display yet.</p>
+            </div>
           ) : (
-            <motion.div style={{ x }} className="flex gap-6 items-center w-max">
-              {displayProjects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
-              ))}
-            </motion.div>
+            displayProjects.map((project, index) => (
+              <div
+                key={project.id}
+                className="sticky w-full"
+                style={{ top: `calc(10vh + ${index * 2}0px)` }}
+              >
+                <ProjectCard project={project} index={index} total={displayProjects.length} />
+              </div>
+            ))
           )}
         </div>
       </div>

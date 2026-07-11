@@ -12,10 +12,10 @@ const LogoCarousel = lazy(() => import("./LogoCarousel"));
 
 // Skeletons to prevent layout shift
 const CardSkeleton = () => (
-  <div className="h-[40vh] w-full bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]" />
+  <div className="h-80 w-full bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]" />
 );
 const GaugeSkeleton = () => (
-  <div className="h-[35vh] w-full bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]" />
+  <div className="min-h-60 flex-1 w-full bg-[var(--color-bg-card)] rounded-4xl animate-pulse border border-[var(--color-border-default)]" />
 );
 const CarouselSkeleton = () => <div className="h-[60px] w-full bg-transparent mt-8" />;
 
@@ -89,7 +89,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Right sidebar */}
-        <div className="flex flex-col gap-15 pt-5 md:pt-0 lg:w-[320px]">
+        <div className="flex flex-col gap-4 sm:gap-5 lg:gap-6 pt-5 md:pt-0 lg:w-[320px]">
           {/* Featured card */}
           <Suspense fallback={<CardSkeleton />}>
             {/* <FeaturedCard /> */}
