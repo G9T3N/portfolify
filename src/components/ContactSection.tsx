@@ -1,8 +1,13 @@
 import { motion } from "framer-motion";
-import { Sparkles, Mail, Phone, MessageCircle } from "lucide-react";
+import { Sparkles, Mail, Phone, MessageCircle, Eye, EyeOff, FileDown } from "lucide-react";
+import { useState } from "react";
 import { ContactForm } from "./ContactForm";
+import { useSiteSetting } from "@/queries";
 
 const ContactSection = () => {
+  const [showNumbers, setShowNumbers] = useState(false);
+  const { data: cvUrl } = useSiteSetting("cv_url");
+
   return (
     <section id="contact" className="relative min-h-screen flex flex-col">
       {/* Card background */}
@@ -64,37 +69,55 @@ const ContactSection = () => {
                   waelamrany@gmail.com
                 </a>
 
-                <a
-                  href="tel:+967770826486"
-                  className="group flex items-center gap-3 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
-                >
-                  <span className="flex items-center justify-center min-w-8 h-8 rounded-full border border-[var(--color-border-default)] group-hover:border-[var(--color-text-primary)] transition-colors">
-                    <Phone className="w-4 h-4" />
-                  </span>
-                  <span className="flex flex-col">
-                    <span>+967 770 826 486</span>
-                    <span className="text-xs text-[var(--color-text-muted)]">
-                      Call / WhatsApp / SMS
-                    </span>
-                  </span>
-                </a>
+                {/* Phone numbers — hidden by default */}
+                {showNumbers ? (
+                  <>
+                    <a
+                      href="tel:+967770826486"
+                      className="group flex items-center gap-3 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+                    >
+                      <span className="flex items-center justify-center min-w-8 h-8 rounded-full border border-[var(--color-border-default)] group-hover:border-[var(--color-text-primary)] transition-colors">
+                        <Phone className="w-4 h-4" />
+                      </span>
+                      <span className="flex flex-col">
+                        <span>+967 770 826 486</span>
+                        <span className="text-xs text-[var(--color-text-muted)]">
+                          Call / WhatsApp / SMS
+                        </span>
+                      </span>
+                    </a>
 
-                <a
-                  href="https://wa.me/994409197608"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
-                >
-                  <span className="flex items-center justify-center min-w-8 h-8 rounded-full border border-[var(--color-border-default)] group-hover:border-[var(--color-text-primary)] transition-colors">
-                    <MessageCircle className="w-4 h-4" />
-                  </span>
-                  <span className="flex flex-col">
-                    <span>+994 409 197 608</span>
-                    <span className="text-xs text-[var(--color-text-muted)]">
-                      Business WhatsApp
+                    <a
+                      href="https://wa.me/994409197608"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-3 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+                    >
+                      <span className="flex items-center justify-center min-w-8 h-8 rounded-full border border-[var(--color-border-default)] group-hover:border-[var(--color-text-primary)] transition-colors">
+                        <MessageCircle className="w-4 h-4" />
+                      </span>
+                      <span className="flex flex-col">
+                        <span>+994 409 197 608</span>
+                        <span className="text-xs text-[var(--color-text-muted)]">
+                          Business WhatsApp
+                        </span>
+                      </span>
+                    </a>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => setShowNumbers(true)}
+                    className="group flex items-center gap-3 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors cursor-pointer"
+                  >
+                    <span className="flex items-center justify-center min-w-8 h-8 rounded-full border border-[var(--color-border-default)] group-hover:border-[var(--color-text-primary)] transition-colors">
+                      <Phone className="w-4 h-4" />
                     </span>
-                  </span>
-                </a>
+                    <span className="flex items-center gap-2">
+                      Click to reveal phone numbers
+                      <Eye className="w-3.5 h-3.5 opacity-50" />
+                    </span>
+                  </button>
+                )}
               </div>
 
               <div className="flex flex-wrap gap-2 mt-2">
@@ -133,14 +156,28 @@ const ContactSection = () => {
               </div>
             </div>
 
-            <a
-              href="mailto:waelamrany@gmail.com"
-              className="bg-[var(--color-mp-text-primary)] text-[var(--color-bg-primary)] px-10 h-12 rounded-xl border flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
-            >
-              <Sparkles className="w-4 h-4" />
-              Let&apos;s talk
-              <Sparkles className="w-4 h-4" />
-            </a>
+            <div className="flex flex-col sm:flex-row gap-3">
+              {/* CV Download */}
+              <a
+                href={cvUrl || "/cv.pdf"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-[var(--color-border-default)] text-[var(--color-text-primary)] px-8 h-12 rounded-xl flex items-center justify-center gap-2 hover:bg-[var(--color-bg-elevated)] transition-colors"
+              >
+                <FileDown className="w-4 h-4" />
+                Download CV
+              </a>
+
+              {/* Let's talk */}
+              <a
+                href="mailto:waelamrany@gmail.com"
+                className="bg-[var(--color-mp-text-primary)] text-[var(--color-bg-primary)] px-10 h-12 rounded-xl border flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+              >
+                <Sparkles className="w-4 h-4" />
+                Let&apos;s talk
+                <Sparkles className="w-4 h-4" />
+              </a>
+            </div>
           </motion.div>
         </div>
       </div>
