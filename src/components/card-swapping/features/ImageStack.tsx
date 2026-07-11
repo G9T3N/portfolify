@@ -12,9 +12,13 @@ export function ImageCardStack() {
     { id: 2, img: lanyardImage },
   ];
   return (
-    <CardStack items={items}>
+    <CardStack
+      items={items}
+      containerClassName="relative h-80"
+      cardClassName="absolute h-80 w-full cursor-grab"
+    >
       {(card) => (
-        <div className="relative w-full! rounded-4xl p-4 border shadow-2xl overflow-hidden flex flex-col h-[42vh] bg-card border-border">
+        <div className="relative w-full! rounded-4xl p-4 border shadow-2xl overflow-hidden flex flex-col h-full bg-card border-border">
           <div className="flex items-center w-full justify-between mb-4 ">
             <span className="mp-label-caps text-muted-foreground"></span>
             <div className="flex gap-2">
@@ -30,6 +34,8 @@ export function ImageCardStack() {
                 src={card.img}
                 alt="card"
                 className="pointer-events-none size-42 rounded-2xl object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="absolute inset-0 border rounded-4xl pointer-events-none border-border" />
