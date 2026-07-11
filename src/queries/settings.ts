@@ -19,3 +19,25 @@ export function useSiteSettings() {
     },
   });
 }
+
+/**
+ * Fetches a specific setting by key from the site_settings table.
+ */
+export function useSiteSetting(key: string) {
+  return useQuery({
+    queryKey: ["site-setting", key],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("site_settings")
+        .select("value")
+        .eq("key", key)
+        .maybeSingle();
+      if (error) {
+        throw error;
+      }
+      return data?.value ?? null;
+    },
+    enabled: !!key,
+  });
+}
+
