@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { Sun, Moon } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Projects", href: "#projects" },
@@ -13,17 +12,26 @@ const NAV_LINKS = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
-  const [theme, setTheme] = useState<"dark" | "light">(() => {
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
     if (typeof window !== "undefined") {
-      return (document.documentElement.getAttribute("data-theme") as "dark" | "light") ?? "dark";
+      const saved = localStorage.getItem("theme") as "dark" | "light" | null;
+      const initialTheme = saved ?? (document.documentElement.getAttribute("data-theme") as "dark" | "light") ?? "dark";
+      setTheme(initialTheme);
+      if (saved) {
+        document.documentElement.setAttribute("data-theme", saved);
+      }
     }
-    return "dark";
-  });
+  }, []);
 
   const toggleTheme = useCallback(() => {
     setTheme((prev) => {
       const next = prev === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", next);
+      if (typeof window !== "undefined") {
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      }
       return next;
     });
   }, []);
@@ -53,12 +61,36 @@ const Navbar = () => {
       { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
     );
 
-    for (const id of sectionIds) {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    }
+    const observeSections = () => {
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el && !observer.takeRecords().some((r) => r.target === el)) {
+          observer.observe(el);
+        }
+      }
+    };
 
-    return () => observer.disconnect();
+    observeSections();
+
+    const mutationObserver = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+          if (node instanceof Element && node.id && sectionIds.includes(node.id)) {
+            observer.observe(node);
+          }
+        }
+      }
+    });
+
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      observer.disconnect();
+      mutationObserver.disconnect();
+    };
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -110,9 +142,9 @@ const Navbar = () => {
           onClick={toggleTheme}
         >
           {theme === "dark" ? (
-            <Sun className="w-4 h-4 text-[var(--color-text-secondary)]" />
+            <div className="i-ph:sun w-4 h-4 text-[var(--color-text-secondary)]" />
           ) : (
-            <Moon className="w-4 h-4 text-[var(--color-text-secondary)]" />
+            <div className="i-ph:moon w-4 h-4 text-[var(--color-text-secondary)]" />
           )}
         </button>
       </nav>

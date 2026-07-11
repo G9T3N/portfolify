@@ -3,7 +3,7 @@
 
 "use client";
 import { useEffect, useRef, useState, useMemo } from "react";
-import { Canvas, extend, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, extend, useFrame } from "@react-three/fiber";
 import { useGLTF, useTexture, Environment, Lightformer } from "@react-three/drei";
 import {
   BallCollider,
@@ -47,7 +47,7 @@ export default function Lanyard({
 }: LanyardProps) {
   // Determine if it's a small screen to adjust fov or scale
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -164,7 +164,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
     return (): void => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const isMobile = isSmall; // alias for clarity
+  const isTablet = isSmall; // checks for < 1024px (tablet/mobile)
 
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
@@ -185,7 +185,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
 
   useEffect(() => {
     return () => {
-      document.body.style.overflow = priorOverflow.current;
+      document.body.style.overflow = '';
     };
   }, []);
 
@@ -234,14 +234,14 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
     const mat: any = new MeshLineMaterial({
       color: "white",
       depthTest: false,
-      resolution: new THREE.Vector2(isMobile ? 500 : 1000, isMobile ? 500 : 1000),
+      resolution: new THREE.Vector2(isTablet ? 500 : 1000, isTablet ? 500 : 1000),
       useMap: true,
       map: texture,
       repeat: new THREE.Vector2(-4, 1),
       lineWidth: 1,
     } as any);
     return mat;
-  }, [texture, isMobile]);
+  }, [texture, isTablet]);
 
   return (
     <>
@@ -307,8 +307,8 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
             <mesh geometry={nodes.card.geometry} userData={{ isCard: true }}>
               <meshPhysicalMaterial
                 map={materials.base.map}
-                map-anisotropy={isMobile ? 1 : 16}
-                clearcoat={isMobile ? 0 : 1}
+                map-anisotropy={isTablet ? 1 : 16}
+                clearcoat={isTablet ? 0 : 1}
                 clearcoatRoughness={0.15}
                 roughness={0.9}
                 metalness={0.8}

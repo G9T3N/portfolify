@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { Quote, Star } from "lucide-react";
+import { motion } from "framer-motion";
 
 // Placeholder testimonials — replace with Supabase data when ready
 const PLACEHOLDER_TESTIMONIALS = [

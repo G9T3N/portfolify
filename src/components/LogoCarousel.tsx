@@ -1,46 +1,33 @@
-import {
-  Code,
-  Terminal,
-  Database,
-  Globe,
-  Server,
-  Cpu,
-  Monitor,
-  Smartphone,
-  Cloud,
-  Shield,
-  type LucideIcon,
-} from "lucide-react";
 import { useSkills } from "@/queries";
 
-/** Map skill names to icons — fallback to Code for unknowns */
-const ICON_MAP: Record<string, LucideIcon> = {
-  react: Code,
-  typescript: Terminal,
-  supabase: Database,
-  "next.js": Globe,
-  nextjs: Globe,
-  "node.js": Server,
-  nodejs: Server,
-  graphql: Cpu,
-  "tailwind css": Monitor,
-  tailwindcss: Monitor,
-  "react native": Smartphone,
-  aws: Cloud,
-  cybersecurity: Shield,
+/** Map skill names to Phosphor icon classes — fallback to code icon for unknowns */
+const ICON_MAP: Record<string, string> = {
+  react: "i-ph:code",
+  typescript: "i-ph:terminal-window",
+  supabase: "i-ph:database",
+  "next.js": "i-ph:globe",
+  nextjs: "i-ph:globe",
+  "node.js": "i-ph:terminal",
+  nodejs: "i-ph:terminal",
+  graphql: "i-ph:graph",
+  "tailwind css": "i-ph:monitor",
+  tailwindcss: "i-ph:monitor",
+  "react native": "i-ph:device-mobile",
+  aws: "i-ph:cloud",
+  cybersecurity: "i-ph:shield-check",
 };
 
 const FALLBACK_LOGOS = [
-  { icon: Code, name: "React" },
-  { icon: Terminal, name: "TypeScript" },
-  { icon: Database, name: "Supabase" },
-  { icon: Globe, name: "Next.js" },
-  { icon: Server, name: "Node.js" },
-  { icon: Cpu, name: "GraphQL" },
-  { icon: Monitor, name: "Tailwind CSS" },
-  { icon: Smartphone, name: "React Native" },
-  { icon: Cloud, name: "AWS" },
-  { icon: Shield, name: "Cybersecurity" },
+  { icon: "i-ph:code", name: "React" },
+  { icon: "i-ph:terminal-window", name: "TypeScript" },
+  { icon: "i-ph:database", name: "Supabase" },
+  { icon: "i-ph:globe", name: "Next.js" },
+  { icon: "i-ph:terminal", name: "Node.js" },
+  { icon: "i-ph:graph", name: "GraphQL" },
+  { icon: "i-ph:monitor", name: "Tailwind CSS" },
+  { icon: "i-ph:device-mobile", name: "React Native" },
+  { icon: "i-ph:cloud", name: "AWS" },
+  { icon: "i-ph:shield-check", name: "Cybersecurity" },
 ];
 
 export default function LogoCarousel() {
@@ -50,7 +37,7 @@ export default function LogoCarousel() {
   const logos =
     skills && skills.length > 0
       ? skills.map((skill) => ({
-          icon: ICON_MAP[skill.name.toLowerCase()] ?? Code,
+          icon: ICON_MAP[skill.name.toLowerCase()] ?? "i-ph:code",
           name: skill.name,
         }))
       : FALLBACK_LOGOS;
@@ -64,7 +51,7 @@ export default function LogoCarousel() {
               key={index}
               className="flex items-center gap-2  flex-1 w-fit  py-2   text-[var(--color-text-muted)] hover:text-[var(--color-mp-primary)] transition-colors duration-300"
             >
-              <logo.icon size={24} />
+              <span className={`${logo.icon} w-6 h-6`} />
               <span className="font-mono w-full break-keep whitespace-nowrap  text-sm uppercase tracking-wider font-semibold">
                 {logo.name}
               </span>

@@ -12,7 +12,7 @@ const SOCIAL_LINKS = [
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const navigate = useNavigate();
-  const [clickCount, setClickCount] = useState(0);
+  const clickCountRef = useRef(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Hidden admin access: 5-click the copyright text
@@ -21,16 +21,17 @@ const Footer = () => {
       clearTimeout(timerRef.current);
     }
 
-    setClickCount((prev) => {
-      const next = prev + 1;
-      if (next >= 5) {
-        navigate("/login");
-        return 0;
-      }
-      return next;
-    });
+    clickCountRef.current += 1;
 
-    timerRef.current = setTimeout(() => setClickCount(0), 2000);
+    if (clickCountRef.current >= 5) {
+      navigate("/login");
+      clickCountRef.current = 0;
+      return;
+    }
+
+    timerRef.current = setTimeout(() => {
+      clickCountRef.current = 0;
+    }, 2000);
   }, [navigate]);
 
   useEffect(() => {

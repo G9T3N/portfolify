@@ -8,10 +8,13 @@ import {
   MessageSquare,
   Settings,
   Layers,
+  Menu,
+  X,
 } from "lucide-react";
 import { NavLink, Outlet } from "react-router";
 import { useAdminStats } from "./queries";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 const sidebarItems = [
   { to: "/admin/dashboard", label: "Dashboard", icon: BarChart3 },
@@ -28,6 +31,7 @@ const sidebarItems = [
  */
 export default function AdminLayout() {
   const { data: stats } = useAdminStats();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] flex font-sans selection:bg-[var(--color-mp-primary)]/30">
@@ -92,16 +96,101 @@ export default function AdminLayout() {
         {/* Mobile Header */}
         <div className="lg:hidden p-4 border-b border-[var(--color-border-default)] bg-[var(--color-bg-elevated)]/80 backdrop-blur-md sticky top-0 z-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-[var(--color-text-muted)] p-2 hover:text-[var(--color-text-primary)]"
+              aria-label="Toggle menu"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
             <div className="w-8 h-8 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border-default)] flex items-center justify-center">
               <FileText className="w-4 h-4 text-[var(--color-mp-primary)]" />
             </div>
             <p className="text-sm font-bold text-[var(--color-text-primary)]">Mr.Err Admin</p>
           </div>
-          {/* Note: Mobile menu toggle logic could go here, for now it relies on users navigating from dashboard */}
           <NavLink to="/" className="text-[var(--color-text-muted)] p-2">
             <Home className="w-5 h-5" />
           </NavLink>
         </div>
+
+        {/* Mobile Menu Drawer */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setMobileMenuOpen(false)}
+                className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+              />
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "-100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="fixed inset-y-0 start-0 w-64 bg-[var(--color-bg-elevated)] border-e border-[var(--color-border-default)] z-50 lg:hidden flex flex-col shadow-xl"
+              >
+                <div className="p-4 border-b border-[var(--color-border-default)] flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border-default)] flex items-center justify-center">
+                      <FileText className="w-4 h-4 text-[var(--color-mp-primary)]" />
+                    </div>
+                    <p className="text-sm font-bold text-[var(--color-text-primary)]">Mr.Err Admin</p>
+                  </div>
+                  <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-[var(--color-text-muted)] p-1 hover:text-[var(--color-text-primary)]"
+                    aria-label="Close menu"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+                  {sidebarItems.map(({ to, label, icon: Icon, end }) => (
+                    <NavLink
+                      key={to}
+                      to={to}
+                      end={end}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={({ isActive }) =>
+                        `flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-300 ${
+                          isActive
+                            ? "bg-[var(--color-bg-card)] text-[var(--color-text-primary)] border border-[var(--color-border-hover)] shadow-md"
+                            : "text-[var(--color-text-muted)] hover:bg-[var(--color-bg-card)]/50 hover:text-[var(--color-text-secondary)] border border-transparent"
+                        }`
+                      }
+                    >
+                      {({ isActive }) => (
+                        <>
+                          <Icon className={`w-5 h-5 flex-shrink-0 transition-colors ${isActive ? "text-[var(--color-mp-primary)]" : ""}`} />
+                          <span className="flex-1 font-sans">{label}</span>
+                          {to === "/admin/messages" && stats?.unreadMessages && stats.unreadMessages > 0 && (
+                            <span className="px-2 py-0.5 rounded-full bg-[var(--color-mp-primary)]/20 text-[var(--color-mp-primary)] text-[10px] font-bold">
+                              {stats.unreadMessages}
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </NavLink>
+                  ))}
+                </nav>
+
+                <div className="p-4 border-t border-[var(--color-border-default)]">
+                  <NavLink
+                    to="/"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full py-3 rounded-2xl text-sm font-bold text-[var(--color-bg-primary)] bg-[var(--color-text-primary)] hover:bg-[var(--color-mp-primary)] hover:text-white transition-colors duration-300"
+                  >
+                    <Home className="w-4 h-4" />
+                    Back to Site
+                  </NavLink>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
 
         <div className="flex-1 p-6 lg:p-10 lg:pt-12">
           <motion.div
