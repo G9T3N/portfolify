@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0](https://github.com/G9T3N/portfolify/compare/v1.2.0...v1.3.0) (2026-07-12)
+
+
+### Features
+
+* add light/dark theme variable overrides for custom portfolio palette ([a67801b](https://github.com/G9T3N/portfolify/commit/a67801b7a4b0fa9172a3029411418e6ffe771350))
+* add LogoCarousel component with dynamic skill mapping and marquee animation ([5da0c63](https://github.com/G9T3N/portfolify/commit/5da0c63eaa4998fa91db7a51bd51d2c348590565))
+
+
+### Bug Fixes
+
+* replace hardcoded colors with theme-aware values in dialog, metrics, and lanyard ([3e45855](https://github.com/G9T3N/portfolify/commit/3e45855b8422b793d291ab9c3fd59e8ed8d5127e))
+
 ## [1.2.0](https://github.com/G9T3N/portfolify/compare/v1.1.1...v1.2.0) (2026-07-11)
 
 
