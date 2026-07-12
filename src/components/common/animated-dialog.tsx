@@ -47,7 +47,7 @@ export function AnimatedDialog({
           >
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 p-2 rounded-full hover:bg-white/10 transition-colors z-10"
+              className="absolute right-4 top-4 p-2 rounded-full hover:bg-[var(--color-text-primary)]/10 transition-colors z-10"
             >
               <X className="w-5 h-5" />
             </button>

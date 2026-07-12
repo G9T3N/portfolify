@@ -231,7 +231,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
   const meshLineMat = useMemo(() => {
     // MeshLineMaterial expects some non-React props; create it imperatively and keep it stable.
     const mat: any = new MeshLineMaterial({
-      color: "white",
+      color: "green",
       depthTest: false,
       resolution: new THREE.Vector2(isTablet ? 500 : 1000, isTablet ? 500 : 1000),
       useMap: true,
