@@ -101,7 +101,7 @@
 
 .inverted-border-button {
   position: relative;
-  background-color: black;
+  background-color: var(--color-bg-primary);
   border-bottom-right-radius: var(--radius-4xl);
   width: fit-content;
   max-width: 100%;
@@ -253,7 +253,7 @@
     border-radius: var(--radius-full);
     border: 1px solid var(--color-border-default);
     background: var(--color-primary);
-    color: var(--color-text-primary);
+    color: white;
     font-family: var(--font-sans);
     font-size: 16px;
     font-weight: 500;
@@ -482,6 +482,102 @@
     --sidebar-accent-foreground: 210 20% 98%;
     --sidebar-border: 0 0% 14%;
     --sidebar-ring: 160 100% 40%;
+
+    /* Custom portfolio palette — dark */
+    --color-bg-primary: rgb(0, 0, 0);
+    --color-bg-surface: rgb(10, 10, 10);
+    --color-bg-elevated: #121212;
+    --color-bg-card: #171717;
+
+    --color-text-primary: rgb(255, 255, 255);
+    --color-text-secondary: #aaaaaa;
+    --color-text-muted: #646464;
+
+    --color-mp-surface-bright: rgb(57, 57, 57);
+    --color-border-default: rgb(40, 40, 40);
+    --color-border-hover: rgb(80, 80, 80);
+
+    --color-accent-purple: rgb(138, 92, 246);
+    --color-accent-blue: rgb(88, 140, 255);
+    --color-accent-cyan: rgb(0, 220, 200);
+    --color-accent-pink: rgb(236, 72, 153);
+    --color-mp-primary: rgb(0, 128, 0);
+    --color-mp-primary-container: rgb(10, 75, 11);
+    --color-mp-on-primary-container: rgb(116, 167, 155);
+    --color-mp-inverse-primary: rgb(53, 103, 93);
+    --color-gradient-start: var(--color-mp-primary);
+    --color-gradient-mid: var(--color-mp-primary-container);
+    --color-gradient-end: var(--color-mp-on-primary-container);
+
+    /* MP design tokens — dark */
+    --color-mp-background: rgb(19, 19, 19);
+    --color-mp-surface: rgb(19, 19, 19);
+    --color-mp-surface-dim: rgb(19, 19, 19);
+    --color-mp-surface-container-lowest: rgb(14, 14, 14);
+    --color-mp-surface-container-low: rgb(27, 27, 27);
+    --color-mp-surface-container: rgb(31, 31, 31);
+    --color-mp-surface-container-high: rgb(42, 42, 42);
+    --color-mp-surface-container-highest: rgb(53, 53, 53);
+    --color-mp-surface-variant: rgb(53, 53, 53);
+    --color-mp-on-surface: rgb(226, 226, 226);
+    --color-mp-on-surface-variant: rgb(192, 200, 197);
+    --color-mp-on-background: rgb(226, 226, 226);
+    --color-mp-hairline: rgb(34, 34, 34);
+    --color-mp-outline: rgb(138, 147, 143);
+    --color-mp-outline-variant: rgb(64, 73, 70);
+    --color-mp-text-primary: rgb(255, 255, 255);
+    --color-mp-text-muted: rgb(147, 147, 159);
+    --color-mp-accent-green: rgb(0, 255, 204);
+    --color-mp-error: rgb(255, 180, 171);
+  }
+
+  [data-theme="light"] {
+    /* Custom portfolio palette — light */
+    --color-bg-primary: rgb(255, 255, 255);
+    --color-bg-surface: rgb(245, 245, 245);
+    --color-bg-elevated: #f0f0f0;
+    --color-bg-card: #fafafa;
+
+    --color-text-primary: rgb(10, 10, 10);
+    --color-text-secondary: #555555;
+    --color-text-muted: #999999;
+
+    --color-mp-surface-bright: rgb(235, 235, 235);
+    --color-border-default: rgb(220, 220, 220);
+    --color-border-hover: rgb(180, 180, 180);
+
+    --color-accent-purple: rgb(120, 70, 220);
+    --color-accent-blue: rgb(60, 120, 240);
+    --color-accent-cyan: rgb(0, 180, 165);
+    --color-accent-pink: rgb(220, 50, 130);
+    --color-mp-primary: rgb(0, 140, 0);
+    --color-mp-primary-container: rgb(20, 100, 22);
+    --color-mp-on-primary-container: rgb(90, 140, 130);
+    --color-mp-inverse-primary: rgb(70, 130, 118);
+    --color-gradient-start: var(--color-mp-primary);
+    --color-gradient-mid: var(--color-mp-primary-container);
+    --color-gradient-end: var(--color-mp-on-primary-container);
+
+    /* MP design tokens — light */
+    --color-mp-background: rgb(250, 250, 250);
+    --color-mp-surface: rgb(250, 250, 250);
+    --color-mp-surface-dim: rgb(230, 230, 230);
+    --color-mp-surface-container-lowest: rgb(255, 255, 255);
+    --color-mp-surface-container-low: rgb(245, 245, 245);
+    --color-mp-surface-container: rgb(240, 240, 240);
+    --color-mp-surface-container-high: rgb(230, 230, 230);
+    --color-mp-surface-container-highest: rgb(220, 220, 220);
+    --color-mp-surface-variant: rgb(220, 220, 220);
+    --color-mp-on-surface: rgb(30, 30, 30);
+    --color-mp-on-surface-variant: rgb(80, 80, 80);
+    --color-mp-on-background: rgb(30, 30, 30);
+    --color-mp-hairline: rgb(220, 220, 220);
+    --color-mp-outline: rgb(120, 130, 126);
+    --color-mp-outline-variant: rgb(180, 190, 186);
+    --color-mp-text-primary: rgb(10, 10, 10);
+    --color-mp-text-muted: rgb(100, 100, 115);
+    --color-mp-accent-green: rgb(0, 160, 130);
+    --color-mp-error: rgb(200, 50, 40);
   }
 }
 

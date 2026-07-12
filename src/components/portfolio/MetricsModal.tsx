@@ -37,7 +37,7 @@ export const MetricsModal = ({ isOpen, onClose, metrics }: MetricsModalProps) =>
               </h2>
               <button
                 onClick={onClose}
-                className="w-8 h-8 flex items-center justify-center hover:bg-white/10 rounded-full transition-colors text-[var(--color-text-primary)] cursor-pointer"
+                className="w-8 h-8 flex items-center justify-center hover:bg-[var(--color-text-primary)]/10 rounded-full transition-colors text-[var(--color-text-primary)] cursor-pointer"
               >
                 ✕
               </button>
@@ -46,7 +46,7 @@ export const MetricsModal = ({ isOpen, onClose, metrics }: MetricsModalProps) =>
               {metrics.map((stat, i) => (
                 <div
                   key={i}
-                  className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white/5 border border-border/50 hover:bg-white/10 transition-colors"
+                  className="flex flex-col items-center justify-center p-4 rounded-2xl bg-[var(--color-text-primary)]/5 border border-border/50 hover:bg-[var(--color-text-primary)]/10 transition-colors"
                 >
                   <span className="text-3xl font-bold text-[var(--color-text-primary)] flex items-baseline">
                     {stat.value}

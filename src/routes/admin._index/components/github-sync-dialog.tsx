@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { AnimatedDialog } from "@/components/common/animated-dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
+import { GitCommit, Loader2, AlertCircle, Check } from "lucide-react";
 
 interface GithubSyncDialogProps {
   isOpen?: boolean;
@@ -128,7 +129,7 @@ export default function GithubSyncDialog({ isOpen = true, onClose }: GithubSyncD
         {/* Fetch Form */}
         <form onSubmit={handleFetch} className="flex gap-2">
           <div className="flex-1 relative">
-            <div className="i-ph:git-commit absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <GitCommit className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               value={username}
@@ -142,14 +143,14 @@ export default function GithubSyncDialog({ isOpen = true, onClose }: GithubSyncD
             disabled={isFetching || !username}
             className="px-6 py-3 rounded-lg bg-primary/20 text-primary hover:bg-primary/30 transition-colors disabled:opacity-50 font-mono text-sm flex items-center gap-2"
           >
-            {isFetching && <div className="i-ph:spinner w-4 h-4 animate-spin" />}
+            {isFetching && <Loader2 className="w-4 h-4 animate-spin" />}
             Fetch
           </button>
         </form>
 
         {error && (
           <div className="flex items-center gap-2 p-3 text-sm text-destructive bg-destructive/10 rounded-lg border border-destructive/20 font-mono">
-            <div className="i-ph:warning-circle w-4 h-4 shrink-0" />
+            <AlertCircle className="w-4 h-4 shrink-0" />
             {error}
           </div>
         )}
@@ -187,7 +188,7 @@ export default function GithubSyncDialog({ isOpen = true, onClose }: GithubSyncD
                         : "border-muted-foreground"
                     }`}
                   >
-                    {selectedRepos.has(repo.id) && <div className="i-ph:check w-3 h-3" />}
+                    {selectedRepos.has(repo.id) && <Check className="w-3 h-3" />}
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-mono font-medium text-foreground truncate">
@@ -234,9 +235,9 @@ export default function GithubSyncDialog({ isOpen = true, onClose }: GithubSyncD
                   className="cyber-button flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   {isImporting ? (
-                    <div className="i-ph:spinner w-4 h-4 animate-spin" />
+                    <Loader2 className="w-4 h-4 animate-spin" />
                   ) : (
-                    <div className="i-ph:git-commit w-4 h-4" />
+                    <GitCommit className="w-4 h-4" />
                   )}
                   Import {selectedRepos.size} Projects
                 </button>
