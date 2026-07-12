@@ -1,5 +1,15 @@
 import { useSkills } from "@/queries";
-import { Code, Terminal, Database, Globe, Network, Monitor, Smartphone, Cloud, ShieldCheck } from "lucide-react";
+import {
+  Code,
+  Terminal,
+  Database,
+  Globe,
+  Network,
+  Monitor,
+  Smartphone,
+  Cloud,
+  ShieldCheck,
+} from "lucide-react";
 
 /** Map skill names to Lucide icons — fallback to code icon for unknowns */
 const ICON_MAP: Record<string, React.ElementType> = {
