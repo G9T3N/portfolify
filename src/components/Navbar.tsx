@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
+import { Sun, Moon } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Projects", href: "#projects" },
@@ -148,9 +149,9 @@ const Navbar = () => {
           onClick={toggleTheme}
         >
           {theme === "dark" ? (
-            <div className="i-ph:sun w-4 h-4 text-[var(--color-text-secondary)]" />
+            <Sun className="w-4 h-4 text-[var(--color-text-secondary)]" />
           ) : (
-            <div className="i-ph:moon w-4 h-4 text-[var(--color-text-secondary)]" />
+            <Moon className="w-4 h-4 text-[var(--color-text-secondary)]" />
           )}
         </button>
       </nav>

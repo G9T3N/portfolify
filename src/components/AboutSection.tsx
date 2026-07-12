@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { lazy, Suspense } from "react";
 import { useWorkExperiences, useSiteSetting } from "@/queries";
 import { LazyInView } from "./common/LazyInView";
+import { MapPin, Calendar, Briefcase, Sparkles, FileDown } from "lucide-react";
 
 const Lanyard = lazy(() => import("./Lanyard"));
 
@@ -86,17 +87,17 @@ const AboutSection = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-border-default)] text-sm text-[var(--color-text-secondary)]">
-                <span className="i-ph:map-pin w-4 h-4 text-[var(--color-mp-primary)]" />
+                <MapPin className="w-4 h-4 text-[var(--color-mp-primary)]" />
                 Remote — Worldwide
               </div>
               {yearsExperience && (
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-border-default)] text-sm text-[var(--color-text-secondary)]">
-                  <span className="i-ph:calendar w-4 h-4 text-[var(--color-mp-primary)]" />
+                  <Calendar className="w-4 h-4 text-[var(--color-mp-primary)]" />
                   {yearsExperience}+ Years Experience
                 </div>
               )}
               <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-border-default)] text-sm text-[var(--color-text-secondary)]">
-                <span className="i-ph:briefcase w-4 h-4 text-[var(--color-mp-primary)]" />
+                <Briefcase className="w-4 h-4 text-[var(--color-mp-primary)]" />
                 Open to Opportunities
               </div>
             </motion.div>
@@ -115,11 +116,11 @@ const AboutSection = () => {
                   e.preventDefault();
                   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="btn-pill "
+                className="btn-pill text-white "
               >
-                <span className="i-ph:sparkle w-4 h-4" />
+                <Sparkles className="w-4 h-4" />
                 Get in touch
-                <span className="i-ph:sparkle w-4 h-4" />
+                <Sparkles className="w-4 h-4" />
               </a>
               <a
                 href={cvUrl || "/cv.pdf"}
@@ -127,7 +128,7 @@ const AboutSection = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-6 py-3 rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)] transition-all text-sm font-medium"
               >
-                <span className="i-ph:file-arrow-down w-4 h-4" />
+                <FileDown className="w-4 h-4" />
                 View CV
               </a>
             </motion.div>
