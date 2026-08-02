@@ -26,8 +26,8 @@ jobs:
       - name: Copy docker-compose.yml to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: 13.222.172.60
-          username: admin
+          host: 169.58.112.7
+          username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "docker-compose.yml"
           target: "/home/admin/portfolify"
@@ -39,8 +39,8 @@ jobs:
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO_OWNER: ${{ github.repository_owner }}
         with:
-          host: 13.222.172.60
-          username: admin
+          host: 169.58.112.7
+          username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           envs: GHCR_TOKEN,REPO_OWNER
           script: |
