@@ -23,12 +23,12 @@ export const Gauge = () => {
   const yearsExperience =
     experiences && experiences.length > 0
       ? Math.max(
-          1,
-          new Date().getFullYear() -
-            new Date(
-              Math.min(...experiences.map((e) => new Date(e.start_date).getTime())),
-            ).getFullYear(),
-        )
+        1,
+        new Date().getFullYear() -
+        new Date(
+          Math.min(...experiences.map((e) => new Date(e.start_date).getTime())),
+        ).getFullYear(),
+      )
       : 0;
   const radius = 80;
   const circumference = Math.PI * radius;
@@ -103,9 +103,9 @@ export const Gauge = () => {
         </div>
       </div>
       <div className="flex-grow rounded-4xl overflow-hidden relative">
-        <div className="w-full h-full flex items-center justify-center">
+        <div className="w-full h-full flex flex-col items-center justify-center gap-1 py-2">
           <svg
-            className="w-full max-w-[240px] drop-shadow-2xl overflow-visible"
+            className="w-full max-w-[280px] drop-shadow-2xl overflow-visible"
             viewBox="0 0 200 120"
           >
             {/* Background Arc */}
@@ -131,7 +131,7 @@ export const Gauge = () => {
             />
           </svg>
 
-          <div className="absolute bottom-6 start-1/2 transform -translate-x-1/2 flex flex-col items-center">
+          <div className="flex flex-col items-center">
             <div className="flex items-baseline">
               <motion.span
                 key={Number(coreStats[currentStat].value)}
@@ -158,9 +158,8 @@ export const Gauge = () => {
           {coreStats.map((_, i) => (
             <div
               key={i}
-              className={`w-2 h-2 rounded-4xl transition-colors cursor-pointer ${
-                i === currentStat ? "bg-[var(--color-primary)]" : "bg-[var(--color-border-default)]"
-              }`}
+              className={`w-2 h-2 rounded-4xl transition-colors cursor-pointer ${i === currentStat ? "bg-[var(--color-primary)]" : "bg-[var(--color-border-default)]"
+                }`}
               onClick={() => setCurrentStat(i)}
             />
           ))}
