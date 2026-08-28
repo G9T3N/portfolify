@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.0](https://github.com/G9T3N/portfolify/compare/v1.3.0...v1.4.0) (2026-08-28)
+
+
+### Features
+
+* add dynamic per-project metadata with client-side loader ([86e5868](https://github.com/G9T3N/portfolify/commit/86e5868548d5a03652d484c6ff2ec2c805f4d6b5))
+* centralize site constants and enhance home SEO metadata ([1f3ed91](https://github.com/G9T3N/portfolify/commit/1f3ed916af559651a501798d6efbe315dd303cec))
+* optimize 3D Lanyard performance with intersection observers and touch-gesture fixes, add 2xl container support, and refine gauge component layout and animations. ([bf11e4f](https://github.com/G9T3N/portfolify/commit/bf11e4f3f25fe0e9bb8f0d54f3550dc2a1bcc928))
+
 ## [1.3.0](https://github.com/G9T3N/portfolify/compare/v1.2.0...v1.3.0) (2026-07-12)
 
 
