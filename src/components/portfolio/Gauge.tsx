@@ -23,12 +23,12 @@ export const Gauge = () => {
   const yearsExperience =
     experiences && experiences.length > 0
       ? Math.max(
-        1,
-        new Date().getFullYear() -
-        new Date(
-          Math.min(...experiences.map((e) => new Date(e.start_date).getTime())),
-        ).getFullYear(),
-      )
+          1,
+          new Date().getFullYear() -
+            new Date(
+              Math.min(...experiences.map((e) => new Date(e.start_date).getTime())),
+            ).getFullYear(),
+        )
       : 0;
   const radius = 80;
   const circumference = Math.PI * radius;
@@ -106,10 +106,7 @@ export const Gauge = () => {
         {/* Gauge svg defines the box; stats are absolutely positioned inside
             the arc (anchored just above its baseline) so the arc hugs them */}
         <div className="relative w-full">
-          <svg
-            className="w-full drop-shadow-2xl overflow-visible"
-            viewBox="0 0 200 120"
-          >
+          <svg className="w-full drop-shadow-2xl overflow-visible" viewBox="0 0 200 120">
             {/* Background Arc */}
 
             <path
@@ -161,8 +158,9 @@ export const Gauge = () => {
           {coreStats.map((_, i) => (
             <div
               key={i}
-              className={`w-2 h-2 rounded-4xl transition-colors cursor-pointer ${i === currentStat ? "bg-[var(--color-primary)]" : "bg-[var(--color-border-default)]"
-                }`}
+              className={`w-2 h-2 rounded-4xl transition-colors cursor-pointer ${
+                i === currentStat ? "bg-[var(--color-primary)]" : "bg-[var(--color-border-default)]"
+              }`}
               onClick={() => setCurrentStat(i)}
             />
           ))}
