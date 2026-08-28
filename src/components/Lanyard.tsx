@@ -60,10 +60,9 @@ export default function Lanyard({
   useEffect(() => {
     const el = wrapperRef.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { rootMargin: "100px" },
-    );
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
+      rootMargin: "100px",
+    });
     observer.observe(el);
     return () => observer.disconnect();
   }, []);

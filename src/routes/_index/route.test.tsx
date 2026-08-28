@@ -49,11 +49,12 @@ describe("HomeRoute – metadata for SEO and social previews", () => {
   const tags = meta({} as Parameters<typeof meta>[0]) as unknown as Array<
     Record<string, string | undefined>
   >;
-  const findTag = (key: string, value: string) =>
-    tags.find((t) => t[key] === value) ?? {};
+  const findTag = (key: string, value: string) => tags.find((t) => t[key] === value) ?? {};
 
   it("returns the full title, description, and canonical URL", () => {
-    expect(tags).toContainEqual({ title: "Wael Alamrany — Full-Stack Developer & UI Specialist | mrerr.com" });
+    expect(tags).toContainEqual({
+      title: "Wael Alamrany — Full-Stack Developer & UI Specialist | mrerr.com",
+    });
     expect(findTag("name", "description").content).toContain("Full-Stack Developer");
     expect(findTag("rel", "canonical").href).toBe("https://mrerr.com");
   });

@@ -35,7 +35,10 @@ const ProjectsSection = () => {
   }, [validProjects, activeCategory]);
 
   return (
-    <section id="projects" className="relative min-h-screen bg-[var(--color-bg-primary)] py-16 md:py-32">
+    <section
+      id="projects"
+      className="relative min-h-screen bg-[var(--color-bg-primary)] py-16 md:py-32"
+    >
       <div className="container mx-auto px-4 md:px-8">
         {/* Section label + category filters */}
         <div className="flex flex-col items-center gap-6 mb-24">

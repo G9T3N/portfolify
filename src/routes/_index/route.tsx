@@ -40,10 +40,7 @@ const structuredData = {
       description: SITE_DESCRIPTION,
       url: SITE_URL,
       image: OG_IMAGE,
-      sameAs: [
-        "https://github.com/G9T3N",
-        "https://www.linkedin.com/in/wael-alamrany-1557a5288",
-      ],
+      sameAs: ["https://github.com/G9T3N", "https://www.linkedin.com/in/wael-alamrany-1557a5288"],
       knowsAbout: ["React", "Next.js", "TypeScript", "Node.js", "Web Performance"],
     },
     {
