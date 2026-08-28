@@ -22,8 +22,8 @@ const AboutSection = () => {
       : null;
 
   return (
-    <section id="about" className="px-4 md:px-8 lg:px-12 py-24 md:py-32">
-      <div className="max-w-[1400px] mx-auto">
+    <section id="about" className="px-4 md:px-8 lg:px-12 py-16 md:py-32">
+      <div className="max-w-[1400px] 2xl:max-w-[1700px] mx-auto">
         <div className="  z-10 flex justify-center">
           <motion.span
             className="section-label  text-center  "

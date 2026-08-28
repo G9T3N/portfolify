@@ -27,7 +27,7 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-[90vh] lg:min-h-[85svh] flex flex-col">
       {/* Main content area */}
-      <div className="flex-1 flex flex-col lg:flex-row gap-6 pt-24 lg:pt-5 pb-8">
+      <div className="flex-1 flex flex-col lg:flex-row gap-6 pt-14 lg:pt-5 pb-8">
         {/* Left — Gradient mesh hero image */}
         <motion.div
           className="relative flex-1 gradient-mesh rounded-4xl rounded-ee-none overflow-hidden min-h-[50vh] lg:min-h-0 "

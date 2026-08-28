@@ -23,12 +23,12 @@ export const Gauge = () => {
   const yearsExperience =
     experiences && experiences.length > 0
       ? Math.max(
-          1,
-          new Date().getFullYear() -
-            new Date(
-              Math.min(...experiences.map((e) => new Date(e.start_date).getTime())),
-            ).getFullYear(),
-        )
+        1,
+        new Date().getFullYear() -
+        new Date(
+          Math.min(...experiences.map((e) => new Date(e.start_date).getTime())),
+        ).getFullYear(),
+      )
       : 0;
   const radius = 80;
   const circumference = Math.PI * radius;
@@ -102,10 +102,12 @@ export const Gauge = () => {
           />
         </div>
       </div>
-      <div className="flex-grow rounded-4xl overflow-hidden relative">
-        <div className="w-full h-full flex items-center justify-center">
+      <div className="rounded-4xl overflow-hidden relative">
+        {/* Gauge svg defines the box; stats are absolutely positioned inside
+            the arc (anchored just above its baseline) so the arc hugs them */}
+        <div className="relative w-full">
           <svg
-            className="w-full max-w-[240px] drop-shadow-2xl overflow-visible"
+            className="w-full drop-shadow-2xl overflow-visible"
             viewBox="0 0 200 120"
           >
             {/* Background Arc */}
@@ -131,7 +133,8 @@ export const Gauge = () => {
             />
           </svg>
 
-          <div className="absolute bottom-6 start-1/2 transform -translate-x-1/2 flex flex-col items-center">
+          {/* Arc baseline sits at y=100/120, so anchor the stats ~17% up */}
+          <div className="absolute inset-x-0 bottom-[17%] flex flex-col items-center">
             <div className="flex items-baseline">
               <motion.span
                 key={Number(coreStats[currentStat].value)}
@@ -152,19 +155,36 @@ export const Gauge = () => {
         </div>
         <div className="absolute inset-0 border rounded-4xl pointer-events-none border-border" />
       </div>
-      <div className="mt-4 px-1 flex justify-center items-center mp-label-mono">
+      <div className="mt-3 px-1 flex justify-center items-center mp-label-mono">
         {/* Dot indicators */}
         <div className="flex gap-2 ">
           {coreStats.map((_, i) => (
             <div
               key={i}
-              className={`w-2 h-2 rounded-4xl transition-colors cursor-pointer ${
-                i === currentStat ? "bg-[var(--color-primary)]" : "bg-[var(--color-border-default)]"
-              }`}
+              className={`w-2 h-2 rounded-4xl transition-colors cursor-pointer ${i === currentStat ? "bg-[var(--color-primary)]" : "bg-[var(--color-border-default)]"
+                }`}
               onClick={() => setCurrentStat(i)}
             />
           ))}
         </div>
+      </div>
+      {/* Secondary stats fill the remaining card height on tall screens
+          (the sidebar stretches the card next to the hero image) */}
+      <div className="mt-3 flex-1 flex flex-col justify-evenly gap-2">
+        {allMetrics.slice(4).map((m) => (
+          <div
+            key={m.label}
+            className="flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-elevated)]"
+          >
+            <span className="text-xs text-[var(--color-text-secondary)] font-medium truncate">
+              {m.label}
+            </span>
+            <span className="text-xs font-mono font-semibold text-[var(--color-text-primary)] whitespace-nowrap">
+              {Number(m.value).toLocaleString()}
+              {m.unit}
+            </span>
+          </div>
+        ))}
       </div>
       <MetricsModal
         isOpen={isModalOpen}

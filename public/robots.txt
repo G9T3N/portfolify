@@ -1,0 +1,42 @@
+# mrerr.com — Wael Alamrany portfolio
+# All crawlers welcome, including AI search/citation bots.
+
+User-agent: *
+Allow: /
+
+# Keep admin and auth pages out of indexes
+Disallow: /admin
+Disallow: /login
+
+# AI search engines — allowed so the site can be cited
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://mrerr.com/sitemap.xml

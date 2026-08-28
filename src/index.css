@@ -324,7 +324,7 @@
 }
 
 .animate-marquee {
-  animation: marquee 40s linear infinite;
+  animation: marquee 60s linear infinite;
 }
 
 /* === Custom Scrollbar === */
@@ -588,7 +588,8 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-snap-type: y proximity;
+    /* No page-level scroll-snap: sections are far taller than the viewport,
+       so snapping yanks the page to section tops and fights user scrolling. */
   }
 
   body {

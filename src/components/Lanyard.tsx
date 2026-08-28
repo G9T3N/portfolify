@@ -3,7 +3,7 @@
 
 "use client";
 import { useEffect, useRef, useState, useMemo } from "react";
-import { Canvas, extend, useFrame } from "@react-three/fiber";
+import { Canvas, extend, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, useTexture, Environment, Lightformer } from "@react-three/drei";
 import {
   BallCollider,
@@ -46,6 +46,9 @@ export default function Lanyard({
 }: LanyardProps) {
   // Determine if it's a small screen to adjust fov or scale
   const [isMobile, setIsMobile] = useState(false);
+  // Pause the render/physics loop when the canvas is off-screen (mobile perf)
+  const [inView, setInView] = useState(true);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -54,16 +57,33 @@ export default function Lanyard({
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "100px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="relative z-0 w-full h-[65vh] md:h-[80vh] flex justify-center items-center">
+    <div
+      ref={wrapperRef}
+      className="relative z-0 w-full h-[65vh] md:h-[80vh] flex justify-center items-center"
+    >
       <Canvas
         camera={{ position, fov: isMobile ? fov * 1.6 : fov }}
         gl={{ alpha: transparent, antialias: !isMobile }}
         dpr={isMobile ? [1, 1] : [1, 2]}
+        frameloop={inView ? "always" : "never"}
         onCreated={({ gl }) => {
           gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1);
-          // Allow page scrolling on canvas touch by default
-          gl.domElement.style.touchAction = "auto";
+          // Let vertical page scroll pass through, while horizontal drags
+          // stay captured by the card (touch drags were being stolen by the
+          // browser as scroll gestures, releasing the card mid-drag)
+          gl.domElement.style.touchAction = "pan-y";
         }}
       >
         <ambientLight intensity={Math.PI} />
@@ -146,6 +166,26 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
   const [dragged, drag] = useState<false | THREE.Vector3>(false);
   const [hovered, hover] = useState(false);
   const priorOverflow = useRef<string>("");
+
+  // True between the pointerdown that grabs the card and pointer up/cancel.
+  // touch-action is "pan-y" on the canvas so vertical page scroll works when
+  // touching anywhere on it — but that same setting lets the browser claim
+  // vertical card drags (pointercancel → card dropped). We can't know at
+  // touchstart time whether the card was hit, but pointerdown fires first,
+  // so the card's grab handler sets this flag and the touchstart listener
+  // below keeps the whole gesture for the card instead.
+  const cardGrabbed = useRef(false);
+
+  const gl = useThree((state) => state.gl);
+
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const onTouchStart = (e: TouchEvent) => {
+      if (cardGrabbed.current) e.preventDefault();
+    };
+    canvas.addEventListener("touchstart", onTouchStart, { passive: false });
+    return () => canvas.removeEventListener("touchstart", onTouchStart);
+  }, [gl]);
 
   const [isSmall, setIsSmall] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
@@ -288,16 +328,19 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
             onPointerOut={() => hover(false)}
             onPointerUp={(e: any) => {
               e.target.releasePointerCapture(e.pointerId);
+              cardGrabbed.current = false;
               drag(false);
               document.body.style.overflow = priorOverflow.current;
             }}
             onPointerCancel={(e: any) => {
               e.target.releasePointerCapture(e.pointerId);
+              cardGrabbed.current = false;
               drag(false);
               document.body.style.overflow = priorOverflow.current;
             }}
             onPointerDown={(e: any) => {
               e.target.setPointerCapture(e.pointerId);
+              cardGrabbed.current = true;
               priorOverflow.current = document.body.style.overflow;
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
               document.body.style.overflow = "hidden";

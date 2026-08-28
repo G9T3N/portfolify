@@ -1,0 +1,25 @@
+# Wael Alamrany (Mr.Err)
+
+> Full-Stack Developer & UI Specialist. Portfolio at https://mrerr.com — bridging robust system architecture and seamless, high-performance user interfaces.
+
+## About
+
+Wael Alamrany is a full-stack developer specializing in React, Next.js, TypeScript, and Node.js, with a focus on high-performance web applications and polished UI engineering. Portfolio site: https://mrerr.com
+
+## Sections
+
+- [Projects](https://mrerr.com/#projects): Selected live work — full-stack web applications with categories, tech stacks, live demos, and source links.
+- [About](https://mrerr.com/#about): Background and experience.
+- [Skills](https://mrerr.com/#skills): Tech stack and tools.
+- [Testimonials](https://mrerr.com/#testimonials): Client and colleague feedback.
+- [Contact](https://mrerr.com/#contact): Contact form and direct links.
+
+## Links
+
+- GitHub: https://github.com/G9T3N
+- LinkedIn: https://www.linkedin.com/in/wael-alamrany-1557a5288
+- Site: https://mrerr.com
+
+## Contact
+
+Use the contact form at https://mrerr.com/#contact.

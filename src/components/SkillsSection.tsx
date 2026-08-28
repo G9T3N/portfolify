@@ -21,10 +21,10 @@ const SKILLS_DATA = [
 
 const SkillsSection = () => {
   return (
-    <section id="skills" className="px-4 md:px-8 lg:px-12 py-24 md:py-32 overflow-hidden">
+    <section id="skills" className="px-4 md:px-8 lg:px-12 py-16 md:py-32 overflow-hidden">
       {/* Section label */}
       <motion.div
-        className="flex justify-end mb-20 max-w-[1400px] mx-auto"
+        className="flex justify-end mb-20 max-w-[1400px] 2xl:max-w-[1700px] mx-auto"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -34,7 +34,7 @@ const SkillsSection = () => {
       </motion.div>
 
       {/* Massive typography rows */}
-      <div className="max-w-[1400px] mx-auto space-y-12 md:space-y-20">
+      <div className="max-w-[1400px] 2xl:max-w-[1700px] mx-auto space-y-12 md:space-y-20">
         {SKILLS_DATA.map((skill, index) => (
           <motion.div
             key={skill.label}
