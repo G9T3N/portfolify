@@ -25,7 +25,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex flex-col">
+    <section className="relative min-h-[90vh] lg:min-h-[85svh] flex flex-col">
       {/* Main content area */}
       <div className="flex-1 flex flex-col lg:flex-row gap-6 pt-24 lg:pt-5 pb-8">
         {/* Left — Gradient mesh hero image */}
@@ -38,7 +38,7 @@ const HeroSection = () => {
           <div className="relative flex flex-col justify-start h-full">
             {/* Bottom text overlay */}
             <motion.div
-              className="inverted-border-card ps-6 md:ps-8 p-7 md:pt-16"
+              className="inverted-border-card ps-6 md:ps-8 p-7 md:pt-10 lg:pt-12"
               initial={{ opacity: 0, y: -40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -50,7 +50,7 @@ const HeroSection = () => {
                       Full-Stack Developer & UI Specialist
                     </Trans>
                   </span>
-                  <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight text-[var(--color-text-primary)]">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight text-[var(--color-text-primary)]">
                     <Trans id="Wael Alamrany">Wael Alamrany</Trans>
                     <span className="block text-xl sm:text-2xl md:text-3xl font-medium text-[var(--color-text-secondary)] mt-1 font-mono">
                       <Trans id="— Mr.Err">— Mr.Err</Trans>
@@ -89,7 +89,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Right sidebar */}
-        <div className="flex flex-col gap-4 sm:gap-5 lg:gap-6 pt-5 md:pt-0 lg:w-[320px]">
+        <div className="flex flex-col gap-4 sm:gap-5 lg:gap-6 pt-5 md:pt-0 lg:w-[clamp(280px,22vw,380px)] xl:w-[360px]">
           {/* Featured card */}
           <Suspense fallback={<CardSkeleton />}>
             {/* <FeaturedCard /> */}
