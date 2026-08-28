@@ -78,7 +78,7 @@ export default function HomeRoute() {
   const { scrollYProgress } = useScroll();
 
   return (
-    <div className=" relative min-h-screen max-w-[95vw] lg:max-w-[85vw] xl:max-w-[1400px] mx-auto bg-[var(--color-bg-primary)]">
+    <div className=" relative min-h-screen max-w-[95vw] lg:max-w-[85vw] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto bg-[var(--color-bg-primary)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
