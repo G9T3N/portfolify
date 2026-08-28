@@ -4,23 +4,59 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import type { Route } from "./+types/route";
 import { LazyInView } from "@/components/common/LazyInView";
+import { OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/utils/constants/site";
 
 export function meta(_args: Route.MetaArgs) {
   return [
-    { title: "Wael Alamrany — Full-Stack Developer & UI Specialist | mrerr.com" },
-    {
-      name: "description",
-      content:
-        "Portfolio of Wael Alamrany (Mr.Err) — Full-Stack Developer specializing in React, Next.js, TypeScript, and high-performance web applications.",
-    },
-    { name: "og:title", content: "Wael Alamrany — Full-Stack Developer & UI Specialist" },
-    {
-      name: "og:description",
-      content:
-        "Bridging the gap between robust system architecture and seamless, high-performance user interfaces.",
-    },
+    { title: SITE_TITLE },
+    { name: "description", content: SITE_DESCRIPTION },
+    { name: "author", content: "Wael Alamrany" },
+    { rel: "canonical", href: SITE_URL },
+    { property: "og:title", content: SITE_TITLE },
+    { property: "og:description", content: SITE_DESCRIPTION },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: SITE_URL },
+    { property: "og:image", content: OG_IMAGE },
+    { property: "og:image:width", content: "1200" },
+    { property: "og:image:height", content: "630" },
+    { property: "og:site_name", content: "Wael Alamrany (Mr.Err)" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: SITE_TITLE },
+    { name: "twitter:description", content: SITE_DESCRIPTION },
+    { name: "twitter:image", content: OG_IMAGE },
   ];
 }
+
+/** Structured data: Person + WebSite for search engines and AI answer engines */
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
+      name: "Wael Alamrany",
+      alternateName: "Mr.Err",
+      jobTitle: "Full-Stack Developer & UI Specialist",
+      description: SITE_DESCRIPTION,
+      url: SITE_URL,
+      image: OG_IMAGE,
+      sameAs: [
+        "https://github.com/G9T3N",
+        "https://www.linkedin.com/in/wael-alamrany-1557a5288",
+      ],
+      knowsAbout: ["React", "Next.js", "TypeScript", "Node.js", "Web Performance"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "Wael Alamrany — Portfolio",
+      description: SITE_DESCRIPTION,
+      publisher: { "@id": `${SITE_URL}/#person` },
+      inLanguage: "en",
+    },
+  ],
+};
 
 // Lazy load below-the-fold components
 const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
@@ -43,6 +79,10 @@ export default function HomeRoute() {
 
   return (
     <div className=" relative min-h-screen max-w-[95vw] lg:max-w-[85vw] xl:max-w-[1400px] mx-auto bg-[var(--color-bg-primary)]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
       <Navbar />
       <main>

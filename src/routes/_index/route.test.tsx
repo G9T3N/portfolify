@@ -10,6 +10,7 @@ vi.mock("framer-motion", () => ({
     ),
   },
   useScroll: () => ({ scrollYProgress: { get: () => 0 } }),
+  useInView: () => true,
 }));
 
 // Mock Navbar and HeroSection (eager loaded)
@@ -42,7 +43,40 @@ vi.mock("@/components/Footer", () => ({
   default: () => <footer data-testid="footer">Footer</footer>,
 }));
 
-import HomeRoute from "./route";
+import HomeRoute, { meta } from "./route";
+
+describe("HomeRoute – metadata for SEO and social previews", () => {
+  const tags = meta({} as Parameters<typeof meta>[0]) as unknown as Array<
+    Record<string, string | undefined>
+  >;
+  const findTag = (key: string, value: string) =>
+    tags.find((t) => t[key] === value) ?? {};
+
+  it("returns the full title, description, and canonical URL", () => {
+    expect(tags).toContainEqual({ title: "Wael Alamrany — Full-Stack Developer & UI Specialist | mrerr.com" });
+    expect(findTag("name", "description").content).toContain("Full-Stack Developer");
+    expect(findTag("rel", "canonical").href).toBe("https://mrerr.com");
+  });
+
+  it("includes Open Graph and Twitter card tags with the og:image", () => {
+    expect(findTag("property", "og:title").content).toContain("Wael Alamrany");
+    expect(findTag("property", "og:type").content).toBe("website");
+    expect(findTag("property", "og:url").content).toBe("https://mrerr.com");
+    expect(findTag("property", "og:image").content).toBe("https://mrerr.com/og-image.png");
+    expect(findTag("name", "twitter:card").content).toBe("summary_large_image");
+    expect(findTag("name", "twitter:image").content).toBe("https://mrerr.com/og-image.png");
+  });
+
+  it("renders Person + WebSite JSON-LD structured data", () => {
+    const { container } = render(<HomeRoute />);
+    const script = container.querySelector('script[type="application/ld+json"]');
+    expect(script).toBeInTheDocument();
+
+    const data = JSON.parse(script?.textContent ?? "{}");
+    const graph = data["@graph"] as { "@type": string }[];
+    expect(graph.map((g) => g["@type"])).toEqual(["Person", "WebSite"]);
+  });
+});
 
 describe("HomeRoute – lazy loading below-fold sections with Suspense (PR change)", () => {
   it("renders Navbar eagerly (not lazy)", () => {
