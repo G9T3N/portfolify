@@ -1,12 +1,56 @@
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, useLoaderData } from "react-router";
 import { useProject } from "./queries";
 import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink, GitBranch, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
+import { OG_IMAGE, SITE_URL } from "@/utils/constants/site";
+import type { Route } from "./+types/route";
+
+type ProjectRow = Database["public"]["Tables"]["projects"]["Row"];
+
+/** Fetches the project on the client (SPA mode) so its metadata is available before render */
+export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+  const { id } = params;
+  if (!id) {
+    return { project: null };
+  }
+  const { data } = await supabase.from("projects").select("*").eq("id", id).maybeSingle();
+  return { project: (data as ProjectRow | null) ?? null };
+}
+
+export function meta({ data }: Route.MetaArgs) {
+  const project = data?.project;
+  if (!project) {
+    return [{ title: "Project Not Found — Wael Alamrany" }];
+  }
+
+  const title = `${project.title} — Wael Alamrany`;
+  const description = project.description || "A project by Wael Alamrany, Full-Stack Developer.";
+  const url = `${SITE_URL}/project/${project.id}`;
+  const image = project.thumbnail_url || OG_IMAGE;
+
+  return [
+    { title },
+    { name: "description", content: description },
+    { rel: "canonical", href: url },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: "article" },
+    { property: "og:url", content: url },
+    { property: "og:image", content: image },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: image },
+  ];
+}
 
 export default function ProjectDetails() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { data: project, isLoading, isError } = useProject(id);
+  const { project: initialProject } = useLoaderData<typeof clientLoader>();
+  const { data: project, isLoading, isError } = useProject(id, initialProject);
 
   if (isLoading) {
     return (
@@ -33,8 +77,26 @@ export default function ProjectDetails() {
     );
   }
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: project.title,
+        item: `${SITE_URL}/project/${project.id}`,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       {/* Header / Navigation */}
       <nav className="sticky top-0 z-50 backdrop-blur-md bg-[var(--color-bg-primary)]/80 border-b border-[var(--color-border-default)] px-4 py-4 md:px-8">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
