@@ -64,14 +64,34 @@ export default defineConfig({
     chunkSizeWarningLimit: 4000,
     rolldownOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes("node_modules/three/")) {
-            return "three";
-          }
-          if (id.includes("node_modules/@react-three/")) {
-            if (id.includes("rapier")) return "rapier";
-            return "react-three";
-          }
+        codeSplitting: {
+          groups: [
+            {
+              name: "preload-helper",
+              test: /preload-helper/,
+              priority: 200,
+            },
+            {
+              name: "react-vendor",
+              test: /node_modules\/(react|react-dom|scheduler)\//,
+              priority: 100,
+            },
+            {
+              name: "rapier-physics",
+              test: /node_modules\/(@dimforge\/rapier|@react-three\/rapier)\//,
+              priority: 50,
+            },
+            {
+              name: "three",
+              test: /node_modules\/three\//,
+              priority: 40,
+            },
+            {
+              name: "react-three",
+              test: /node_modules\/@react-three\//,
+              priority: 30,
+            },
+          ],
         },
       },
     },
