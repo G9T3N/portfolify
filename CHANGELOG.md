@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.5.0](https://github.com/G9T3N/portfolify/compare/v1.4.0...v1.5.0) (2026-09-09)
+
+
+### Features
+
+* add env-gated GA4 and Umami analytics with SPA page view tracking ([d07911a](https://github.com/G9T3N/portfolify/commit/d07911a45015b75fe15431288328c4f908177e1a))
+* add per-project SEO metadata and lazy-load portfolio images with intrinsic sizes ([952a922](https://github.com/G9T3N/portfolify/commit/952a922e47a3be0fec1b9e6b69ed3537c705b8ba))
+* add PWA manifest and favicon assets ([d166387](https://github.com/G9T3N/portfolify/commit/d166387ef49387242cc00086c9cb46c5df064906))
+* expand home sections with Experience section and bilingual content updates ([a8fb0a6](https://github.com/G9T3N/portfolify/commit/a8fb0a666b277c963dd55184f33b7d8c22d4d7ab))
+* noindex admin panel and login routes ([63a48a1](https://github.com/G9T3N/portfolify/commit/63a48a1bef17afb44d04f642fdbcf69dceacd0f7))
+* strengthen home SEO with self-canonical URL and Person schema plus FAQ section ([b9d5709](https://github.com/G9T3N/portfolify/commit/b9d57093d90ddfc5bca86cf994fc697cf288297a))
+
+
+### Bug Fixes
+
+* self-host Inter font and improve light-theme muted text contrast ([6e056e1](https://github.com/G9T3N/portfolify/commit/6e056e1e5e74e6c13569377fbdd7d3e457f14bfb))
+
 ## [1.4.0](https://github.com/G9T3N/portfolify/compare/v1.3.0...v1.4.0) (2026-08-28)
 
 
