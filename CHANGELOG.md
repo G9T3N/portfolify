@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.6.0](https://github.com/G9T3N/portfolify/compare/v1.5.0...v1.6.0) (2026-09-09)
+
+
+### Features
+
+* add Supabase content localization with Arabic overrides and en fallback ([345d18b](https://github.com/G9T3N/portfolify/commit/345d18b24fef23124549222b5aab8d8a437b296f))
+* replace mobile nav links with a hamburger dropdown ([56c0c57](https://github.com/G9T3N/portfolify/commit/56c0c575519e8dedd1bf84b24766e3eed8d07caf))
+
+
+### Bug Fixes
+
+* improve theme contrast and polish portfolio components ([a418843](https://github.com/G9T3N/portfolify/commit/a41884358c224fe0db9fad9023a392416d5c255e))
+
+
+### Performance Improvements
+
+* add code splitting groups and post-build asset optimization ([47e2184](https://github.com/G9T3N/portfolify/commit/47e2184857d0c733f651cca2e460034b25373ab3))
+
 ## [1.5.0](https://github.com/G9T3N/portfolify/compare/v1.4.0...v1.5.0) (2026-09-09)
 
 
