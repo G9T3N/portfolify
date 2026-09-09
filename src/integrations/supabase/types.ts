@@ -246,6 +246,39 @@ export type Database = {
           },
         ];
       };
+      translations: {
+        Row: {
+          created_at: string;
+          field: string;
+          id: string;
+          locale: string;
+          row_id: string;
+          table_name: string;
+          updated_at: string;
+          value: string;
+        };
+        Insert: {
+          created_at?: string;
+          field: string;
+          id?: string;
+          locale: string;
+          row_id: string;
+          table_name: string;
+          updated_at?: string;
+          value: string;
+        };
+        Update: {
+          created_at?: string;
+          field?: string;
+          id?: string;
+          locale?: string;
+          row_id?: string;
+          table_name?: string;
+          updated_at?: string;
+          value?: string;
+        };
+        Relationships: [];
+      };
       user_roles: {
         Row: {
           created_at: string;
