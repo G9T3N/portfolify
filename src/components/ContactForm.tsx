@@ -65,6 +65,7 @@ export const ContactForm = () => {
           <input
             type="text"
             placeholder="Your name"
+            aria-label="Your name"
             {...register("name")}
             className={`form-input w-full rounded-xl ${errors.name ? "border-red-500/50 focus:border-red-500" : ""}`}
           />
@@ -72,7 +73,9 @@ export const ContactForm = () => {
         </div>
         <div className="flex-1 space-y-1">
           <input
+            type="email"
             placeholder="Your email"
+            aria-label="Your email"
             {...register("email")}
             className={`form-input w-full rounded-xl ${errors.email ? "border-red-500/50 focus:border-red-500" : ""}`}
           />
@@ -82,6 +85,7 @@ export const ContactForm = () => {
       <div className="space-y-1">
         <textarea
           placeholder="Tell me about your project..."
+          aria-label="Your message"
           {...register("message")}
           rows={4}
           className={`form-input w-full resize-none rounded-xl ${errors.message ? "border-red-500/50 focus:border-red-500" : ""}`}

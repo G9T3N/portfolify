@@ -25,14 +25,14 @@ const AboutSection = () => {
     <section id="about" className="px-4 md:px-8 lg:px-12 py-16 md:py-32">
       <div className="max-w-[1400px] 2xl:max-w-[1700px] mx-auto">
         <div className="  z-10 flex justify-center">
-          <motion.span
+          <motion.h2
             className="section-label  text-center  "
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
           >
             About Me
-          </motion.span>
+          </motion.h2>
         </div>
         <div className="flex flex-col lg:flex-row items-center ">
           {/* Photo */}

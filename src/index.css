@@ -16,7 +16,7 @@
 
   --color-text-primary: rgb(255, 255, 255);
   --color-text-secondary: #aaaaaa;
-  --color-text-muted: #646464;
+  --color-text-muted: #9ca3af;
 
   --color-mp-surface-bright: rgb(57, 57, 57);
   --color-border-default: rgb(40, 40, 40);
@@ -286,7 +286,7 @@
 @layer utilities {
   /* === Glass Navbar === */
   .glass-nav {
-    background: color-mix(in srgb, var(--color-bg-primary), transparent 40%);
+    background: color-mix(in srgb, var(--color-bg-primary), transparent 2%);
     backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--color-border-default);
   }
@@ -635,7 +635,7 @@
 
     --color-text-primary: rgb(255, 255, 255);
     --color-text-secondary: #aaaaaa;
-    --color-text-muted: #646464;
+    --color-text-muted: #9ca3af;
 
     --color-mp-surface-bright: rgb(57, 57, 57);
     --color-border-default: rgb(40, 40, 40);
@@ -683,8 +683,8 @@
     --color-bg-card: #fafafa;
 
     --color-text-primary: rgb(10, 10, 10);
-    --color-text-secondary: #555555;
-    --color-text-muted: #5f5f5f;
+    --color-text-secondary: #4b5563;
+    --color-text-muted: #52525b;
 
     --color-mp-surface-bright: rgb(235, 235, 235);
     --color-border-default: rgb(220, 220, 220);
@@ -1081,6 +1081,11 @@
 .snap-section {
   scroll-snap-align: start;
   scroll-snap-stop: normal;
+}
+
+.snap-section:not(:first-of-type) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 /* Scroll progress indicator */

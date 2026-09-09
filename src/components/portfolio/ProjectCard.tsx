@@ -110,6 +110,7 @@ export function ProjectCard({ project, index, total = 3 }: ProjectCardProps) {
                   href={project.live_url!}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`Visit live site for ${project.title}`}
                   className="flex items-center gap-2 text-sm font-semibold text-[var(--color-text-primary)] hover:text-[var(--color-mp-primary)] transition-colors"
                 >
                   <ExternalLink size={18} /> Live Site
@@ -120,6 +121,7 @@ export function ProjectCard({ project, index, total = 3 }: ProjectCardProps) {
                   href={project.code_url!}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`View source code for ${project.title}`}
                   className="flex items-center gap-2 text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
                 >
                   <GitBranch size={18} /> Source Code
@@ -130,6 +132,7 @@ export function ProjectCard({ project, index, total = 3 }: ProjectCardProps) {
                   href={primaryLink}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`Open ${project.title} project`}
                   className="ml-auto w-12 h-12 rounded-full bg-[var(--color-bg-elevated)] flex items-center justify-center border border-[var(--color-border-default)] group-hover:bg-[var(--color-text-primary)] group-hover:text-[var(--color-bg-primary)] transition-colors"
                 >
                   <ArrowRight
