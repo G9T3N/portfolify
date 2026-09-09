@@ -60,7 +60,7 @@ export default function LogoCarousel() {
           {[...logos, ...logos, ...logos].map((logo, index) => (
             <div
               key={index}
-              className="flex items-center gap-2  flex-1 w-fit  py-2   text-[var(--color-text-muted)] hover:text-[var(--color-mp-primary)] transition-colors duration-300"
+              className="flex items-center gap-2  flex-1 w-fit  py-2   text-[var(--color-text-secondary)] hover:text-[var(--color-mp-primary)] transition-colors duration-300"
             >
               <logo.Icon className="w-6 h-6" />
               <span className="font-mono w-full break-keep whitespace-nowrap  text-sm uppercase tracking-wider font-semibold">

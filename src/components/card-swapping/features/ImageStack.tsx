@@ -1,7 +1,7 @@
 import { Fullscreen } from "lucide-react";
 import { CardStack } from "../core/CardStack";
 import { StackableItem } from "../types";
-import lanyardImage from "@/assets/lanyard/lanyard.jpg";
+import lanyardImage from "@/assets/lanyard/lanyard.webp";
 import { motion } from "framer-motion";
 interface ImageCard extends StackableItem {
   img: string;
@@ -36,7 +36,8 @@ export function ImageCardStack() {
                 width="168"
                 height="168"
                 className="pointer-events-none size-42 rounded-2xl object-cover"
-                loading="lazy"
+                loading={card.id === 1 ? "eager" : "lazy"}
+                fetchPriority={card.id === 1 ? "high" : "auto"}
                 decoding="async"
               />
             </div>

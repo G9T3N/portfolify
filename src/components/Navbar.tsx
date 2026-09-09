@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { Sun, Moon, Languages } from "lucide-react";
+import { Sun, Moon, Languages, Menu, X } from "lucide-react";
 import { i18n } from "@lingui/core";
 import { Trans } from "@lingui/react";
 
@@ -10,6 +10,7 @@ const NAV_SECTION_IDS = ["projects", "experience", "about", "skills", "contact"]
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("theme") as "dark" | "light" | null;
@@ -119,15 +120,24 @@ const Navbar = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    setMenuOpen(false);
     const el = document.querySelector(href);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
+  const navLinks = [
+    { href: "#projects", label: <Trans id="nav.projects">Projects</Trans> },
+    { href: "#experience", label: <Trans id="nav.experience">Experience</Trans> },
+    { href: "#about", label: <Trans id="nav.about">About</Trans> },
+    { href: "#skills", label: <Trans id="nav.skills">Skills</Trans> },
+    { href: "#contact", label: <Trans id="nav.contact">Contact</Trans> },
+  ];
+
   return (
     <motion.header
-      className="sticky top-5 start-0 w-full md:w-fit z-10   "
+      className="sticky top-5 start-0 w-full md:w-fit z-40"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -143,6 +153,7 @@ const Navbar = () => {
           href="#home"
           onClick={(e) => {
             e.preventDefault();
+            setMenuOpen(false);
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
           className="flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-[var(--color-bg-elevated)] transition-colors group flex-shrink-0"
@@ -154,15 +165,9 @@ const Navbar = () => {
           </span>
         </a>
 
-        {/* Nav links */}
-        <div className="flex items-center overflow-x-auto no-scrollbar gap-0.5 w-auto">
-          {[
-            { href: "#projects", label: <Trans id="nav.projects">Projects</Trans> },
-            { href: "#experience", label: <Trans id="nav.experience">Experience</Trans> },
-            { href: "#about", label: <Trans id="nav.about">About</Trans> },
-            { href: "#skills", label: <Trans id="nav.skills">Skills</Trans> },
-            { href: "#contact", label: <Trans id="nav.contact">Contact</Trans> },
-          ].map((link) => (
+        {/* Nav links — desktop */}
+        <div className="hidden md:flex items-center overflow-x-auto no-scrollbar gap-0.5 w-auto">
+          {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -181,17 +186,55 @@ const Navbar = () => {
           ))}
         </div>
 
+        {/* Mobile nav dropdown */}
+        {menuOpen && (
+          <motion.div
+            className="absolute top-full start-0 mt-2 w-full md:hidden glass-nav rounded-3xl p-2 flex flex-col gap-1"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => {
+                  handleNavClick(e, link.href);
+                }}
+                className={cn(
+                  "px-4 py-3 text-sm font-medium rounded-2xl transition-colors",
+                  activeSection === link.href
+                    ? "text-[var(--color-text-primary)] bg-[var(--color-bg-elevated)] font-semibold"
+                    : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)]",
+                )}
+              >
+                {link.label}
+              </a>
+            ))}
+          </motion.div>
+        )}
+
         {/* Actions (Language Switcher & Theme Toggle) */}
         <div className="flex items-center gap-1 flex-shrink-0">
+          {/* Mobile menu toggle */}
+          <button
+            type="button"
+            className="md:hidden h-9 w-9 rounded-4xl flex items-center justify-center text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] transition-colors cursor-pointer flex-shrink-0"
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
           {/* Language Switcher */}
           <button
             type="button"
             className="h-9 px-2.5 rounded-4xl flex items-center gap-1.5 text-xs font-mono font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] transition-colors cursor-pointer"
-            aria-label="Toggle language"
+            aria-label={locale === "en" ? "عربي — Switch to Arabic" : "EN — Switch to English"}
             onClick={toggleLanguage}
             title={locale === "en" ? "تبديل إلى العربية" : "Switch to English"}
           >
-            <Languages className="w-3.5 h-3.5" />
+            <Languages className="w-3.5 h-3.5" aria-hidden="true" />
             <span>{locale === "en" ? "عربي" : "EN"}</span>
           </button>
 

@@ -93,7 +93,7 @@ const ProjectsSection = () => {
       <div className="container mx-auto px-4 md:px-8">
         {/* Section label + category filters */}
         <div className="flex flex-col items-center gap-6 mb-24">
-          <motion.span
+          <motion.h2
             className="section-label"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -101,7 +101,7 @@ const ProjectsSection = () => {
             transition={{ duration: 0.6 }}
           >
             Selected Work
-          </motion.span>
+          </motion.h2>
 
           {/* Category filter tabs */}
           {categories.length > 2 && (

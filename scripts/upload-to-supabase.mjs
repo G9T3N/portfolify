@@ -201,6 +201,151 @@ async function main() {
     console.log(`Successfully upserted ${eData?.length || workExperiences.length} experiences.`);
   }
 
+  // 6. Upsert Arabic translations (English stays canonical in the base tables)
+  console.log("Upserting Arabic translations...");
+  const translations = [
+    // Projects
+    {
+      table_name: "projects",
+      row_id: "e2b4f981-8b3d-4c3e-9c5e-7a1b3c5d7e90",
+      locale: "ar",
+      field: "title",
+      value: "منصة صوفا",
+    },
+    {
+      table_name: "projects",
+      row_id: "e2b4f981-8b3d-4c3e-9c5e-7a1b3c5d7e90",
+      locale: "ar",
+      field: "description",
+      value:
+        "عمل إنتاجي على منتجات الويب يشمل واجهات React قابلة لإعادة الاستخدام، ودمج واجهات برمجة التطبيقات، وإدارة حالة التطبيق، وتصحيح الأخطاء، وتقديم ميزات قابلة للصيانة.",
+    },
+    {
+      table_name: "projects",
+      row_id: "e2b4f981-8b3d-4c3e-9c5e-7a1b3c5d7e90",
+      locale: "ar",
+      field: "full_content",
+      value:
+        "هندسة المنصة الأساسية لتطبيقات الويب في شركة صوفا. بنيت وحافظت على واجهات عملاء تفاعلية ومعقدة ومتجاوبة باستخدام React وTypeScript، ودمجت واجهات برمجة تطبيقات REST عالية الإنتاجية، وأدرت حالة عميل معقدة، وضمنت إصدارات إنتاجية سلسة.",
+    },
+    {
+      table_name: "projects",
+      row_id: "f3c5a092-9c4e-5d4f-ad6f-8b2c4d6e8f01",
+      locale: "ar",
+      field: "title",
+      value: "بورتفوليفاي",
+    },
+    {
+      table_name: "projects",
+      row_id: "f3c5a092-9c4e-5d4f-ad6f-8b2c4d6e8f01",
+      locale: "ar",
+      field: "description",
+      value:
+        "مشروع عام مبني بلغة TypeScript يركز على العرض العصري للمحافظ والمنتجات وهيكلية واجهات أمامية قابلة لإعادة الاستخدام.",
+    },
+    {
+      table_name: "projects",
+      row_id: "f3c5a092-9c4e-5d4f-ad6f-8b2c4d6e8f01",
+      locale: "ar",
+      field: "full_content",
+      value:
+        "تطبيق محفظة حديث مبني باستخدام React Router v7 وTypeScript وTailwind CSS وFramer Motion مع دمج Supabase. يتميز بالوضع الداكن، وواجهات زجاجية متجاوبة، وتوجيه ديناميكي للمشاريع، وإدارة محتوى عبر لوحة تحكم.",
+    },
+    {
+      table_name: "projects",
+      row_id: "a4d6b103-0d5f-6e5a-be70-9c3d5e7f9a12",
+      locale: "ar",
+      field: "title",
+      value: "مصادر مفتوحة و npm",
+    },
+    {
+      table_name: "projects",
+      row_id: "a4d6b103-0d5f-6e5a-be70-9c3d5e7f9a12",
+      locale: "ar",
+      field: "description",
+      value:
+        "أدوات React قابلة لإعادة الاستخدام وأدوات Mapbox منشورة تحت مساحة g9t3n، بما في ذلك Skeletune وحزم متعلقة بالجغرافيا المكانية.",
+    },
+    {
+      table_name: "projects",
+      row_id: "a4d6b103-0d5f-6e5a-be70-9c3d5e7f9a12",
+      locale: "ar",
+      field: "full_content",
+      value:
+        "مساهمات في النظام البيئي للمصادر المفتوحة وحزم npm منشورة تحت @g9t3n. تشمل أدوات تحميل الهيكل Skeletune، وأدوات واجهات Mapbox الجغرافية المكانية، ومكتبات إنتاجية للمطورين منشورة للمجتمع.",
+    },
+    // Work experiences
+    {
+      table_name: "work_experiences",
+      row_id: "c1a2b3c4-1111-4444-8888-000000000001",
+      locale: "ar",
+      field: "position",
+      value: "مهندس منتجات أمامية / تطوير كامل",
+    },
+    {
+      table_name: "work_experiences",
+      row_id: "c1a2b3c4-1111-4444-8888-000000000001",
+      locale: "ar",
+      field: "description",
+      value:
+        "هندسة منتجات أمامية وتطوير كامل باستخدام React وTypeScript، ودمج واجهات برمجة التطبيقات، وهندسة واجهات قابلة لإعادة الاستخدام، وتصحيح الأخطاء، والتسليم الإنتاجي.",
+    },
+    {
+      table_name: "work_experiences",
+      row_id: "c1a2b3c4-2222-4444-8888-000000000002",
+      locale: "ar",
+      field: "position",
+      value: "مهندس برمجيات",
+    },
+    {
+      table_name: "work_experiences",
+      row_id: "c1a2b3c4-2222-4444-8888-000000000002",
+      locale: "ar",
+      field: "description",
+      value:
+        "هندسة عن بُعد عبر قواعد أكواد إنتاجية خاصة، وسير عمل Git تعاوني، ولوحات تحكم، ومنتجات تجارية، وخطوط CI/CD، وبوابات جودة.",
+    },
+    {
+      table_name: "work_experiences",
+      row_id: "c1a2b3c4-3333-4444-8888-000000000003",
+      locale: "ar",
+      field: "position",
+      value: "مهندس برمجيات",
+    },
+    {
+      table_name: "work_experiences",
+      row_id: "c1a2b3c4-3333-4444-8888-000000000003",
+      locale: "ar",
+      field: "description",
+      value:
+        "هندسة برمجيات عن بُعد في مستودعات خاصة مع تعاون موزّع، وتقديم ميزات، وتصحيح أخطاء، ومراجعات كود، وتطبيق قابل للصيانة.",
+    },
+    // Site settings (title + bio; cv_url is language-neutral)
+    {
+      table_name: "site_settings",
+      row_id: "d8a1c2e3-f4b5-4a6b-8c7d-9e0f1a2b3c4d",
+      locale: "ar",
+      field: "value",
+      value: "وليد العمراني — مهندس برمجيات | React وTypeScript",
+    },
+    {
+      table_name: "site_settings",
+      row_id: "b7a0b1c2-e3d4-4f5a-9b8c-0d1e2f3a4b5c",
+      locale: "ar",
+      field: "value",
+      value:
+        "مهندس برمجيات مقيم في صنعاء، اليمن. متخصص في React وTypeScript والبنى الإنتاجية وأدوات مفتوحة المصدر.",
+    },
+  ];
+  const { error: tErr } = await supabase
+    .from("translations")
+    .upsert(translations, { onConflict: "table_name,row_id,locale,field" });
+  if (tErr) {
+    console.error("Error upserting translations:", tErr);
+  } else {
+    console.log(`Successfully upserted ${translations.length} translations.`);
+  }
+
   console.log("Done! You can now view and edit all data from your admin dashboard.");
 }
 

@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { getContentLocale, localizeRows } from "@/queries/translations";
 
 export function useWorkExperiences() {
+  const locale = getContentLocale();
   return useQuery({
-    queryKey: ["work-experiences"],
+    queryKey: ["work-experiences", locale],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("work_experiences")
@@ -12,7 +14,7 @@ export function useWorkExperiences() {
       if (error) {
         throw error;
       }
-      return data;
+      return localizeRows("work_experiences", data, locale);
     },
   });
 }

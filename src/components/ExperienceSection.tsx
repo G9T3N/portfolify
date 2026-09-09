@@ -89,7 +89,7 @@ const ExperienceSection = () => {
       <div className="max-w-[1400px] 2xl:max-w-[1700px] mx-auto">
         {/* Section Label */}
         <div className="flex justify-center mb-16">
-          <motion.span
+          <motion.h2
             className="section-label text-center"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -97,7 +97,7 @@ const ExperienceSection = () => {
             transition={{ duration: 0.6 }}
           >
             Work Experience
-          </motion.span>
+          </motion.h2>
         </div>
 
         {/* Experience Cards Grid */}
@@ -158,6 +158,7 @@ const ExperienceSection = () => {
                     href={exp.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Visit ${exp.company} website`}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-text-primary)] hover:text-[var(--color-primary)] transition-colors pt-2 border-t border-[var(--color-border-default)] w-full"
                   >
                     <span>Visit Company</span>

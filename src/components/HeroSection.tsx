@@ -30,18 +30,16 @@ const HeroSection = () => {
       <div className="flex-1 flex flex-col lg:flex-row gap-6 pt-14 lg:pt-5 pb-8">
         {/* Left — Gradient mesh hero image */}
         <motion.div
-          className="relative flex-1 gradient-mesh rounded-4xl rounded-ee-none overflow-hidden min-h-[50vh] lg:min-h-0 "
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="relative flex-1 gradient-mesh rounded-4xl rounded-ee-none overflow-hidden min-h-[50vh] lg:min-h-0"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
         >
           <div className="relative flex flex-col justify-start h-full">
             {/* Bottom text overlay */}
             <motion.div
               className="inverted-border-card ps-6 md:ps-8 p-7 md:pt-10 lg:pt-12"
-              initial={{ opacity: 0, y: -40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
             >
               <div className="flex flex-col gap-4 max-w-2xl pr-4">
                 <div className="space-y-1">

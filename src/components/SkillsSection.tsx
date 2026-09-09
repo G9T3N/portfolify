@@ -94,7 +94,7 @@ const SkillsSection = () => {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
       >
-        <span className="section-label">Skills &amp; Services</span>
+        <h2 className="section-label">Skills &amp; Services</h2>
       </motion.div>
 
       {/* Massive typography rows */}

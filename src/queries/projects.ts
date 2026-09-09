@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { getContentLocale, localizeRow, localizeRows } from "@/queries/translations";
 
 export function useProjects() {
+  const locale = getContentLocale();
   return useQuery({
-    queryKey: ["projects"],
+    queryKey: ["projects", locale],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("projects")
@@ -12,14 +14,15 @@ export function useProjects() {
       if (error) {
         throw error;
       }
-      return data;
+      return localizeRows("projects", data, locale);
     },
   });
 }
 
 export function useProject(id: string) {
+  const locale = getContentLocale();
   return useQuery({
-    queryKey: ["project", id],
+    queryKey: ["project", id, locale],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("projects")
@@ -29,7 +32,10 @@ export function useProject(id: string) {
       if (error) {
         throw error;
       }
-      return data;
+      if (!data) {
+        return null;
+      }
+      return localizeRow("projects", data, locale);
     },
     enabled: !!id,
   });

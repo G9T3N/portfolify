@@ -87,9 +87,8 @@ export const Gauge = () => {
   return (
     <motion.div
       className="relative rounded-4xl p-4 border shadow-2xl overflow-hidden flex flex-col flex-1 min-h-60 bg-card border-border"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, delay: 0.4 }}
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
     >
       <div className="flex items-center justify-between mb-4 ">
         <span className="text-sm text-[var(--color-text-secondary)] mt-0 font-medium">
