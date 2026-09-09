@@ -33,6 +33,8 @@ export function ImageCardStack() {
               <img
                 src={card.img}
                 alt="card"
+                width="168"
+                height="168"
                 className="pointer-events-none size-42 rounded-2xl object-cover"
                 loading="lazy"
                 decoding="async"

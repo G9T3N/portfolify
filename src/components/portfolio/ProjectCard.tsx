@@ -49,6 +49,8 @@ export function ProjectCard({ project, index, total = 3 }: ProjectCardProps) {
             <img
               src={project.thumbnail_url}
               alt={project.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           ) : (
@@ -56,6 +58,10 @@ export function ProjectCard({ project, index, total = 3 }: ProjectCardProps) {
               <img
                 src="/favicon.svg"
                 alt="Mr.Err"
+                width="160"
+                height="160"
+                loading="lazy"
+                decoding="async"
                 className="w-24 h-24 md:w-40 md:h-40 opacity-10 group-hover:opacity-30 transition-opacity duration-500 grayscale"
               />
             </div>
