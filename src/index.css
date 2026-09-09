@@ -3,6 +3,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
+@import "@fontsource-variable/inter";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -38,7 +39,7 @@
   --spacing-container: 80px;
 
   /* Typography */
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   /* Radius */
 
@@ -99,10 +100,47 @@
   pointer-events: none;
 }
 
+[dir="rtl"] .inverted-border-card {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: var(--radius-4xl);
+}
+
+[dir="rtl"] .inverted-border-card::before {
+  left: auto;
+  right: 0;
+  border-radius: 0 0 0 var(--radius-4xl);
+  box-shadow: -50px -50px 0 50px #fffdf7;
+  mask-image: radial-gradient(
+    circle at bottom left,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at bottom left,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+}
+
+[dir="rtl"] .inverted-border-card::after {
+  right: auto;
+  left: calc(-1 * var(--radius-4xl));
+  mask-image: radial-gradient(
+    circle at bottom left,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at bottom left,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+}
+
 .inverted-border-button {
   position: relative;
   background-color: var(--color-bg-primary);
-  border-bottom-right-radius: var(--radius-4xl);
+  border-radius: 0 var(--radius-4xl) 0 0;
   width: fit-content;
   max-width: 100%;
 }
@@ -111,17 +149,18 @@
   content: "";
   position: absolute;
   top: calc(-1 * var(--radius-4xl));
-  inset-inline-end: 0;
+  left: 0;
+  right: auto;
   width: calc(var(--radius-4xl));
   height: calc(var(--radius-4xl));
   background-color: var(--color-bg-primary);
   mask-image: radial-gradient(
-    circle at top left,
+    circle at top right,
     transparent var(--radius-4xl),
     black calc(var(--radius-4xl) + 1px)
   );
   -webkit-mask-image: radial-gradient(
-    circle at top left,
+    circle at top right,
     transparent var(--radius-4xl),
     black calc(var(--radius-4xl) + 1px)
   );
@@ -132,10 +171,65 @@
   content: "";
   position: absolute;
   bottom: 0;
-  inset-inline-start: calc(-1 * var(--radius-4xl));
+  left: 100%;
+  right: auto;
   width: calc(var(--radius-4xl));
   height: calc(var(--radius-4xl));
   background-color: var(--color-bg-primary);
+  mask-image: radial-gradient(
+    circle at top right,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at top right,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+  pointer-events: none;
+}
+
+[dir="rtl"] .inverted-border-button {
+  border-radius: 0 var(--radius-4xl) 0 0;
+}
+
+[dir="rtl"] .inverted-border-button::before {
+  left: 0;
+  right: auto;
+  mask-image: radial-gradient(
+    circle at top right,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at top right,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+}
+
+[dir="rtl"] .inverted-border-button::after {
+  left: 100%;
+  right: auto;
+  mask-image: radial-gradient(
+    circle at top right,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at top right,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+}
+
+[dir="ltr"] .inverted-border-button {
+  border-radius: var(--radius-4xl) 0 0 0;
+}
+
+[dir="ltr"] .inverted-border-button::before {
+  left: auto;
+  right: 0;
   mask-image: radial-gradient(
     circle at top left,
     transparent var(--radius-4xl),
@@ -146,7 +240,21 @@
     transparent var(--radius-4xl),
     black calc(var(--radius-4xl) + 1px)
   );
-  pointer-events: none;
+}
+
+[dir="ltr"] .inverted-border-button::after {
+  left: calc(-1 * var(--radius-4xl));
+  right: auto;
+  mask-image: radial-gradient(
+    circle at top left,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at top left,
+    transparent var(--radius-4xl),
+    black calc(var(--radius-4xl) + 1px)
+  );
 }
 
 @layer base {
@@ -196,13 +304,31 @@
     width: 200%;
     height: 200%;
     background:
+      radial-gradient(ellipse at 80% 50%, var(--color-gradient-start) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 20%, var(--color-gradient-mid) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, var(--color-gradient-end) 0%, transparent 40%),
+      radial-gradient(ellipse at 30% 60%, var(--color-mp-inverse-primary) 0%, transparent 40%);
+    animation: mesh-shift-rtl 12s ease-in-out infinite alternate;
+    opacity: 0.85;
+    filter: blur(40px) saturate(150%);
+  }
+
+  [dir="rtl"] .gradient-mesh::before {
+    background:
+      radial-gradient(ellipse at 80% 50%, var(--color-gradient-start) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 20%, var(--color-gradient-mid) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, var(--color-gradient-end) 0%, transparent 40%),
+      radial-gradient(ellipse at 30% 60%, var(--color-mp-inverse-primary) 0%, transparent 40%);
+    animation-name: mesh-shift-rtl;
+  }
+
+  [dir="ltr"] .gradient-mesh::before {
+    background:
       radial-gradient(ellipse at 20% 50%, var(--color-gradient-start) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 20%, var(--color-gradient-mid) 0%, transparent 50%),
       radial-gradient(ellipse at 40% 80%, var(--color-gradient-end) 0%, transparent 40%),
       radial-gradient(ellipse at 70% 60%, var(--color-mp-inverse-primary) 0%, transparent 40%);
-    animation: mesh-shift 12s ease-in-out infinite alternate;
-    opacity: 0.85;
-    filter: blur(40px) saturate(150%);
+    animation-name: mesh-shift;
   }
 
   @keyframes mesh-shift {
@@ -220,6 +346,24 @@
 
     100% {
       transform: translate(2%, -2%) rotate(1deg) scale(1.01);
+    }
+  }
+
+  @keyframes mesh-shift-rtl {
+    0% {
+      transform: translate(0%, 0%) rotate(0deg) scale(1);
+    }
+
+    33% {
+      transform: translate(-5%, -3%) rotate(-3deg) scale(1.02);
+    }
+
+    66% {
+      transform: translate(3%, 5%) rotate(2deg) scale(0.98);
+    }
+
+    100% {
+      transform: translate(-2%, -2%) rotate(-1deg) scale(1.01);
     }
   }
 
@@ -540,7 +684,7 @@
 
     --color-text-primary: rgb(10, 10, 10);
     --color-text-secondary: #555555;
-    --color-text-muted: #999999;
+    --color-text-muted: #5f5f5f;
 
     --color-mp-surface-bright: rgb(235, 235, 235);
     --color-border-default: rgb(220, 220, 220);

@@ -1,5 +1,15 @@
 import { motion } from "framer-motion";
-import { Code, Layout, Globe } from "lucide-react";
+import {
+  Code,
+  Layout,
+  Globe,
+  Server,
+  GitBranch,
+  ShieldCheck,
+  Cpu,
+  Terminal,
+  Workflow,
+} from "lucide-react";
 
 const SKILLS_DATA = [
   {
@@ -17,6 +27,60 @@ const SKILLS_DATA = [
     icon: Globe,
     suffix: "engineering",
   },
+  {
+    label: "DevOps",
+    icon: Workflow,
+    suffix: "and automation",
+  },
+] as const;
+
+const SKILL_CATEGORIES = [
+  {
+    title: "Frontend",
+    icon: Code,
+    skills: [
+      "React",
+      "TypeScript",
+      "Next.js",
+      "TanStack Query",
+      "Zustand",
+      "React Router",
+      "Tailwind CSS",
+    ],
+  },
+  {
+    title: "APIs & Backend",
+    icon: Server,
+    skills: ["REST", "OpenAPI", "Zod", "Python", "FastAPI", "Node.js", "Supabase"],
+  },
+  {
+    title: "CI/CD & Delivery",
+    icon: GitBranch,
+    skills: ["GitHub Actions", "GitLab CI", "Docker", "Conventional Commits", "Release Automation"],
+  },
+  {
+    title: "Quality & Testing",
+    icon: ShieldCheck,
+    skills: ["ESLint", "SonarQube", "Oxlint", "Vitest", "Testing Library", "Jest", "Cypress"],
+  },
+  {
+    title: "Engineering Practices",
+    icon: Cpu,
+    skills: [
+      "UI Architecture",
+      "Business Logic",
+      "API Contracts",
+      "Debugging",
+      "Refactoring",
+      "Code Review",
+      "Jira",
+    ],
+  },
+  {
+    title: "Tooling & Ecosystem",
+    icon: Terminal,
+    skills: ["Linux", "Git", "GitHub", "Mapbox", "Geospatial", "MCP Tooling", "NPM Publishing"],
+  },
 ] as const;
 
 const SkillsSection = () => {
@@ -30,11 +94,11 @@ const SkillsSection = () => {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
       >
-        <span className="section-label">Skills & Services</span>
+        <span className="section-label">Skills &amp; Services</span>
       </motion.div>
 
       {/* Massive typography rows */}
-      <div className="max-w-[1400px] 2xl:max-w-[1700px] mx-auto space-y-12 md:space-y-20">
+      <div className="max-w-[1400px] 2xl:max-w-[1700px] mx-auto space-y-12 md:space-y-20 mb-24">
         {SKILLS_DATA.map((skill, index) => (
           <motion.div
             key={skill.label}
@@ -68,6 +132,43 @@ const SkillsSection = () => {
             </span>
           </motion.div>
         ))}
+      </div>
+
+      {/* Structured Skill Matrix Grid */}
+      <div className="max-w-[1400px] 2xl:max-w-[1700px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {SKILL_CATEGORIES.map((cat, idx) => (
+            <motion.div
+              key={cat.title}
+              className="p-6 bg-[var(--color-bg-card)] border border-[var(--color-border-default)] rounded-3xl flex flex-col justify-between hover:border-[var(--color-primary)] transition-colors shadow-sm"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+            >
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] flex items-center justify-center">
+                    <cat.icon className="w-5 h-5 text-[var(--color-primary)]" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[var(--color-text-primary)]">
+                    {cat.title}
+                  </h3>
+                </div>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {cat.skills.map((s) => (
+                    <span
+                      key={s}
+                      className="px-3 py-1 text-xs font-medium rounded-lg bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

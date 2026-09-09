@@ -14,38 +14,78 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:45
-msgid "Full-Stack Developer & UI Specialist"
-msgstr "Full-Stack Developer & UI Specialist"
+#: src/components/HeroSection.tsx:91
+msgid "Let's Build"
+msgstr "Let's Build"
 
 #. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:48
+#: src/components/HeroSection.tsx:50
+msgid "Software Engineer · React & TypeScript"
+msgstr "Software Engineer · React & TypeScript"
+
+#. js-lingui-explicit-id
+#: src/components/HeroSection.tsx:60
 msgid "Wael Alamrany"
 msgstr "Wael Alamrany"
 
 #. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:50
+#: src/components/HeroSection.tsx:62
 msgid "— Mr.Err"
 msgstr "— Mr.Err"
 
 #. js-lingui-explicit-id
+#: src/components/HeroSection.tsx:67
+msgid "Software Engineer building maintainable web products, production architectures, delivery automation, and open-source tooling."
+msgstr "Software Engineer building maintainable web products, production architectures, delivery automation, and open-source tooling."
+
+#. js-lingui-explicit-id
+#: src/components/Navbar.tsx:160
+msgid "nav.projects"
+msgstr "Projects"
+
+#. js-lingui-explicit-id
+#: src/components/Navbar.tsx:161
+msgid "nav.experience"
+msgstr "Experience"
+
+#. js-lingui-explicit-id
+#: src/components/Navbar.tsx:162
+msgid "nav.about"
+msgstr "About"
+
+#. js-lingui-explicit-id
+#: src/components/Navbar.tsx:163
+msgid "nav.skills"
+msgstr "Skills"
+
+#. js-lingui-explicit-id
+#: src/components/Navbar.tsx:164
+msgid "nav.contact"
+msgstr "Contact"
+
+#. js-lingui-explicit-id
+#: src/components/HeroSection.tsx:45
+#~ msgid "Full-Stack Developer & UI Specialist"
+#~ msgstr "Full-Stack Developer & UI Specialist"
+
+#. js-lingui-explicit-id
 #: src/components/HeroSection.tsx:55
-msgid "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
-msgstr "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
+#~ msgid "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
+#~ msgstr "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
 
 #: src/components/HeroSection.tsx:46
 #~ msgid "— Mr.Err"
 #~ msgstr "— Mr.Err"
 
-#: src/utils/helpers/ApiErrorHandler.tsx:98
+#: src/utils/helpers/ApiErrorHandler.tsx:110
 msgid "Access Denied!"
 msgstr "Access Denied!"
 
-#: src/utils/helpers/ApiErrorHandler.tsx:83
+#: src/utils/helpers/ApiErrorHandler.tsx:91
 msgid "An error occurred while Sending the Request"
 msgstr "An error occurred while Sending the Request"
 
-#: src/utils/helpers/ApiErrorHandler.tsx:149
+#: src/utils/helpers/ApiErrorHandler.tsx:183
 msgid "An unexpected error occurred"
 msgstr "An unexpected error occurred"
 
@@ -53,15 +93,15 @@ msgstr "An unexpected error occurred"
 #~ msgid "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
 #~ msgstr "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
 
-#: src/utils/helpers/ApiErrorHandler.tsx:64
+#: src/utils/helpers/ApiErrorHandler.tsx:72
 msgid "Continue"
 msgstr "Continue"
 
-#: src/utils/helpers/ApiErrorHandler.tsx:138
+#: src/utils/helpers/ApiErrorHandler.tsx:170
 msgid "data will be displayed when available"
 msgstr "data will be displayed when available"
 
-#: src/utils/helpers/ApiErrorHandler.tsx:61
+#: src/utils/helpers/ApiErrorHandler.tsx:69
 msgid "Error"
 msgstr "Error"
 
@@ -69,12 +109,12 @@ msgstr "Error"
 #~ msgid "Full-Stack Developer & UI Specialist"
 #~ msgstr "Full-Stack Developer & UI Specialist"
 
-#: src/utils/helpers/ApiErrorHandler.tsx:113
-#: src/utils/helpers/ApiErrorHandler.tsx:137
+#: src/utils/helpers/ApiErrorHandler.tsx:135
+#: src/utils/helpers/ApiErrorHandler.tsx:161
 msgid "The page is not found"
 msgstr "The page is not found"
 
-#: src/utils/helpers/ApiErrorHandler.tsx:137
+#: src/utils/helpers/ApiErrorHandler.tsx:163
 msgid "There is no data to display at the moment"
 msgstr "There is no data to display at the moment"
 
@@ -82,20 +122,20 @@ msgstr "There is no data to display at the moment"
 #~ msgid "Wael Alamrany"
 #~ msgstr "Wael Alamrany"
 
-#: src/utils/helpers/ApiErrorHandler.tsx:84
-#: src/utils/helpers/ApiErrorHandler.tsx:150
+#: src/utils/helpers/ApiErrorHandler.tsx:92
+#: src/utils/helpers/ApiErrorHandler.tsx:184
 msgid "We were unable to load the data. Please try again later"
 msgstr "We were unable to load the data. Please try again later"
 
-#: src/utils/helpers/ApiErrorHandler.tsx:114
-#: src/utils/helpers/ApiErrorHandler.tsx:138
+#: src/utils/helpers/ApiErrorHandler.tsx:136
+#: src/utils/helpers/ApiErrorHandler.tsx:168
 msgid "Wrong Page Path or URL or Data is Not Found"
 msgstr "Wrong Page Path or URL or Data is Not Found"
 
-#: src/utils/helpers/ApiErrorHandler.tsx:99
+#: src/utils/helpers/ApiErrorHandler.tsx:115
 msgid "You Are Not Allowed To Access This Content!"
 msgstr "You Are Not Allowed To Access This Content!"
 
-#: src/utils/helpers/ApiErrorHandler.tsx:99
+#: src/utils/helpers/ApiErrorHandler.tsx:113
 msgid "You Are Not Allowed To Access This Page!"
 msgstr "You Are Not Allowed To Access This Page!"

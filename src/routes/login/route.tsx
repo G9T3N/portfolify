@@ -2,6 +2,13 @@ import { Loader2 } from "lucide-react";
 import { useAdminAuth } from "./queries";
 import { AuthForm } from "./components/AuthForm";
 
+export function meta() {
+  return [
+    { title: "Admin Login — Wael Alamrany (Mr.Err)" },
+    { name: "robots", content: "noindex, nofollow" },
+  ];
+}
+
 const AdminLogin = () => {
   const { isLoading, isCheckingSession, isSignUp, setIsSignUp, submitAuth } = useAdminAuth();
 

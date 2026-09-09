@@ -45,11 +45,17 @@ const HeroSection = () => {
             >
               <div className="flex flex-col gap-4 max-w-2xl pr-4">
                 <div className="space-y-1">
-                  <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-primary)] uppercase font-mono">
-                    <Trans id="Full-Stack Developer & UI Specialist">
-                      Full-Stack Developer & UI Specialist
-                    </Trans>
-                  </span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-primary)] uppercase font-mono">
+                      <Trans id="Software Engineer · React & TypeScript">
+                        Software Engineer · React & TypeScript
+                      </Trans>
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)]">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      Building at Sofa + remote teams
+                    </span>
+                  </div>
                   <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight text-[var(--color-text-primary)]">
                     <Trans id="Wael Alamrany">Wael Alamrany</Trans>
                     <span className="block text-xl sm:text-2xl md:text-3xl font-medium text-[var(--color-text-secondary)] mt-1 font-mono">
@@ -58,9 +64,9 @@ const HeroSection = () => {
                   </h1>
                 </div>
                 <p className="text-sm sm:text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-lg font-sans">
-                  <Trans id="Bridging the gap between robust system architecture and seamless, high-performance user interfaces.">
-                    Bridging the gap between robust system architecture and seamless,
-                    high-performance user interfaces.
+                  <Trans id="Software Engineer building maintainable web products, production architectures, delivery automation, and open-source tooling.">
+                    Software Engineer building maintainable web products, production architectures,
+                    delivery automation, and open-source tooling with React &amp; TypeScript.
                   </Trans>
                 </p>
               </div>
@@ -82,7 +88,10 @@ const HeroSection = () => {
                 transition={{ delay: 0, duration: 0.3 }}
                 whileHover={{ scale: 1.02 }}
               >
-                <p>Let's Build</p> <ArrowRight />
+                <p>
+                  <Trans id="Let's Build">Let's Build</Trans>
+                </p>
+                <ArrowRight className="w-4 h-4 rtl:rotate-180 transition-transform" />
               </motion.button>
             </div>
           </motion.div>

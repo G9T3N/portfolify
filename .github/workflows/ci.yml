@@ -29,8 +29,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
 
-      - name: Lint
-        run: pnpm lint
+      - name: Lint (oxlint, fast)
+        run: pnpm lint:oxc
+
+      - name: Lint (ESLint)
+        run: pnpm lint:eslint
 
       - name: Format check
         run: pnpm format:check

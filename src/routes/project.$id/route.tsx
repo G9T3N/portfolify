@@ -36,9 +36,10 @@ export function meta({ data }: Route.MetaArgs) {
     { rel: "canonical", href: url },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
-    { property: "og:type", content: "article" },
+    { property: "og:type", content: "website" },
     { property: "og:url", content: url },
     { property: "og:image", content: image },
+    { property: "og:site_name", content: "Wael Alamrany (Mr.Err)" },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
@@ -77,16 +78,25 @@ export default function ProjectDetails() {
     );
   }
 
-  const breadcrumbLd = {
+  const projectUrl = `${SITE_URL}/project/${project.id}`;
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+    "@graph": [
       {
-        "@type": "ListItem",
-        position: 2,
+        "@type": "WebPage",
+        "@id": `${projectUrl}#webpage`,
+        url: projectUrl,
         name: project.title,
-        item: `${SITE_URL}/project/${project.id}`,
+        description: project.description || undefined,
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        about: { "@id": `${SITE_URL}/#person` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: project.title, item: projectUrl },
+        ],
       },
     ],
   };
@@ -95,7 +105,7 @@ export default function ProjectDetails() {
     <div className="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] pb-24">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       {/* Header / Navigation */}
       <nav className="sticky top-0 z-50 backdrop-blur-md bg-[var(--color-bg-primary)]/80 border-b border-[var(--color-border-default)] px-4 py-4 md:px-8">
@@ -166,6 +176,8 @@ export default function ProjectDetails() {
                 <img
                   src={project.thumbnail_url as string}
                   alt={project.title as string}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               </div>

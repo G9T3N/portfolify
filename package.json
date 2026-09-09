@@ -7,9 +7,12 @@
     "dev": "vite --port 3000 --host ",
     "build": "react-router build",
     "preview": "vite preview --port 3000",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "lint:oxc": "oxlint --tsconfig tsconfig.app.json --ignore-pattern '.opencode' --ignore-pattern '.react-router' --ignore-pattern 'dist'",
+    "lint": "oxlint -c .oxlintrc.json . && eslint .",
+    "lint:fix": "oxlint -c .oxlintrc.json --fix . && eslint . --fix",
+    "lint:oxc": "oxlint -c .oxlintrc.json .",
+    "lint:oxc:fix": "oxlint -c .oxlintrc.json --fix .",
+    "lint:eslint": "eslint .",
+    "lint:eslint:fix": "eslint . --fix",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "typecheck": "tsc --noEmit",
@@ -17,11 +20,26 @@
     "msg:extract": "lingui extract",
     "msg:compile": "lingui compile",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "oxlint -c .oxlintrc.json --fix",
+      "oxfmt --write"
+    ],
+    "*.{js,jsx,mjs,cjs}": [
+      "oxlint -c .oxlintrc.json --fix",
+      "oxfmt --write"
+    ],
+    "*.{css,md}": [
+      "oxfmt --write"
+    ]
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
     "@fontsource-variable/geist": "^5.2.9",
+    "@fontsource-variable/inter": "^5.3.0",
     "@hookform/resolvers": "^5.4.0",
     "@lingui/core": "^6.4.0",
     "@lingui/macro": "^5.9.5",
@@ -109,7 +127,9 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "husky": "^9.1.7",
     "jsdom": "^29.1.1",
+    "lint-staged": "^17.5.0",
     "oxfmt": "^0.55.0",
     "oxlint": "^1.70.0",
     "postcss": "^8.5.15",

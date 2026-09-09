@@ -11,11 +11,11 @@ export function meta(_args: Route.MetaArgs) {
     { title: SITE_TITLE },
     { name: "description", content: SITE_DESCRIPTION },
     { name: "author", content: "Wael Alamrany" },
-    { rel: "canonical", href: SITE_URL },
+    { rel: "canonical", href: `${SITE_URL}/` },
     { property: "og:title", content: SITE_TITLE },
     { property: "og:description", content: SITE_DESCRIPTION },
     { property: "og:type", content: "website" },
-    { property: "og:url", content: SITE_URL },
+    { property: "og:url", content: `${SITE_URL}/` },
     { property: "og:image", content: OG_IMAGE },
     { property: "og:image:width", content: "1200" },
     { property: "og:image:height", content: "630" },
@@ -36,12 +36,28 @@ const structuredData = {
       "@id": `${SITE_URL}/#person`,
       name: "Wael Alamrany",
       alternateName: "Mr.Err",
-      jobTitle: "Full-Stack Developer & UI Specialist",
+      jobTitle: "Software Engineer",
+      worksFor: { "@type": "Organization", name: "Sofa" },
       description: SITE_DESCRIPTION,
       url: SITE_URL,
       image: OG_IMAGE,
-      sameAs: ["https://github.com/G9T3N", "https://www.linkedin.com/in/wael-alamrany-1557a5288"],
-      knowsAbout: ["React", "Next.js", "TypeScript", "Node.js", "Web Performance"],
+      sameAs: [
+        "https://github.com/G9T3N",
+        "https://www.linkedin.com/in/wael-alamrany-1557a5288",
+        "https://www.npmjs.com/~g9t3n",
+        "https://github.com/wael-amrany",
+      ],
+      knowsAbout: [
+        "React",
+        "TypeScript",
+        "Next.js",
+        "TanStack Query",
+        "Zustand",
+        "REST & OpenAPI",
+        "CI/CD & Release Automation",
+        "FastAPI",
+        "Node.js",
+      ],
     },
     {
       "@type": "WebSite",
@@ -57,11 +73,13 @@ const structuredData = {
 
 // Lazy load below-the-fold components
 const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
+const ExperienceSection = lazy(() => import("@/components/ExperienceSection"));
 const AboutSection = lazy(() => import("@/components/AboutSection"));
 const SkillsSection = lazy(() => import("@/components/SkillsSection"));
 const ContactSection = lazy(() => import("@/components/ContactSection"));
 const Footer = lazy(() => import("@/components/Footer"));
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
+const FaqSection = lazy(() => import("@/components/FaqSection"));
 
 // Fallback skeleton or empty block to prevent layout shift
 const SectionFallback = () => (
@@ -98,6 +116,14 @@ export default function HomeRoute() {
         <LazyInView margin="300px" fallback={<SectionFallback />}>
           <Suspense fallback={<SectionFallback />}>
             <div className="snap-section">
+              <ExperienceSection />
+            </div>
+          </Suspense>
+        </LazyInView>
+
+        <LazyInView margin="300px" fallback={<SectionFallback />}>
+          <Suspense fallback={<SectionFallback />}>
+            <div className="snap-section">
               <AboutSection />
             </div>
           </Suspense>
@@ -114,6 +140,14 @@ export default function HomeRoute() {
         <LazyInView margin="300px" fallback={<div className="min-h-[30vh] animate-pulse" />}>
           <Suspense fallback={null}>
             <TestimonialsSection />
+          </Suspense>
+        </LazyInView>
+
+        <LazyInView margin="300px" fallback={<div className="min-h-[30vh] animate-pulse" />}>
+          <Suspense fallback={null}>
+            <div className="snap-section">
+              <FaqSection />
+            </div>
           </Suspense>
         </LazyInView>
 

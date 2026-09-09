@@ -6,6 +6,7 @@ import lanyardImage from "@/assets/lanyard/lanyard.jpg";
 export const FeaturedCard = () => {
   const socialPosts = [
     <motion.div
+      key="social-post-1"
       className="md:col-span-4 w-full!  mt-12 md:mt-0 relative"
       initial={{ opacity: 0, x: 80 }}
       animate={{ opacity: 1, x: 0 }}
@@ -26,6 +27,8 @@ export const FeaturedCard = () => {
             <img
               src="/favicon.svg"
               alt="Mr.Err"
+              width="128"
+              height="128"
               className="w-32 h-32 opacity-30"
               loading="lazy"
               decoding="async"
@@ -42,6 +45,7 @@ export const FeaturedCard = () => {
       </div>
     </motion.div>,
     <motion.div
+      key="social-post-2"
       className="md:col-span-4 w-full! mt-12 md:mt-0 relative"
       initial={{ opacity: 0, x: 80 }}
       animate={{ opacity: 1, x: 0 }}
@@ -62,6 +66,8 @@ export const FeaturedCard = () => {
             <img
               src={lanyardImage}
               alt="Mr.Err"
+              width="128"
+              height="128"
               className=" w-32 h-32 rounded-3xl opacity-80"
               loading="lazy"
               decoding="async"

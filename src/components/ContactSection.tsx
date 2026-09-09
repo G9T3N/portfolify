@@ -60,13 +60,13 @@ const ContactSection = () => {
 
               <div className="flex flex-col gap-3">
                 <a
-                  href="mailto:waelamrany@gmail.com"
+                  href="mailto:waelalamrany7@gmail.com"
                   className="group flex items-center gap-3 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
                 >
                   <span className="flex items-center justify-center min-w-8 h-8 rounded-full border border-[var(--color-border-default)] group-hover:border-[var(--color-text-primary)] transition-colors">
                     <Mail className="w-4 h-4" />
                   </span>
-                  waelamrany@gmail.com
+                  waelalamrany7@gmail.com
                 </a>
 
                 {/* Phone numbers — hidden by default */}
@@ -170,7 +170,7 @@ const ContactSection = () => {
 
               {/* Let's talk */}
               <a
-                href="mailto:waelamrany@gmail.com"
+                href="mailto:waelalamrany7@gmail.com"
                 className="bg-[var(--color-mp-text-primary)] text-[var(--color-bg-primary)] px-10 h-12 rounded-xl border flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
               >
                 <Sparkles className="w-4 h-4" />

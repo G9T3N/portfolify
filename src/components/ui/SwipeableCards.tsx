@@ -63,7 +63,13 @@ const SwipeableCards = ({
       >
         {images.map((image, index) => (
           <SwiperSlide key={index} className="rounded-3xl">
-            <img className="h-full w-full object-cover" src={image.src} alt={image.alt} />
+            <img
+              className="h-full w-full object-cover"
+              src={image.src}
+              alt={image.alt}
+              loading="lazy"
+              decoding="async"
+            />
           </SwiperSlide>
         ))}
         {showNavigation && (

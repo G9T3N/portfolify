@@ -1,0 +1,52 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": [
+    "**/*.test.{ts,tsx}",
+    "**/*.spec.{ts,tsx}",
+    "dist",
+    ".react-router",
+    ".opencode",
+    "build",
+    "new",
+    "node_modules"
+  ],
+  "plugins": [
+    "react",
+    "typescript",
+    "unicorn",
+    "oxc",
+    "import",
+    "promise"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "rules": {
+    "no-console": "warn",
+    "eqeqeq": "warn",
+    "no-debugger": "error",
+    "no-var": "error",
+    "prefer-const": "warn",
+    "react/jsx-key": "error",
+    "react/jsx-no-undef": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "typescript/no-explicit-any": "warn",
+    "typescript/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "unicorn/prefer-string-slice": "warn",
+    "unicorn/prefer-includes": "warn",
+    "no-compare-neg-zero": "error",
+    "no-unsafe-finally": "error",
+    "no-unsafe-negation": "error"
+  }
+}
