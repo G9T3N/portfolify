@@ -64,13 +64,21 @@ function loadGtagScript(): void {
         window.gtag?.("event", "page_view", { ...pending, send_to: GA_ID });
       }
     };
+    script.onerror = () => {
+      // Gracefully silence ad-blocker network block errors
+    };
     document.head.appendChild(script);
   };
-  if (document.readyState === "complete") {
-    inject();
-  } else {
-    window.addEventListener("load", inject, { once: true });
-  }
+  const scheduleInject = (fn: () => void) => {
+    if (typeof window === "undefined") return;
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(fn, { timeout: 3500 });
+    } else {
+      setTimeout(fn, 2000);
+    }
+  };
+
+  scheduleInject(inject);
 }
 
 /** Lazily injects the Umami tracking script after the page has loaded / is idle. */
@@ -84,13 +92,21 @@ function loadUmamiScript(): void {
     script.defer = true;
     script.src = UMAMI_SCRIPT_URL as string;
     script.setAttribute("data-website-id", UMAMI_WEBSITE_ID as string);
+    script.onerror = () => {
+      // Gracefully silence ad-blocker network block errors
+    };
     document.head.appendChild(script);
   };
-  if (document.readyState === "complete") {
-    inject();
-  } else {
-    window.addEventListener("load", inject, { once: true });
-  }
+  const scheduleInject = (fn: () => void) => {
+    if (typeof window === "undefined") return;
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(fn, { timeout: 3500 });
+    } else {
+      setTimeout(fn, 2000);
+    }
+  };
+
+  scheduleInject(inject);
 }
 
 /**
