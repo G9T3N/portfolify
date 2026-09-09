@@ -29,6 +29,13 @@ const sidebarItems = [
 /**
  * Renders the admin page layout with a fixed left sidebar and a main content area.
  */
+export function meta() {
+  return [
+    { title: "Admin Panel — Wael Alamrany (Mr.Err)" },
+    { name: "robots", content: "noindex, nofollow" },
+  ];
+}
+
 export default function AdminLayout() {
   const { data: stats } = useAdminStats();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
