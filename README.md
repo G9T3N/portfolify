@@ -26,19 +26,34 @@ pnpm preview    # preview production build
 
 ## Available Scripts
 
-| Command           | Description                                 |
-| ----------------- | ------------------------------------------- |
-| `pnpm dev`        | Start dev server on port 3000               |
-| `pnpm build`      | Production build (react-router build + tsc) |
-| `pnpm preview`    | Preview production build                    |
-| `pnpm lint`       | Run ESLint                                  |
-| `pnpm lint:fix`   | Fix ESLint issues                           |
-| `pnpm lint:oxc`   | Run oxlint                                  |
-| `pnpm format`     | Format code with oxfmt                      |
-| `pnpm typecheck`  | TypeScript type checking                    |
-| `pnpm test`       | Run Vitest tests                            |
-| `pnpm test:watch` | Run tests in watch mode                     |
-| `pnpm doctor`     | Run React Doctor                            |
+| Command            | Description                                 |
+| ------------------ | ------------------------------------------- |
+| `pnpm dev`         | Start dev server on port 3000               |
+| `pnpm build`       | Production build (react-router build + tsc) |
+| `pnpm preview`     | Preview production build                    |
+| `pnpm lint`        | Run oxlint then ESLint                      |
+| `pnpm lint:oxc`    | Run oxlint only (fast)                      |
+| `pnpm lint:eslint` | Run ESLint only                             |
+| `pnpm lint:fix`    | Auto-fix oxlint + ESLint issues             |
+| `pnpm format`      | Format code with oxfmt                      |
+| `pnpm typecheck`   | TypeScript type checking                    |
+| `pnpm test`        | Run Vitest tests                            |
+| `pnpm test:watch`  | Run tests in watch mode                     |
+| `pnpm doctor`      | Run React Doctor                            |
+
+## Environment Variables
+
+| Variable                   | Purpose                                                                       |
+| -------------------------- | ----------------------------------------------------------------------------- |
+| `VITE_SUPABASE_URL`        | Supabase project URL (required)                                               |
+| `VITE_SUPABASE_PROJECT_ID` | Supabase project ID (required)                                                |
+| `VITE_GA_MEASUREMENT_ID`   | GA4 property ID (`G-…`). Empty = GA4 fully disabled.                          |
+| `VITE_UMAMI_SCRIPT_URL`    | Umami host script URL. Must be set **with** the website ID for Umami to load. |
+| `VITE_UMAMI_WEBSITE_ID`    | Umami website ID. Empty = Umami disabled.                                     |
+
+All optional analytics variables are env-gated: when empty, nothing is injected and
+no network requests are made. GA4 initializes after page load and tracks SPA route
+changes as page views. Umami is defer-loaded and tracks navigation automatically.
 
 ## Project Structure
 

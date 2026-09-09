@@ -6,6 +6,7 @@ import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { messages as messagesEn } from "./locales/en/messages";
 import { messages as messagesAr } from "./locales/ar/messages";
+import { Analytics } from "@/lib/analytics";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,18 +40,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         <Meta />
         <Links />
       </head>
       <body>
         {children}
+        <Analytics />
         <Toaster />
         <ScrollRestoration />
         <Scripts />
