@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { lazy, Suspense } from "react";
-import { useWorkExperiences, useSiteSetting } from "@/queries";
+import { Suspense, lazy } from "react";
+import { useSiteSetting, useWorkExperiences } from "@/queries";
 import { LazyInView } from "./common/LazyInView";
-import { MapPin, Calendar, Briefcase, Sparkles, FileDown } from "lucide-react";
+import { Briefcase, Calendar, FileDown, MapPin, Sparkles } from "lucide-react";
 
 const Lanyard = lazy(() => import("./Lanyard"));
 
@@ -58,25 +58,34 @@ const AboutSection = () => {
             className=" flex-3"
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ margin: "-100px", once: true }}
+            transition={{ delay: 0.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="text-2xl sm:text-3xl md:text-4xl leading-[1.3] text-center md:font-light text-[var(--color-text-secondary)]">
-              I&apos;m a{" "}
-              <strong className="font-bold text-[var(--color-text-primary)]">
-                Full Stack Developer
-              </strong>{" "}
-              & <strong className="font-bold text-[var(--color-text-primary)]">designer</strong>{" "}
-              specializing in{" "}
-              <strong className="font-bold text-[var(--color-text-primary)]">
-                Frontend Engineering,
-              </strong>{" "}
-              focusing on building high quality web experiences through{" "}
-              <strong className="font-bold text-[var(--color-text-primary)]">clean code</strong> and{" "}
-              <strong className="font-bold text-[var(--color-text-primary)]">
-                thoughtful design.
-              </strong>
-            </p>
+            <div className="space-y-4 text-center md:text-left">
+              <p className="text-2xl sm:text-3xl md:text-4xl leading-[1.3] text-[var(--color-text-primary)] font-medium">
+                Software Engineer based in Sana'a, Yemen & collaborating worldwide.
+              </p>
+              <p className="text-base sm:text-lg leading-relaxed text-[var(--color-text-secondary)] font-normal">
+                I currently work at{" "}
+                <strong className="text-[var(--color-text-primary)]">Sofa</strong> and collaborate
+                remotely with{" "}
+                <strong className="text-[var(--color-text-primary)]">Sparksoft</strong> and{" "}
+                <strong className="text-[var(--color-text-primary)]">OnePlusOneTech</strong>. My
+                core domain is <strong className="text-[var(--color-text-primary)]">React</strong>{" "}
+                and <strong className="text-[var(--color-text-primary)]">TypeScript</strong>, with
+                extensive experience across REST APIs, backend integration, CI/CD, release
+                automation, debugging, architecture, and code quality.
+              </p>
+              <p className="text-sm sm:text-base leading-relaxed text-[var(--color-text-muted)]">
+                I prioritize deep understanding of system architecture and business logic to ship
+                reliable, high-performance web products. Beyond commercial work, I publish reusable
+                NPM utilities under the{" "}
+                <code className="text-xs bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded text-[var(--color-text-primary)]">
+                  @g9t3n
+                </code>{" "}
+                namespace and contribute to open-source tooling.
+              </p>
+            </div>
 
             {/* Quick stats */}
             <motion.div
@@ -84,11 +93,11 @@ const AboutSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
             >
               <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-border-default)] text-sm text-[var(--color-text-secondary)]">
                 <MapPin className="w-4 h-4 text-[var(--color-mp-primary)]" />
-                Remote — Worldwide
+                Sana'a, Yemen & Remote
               </div>
               {yearsExperience && (
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-border-default)] text-sm text-[var(--color-text-secondary)]">
@@ -104,11 +113,11 @@ const AboutSection = () => {
 
             {/* CTA buttons */}
             <motion.div
-              className="mt-12 flex flex-wrap justify-center md:justify-start gap-3"
+              className="mt-10 flex flex-wrap justify-center md:justify-start items-center gap-3"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
             >
               <a
                 href="#contact"
@@ -130,6 +139,22 @@ const AboutSection = () => {
               >
                 <FileDown className="w-4 h-4" />
                 View CV
+              </a>
+              <a
+                href="https://www.npmjs.com/~g9t3n"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-3 rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)] transition-all text-sm font-medium"
+              >
+                NPM Profile
+              </a>
+              <a
+                href="https://github.com/wael-amrany"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-3 rounded-full border border-[var(--color-border-default)] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)] transition-all text-sm font-medium"
+              >
+                Secondary GitHub
               </a>
             </motion.div>
           </motion.div>

@@ -3,14 +3,64 @@ import { useState, useMemo } from "react";
 import { useProjects } from "@/queries";
 import { ProjectCard } from "./portfolio/ProjectCard";
 
-/** Titles that look like placeholder/test content */
-const PLACEHOLDER_PATTERNS = /^(test|asdasd|asd|placeholder|lorem|untitled|example)$/i;
+const DEFAULT_PROJECTS = [
+  {
+    id: "sofa-platform",
+    title: "Sofa Platform",
+    description:
+      "Production web product work spanning reusable React interfaces, API integration, application state, debugging, and maintainable feature delivery.",
+    category: "web",
+    status: "live",
+    thumbnail_url: null,
+    tech_stack: ["React", "TypeScript", "REST", "Production"],
+    live_url: "https://play.sofa.ye",
+    code_url: null,
+  },
+  {
+    id: "portfolify-project",
+    title: "Portfolify",
+    description:
+      "A TypeScript-based public project focused on modern portfolio/product presentation and reusable frontend structure.",
+    category: "web",
+    status: "live",
+    thumbnail_url: null,
+    tech_stack: ["TypeScript", "React", "UI"],
+    live_url: null,
+    code_url: "https://github.com/G9T3N/portfolify",
+  },
+  {
+    id: "open-source-npm",
+    title: "Open Source & NPM",
+    description:
+      "Reusable React utilities and Mapbox tooling published under the g9t3n namespace, including Skeletune and geospatial packages.",
+    category: "open-source",
+    status: "live",
+    thumbnail_url: null,
+    tech_stack: ["NPM", "React", "Mapbox", "Open Source"],
+    live_url: "https://www.npmjs.com/~g9t3n",
+    code_url: "https://github.com/G9T3N",
+  },
+];
 
-function isPlaceholder(project: { title: string; description: string }): boolean {
-  return (
-    PLACEHOLDER_PATTERNS.test(project.title.trim()) ||
-    PLACEHOLDER_PATTERNS.test(project.description.trim())
-  );
+/** Titles that look like placeholder/test content */
+const PLACEHOLDER_PATTERNS =
+  /^(test|asdasd|asd|placeholder|lorem|untitled|example|secureauth dashboard|cryptotracker pro|healthsync mobile|devops monitor)$/i;
+
+function isPlaceholder(project: {
+  title: string;
+  description: string;
+  live_url?: string | null;
+  code_url?: string | null;
+}): boolean {
+  if (PLACEHOLDER_PATTERNS.test(project.title.trim())) return true;
+  if (PLACEHOLDER_PATTERNS.test(project.description.trim())) return true;
+  if (
+    project.live_url?.includes("example.com") &&
+    (!project.code_url || project.code_url.includes("example.com"))
+  ) {
+    return true;
+  }
+  return false;
 }
 
 const ProjectsSection = () => {
@@ -19,7 +69,8 @@ const ProjectsSection = () => {
 
   // Filter out placeholder projects and ensure they are 'live'
   const validProjects = useMemo(() => {
-    return (projects ?? []).filter((p) => !isPlaceholder(p) && p.status === "live");
+    const filtered = (projects ?? []).filter((p) => !isPlaceholder(p) && p.status === "live");
+    return filtered.length > 0 ? filtered : DEFAULT_PROJECTS;
   }, [projects]);
 
   // Get unique categories

@@ -1,4 +1,4 @@
-import { GitMerge, Dock, Mail } from "lucide-react";
+import { GitMerge, Dock, Mail, Package } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useState, useCallback, useRef, useEffect } from "react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -6,7 +6,8 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 const SOCIAL_LINKS = [
   { icon: GitMerge, href: "https://github.com/G9T3N", label: "GitHub" },
   { icon: Dock, href: "https://www.linkedin.com/in/wael-alamrany-1557a5288", label: "LinkedIn" },
-  { icon: Mail, href: "mailto:waelamrany@gmail.com", label: "Email" },
+  { icon: Package, href: "https://www.npmjs.com/~g9t3n", label: "NPM Packages" },
+  { icon: Mail, href: "mailto:waelalamrany7@gmail.com", label: "Email" },
 ] as const;
 
 const Footer = () => {
@@ -46,12 +47,18 @@ const Footer = () => {
     <footer className="px-4 md:px-8 lg:px-12 py-12 border-t border-[var(--color-border-default)]">
       <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Copyright — 5-click to access admin */}
-        <p
-          className="text-sm text-[var(--color-text-muted)] cursor-default select-none"
-          onClick={handleCopyrightClick}
-        >
-          © {currentYear} Wael Alamrany. All rights reserved.
-        </p>
+        <div className="flex flex-col sm:flex-row items-center gap-2">
+          <p
+            className="text-sm text-[var(--color-text-muted)] cursor-default select-none hover:text-[var(--color-text-secondary)] transition-colors"
+            onClick={handleCopyrightClick}
+          >
+            © {currentYear} Wael Alamrany. Built as Mr.Err.
+          </p>
+          <span className="hidden sm:inline text-xs text-[var(--color-text-muted)]">•</span>
+          <span className="text-xs text-[var(--color-text-muted)] font-mono">
+            Software Engineer · React & TypeScript
+          </span>
+        </div>
 
         {/* Social links */}
         <TooltipProvider delayDuration={100}>
