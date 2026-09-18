@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Award,
   CheckCircle2,
@@ -28,24 +28,22 @@ export default function PortfolioMetricsManager() {
   const { data: experiences } = useWorkExperiences();
   const updateMutation = useUpdatePortfolioMetricsMutation();
 
-  const [projectsDeliveredInput, setProjectsDeliveredInput] = useState<string>("");
-  const [yearsExperienceInput, setYearsExperienceInput] = useState<string>("");
+  const [draftProjects, setDraftProjects] = useState<string | null>(null);
+  const [draftYears, setDraftYears] = useState<string | null>(null);
 
-  // Sync inputs with backend values when fetched
-  useEffect(() => {
-    if (metrics) {
-      setProjectsDeliveredInput(
-        metrics.projectsDelivered !== null && metrics.projectsDelivered !== undefined
-          ? String(metrics.projectsDelivered)
-          : "",
-      );
-      setYearsExperienceInput(
-        metrics.yearsExperience !== null && metrics.yearsExperience !== undefined
-          ? String(metrics.yearsExperience)
-          : "",
-      );
-    }
-  }, [metrics]);
+  const projectsDeliveredInput =
+    draftProjects !== null
+      ? draftProjects
+      : metrics?.projectsDelivered !== null && metrics?.projectsDelivered !== undefined
+        ? String(metrics.projectsDelivered)
+        : "";
+
+  const yearsExperienceInput =
+    draftYears !== null
+      ? draftYears
+      : metrics?.yearsExperience !== null && metrics?.yearsExperience !== undefined
+        ? String(metrics.yearsExperience)
+        : "";
 
   // Compute auto-calculated fallbacks
   const autoProjectsCount = stats?.totalProjects ?? 0;
@@ -91,6 +89,8 @@ export default function PortfolioMetricsManager() {
         projectsDelivered: parsedProjects,
         yearsExperience: parsedYears,
       });
+      setDraftProjects(null);
+      setDraftYears(null);
       toast({
         title: "Metrics updated successfully",
         description: "Your hero gauge and portfolio stats have been updated.",
@@ -106,13 +106,15 @@ export default function PortfolioMetricsManager() {
   };
 
   const handleResetToAuto = async () => {
-    setProjectsDeliveredInput("");
-    setYearsExperienceInput("");
+    setDraftProjects("");
+    setDraftYears("");
     try {
       await updateMutation.mutateAsync({
         projectsDelivered: null,
         yearsExperience: null,
       });
+      setDraftProjects(null);
+      setDraftYears(null);
       toast({
         title: "Reverted to automatic metrics",
         description:
@@ -219,7 +221,7 @@ export default function PortfolioMetricsManager() {
               min="0"
               placeholder={`Auto (${autoProjectsCount || 25})`}
               value={projectsDeliveredInput}
-              onChange={(e) => setProjectsDeliveredInput(e.target.value)}
+              onChange={(e) => setDraftProjects(e.target.value)}
               disabled={isMetricsLoading}
               className="w-full h-11 px-3.5 pe-10 bg-[var(--color-bg-card)] border border-[var(--color-border-default)] focus:border-[var(--color-mp-primary)] rounded-xl text-sm font-mono text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] outline-none transition-colors"
             />
@@ -268,7 +270,7 @@ export default function PortfolioMetricsManager() {
               min="0"
               placeholder={`Auto (${autoYearsExperience || 10})`}
               value={yearsExperienceInput}
-              onChange={(e) => setYearsExperienceInput(e.target.value)}
+              onChange={(e) => setDraftYears(e.target.value)}
               disabled={isMetricsLoading}
               className="w-full h-11 px-3.5 pe-12 bg-[var(--color-bg-card)] border border-[var(--color-border-default)] focus:border-[var(--color-mp-primary)] rounded-xl text-sm font-mono text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] outline-none transition-colors"
             />
