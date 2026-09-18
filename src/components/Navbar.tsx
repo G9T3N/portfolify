@@ -97,24 +97,15 @@ const Navbar = () => {
 
     observeSections();
 
-    const mutationObserver = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        for (const node of mutation.addedNodes) {
-          if (node instanceof Element && node.id && sectionIds.includes(node.id)) {
-            observer.observe(node);
-          }
-        }
-      }
-    });
-
-    mutationObserver.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
+    // Re-check when user scrolls so lazily mounted sections are observed
+    const onScroll = () => {
+      observeSections();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       observer.disconnect();
-      mutationObserver.disconnect();
+      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 

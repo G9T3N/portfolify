@@ -44,3 +44,11 @@ export function useDashboardStats() {
     },
   });
 }
+
+export {
+  usePortfolioMetrics,
+  useUpdatePortfolioMetricsMutation,
+  type PortfolioMetrics,
+} from "@/queries/settings";
+export { useWorkExperiences } from "@/queries/experiences";
+export { useSkills } from "@/queries/skills";

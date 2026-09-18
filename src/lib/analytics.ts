@@ -40,6 +40,33 @@ function sendPageView(): void {
   window.gtag("event", "page_view", { ...args, send_to: GA_ID });
 }
 
+/** Schedules non-critical third-party scripts on user interaction or after idle. */
+function scheduleIdleOrInteraction(fn: () => void): void {
+  if (typeof window === "undefined") return;
+
+  let triggered = false;
+  const trigger = () => {
+    if (triggered) return;
+    triggered = true;
+    for (const evt of ["scroll", "pointerdown", "touchstart", "keydown"]) {
+      window.removeEventListener(evt, trigger);
+    }
+    fn();
+  };
+
+  for (const evt of ["scroll", "pointerdown", "touchstart", "keydown"]) {
+    window.addEventListener(evt, trigger, { passive: true, once: true });
+  }
+
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(() => {
+      setTimeout(trigger, 5000);
+    });
+  } else {
+    setTimeout(trigger, 6000);
+  }
+}
+
 /** Lazily injects the GA4 script after the page has loaded / is idle. */
 function loadGtagScript(): void {
   if (!GA_ENABLED || document.querySelector("#ga4-script")) {
@@ -69,16 +96,8 @@ function loadGtagScript(): void {
     };
     document.head.appendChild(script);
   };
-  const scheduleInject = (fn: () => void) => {
-    if (typeof window === "undefined") return;
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(fn, { timeout: 3500 });
-    } else {
-      setTimeout(fn, 2000);
-    }
-  };
 
-  scheduleInject(inject);
+  scheduleIdleOrInteraction(inject);
 }
 
 /** Lazily injects the Umami tracking script after the page has loaded / is idle. */
@@ -97,16 +116,8 @@ function loadUmamiScript(): void {
     };
     document.head.appendChild(script);
   };
-  const scheduleInject = (fn: () => void) => {
-    if (typeof window === "undefined") return;
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(fn, { timeout: 3500 });
-    } else {
-      setTimeout(fn, 2000);
-    }
-  };
 
-  scheduleInject(inject);
+  scheduleIdleOrInteraction(inject);
 }
 
 /**
