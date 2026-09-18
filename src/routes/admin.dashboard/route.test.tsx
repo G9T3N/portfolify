@@ -21,9 +21,13 @@ vi.mock("@/components/ui/card", () => ({
   ),
 }));
 
-// Mock useDashboardStats query
+// Mock queries
 vi.mock("./queries", () => ({
   useDashboardStats: vi.fn(),
+  usePortfolioMetrics: vi.fn(() => ({ data: undefined, isLoading: false })),
+  useUpdatePortfolioMetricsMutation: vi.fn(() => ({ mutateAsync: vi.fn(), isPending: false })),
+  useSkills: vi.fn(() => ({ data: [] })),
+  useWorkExperiences: vi.fn(() => ({ data: [] })),
 }));
 
 import { useDashboardStats } from "./queries";

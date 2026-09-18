@@ -1,1 +1,11 @@
+# Load Node / NVM / pnpm if running in a non-interactive shell (e.g. VS Code, Git GUI)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use 2>/dev/null
+
+if ! command -v pnpm >/dev/null 2>&1; then
+  for dir in "$HOME"/.nvm/versions/node/*/bin "$HOME"/.local/share/pnpm "$HOME"/.pnpm-global/bin "$HOME"/bin /usr/local/bin; do
+    [ -d "$dir" ] && export PATH="$dir:$PATH"
+  done
+fi
+
 pnpm exec lint-staged

@@ -38,6 +38,8 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } },
 };
 
+import PortfolioMetricsManager from "./components/portfolio-metrics-manager";
+
 /**
  * Render the admin dashboard overview with animated statistic cards.
  */
@@ -57,8 +59,8 @@ export default function AdminDashboard() {
           Dashboard Overview
         </h1>
         <p className="text-base text-[var(--color-text-muted)] mt-2 font-sans max-w-xl">
-          Welcome to the control center. Here is a high-level view of your portfolio's metrics and
-          data.
+          Welcome to the admin panel control center. Here is a high-level view of your portfolio's
+          metrics and data.
         </p>
       </div>
 
@@ -93,6 +95,9 @@ export default function AdminDashboard() {
           </motion.div>
         ))}
       </motion.div>
+
+      {/* Portfolio Public Hero Metrics Management */}
+      <PortfolioMetricsManager />
     </motion.div>
   );
 }

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Suspense, lazy } from "react";
-import { useSiteSetting, useWorkExperiences } from "@/queries";
+import { usePortfolioMetrics, useSiteSetting, useWorkExperiences } from "@/queries";
 import { LazyInView } from "./common/LazyInView";
 import { Briefcase, Calendar, FileDown, MapPin, Sparkles } from "lucide-react";
 
@@ -9,8 +9,9 @@ const Lanyard = lazy(() => import("./Lanyard"));
 const AboutSection = () => {
   const { data: experiences } = useWorkExperiences();
   const { data: cvUrl } = useSiteSetting("cv_url");
+  const { data: metrics } = usePortfolioMetrics();
 
-  const yearsExperience =
+  const autoYearsExperience =
     experiences && experiences.length > 0
       ? Math.max(
           1,
@@ -20,6 +21,11 @@ const AboutSection = () => {
             ).getFullYear(),
         )
       : null;
+
+  const yearsExperience =
+    metrics?.yearsExperience !== null && metrics?.yearsExperience !== undefined
+      ? metrics.yearsExperience
+      : autoYearsExperience;
 
   return (
     <section id="about" className="px-4 md:px-8 lg:px-12 py-16 md:py-32">

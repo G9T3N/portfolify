@@ -5,6 +5,7 @@ import { Metric, MetricsModal } from "./MetricsModal";
 import {
   useCertificates,
   useGithubStats,
+  usePortfolioMetrics,
   useProjects,
   useSkills,
   useWorkExperiences,
@@ -17,10 +18,11 @@ export const Gauge = () => {
   const { data: skills } = useSkills();
   const { data: certificates } = useCertificates();
   const { data: experiences } = useWorkExperiences();
+  const { data: customMetrics } = usePortfolioMetrics();
 
   const [currentStat, setCurrentStat] = useState(0);
 
-  const yearsExperience =
+  const autoYearsExperience =
     experiences && experiences.length > 0
       ? Math.max(
           1,
@@ -30,25 +32,41 @@ export const Gauge = () => {
             ).getFullYear(),
         )
       : 0;
+
+  const yearsExperience =
+    customMetrics?.yearsExperience !== null && customMetrics?.yearsExperience !== undefined
+      ? customMetrics.yearsExperience
+      : autoYearsExperience > 0
+        ? autoYearsExperience
+        : 10;
+
   const radius = 80;
   const circumference = Math.PI * radius;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const projectCount = projects?.length ?? 0;
+
+  const autoProjectCount = projects?.length ?? 0;
+  const projectCount =
+    customMetrics?.projectsDelivered !== null && customMetrics?.projectsDelivered !== undefined
+      ? customMetrics.projectsDelivered
+      : autoProjectCount > 0
+        ? autoProjectCount
+        : 25;
+
   const skillCount = skills?.length ?? 0;
   const certificateCount = certificates?.length ?? 0;
   const coreStats: Metric[] = [
     {
       label: "Projects Delivered",
-      value: projectCount > 0 ? projectCount : 25,
+      value: projectCount,
       unit: "+",
-      max: 100,
+      max: Math.max(100, Math.ceil((projectCount * 1.25) / 10) * 10),
     },
     {
       label: "Years Experience",
-      value: yearsExperience > 0 ? yearsExperience : 10,
+      value: yearsExperience,
       unit: "+",
-      max: 20,
+      max: Math.max(20, Math.ceil(yearsExperience * 1.5)),
     },
     { label: "Skills Mastered", value: skillCount > 0 ? skillCount : 40, unit: "+", max: 100 },
     {

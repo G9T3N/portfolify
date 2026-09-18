@@ -50,6 +50,7 @@ export function CardStack<T extends StackableItem>({
         >
           <motion.div
             className="h-full w-full"
+            initial={false}
             animate={{
               rotateZ: -(items.length - index - 1) * config.rotation,
               scale: 1 + index * config.scale - items.length * config.scale,

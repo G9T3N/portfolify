@@ -199,6 +199,18 @@ INSERT INTO public.site_settings (id, key, value, updated_at) VALUES
   'bio',
   'Software Engineer based in Sana''a, Yemen. Specializing in React, TypeScript, production architectures, and open-source tooling.',
   NOW()
+),
+(
+  'a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d',
+  'projects_delivered',
+  '25',
+  NOW()
+),
+(
+  'c2d3e4f5-a6b7-4c8d-9e0f-1a2b3c4d5e6f',
+  'years_experience',
+  '10',
+  NOW()
 )
 ON CONFLICT (key) DO UPDATE SET
   value = EXCLUDED.value,

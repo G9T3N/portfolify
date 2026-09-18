@@ -1,6 +1,7 @@
+import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
-import { Toaster } from "@/components/ui/sonner";
+const Toaster = lazy(() => import("@/components/ui/sonner").then((m) => ({ default: m.Toaster })));
 import "./index.css";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
@@ -38,8 +39,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preload" as="image" href="/favicon.svg" fetchPriority="high" />
         <meta name="theme-color" content="#000000" />
+        <link
+          rel="preload"
+          as="image"
+          href="/favicon.svg"
+          type="image/svg+xml"
+          fetchPriority="high"
+        />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -50,7 +57,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <Analytics />
-        <Toaster />
+        <Suspense fallback={null}>
+          <Toaster />
+        </Suspense>
         <ScrollRestoration />
         <Scripts />
       </body>
