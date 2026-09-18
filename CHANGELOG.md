@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.0](https://github.com/G9T3N/portfolify/compare/v1.6.0...v1.7.0) (2026-09-18)
+
+
+### Features
+
+* add portfolio metrics manager and queries for admin dashboard ([e74f15a](https://github.com/G9T3N/portfolify/commit/e74f15ad91284b979448e62cd5fddfae461f4d47))
+* add portfolio metrics manager and queries for admin dashboard ([d38b525](https://github.com/G9T3N/portfolify/commit/d38b5253cb00002f65f8b7437775fc19b599f8f0))
+
 ## [1.6.0](https://github.com/G9T3N/portfolify/compare/v1.5.0...v1.6.0) (2026-09-09)
 
 
