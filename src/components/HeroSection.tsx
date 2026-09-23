@@ -4,6 +4,7 @@ import { Trans } from "@lingui/react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ImageCardStack } from "./card-swapping/features/ImageStack";
+import Navbar from "./Navbar";
 
 // Lazy load the heavy widgets so they don't block the initial text/gradient render
 const Gauge = lazy(() => import("./portfolio/Gauge").then((m) => ({ default: m.Gauge })));
@@ -27,7 +28,7 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-[90vh] lg:min-h-[85svh] flex flex-col">
       {/* Main content area */}
-      <div className="flex-1 flex flex-col lg:flex-row gap-6 pt-14 lg:pt-5 pb-8">
+      <div className="flex-1 flex flex-col lg:flex-row gap-10 pt-14 lg:pt-0 pb-8">
         {/* Left — Gradient mesh hero image */}
         <motion.div
           className="relative flex-1 gradient-mesh rounded-4xl rounded-ee-none overflow-hidden min-h-[50vh] lg:min-h-0"
@@ -37,7 +38,7 @@ const HeroSection = () => {
           <div className="relative flex flex-col justify-start h-full">
             {/* Bottom text overlay */}
             <motion.div
-              className="inverted-border-card ps-6 md:ps-8 p-7 md:pt-10 lg:pt-12"
+              className="inverted-border-card ps-6 md:ps-8 p-7 md:pt-10 lg:pt-20"
               initial={{ opacity: 1 }}
               animate={{ opacity: 1 }}
             >
