@@ -10,11 +10,31 @@ import asset10 from "./assets/23-705.svg";
 import asset11 from "./assets/I19-463;19-443.svg";
 import asset12 from "./assets/I19-465;162-1328.svg";
 import asset17 from "./assets/23-704.webp";
-import asset18 from "./assets/4-67.webp";
 import asset19 from "./assets/I6-23;4-67.webp";
 import asset20 from "./assets/I9-189;4-67.webp";
 import asset21 from "./assets/10-213.webp";
 import logoWithText from "./assets/logo_with_text.png";
+
+import coverBigCart from "./assets/projects/big-cart.svg";
+import coverCode4u from "./assets/projects/code4u.svg";
+import coverDemoRepository from "./assets/projects/demo-repository.svg";
+import coverDigitalMarket from "./assets/projects/digitalmarket.png";
+import coverHajzakConsole from "./assets/projects/hajzak-console.svg";
+import coverHajzakDashboard from "./assets/projects/hajzak-dashboard.svg";
+import coverHajzakUser from "./assets/projects/hajzak-user.svg";
+import coverHareer from "./assets/projects/hareer.svg";
+import coverLandingPage from "./assets/projects/landing-page.svg";
+import coverMrerrPlatform from "./assets/projects/mrerr-platform.svg";
+import coverMrerror from "./assets/projects/mrerror.png";
+import coverPortfoliofy from "./assets/projects/portfoliofy.svg";
+import coverPortfolify from "./assets/projects/portfolify.svg";
+import coverReactScreenutil from "./assets/projects/react-screenutil.svg";
+import coverSkeletune from "./assets/projects/skeletune.svg";
+import coverSolvera from "./assets/projects/solvera.svg";
+import coverSparksoftFrontTemplate from "./assets/projects/sparksoft-front-template.svg";
+import coverSparksoftStarterTemplate from "./assets/projects/sparksoft-starter-template.svg";
+import coverSparksoft from "./assets/projects/sparksoft.svg";
+import coverYemenCertificate from "./assets/projects/yemen-certificate.svg";
 
 import ProjectCard from "./components/ProjectCard";
 import SkillCategory from "./components/SkillCategory";
@@ -22,6 +42,170 @@ import ContactMethod from "./components/ContactMethod";
 import DotPattern from "./components/DotPattern";
 
 const sections = ["home", "works", "experience", "skills", "about-me", "contacts"];
+
+interface Project {
+  image: string;
+  title: string;
+  description: string;
+  tags: string[];
+  liveUrl?: string;
+  sourceUrl?: string;
+}
+
+const PROJECTS: Project[] = [
+  {
+    image: coverMrerror,
+    title: "Mr.Err — mrerr.com",
+    description:
+      "The public personal site and brand home for Mr.Err. A fast, animated React + Vite experience with custom sections, dark theme, and GitHub-driven metrics.",
+    tags: ["React", "Vite", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://www.mrerr.com",
+    sourceUrl: "https://github.com/G9T3N/Mrerror",
+  },
+  {
+    image: coverMrerrPlatform,
+    title: "MRERR Platform",
+    description:
+      "A Turborepo monorepo powering mrerr.com, me.mrerr.com, and dashboard.mrerr.com with shared UI, design, and database packages.",
+    tags: ["React Router v7", "Turborepo", "pnpm", "TypeScript"],
+    sourceUrl: "https://github.com/G9T3N/me.portfolify",
+  },
+  {
+    image: coverPortfolify,
+    title: "Mr.Err Portfolio",
+    description:
+      "This site: an interactive React Router v7 portfolio with a Supabase CMS, bilingual Arabic/English content, and a custom admin dashboard.",
+    tags: ["React Router v7", "Supabase", "Framer Motion", "Tailwind CSS"],
+    sourceUrl: "https://github.com/G9T3N/portfolify",
+  },
+  {
+    image: coverPortfoliofy,
+    title: "Portfoliofy",
+    description:
+      "A modern, data-driven portfolio generator that keeps a developer's showcase automatically in sync without manual updates.",
+    tags: ["React", "Vite", "TypeScript", "Tailwind CSS"],
+    sourceUrl: "https://github.com/G9T3N/old-porto",
+  },
+  {
+    image: coverSolvera,
+    title: "Solvera",
+    description:
+      "A bilingual luxury perfume storefront and administration dashboard built with Next.js 16, WooCommerce, and full Arabic/English routing.",
+    tags: ["Next.js 16", "React 19", "WooCommerce", "next-intl"],
+  },
+  {
+    image: coverDigitalMarket,
+    title: "Digital Market",
+    description:
+      "A production e-commerce marketplace with catalog, search, cart, multi-currency, and bilingual storefront experience.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "REST"],
+    liveUrl: "https://digitalmarket.coder4u.com",
+  },
+  {
+    image: coverHajzakUser,
+    title: "HAJZAK User App",
+    description:
+      "A Flutter mobile app for discovering and booking Yemen's finest recreational properties, with BLoC state management and Firebase backend.",
+    tags: ["Flutter", "Dart", "BLoC", "Firebase"],
+  },
+  {
+    image: coverHajzakDashboard,
+    title: "HAJZAK Dashboard",
+    description:
+      "A Flutter host portal and platform operations dashboard for managing properties, bookings, and providers on Supabase.",
+    tags: ["Flutter", "Dart", "BLoC", "Supabase"],
+  },
+  {
+    image: coverHajzakConsole,
+    title: "HAJZAK Admin Console",
+    description:
+      "An Arabic-first RTL web admin panel for property review, approval, and operations monitoring, built with Next.js 16 and PostgREST.",
+    tags: ["Next.js 16", "PostgREST", "shadcn/ui", "RTL"],
+  },
+  {
+    image: coverSparksoft,
+    title: "Sparksoft Platform",
+    description:
+      "The Sparksoft company platform, featuring a fully automated deployment pipeline and production web delivery.",
+    tags: ["Next.js", "TypeScript", "CI/CD"],
+  },
+  {
+    image: coverHareer,
+    title: "Hareer",
+    description:
+      "A production web product delivered for Sparksoft, built with a modern Next.js and TypeScript stack.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+  },
+  {
+    image: coverCode4u,
+    title: "Code4U",
+    description:
+      "A Sparksoft front-end application platform sharing the organization's component and tooling conventions.",
+    tags: ["TypeScript", "React", "Web"],
+  },
+  {
+    image: coverLandingPage,
+    title: "Landing Page System",
+    description:
+      "A reusable Next.js marketing and landing page system used across Sparksoft products.",
+    tags: ["Next.js", "React", "Tailwind CSS"],
+  },
+  {
+    image: coverBigCart,
+    title: "Big Cart",
+    description:
+      "A cross-platform Flutter commerce application exploring scalable mobile shopping experiences.",
+    tags: ["Flutter", "Dart", "Mobile"],
+    sourceUrl: "https://github.com/Big-cart/BIG-CART",
+  },
+  {
+    image: coverYemenCertificate,
+    title: "Yemen Certificate",
+    description:
+      "A certificate issuance and verification platform serving organizations across Yemen.",
+    tags: ["PHP", "MySQL", "Web"],
+    sourceUrl: "https://github.com/G9T3N/yemen-certificate",
+  },
+  {
+    image: coverReactScreenutil,
+    title: "React ScreenUtil",
+    description:
+      "A React/TypeScript port of Flutter's flutter_screenutil, bringing responsive design scaling to React applications. Published on NPM.",
+    tags: ["React", "TypeScript", "NPM"],
+    liveUrl: "https://www.npmjs.com/package/@g9t3n/react-screenutil",
+    sourceUrl: "https://github.com/G9T3N/react_screenUtils",
+  },
+  {
+    image: coverSkeletune,
+    title: "Skeletune",
+    description:
+      "A small, composable React skeleton loading wrapper component with customizable animation, styling, and children. Published on NPM.",
+    tags: ["React", "TypeScript", "NPM", "UnoCSS"],
+    liveUrl: "https://www.npmjs.com/package/@g9t3n/skeletune",
+    sourceUrl: "https://github.com/G9T3N/skeletune",
+  },
+  {
+    image: coverSparksoftFrontTemplate,
+    title: "Sparksoft Front Template",
+    description:
+      "A reusable front-end starter template standardizing tooling, structure, and conventions across Sparksoft projects.",
+    tags: ["React", "TypeScript", "Template"],
+  },
+  {
+    image: coverSparksoftStarterTemplate,
+    title: "Sparksoft E-Commerce Starter",
+    description:
+      "A production-ready Next.js 16 full-stack e-commerce starter with Better-Auth, Prisma, Next-Intl, and shadcn/ui.",
+    tags: ["Next.js 16", "Prisma", "Better-Auth", "shadcn/ui"],
+  },
+  {
+    image: coverDemoRepository,
+    title: "Organization Demo Repository",
+    description:
+      "A reference repository showcasing GitHub Actions workflows, pages, and organization best practices.",
+    tags: ["HTML", "GitHub Actions"],
+  },
+];
 
 const App: React.FC = () => {
   const home = useRef(null);
@@ -274,13 +458,17 @@ const App: React.FC = () => {
               tags={["React", "TypeScript", "REST", "Production"]}
               liveUrl="https://play.sofa.ye"
             />
-            <ProjectCard
-              image={asset18}
-              title="Portfolify"
-              description="A TypeScript-based public project focused on modern portfolio/product presentation and reusable frontend structure."
-              tags={["TypeScript", "React", "UI"]}
-              sourceUrl="https://github.com/G9T3N/portfolify"
-            />
+            {PROJECTS.map((project) => (
+              <ProjectCard
+                key={project.title}
+                image={project.image}
+                title={project.title}
+                description={project.description}
+                tags={project.tags}
+                liveUrl={project.liveUrl}
+                sourceUrl={project.sourceUrl}
+              />
+            ))}
             <ProjectCard
               image={asset20}
               title="Open Source & NPM"
