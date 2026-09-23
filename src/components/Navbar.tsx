@@ -1,25 +1,19 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useCallback } from "react";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { Sun, Moon, Languages, Menu, X } from "lucide-react";
 import { i18n } from "@lingui/core";
 import { Trans } from "@lingui/react";
 
 const NAV_SECTION_IDS = ["projects", "experience", "about", "skills", "contact"];
+const THEME_COLORS = { dark: "#121212", light: "#ffffff" } as const;
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light">(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("theme") as "dark" | "light" | null;
-      return (
-        saved ?? (document.documentElement.getAttribute("data-theme") as "dark" | "light") ?? "dark"
-      );
-    }
-    return "dark";
-  });
+  const { resolvedTheme, setTheme } = useTheme();
 
   const [locale, setLocale] = useState<string>(() => {
     if (typeof window !== "undefined") {
@@ -31,35 +25,27 @@ const Navbar = () => {
   });
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme) {
-        document.documentElement.setAttribute("data-theme", savedTheme);
-      }
-      i18n.activate(locale);
-      document.documentElement.lang = locale;
-      document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
-    }
+    i18n.activate(locale);
+    document.documentElement.lang = locale;
+    document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
   }, [locale]);
+
+  useEffect(() => {
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta && resolvedTheme) {
+      meta.setAttribute("content", THEME_COLORS[resolvedTheme as keyof typeof THEME_COLORS]);
+    }
+  }, [resolvedTheme]);
 
   const toggleLanguage = useCallback(() => {
     const nextLocale = locale === "en" ? "ar" : "en";
     setLocale(nextLocale);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("locale", nextLocale);
-    }
+    localStorage.setItem("locale", nextLocale);
   }, [locale]);
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
-      const next = prev === "dark" ? "light" : "dark";
-      if (typeof window !== "undefined") {
-        document.documentElement.setAttribute("data-theme", next);
-        localStorage.setItem("theme", next);
-      }
-      return next;
-    });
-  }, []);
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  }, [resolvedTheme, setTheme]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -128,7 +114,7 @@ const Navbar = () => {
 
   return (
     <motion.header
-      className="sticky top-5 start-0 w-full md:w-fit z-40"
+      className="sticky top-13.5 start-0 w-full md:w-fit z-40"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -151,9 +137,6 @@ const Navbar = () => {
           aria-label="Mr.Err - Return to top"
         >
           <img src="/favicon.svg" alt="Mr.Err Logo" className="w-6 h-6 object-contain" />
-          <span className="font-bold text-sm text-[var(--color-text-primary)] font-mono tracking-tight hidden sm:inline group-hover:text-[var(--color-primary)] transition-colors">
-            Mr.Err
-          </span>
         </a>
 
         {/* Nav links — desktop */}
@@ -236,7 +219,7 @@ const Navbar = () => {
             aria-label="Toggle theme"
             onClick={toggleTheme}
           >
-            {theme === "dark" ? (
+            {resolvedTheme === "dark" ? (
               <Sun className="w-4 h-4 text-[var(--color-text-secondary)]" />
             ) : (
               <Moon className="w-4 h-4 text-[var(--color-text-secondary)]" />
