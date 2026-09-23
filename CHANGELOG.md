@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.7.0](https://github.com/G9T3N/portfolify/compare/v1.6.0...v1.7.0) (2026-09-23)
+
+
+### Features
+
+* add open graph templates and brand assets, update hero layout, … ([65453fb](https://github.com/G9T3N/portfolify/commit/65453fbdfa372cbb311d6c094d9aa9b21aefdd23))
+* add open graph templates and brand assets, update hero layout, and refactor navbar theme management ([7d26205](https://github.com/G9T3N/portfolify/commit/7d26205c827c25c7f4a48746d414995bac0e2297))
+* add portfolio metrics manager and queries for admin dashboard ([e74f15a](https://github.com/G9T3N/portfolify/commit/e74f15ad91284b979448e62cd5fddfae461f4d47))
+* add portfolio metrics manager and queries for admin dashboard ([d38b525](https://github.com/G9T3N/portfolify/commit/d38b5253cb00002f65f8b7437775fc19b599f8f0))
+* add project assets, github seeding script, and update projects … ([b73e307](https://github.com/G9T3N/portfolify/commit/b73e307881da62ecff91e6e1bc83adab5e10409e))
+* add project assets, github seeding script, and update projects section ([214a4be](https://github.com/G9T3N/portfolify/commit/214a4be9f9c4131338c87fd1f23a9416b191666f))
+
 ## [1.6.0](https://github.com/G9T3N/portfolify/compare/v1.5.0...v1.6.0) (2026-09-09)
 
 
