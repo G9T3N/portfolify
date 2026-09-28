@@ -10,15 +10,10 @@ type ContactMessageInput = {
 export function useSendMessage() {
   return useMutation({
     mutationFn: async (input: ContactMessageInput) => {
-      const { data, error } = await supabase
-        .from("contact_messages")
-        .insert(input)
-        .select()
-        .single();
+      const { error } = await supabase.from("contact_messages").insert(input);
       if (error) {
         throw error;
       }
-      return data;
     },
   });
 }

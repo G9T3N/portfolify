@@ -20,8 +20,9 @@
     "msg:extract": "lingui extract",
     "msg:compile": "lingui compile",
     "test": "vitest run",
-    "test:watch": "vitest",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:migrate": "node scripts/apply-migration.mjs",
+    "test:contact": "node scripts/test-contact.mjs"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
