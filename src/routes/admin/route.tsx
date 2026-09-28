@@ -15,6 +15,8 @@ import { NavLink, Outlet } from "react-router";
 import { useAdminStats } from "./queries";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
+import { Loader2 } from "lucide-react";
 
 const sidebarItems = [
   { to: "/admin/dashboard", label: "Dashboard", icon: BarChart3 },
@@ -28,6 +30,7 @@ const sidebarItems = [
 
 /**
  * Renders the admin page layout with a fixed left sidebar and a main content area.
+ * Protected by auth — redirects to /login if the user is not an authenticated admin.
  */
 export function meta() {
   return [
@@ -37,8 +40,23 @@ export function meta() {
 }
 
 export default function AdminLayout() {
+  const { isLoading: isAuthLoading, isAdmin } = useAdminAuth();
   const { data: stats } = useAdminStats();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Show loading spinner while checking authentication
+  if (isAuthLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg-primary)]">
+        <Loader2 className="w-8 h-8 text-[var(--color-mp-primary)] animate-spin" />
+      </div>
+    );
+  }
+
+  // useAdminAuth redirects to /login if not admin, but guard just in case
+  if (!isAdmin) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] flex font-sans selection:bg-[var(--color-mp-primary)]/30">

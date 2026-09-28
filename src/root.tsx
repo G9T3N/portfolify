@@ -41,6 +41,14 @@ export default function App() {
   );
 }
 
+export function HydrateFallback() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg-primary)]">
+      <div className="w-8 h-8 rounded-full border-2 border-[var(--color-mp-primary)] border-t-transparent animate-spin" />
+    </div>
+  );
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
