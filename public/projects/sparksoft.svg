@@ -19,7 +19,7 @@
   <rect x="80" y="96" width="180" height="40" rx="20" fill="#297f29" fill-opacity="0.15" stroke="#297f29" stroke-opacity="0.5"/>
   <circle cx="100" cy="116" r="5" fill="#297f29"/>
   <text x="182" y="123" font-family="Inter, Segoe UI, sans-serif" font-size="18" font-weight="600" fill="#297f29" text-anchor="middle">TypeScript</text>
-  <text x="1120" y="123" font-family="Inter, Segoe UI, sans-serif" font-size="18" font-weight="600" fill="#6b7280" text-anchor="end">sparksoft1/sparksoft</text>
+  <text x="1120" y="123" font-family="Inter, Segoe UI, sans-serif" font-size="18" font-weight="600" fill="#6b7280" text-anchor="end">sparksoft.io</text>
   <g>
     <text x="80" y="340" font-family="Inter, Segoe UI, sans-serif" font-size="64" font-weight="700" fill="#ffffff">Sparksoft Platform</text>
     <text x="82" y="428" font-family="Inter, Segoe UI, sans-serif" font-size="24" fill="#9aa4b2">Company platform and automated deployment</text>
@@ -31,5 +31,5 @@
     <text x="214" y="742" font-family="Inter, Segoe UI, sans-serif" font-size="18" fill="#297f29">#TypeScript</text>
     <text x="382" y="742" font-family="Inter, Segoe UI, sans-serif" font-size="18" fill="#297f29">#CI/CD</text>
   </g>
-  <text x="1120" y="742" font-family="Inter, Segoe UI, sans-serif" font-size="18" fill="#6b7280" text-anchor="end">github.com/sparksoft1/sparksoft</text>
+  <text x="1120" y="742" font-family="Inter, Segoe UI, sans-serif" font-size="18" fill="#6b7280" text-anchor="end">sparksoft.io</text>
 </svg>

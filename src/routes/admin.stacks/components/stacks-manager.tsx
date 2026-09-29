@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Plus, Pencil, Trash2, Eye, EyeOff, Loader2, FolderPlus } from "lucide-react";
 import { AnimatedDialog } from "@/components/common/animated-dialog";
+import { TechIcon } from "@/components/common/TechIcon";
 import { useStacksManager } from "../utils/hooks/use-stacks-manager";
 import { Skill } from "../queries";
 
@@ -169,8 +170,8 @@ const StacksManager = () => {
                         }}
                       />
                     ) : (
-                      <div className="w-10 h-10 rounded-lg bg-muted/30 flex items-center justify-center text-muted-foreground">
-                        📦
+                      <div className="w-10 h-10 rounded-lg bg-muted/30 flex items-center justify-center text-foreground">
+                        <TechIcon name={skill.name} className="text-xl" />
                       </div>
                     )}
                     <div className="min-w-0">

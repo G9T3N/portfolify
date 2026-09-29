@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { GitBranch, ExternalLink, ArrowRight } from "lucide-react";
+import { TechIcon } from "@/components/common/TechIcon";
 
 export interface ProjectCardProps {
   project: {
@@ -42,7 +43,7 @@ export function ProjectCard({ project, index, total = 3 }: ProjectCardProps) {
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="absolute inset-0 bg-[var(--color-bg-card)] rounded-[2rem] border border-[var(--color-border-default)] shadow-2xl overflow-hidden flex flex-col md:flex-row transition-transform duration-500 ease-out origin-top hover:scale-[1.01]">
+      <div className="absolute inset-0 bg-[var(--color-bg-card)] rounded-[2rem] border border-[var(--color-border-default)] overflow-hidden flex flex-col md:flex-row transition-transform duration-500 ease-out origin-top hover:scale-[1.01]">
         {/* Left: Thumbnail Section */}
         <div className="w-full md:w-[55%] h-[45%] md:h-full relative overflow-hidden bg-gradient-to-br from-[var(--color-bg-elevated)] to-[var(--color-bg-card)] border-b md:border-b-0 md:border-r border-[var(--color-border-default)]">
           {project.thumbnail_url ? (
@@ -68,7 +69,7 @@ export function ProjectCard({ project, index, total = 3 }: ProjectCardProps) {
           )}
           {/* Category Badge overlay on image */}
           <div className="absolute top-6 start-6 z-10">
-            <span className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-white shadow-lg">
+            <span className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-white ">
               {project.category}
             </span>
           </div>
@@ -94,9 +95,10 @@ export function ProjectCard({ project, index, total = 3 }: ProjectCardProps) {
               {project.tech_stack.slice(0, 4).map((tech) => (
                 <span
                   key={tech}
-                  className="px-3 py-1.5 text-xs font-medium rounded-lg bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)] group-hover:border-[var(--color-border-hover)] transition-colors"
                 >
-                  {tech}
+                  <TechIcon name={tech} className="text-sm" />
+                  <span>{tech}</span>
                 </span>
               ))}
             </div>
@@ -133,14 +135,26 @@ export function ProjectCard({ project, index, total = 3 }: ProjectCardProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Open ${project.title} project`}
-                  className="ml-auto w-12 h-12 rounded-full bg-[var(--color-bg-elevated)] flex items-center justify-center border border-[var(--color-border-default)] group-hover:bg-[var(--color-text-primary)] group-hover:text-[var(--color-bg-primary)] transition-colors"
+                  className="ms-auto w-12 h-12 rounded-full bg-[var(--color-bg-elevated)] flex items-center justify-center border border-[var(--color-border-default)] group-hover:bg-[var(--color-text-primary)] group-hover:text-[var(--color-bg-primary)] transition-colors"
                 >
                   <ArrowRight
-                    className="group-hover:-rotate-45 transition-transform duration-300"
+                    className="group-hover:-rotate-45 rtl:group-hover:rotate-45 rtl:rotate-180 transition-transform duration-300"
                     size={20}
                   />
                 </a>
               )}
+            </div>
+          )}
+
+          {!hasAnyLink && (
+            <div className="flex items-center justify-between gap-4 mt-8 pt-6 border-t border-[var(--color-border-default)]">
+              <span className="inline-flex items-center gap-2 text-xs font-mono font-medium text-[var(--color-text-muted)] bg-[var(--color-bg-elevated)] px-3.5 py-1.5 rounded-full border border-[var(--color-border-default)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Internal Dashboard
+              </span>
+              <span className="text-xs font-mono text-[var(--color-text-muted)] opacity-70">
+                Private Access
+              </span>
             </div>
           )}
         </div>

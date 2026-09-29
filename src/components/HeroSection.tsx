@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Trans } from "@lingui/react";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ImageCardStack } from "./card-swapping/features/ImageStack";
 import Navbar from "./Navbar";
@@ -21,8 +21,12 @@ const GaugeSkeleton = () => (
 const CarouselSkeleton = () => <div className="h-[60px] w-full bg-transparent mt-8" />;
 
 const HeroSection = () => {
+  const prefersReducedMotion = useReducedMotion();
+
   const scrollToProjects = () => {
-    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+    document
+      .getElementById("projects")
+      ?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
   };
 
   return (

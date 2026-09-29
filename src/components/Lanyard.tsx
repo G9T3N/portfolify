@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/immutability */
 
 "use client";
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo, useSyncExternalStore } from "react";
 import { Canvas, extend, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, useTexture, Environment, Lightformer } from "@react-three/drei";
 import {
@@ -21,6 +21,24 @@ import cardGLB from "../assets/lanyard/card.glb";
 import lanyard from "../assets/lanyard/wael.svg";
 
 extend({ MeshLineGeometry, MeshLineMaterial });
+
+// Viewport width as an external store, so the tablet/mobile branch is read
+// during render rather than set from an effect.
+const TABLET_MAX_WIDTH = 1024;
+
+function subscribeToViewport(onChange: () => void): () => void {
+  window.addEventListener("resize", onChange);
+  return () => window.removeEventListener("resize", onChange);
+}
+
+function readIsSmall(): boolean {
+  return window.innerWidth < TABLET_MAX_WIDTH;
+}
+
+/** Used only for the prerender pass. */
+function getServerIsSmall(): boolean {
+  return false;
+}
 
 declare global {
   namespace JSX {
@@ -186,21 +204,10 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
     return () => canvas.removeEventListener("touchstart", onTouchStart);
   }, [gl]);
 
-  const [isSmall, setIsSmall] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      return window.innerWidth < 1024;
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    const handleResize = (): void => {
-      setIsSmall(window.innerWidth < 1024);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return (): void => window.removeEventListener("resize", handleResize);
-  }, []);
+  // The viewport width is a store outside React. useSyncExternalStore reads it
+  // during render without branching on `typeof window`, and without a
+  // setState-in-effect that would render the wrong layout for one frame.
+  const isSmall = useSyncExternalStore(subscribeToViewport, readIsSmall, getServerIsSmall);
 
   const isTablet = isSmall; // checks for < 1024px (tablet/mobile)
 
@@ -341,7 +348,9 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
               e.target.setPointerCapture(e.pointerId);
               cardGrabbed.current = true;
               priorOverflow.current = document.body.style.overflow;
-              drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
+              // subVectors(grabPoint, cardPos) rather than copy().sub(), so the
+              // `vec` scratch used by useFrame is not clobbered from here.
+              drag(new THREE.Vector3().subVectors(e.point, card.current.translation()));
               document.body.style.overflow = "hidden";
             }}
           >

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Suspense, lazy } from "react";
 import { usePortfolioMetrics, useSiteSetting, useWorkExperiences } from "@/queries";
 import { LazyInView } from "./common/LazyInView";
@@ -10,6 +10,7 @@ const AboutSection = () => {
   const { data: experiences } = useWorkExperiences();
   const { data: cvUrl } = useSiteSetting("cv_url");
   const { data: metrics } = usePortfolioMetrics();
+  const prefersReducedMotion = useReducedMotion();
 
   const autoYearsExperience =
     experiences && experiences.length > 0
@@ -129,7 +130,9 @@ const AboutSection = () => {
                 href="#contact"
                 onClick={(e) => {
                   e.preventDefault();
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
                 }}
                 className="btn-pill text-white "
               >

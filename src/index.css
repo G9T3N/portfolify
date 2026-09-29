@@ -1103,3 +1103,26 @@
   background: rgba(0, 255, 204, 0.15);
   color: hsl(var(--foreground));
 }
+
+/* === Reduced motion (WCAG 2.3.3) ===
+   JS-driven framer-motion animation is covered by reducedMotion="user" on the
+   MotionConfig in src/root.tsx. This block covers what that does not: the
+   Tailwind/tw-animate-css animate-* utilities, CSS transitions, and the
+   scroll-behavior: smooth this file sets on html. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* The in-page nav and CTA buttons scroll via scrollIntoView({behavior:
+     "smooth"}), which CSS cannot override — those call sites check
+     useReducedMotion() instead. */
+  html {
+    scroll-behavior: auto !important;
+  }
+}
