@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { useState, useEffect, useCallback } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { Sun, Moon, Languages, Menu, X } from "lucide-react";
@@ -9,20 +9,54 @@ import { Trans } from "@lingui/react";
 const NAV_SECTION_IDS = ["projects", "experience", "about", "skills", "contact"];
 const THEME_COLORS = { dark: "#121212", light: "#ffffff" } as const;
 
+// The selected locale lives in localStorage, which is a store outside React.
+// useSyncExternalStore is the supported way to read one during render: it takes
+// a server snapshot for the prerender pass instead of branching on `typeof
+// window`, which would make the prerender and the first client render disagree.
+const LOCALE_KEY = "locale";
+type Locale = "en" | "ar";
+
+const localeListeners = new Set<() => void>();
+
+function subscribeToLocale(onChange: () => void): () => void {
+  localeListeners.add(onChange);
+  // Fires when another tab changes the locale.
+  window.addEventListener("storage", onChange);
+  return () => {
+    localeListeners.delete(onChange);
+    window.removeEventListener("storage", onChange);
+  };
+}
+
+/** Snapshots must be referentially stable between changes; a string is. */
+function readStoredLocale(): Locale {
+  const saved = localStorage.getItem(LOCALE_KEY);
+  if (saved === "en" || saved === "ar") {
+    return saved;
+  }
+  return i18n.locale === "ar" ? "ar" : "en";
+}
+
+/** Used only for the prerender pass. */
+function getServerLocale(): Locale {
+  return "en";
+}
+
+function writeLocale(next: Locale): void {
+  localStorage.setItem(LOCALE_KEY, next);
+  // `storage` does not fire in the tab that wrote it, so notify our own readers.
+  for (const listener of localeListeners) {
+    listener();
+  }
+}
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
-
-  const [locale, setLocale] = useState<string>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("locale");
-      if (saved === "en" || saved === "ar") return saved;
-      return i18n.locale || "en";
-    }
-    return i18n.locale || "en";
-  });
+  const prefersReducedMotion = useReducedMotion();
+  const locale = useSyncExternalStore(subscribeToLocale, readStoredLocale, getServerLocale);
 
   useEffect(() => {
     i18n.activate(locale);
@@ -38,9 +72,7 @@ const Navbar = () => {
   }, [resolvedTheme]);
 
   const toggleLanguage = useCallback(() => {
-    const nextLocale = locale === "en" ? "ar" : "en";
-    setLocale(nextLocale);
-    localStorage.setItem("locale", nextLocale);
+    writeLocale(locale === "en" ? "ar" : "en");
   }, [locale]);
 
   const toggleTheme = useCallback(() => {
@@ -59,8 +91,6 @@ const Navbar = () => {
 
   // Scroll spy — track which section is in the viewport
   useEffect(() => {
-    const sectionIds = NAV_SECTION_IDS;
-
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -72,11 +102,18 @@ const Navbar = () => {
       { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
     );
 
+    // Track what is already observed ourselves. takeRecords() must not be used
+    // for this: it drains the observer's pending queue, so calling it here would
+    // discard intersection notifications the scroll spy still needs.
+    const observed = new Set<string>();
+
     const observeSections = () => {
-      for (const id of sectionIds) {
+      for (const id of NAV_SECTION_IDS) {
+        if (observed.has(id)) continue;
         const el = document.getElementById(id);
-        if (el && !observer.takeRecords().some((r) => r.target === el)) {
+        if (el) {
           observer.observe(el);
+          observed.add(id);
         }
       }
     };
@@ -84,14 +121,12 @@ const Navbar = () => {
     observeSections();
 
     // Re-check when user scrolls so lazily mounted sections are observed
-    const onScroll = () => {
-      observeSections();
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", observeSections, { passive: true });
 
     return () => {
       observer.disconnect();
-      window.removeEventListener("scroll", onScroll);
+      observed.clear();
+      window.removeEventListener("scroll", observeSections);
     };
   }, []);
 
@@ -100,7 +135,7 @@ const Navbar = () => {
     setMenuOpen(false);
     const el = document.querySelector(href);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      el.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
     }
   };
 
@@ -131,7 +166,7 @@ const Navbar = () => {
           onClick={(e) => {
             e.preventDefault();
             setMenuOpen(false);
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
           }}
           className="flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-[var(--color-bg-elevated)] transition-colors group flex-shrink-0"
           aria-label="Mr.Err - Return to top"

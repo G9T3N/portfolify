@@ -11,6 +11,7 @@ vi.mock("framer-motion", () => ({
   },
   useScroll: () => ({ scrollYProgress: { get: () => 0 } }),
   useInView: () => true,
+  useReducedMotion: () => false,
 }));
 
 // Mock Navbar and HeroSection (eager loaded)

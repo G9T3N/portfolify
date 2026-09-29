@@ -12,6 +12,7 @@ vi.mock("framer-motion", () => ({
       <button {...props}>{children}</button>
     ),
   },
+  useReducedMotion: () => false,
 }));
 
 // Mock lucide-react

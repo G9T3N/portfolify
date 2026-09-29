@@ -10,6 +10,7 @@ vi.mock("framer-motion", () => ({
     ),
   },
   AnimatePresence: ({ children }: React.PropsWithChildren<object>) => <>{children}</>,
+  useReducedMotion: () => false,
 }));
 
 // Mock AnimatedDialog

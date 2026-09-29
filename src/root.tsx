@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { MotionConfig } from "framer-motion";
 import { ThemeProvider } from "next-themes";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 const Toaster = lazy(() => import("@/components/ui/sonner").then((m) => ({ default: m.Toaster })));
@@ -32,11 +33,16 @@ export default function App() {
       enableSystem={false}
       storageKey="theme"
     >
-      <I18nProvider i18n={i18n}>
-        <QueryClientProvider client={queryClient}>
-          <Outlet />
-        </QueryClientProvider>
-      </I18nProvider>
+      {/* reducedMotion="user" makes every framer-motion animation below honour
+          the OS "reduce motion" setting (WCAG 2.3.3). CSS-driven animation is
+          handled by the prefers-reduced-motion block in index.css. */}
+      <MotionConfig reducedMotion="user">
+        <I18nProvider i18n={i18n}>
+          <QueryClientProvider client={queryClient}>
+            <Outlet />
+          </QueryClientProvider>
+        </I18nProvider>
+      </MotionConfig>
     </ThemeProvider>
   );
 }
@@ -67,6 +73,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="stylesheet" href="/devicon/devicon.min.css" />
         <Meta />
         <Links />
       </head>

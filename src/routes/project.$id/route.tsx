@@ -2,6 +2,7 @@ import { useParams, useNavigate, useLoaderData } from "react-router";
 import { useProject } from "./queries";
 import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink, GitBranch, Loader2 } from "lucide-react";
+import { TechIcon } from "@/components/common/TechIcon";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { OG_IMAGE, SITE_URL } from "@/utils/constants/site";
@@ -213,9 +214,10 @@ export default function ProjectDetails() {
                     project.tech_stack.map((tech: string, i: number) => (
                       <span
                         key={i}
-                        className="px-3 py-1.5 text-sm font-medium rounded-lg bg-[var(--color-bg-primary)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
+                        className="inline-flex items-center gap-2 px-3.5 py-1.5 text-sm font-medium rounded-xl bg-[var(--color-bg-primary)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-hover)] transition-colors"
                       >
-                        {tech}
+                        <TechIcon name={tech} className="text-base" />
+                        <span>{tech}</span>
                       </span>
                     ))
                   ) : (

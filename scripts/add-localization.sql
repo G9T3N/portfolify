@@ -24,17 +24,67 @@ comment on table public.translations is
 -- 2. ROW LEVEL SECURITY
 alter table public.translations enable row level security;
 
-create policy "translations_select_anon" on public.translations
-  for select to anon using (true);
+-- Public read is intentional: the portfolio site renders Arabic overrides for
+-- anonymous visitors. Reads stay open, writes do not.
+drop policy if exists "translations_select_anon" on public.translations;
+drop policy if exists "translations_select_authenticated" on public.translations;
+drop policy if exists "translations_insert_authenticated" on public.translations;
+drop policy if exists "translations_update_authenticated" on public.translations;
+drop policy if exists "translations_select_public" on public.translations;
+drop policy if exists "translations_admin_insert" on public.translations;
+drop policy if exists "translations_admin_update" on public.translations;
 
-create policy "translations_select_authenticated" on public.translations
-  for select to authenticated using (true);
+create policy "translations_select_public" on public.translations
+  for select to anon, authenticated using (true);
 
-create policy "translations_insert_authenticated" on public.translations
-  for insert to authenticated with check (true);
+-- Writes are admin-only. The previous policies granted every authenticated user
+-- insert and update with `true`, so any signed-up account could rewrite the
+-- site's published copy.
+--
+-- Nothing in the app writes this table today — the Arabic content below is
+-- seeded from this file, which runs in the SQL editor and therefore as the
+-- service role. If a translations admin UI is never built, these two policies
+-- can simply be dropped: the service role bypasses RLS regardless.
+--
+-- INSERT is gated on the column shape too, so an admin cannot store an override
+-- that does not correspond to a real content table or field.
+create policy "translations_admin_insert" on public.translations
+  for insert to authenticated
+  with check (
+    exists (
+      select 1 from public.user_roles
+      where user_roles.user_id = auth.uid()
+        and user_roles.role = 'admin'
+    )
+    and table_name in ('projects', 'work_experiences', 'site_settings')
+    and field in ('title', 'description', 'full_content', 'position', 'value')
+    and locale in ('ar', 'en')
+    and char_length(btrim(value)) between 1 and 20000
+  );
 
-create policy "translations_update_authenticated" on public.translations
-  for update to authenticated using (true);
+create policy "translations_admin_update" on public.translations
+  for update to authenticated
+  using (
+    exists (
+      select 1 from public.user_roles
+      where user_roles.user_id = auth.uid()
+        and user_roles.role = 'admin'
+    )
+  )
+  with check (
+    exists (
+      select 1 from public.user_roles
+      where user_roles.user_id = auth.uid()
+        and user_roles.role = 'admin'
+    )
+    and table_name in ('projects', 'work_experiences', 'site_settings')
+    and field in ('title', 'description', 'full_content', 'position', 'value')
+    and locale in ('ar', 'en')
+    and char_length(btrim(value)) between 1 and 20000
+  );
+
+-- No DELETE policy on purpose: deletion stays denied, as it was before. Add one
+-- gated on the same admin check if removing stale overrides becomes a need.
 
 -- 3. SEED ARABIC OVERRIDES
 --    Locale 'ar' is the only non-English locale today. English values stay in the

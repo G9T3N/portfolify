@@ -1,35 +1,26 @@
 import { motion } from "framer-motion";
-import {
-  Code,
-  Layout,
-  Globe,
-  Server,
-  GitBranch,
-  ShieldCheck,
-  Cpu,
-  Terminal,
-  Workflow,
-} from "lucide-react";
+import { Code, Server, GitBranch, ShieldCheck, Cpu, Terminal } from "lucide-react";
+import { TechIcon } from "./common/TechIcon";
 
 const SKILLS_DATA = [
   {
     label: "Web",
-    icon: Code,
+    devicon: "devicon-react-original colored",
     suffix: "development",
   },
   {
     label: "Interface",
-    icon: Layout,
+    devicon: "devicon-tailwindcss-original colored",
     suffix: "design",
   },
   {
     label: "Full-stack",
-    icon: Globe,
+    devicon: "devicon-nodejs-plain colored",
     suffix: "engineering",
   },
   {
     label: "DevOps",
-    icon: Workflow,
+    devicon: "devicon-docker-plain colored",
     suffix: "and automation",
   },
 ] as const;
@@ -97,7 +88,7 @@ const SkillsSection = () => {
         <h2 className="section-label">Skills &amp; Services</h2>
       </motion.div>
 
-      {/* Massive typography rows */}
+      {/* Massive typography rows with Devicon center badges */}
       <div className="max-w-[1400px] 2xl:max-w-[1700px] mx-auto space-y-12 md:space-y-20 mb-24">
         {SKILLS_DATA.map((skill, index) => (
           <motion.div
@@ -113,28 +104,28 @@ const SkillsSection = () => {
             }}
           >
             {/* First word */}
-            <span className="text-5xl sm:text-6xl md:text-8xl  font-bold tracking-tight text-[var(--color-text-primary)]">
+            <span className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight text-[var(--color-text-primary)]">
               {skill.label}
             </span>
 
-            {/* Icon container */}
+            {/* Devicon icon badge */}
             <motion.div
-              className="w-16 h-16 md:w-24 md:h-24 rounded-4xl border border-[var(--color-border-default)] bg-[var(--color-bg-card)] flex items-center justify-center"
-              whileHover={{ scale: 1.1, rotate: 5 }}
+              className="w-16 h-16 md:w-24 md:h-24 rounded-4xl border border-[var(--color-border-default)] bg-[var(--color-bg-card)] flex items-center justify-center shadow-lg"
+              whileHover={{ scale: 1.12, rotate: 5 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
             >
-              <skill.icon className="w-8 h-8 md:w-12 md:h-12 text-[var(--color-text-secondary)]" />
+              <i className={`${skill.devicon} text-2xl sm:text-3xl md:text-5xl`} />
             </motion.div>
 
             {/* Second word */}
-            <span className="text-5xl sm:text-6xl md:text-8xl  font-bold tracking-tight text-[var(--color-text-primary)]">
+            <span className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight text-[var(--color-text-primary)]">
               {skill.suffix}
             </span>
           </motion.div>
         ))}
       </div>
 
-      {/* Structured Skill Matrix Grid */}
+      {/* Structured Skill Matrix Grid with Devicon icons */}
       <div className="max-w-[1400px] 2xl:max-w-[1700px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {SKILL_CATEGORIES.map((cat, idx) => (
@@ -159,9 +150,10 @@ const SkillsSection = () => {
                   {cat.skills.map((s) => (
                     <span
                       key={s}
-                      className="px-3 py-1 text-xs font-medium rounded-lg bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-primary)] hover:text-[var(--color-text-primary)] transition-all"
                     >
-                      {s}
+                      <TechIcon name={s} className="text-sm" />
+                      <span>{s}</span>
                     </span>
                   ))}
                 </div>

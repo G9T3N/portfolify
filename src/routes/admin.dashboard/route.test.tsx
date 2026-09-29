@@ -9,6 +9,7 @@ vi.mock("framer-motion", () => ({
       <div {...props}>{children}</div>
     ),
   },
+  useReducedMotion: () => false,
 }));
 
 // Mock the Card components
