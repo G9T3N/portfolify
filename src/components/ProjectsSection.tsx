@@ -1,87 +1,39 @@
 import { motion } from "framer-motion";
-import { useState, useMemo } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { useProjects } from "@/queries";
 import { ProjectCard } from "./portfolio/ProjectCard";
-import {
-  DEFAULT_PROJECTS,
-  FEATURED_PROJECTS_COUNT,
-} from "@/routes/_index/utils/constants/project-sections";
+import { useProjectsFilter } from "@/routes/_index/utils/hooks/use-projects-filter";
 
-/** Titles that look like placeholder/test content */
-const PLACEHOLDER_PATTERNS =
-  /^(test|asdasd|asd|placeholder|lorem|untitled|example|secureauth dashboard|cryptotracker pro|healthsync mobile|devops monitor)$/i;
+export const ProjectsSection = () => {
+  const {
+    categories,
+    activeCategory,
+    setActiveCategory,
+    visibleProjects,
+    hasMore,
+    remainingCount,
+    isExpanded,
+    toggleExpanded,
+    isLoading,
+  } = useProjectsFilter();
 
-function isPlaceholder(project: {
-  title: string;
-  description: string;
-  live_url?: string | null;
-  code_url?: string | null;
-}): boolean {
-  if (PLACEHOLDER_PATTERNS.test(project.title.trim())) return true;
-  if (PLACEHOLDER_PATTERNS.test(project.description.trim())) return true;
-  if (
-    project.live_url?.includes("example.com") &&
-    (!project.code_url || project.code_url.includes("example.com"))
-  ) {
-    return true;
-  }
-  return false;
-}
-
-const ProjectsSection = () => {
-  const { data: projects, isLoading } = useProjects();
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  // Filter out placeholder projects and ensure they are 'live'
-  const validProjects = useMemo(() => {
-    const filtered = (projects ?? []).filter((p) => !isPlaceholder(p) && p.status === "live");
-    return filtered.length > 0 ? filtered : DEFAULT_PROJECTS;
-  }, [projects]);
-
-  // Get unique categories
-  const categories = useMemo(() => {
-    const cats = new Set(validProjects.map((p) => p.category.toLowerCase()));
-    return ["all", ...Array.from(cats)];
-  }, [validProjects]);
-
-  // Filter by active category
-  const displayProjects = useMemo(() => {
-    if (activeCategory === "all") return validProjects;
-    return validProjects.filter((p) => p.category.toLowerCase() === activeCategory);
-  }, [validProjects, activeCategory]);
-
-  const hasMore = displayProjects.length > FEATURED_PROJECTS_COUNT;
-  const remainingCount = displayProjects.length - FEATURED_PROJECTS_COUNT;
-
-  const visibleProjects = useMemo(() => {
-    if (isExpanded || !hasMore) return displayProjects;
-    return displayProjects.slice(0, FEATURED_PROJECTS_COUNT);
-  }, [displayProjects, isExpanded, hasMore]);
-
-  const handleCategoryChange = (cat: string) => {
-    setActiveCategory(cat);
-    setIsExpanded(false);
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
   };
 
-  const toggleExpanded = () => {
+  const handleToggleExpanded = () => {
     if (isExpanded) {
-      setIsExpanded(false);
+      toggleExpanded();
       const el = document.getElementById("projects");
       if (el) {
         el.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      setIsExpanded(true);
+      toggleExpanded();
     }
   };
 
   return (
-    <section
-      id="projects"
-      className="relative min-h-screen bg-[var(--color-bg-primary)] py-16 md:py-32"
-    >
+    <section id="projects" className="min-h-screen bg-[var(--color-bg-primary)] py-16 md:py-32">
       <div className="container mx-auto px-4 md:px-8">
         {/* Section label + category filters */}
         <div className="flex flex-col items-center gap-6 mb-24">
@@ -122,7 +74,7 @@ const ProjectsSection = () => {
         </div>
 
         {/* Projects list */}
-        <div className="flex flex-col gap-8 relative pb-16">
+        <div className="flex flex-col gap-8 pb-16">
           {isLoading ? (
             <div className="flex flex-col gap-12">
               {[0, 1, 2].map((i) => (
@@ -152,14 +104,14 @@ const ProjectsSection = () => {
         {/* Read More / Show Less CTA */}
         {hasMore && (
           <motion.div
-            className="flex flex-col items-center justify-center mt-8 mb-16 relative z-30"
+            className="flex flex-col items-center justify-center mt-8 mb-16 z-30"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
             <button
               type="button"
-              onClick={toggleExpanded}
+              onClick={handleToggleExpanded}
               aria-expanded={isExpanded}
               className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] hover:border-[var(--color-text-primary)] text-[var(--color-text-primary)] font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
             >
@@ -178,11 +130,6 @@ const ProjectsSection = () => {
                 </>
               )}
             </button>
-            <p className="text-xs text-[var(--color-text-muted)] mt-3">
-              {isExpanded
-                ? `Showing all ${displayProjects.length} projects`
-                : `Showing 5 featured projects · Click to explore ${displayProjects.length} total`}
-            </p>
           </motion.div>
         )}
       </div>

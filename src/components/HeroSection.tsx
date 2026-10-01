@@ -4,7 +4,7 @@ import { Trans } from "@lingui/react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ImageCardStack } from "./card-swapping/features/ImageStack";
-import Navbar from "./Navbar";
+import { LazyInView } from "@/components/common/LazyInView";
 
 // Lazy load the heavy widgets so they don't block the initial text/gradient render
 const Gauge = lazy(() => import("./portfolio/Gauge").then((m) => ({ default: m.Gauge })));
@@ -110,14 +110,23 @@ const HeroSection = () => {
           </Suspense>
 
           {/* Stat circle */}
-          <Suspense fallback={<GaugeSkeleton />}>
-            <Gauge />
-          </Suspense>
+          <LazyInView
+            fallback={<GaugeSkeleton />}
+            margin="0px"
+            amount={0.4}
+            className="min-h-60 flex-1 w-full"
+          >
+            <Suspense fallback={<GaugeSkeleton />}>
+              <Gauge />
+            </Suspense>
+          </LazyInView>
         </div>
       </div>
-      <Suspense fallback={<CarouselSkeleton />}>
-        <LogoCarousel />
-      </Suspense>
+      <LazyInView fallback={<CarouselSkeleton />} margin="100px" className="w-full">
+        <Suspense fallback={<CarouselSkeleton />}>
+          <LogoCarousel />
+        </Suspense>
+      </LazyInView>
     </section>
   );
 };

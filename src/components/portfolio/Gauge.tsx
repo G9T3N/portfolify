@@ -119,9 +119,8 @@ export const Gauge = () => {
           />
         </div>
       </div>
-      <div className="rounded-4xl overflow-hidden relative">
-        {/* Gauge svg defines the box; stats are absolutely positioned inside
-            the arc (anchored just above its baseline) so the arc hugs them */}
+      <div className="rounded-4xl overflow-hidden border border-border">
+        {/* Gauge svg defines the box; stats are anchored inside the arc */}
         <div className="relative w-full">
           <svg className="w-full drop-shadow-2xl overflow-visible" viewBox="0 0 200 120">
             {/* Background Arc */}
@@ -167,7 +166,6 @@ export const Gauge = () => {
             </span>
           </div>
         </div>
-        <div className="absolute inset-0 border rounded-4xl pointer-events-none border-border" />
       </div>
       <div className="mt-3 px-1 flex justify-center items-center mp-label-mono">
         {/* Dot indicators */}

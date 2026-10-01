@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
-export const useAdminAuth = () => {
+export const useAdminLoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isCheckingSession, setIsCheckingSession] = useState(true);
   const [isSignUp, setIsSignUp] = useState(false);
@@ -126,3 +126,5 @@ export const useAdminAuth = () => {
     submitAuth,
   };
 };
+
+export const useAdminAuth = useAdminLoginForm;

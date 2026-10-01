@@ -10,7 +10,13 @@ interface LazyInViewProps {
    * Positive margin means the element will trigger *before* it enters the viewport.
    * Default: "400px" (trigger when 400px away from viewport)
    */
-  margin?: string;
+  margin?: any;
+  /**
+   * Portion of the element that must be visible before triggering.
+   * "some" (default) triggers as soon as 1px is visible.
+   * A number (0.0 to 1.0) specifies the required intersection ratio (e.g. 0.4 = 40%).
+   */
+  amount?: "some" | "all" | number;
   className?: string;
 }
 
@@ -22,10 +28,11 @@ export function LazyInView({
   children,
   fallback = null,
   margin = "400px",
+  amount = "some",
   className = "w-full h-full min-h-[50px]",
 }: LazyInViewProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin });
+  const isInView = useInView(ref, { once: true, margin, amount });
 
   return (
     <div ref={ref} className={className}>

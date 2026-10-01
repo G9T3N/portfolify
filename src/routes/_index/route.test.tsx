@@ -54,16 +54,16 @@ describe("HomeRoute – metadata for SEO and social previews", () => {
 
   it("returns the full title, description, and canonical URL", () => {
     expect(tags).toContainEqual({
-      title: "Wael Alamrany — Full-Stack Developer & UI Specialist | mrerr.com",
+      title: "Wael Alamrany — Software Engineer | React & TypeScript",
     });
-    expect(findTag("name", "description").content).toContain("Full-Stack Developer");
-    expect(findTag("rel", "canonical").href).toBe("https://mrerr.com");
+    expect(findTag("name", "description").content).toContain("Software Engineer");
+    expect(findTag("rel", "canonical").href).toBe("https://mrerr.com/");
   });
 
   it("includes Open Graph and Twitter card tags with the og:image", () => {
     expect(findTag("property", "og:title").content).toContain("Wael Alamrany");
     expect(findTag("property", "og:type").content).toBe("website");
-    expect(findTag("property", "og:url").content).toBe("https://mrerr.com");
+    expect(findTag("property", "og:url").content).toBe("https://mrerr.com/");
     expect(findTag("property", "og:image").content).toBe("https://mrerr.com/og-image.png");
     expect(findTag("name", "twitter:card").content).toBe("summary_large_image");
     expect(findTag("name", "twitter:image").content).toBe("https://mrerr.com/og-image.png");
