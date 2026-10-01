@@ -1,5 +1,5 @@
 import { Loader2 } from "lucide-react";
-import { useAdminAuth } from "./queries";
+import { useAdminLoginForm } from "./queries";
 import { AuthForm } from "./components/AuthForm";
 
 export function meta() {
@@ -10,7 +10,7 @@ export function meta() {
 }
 
 const AdminLogin = () => {
-  const { isLoading, isCheckingSession, isSignUp, setIsSignUp, submitAuth } = useAdminAuth();
+  const { isLoading, isCheckingSession, isSignUp, setIsSignUp, submitAuth } = useAdminLoginForm();
 
   if (isCheckingSession) {
     return (

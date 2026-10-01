@@ -1,151 +1,46 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
-import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Sun, Moon, Languages, Menu, X } from "lucide-react";
-import { i18n } from "@lingui/core";
 import { Trans } from "@lingui/react";
+import { useLocale } from "@/hooks/useLocale";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
+import { useThemeSync } from "@/hooks/useThemeSync";
+import { NAV_SECTION_IDS } from "@/utils/constants/navigation";
 
-const NAV_SECTION_IDS = ["projects", "experience", "about", "skills", "contact"];
-const THEME_COLORS = { dark: "#121212", light: "#ffffff" } as const;
+const navLinks = [
+  { href: "#projects", label: <Trans id="nav.projects">Projects</Trans> },
+  { href: "#experience", label: <Trans id="nav.experience">Experience</Trans> },
+  { href: "#about", label: <Trans id="nav.about">About</Trans> },
+  { href: "#skills", label: <Trans id="nav.skills">Skills</Trans> },
+  { href: "#contact", label: <Trans id="nav.contact">Contact</Trans> },
+];
 
-// The selected locale lives in localStorage, which is a store outside React.
-// useSyncExternalStore is the supported way to read one during render: it takes
-// a server snapshot for the prerender pass instead of branching on `typeof
-// window`, which would make the prerender and the first client render disagree.
-const LOCALE_KEY = "locale";
-type Locale = "en" | "ar";
-
-const localeListeners = new Set<() => void>();
-
-function subscribeToLocale(onChange: () => void): () => void {
-  localeListeners.add(onChange);
-  // Fires when another tab changes the locale.
-  window.addEventListener("storage", onChange);
-  return () => {
-    localeListeners.delete(onChange);
-    window.removeEventListener("storage", onChange);
-  };
-}
-
-/** Snapshots must be referentially stable between changes; a string is. */
-function readStoredLocale(): Locale {
-  const saved = localStorage.getItem(LOCALE_KEY);
-  if (saved === "en" || saved === "ar") {
-    return saved;
-  }
-  return i18n.locale === "ar" ? "ar" : "en";
-}
-
-/** Used only for the prerender pass. */
-function getServerLocale(): Locale {
-  return "en";
-}
-
-function writeLocale(next: Locale): void {
-  localStorage.setItem(LOCALE_KEY, next);
-  // `storage` does not fire in the tab that wrote it, so notify our own readers.
-  for (const listener of localeListeners) {
-    listener();
-  }
-}
-
-const Navbar = () => {
+export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
   const prefersReducedMotion = useReducedMotion();
-  const locale = useSyncExternalStore(subscribeToLocale, readStoredLocale, getServerLocale);
 
-  useEffect(() => {
-    i18n.activate(locale);
-    document.documentElement.lang = locale;
-    document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
-  }, [locale]);
-
-  useEffect(() => {
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta && resolvedTheme) {
-      meta.setAttribute("content", THEME_COLORS[resolvedTheme as keyof typeof THEME_COLORS]);
-    }
-  }, [resolvedTheme]);
-
-  const toggleLanguage = useCallback(() => {
-    writeLocale(locale === "en" ? "ar" : "en");
-  }, [locale]);
-
-  const toggleTheme = useCallback(() => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  }, [resolvedTheme, setTheme]);
+  const { locale, toggleLanguage } = useLocale();
+  const activeSection = useScrollSpy({ sectionIds: NAV_SECTION_IDS });
+  const { resolvedTheme, toggleTheme } = useThemeSync();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  // Scroll spy — track which section is in the viewport
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveSection(`#${entry.target.id}`);
-          }
-        }
-      },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
-    );
-
-    // Track what is already observed ourselves. takeRecords() must not be used
-    // for this: it drains the observer's pending queue, so calling it here would
-    // discard intersection notifications the scroll spy still needs.
-    const observed = new Set<string>();
-
-    const observeSections = () => {
-      for (const id of NAV_SECTION_IDS) {
-        if (observed.has(id)) continue;
-        const el = document.getElementById(id);
-        if (el) {
-          observer.observe(el);
-          observed.add(id);
-        }
-      }
-    };
-
-    observeSections();
-
-    // Re-check when user scrolls so lazily mounted sections are observed
-    window.addEventListener("scroll", observeSections, { passive: true });
-
-    return () => {
-      observer.disconnect();
-      observed.clear();
-      window.removeEventListener("scroll", observeSections);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
+    const targetElement = document.querySelector(href);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
     }
   };
-
-  const navLinks = [
-    { href: "#projects", label: <Trans id="nav.projects">Projects</Trans> },
-    { href: "#experience", label: <Trans id="nav.experience">Experience</Trans> },
-    { href: "#about", label: <Trans id="nav.about">About</Trans> },
-    { href: "#skills", label: <Trans id="nav.skills">Skills</Trans> },
-    { href: "#contact", label: <Trans id="nav.contact">Contact</Trans> },
-  ];
 
   return (
     <motion.header
@@ -156,7 +51,7 @@ const Navbar = () => {
     >
       <nav
         className={cn(
-          "glass-nav flex items-center justify-between gap-1 sm:gap-3 rounded-4xl px-2.5 sm:px-3.5 py-2 transition-all duration-500 max-w-full",
+          "glass-nav flex items-center justify-between gap-1 sm:gap-3 rounded-4xl px-2.5 sm:px-3.5 py-2 transition-[box-shadow] duration-500 max-w-full",
           scrolled && "shadow-lg shadow-black/20",
         )}
       >
@@ -174,15 +69,13 @@ const Navbar = () => {
           <img src="/favicon.svg" alt="Mr.Err Logo" className="w-6 h-6 object-contain" />
         </a>
 
-        {/* Nav links — desktop */}
+        {/* Desktop Nav Links */}
         <div className="hidden md:flex items-center overflow-x-auto no-scrollbar gap-0.5 w-auto">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              onClick={(e) => {
-                handleNavClick(e, link.href);
-              }}
+              onClick={(e) => handleNavClick(e, link.href)}
               className={cn(
                 "px-2.5 sm:px-3.5 py-1.5 text-sm font-medium rounded-4xl transition-colors whitespace-nowrap",
                 activeSection === link.href
@@ -195,10 +88,10 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile nav dropdown */}
+        {/* Mobile Nav Dropdown */}
         {menuOpen && (
           <motion.div
-            className="absolute top-full start-0 mt-2 w-full md:hidden glass-nav rounded-3xl p-2 flex flex-col gap-1"
+            className="absolute top-full start-0 mt-2 w-full md:hidden glass-nav rounded-3xl p-2 flex flex-col gap-1 shadow-xl"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
@@ -207,9 +100,7 @@ const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => {
-                  handleNavClick(e, link.href);
-                }}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className={cn(
                   "px-4 py-3 text-sm font-medium rounded-2xl transition-colors",
                   activeSection === link.href
@@ -225,7 +116,6 @@ const Navbar = () => {
 
         {/* Actions (Language Switcher & Theme Toggle) */}
         <div className="flex items-center gap-1 flex-shrink-0">
-          {/* Mobile menu toggle */}
           <button
             type="button"
             className="md:hidden h-9 w-9 rounded-4xl flex items-center justify-center text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] transition-colors cursor-pointer flex-shrink-0"
@@ -235,7 +125,7 @@ const Navbar = () => {
           >
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-          {/* Language Switcher */}
+
           <button
             type="button"
             className="h-9 px-2.5 rounded-4xl flex items-center gap-1.5 text-xs font-mono font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] transition-colors cursor-pointer"
@@ -247,7 +137,6 @@ const Navbar = () => {
             <span>{locale === "en" ? "عربي" : "EN"}</span>
           </button>
 
-          {/* Theme toggle */}
           <button
             type="button"
             className="w-9 h-9 rounded-4xl flex items-center justify-center transition-colors hover:bg-[var(--color-bg-elevated)] cursor-pointer"

@@ -56,9 +56,12 @@ interface LanyardProps {
   transparent?: boolean;
 }
 
+const DEFAULT_POSITION: [number, number, number] = [0, 0, 10];
+const DEFAULT_GRAVITY: [number, number, number] = [0, -40, 0];
+
 export default function Lanyard({
-  position = [0, 0, 10],
-  gravity = [0, -40, 0],
+  position = DEFAULT_POSITION,
+  gravity = DEFAULT_GRAVITY,
   fov = 21,
   transparent = true,
 }: LanyardProps) {

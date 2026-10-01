@@ -4,6 +4,8 @@ import { usePortfolioMetrics, useSiteSetting, useWorkExperiences } from "@/queri
 import { LazyInView } from "./common/LazyInView";
 import { Briefcase, Calendar, FileDown, MapPin, Sparkles } from "lucide-react";
 
+import { calculateExperienceYears } from "@/utils/functions/experience";
+
 const Lanyard = lazy(() => import("./Lanyard"));
 
 const AboutSection = () => {
@@ -12,21 +14,7 @@ const AboutSection = () => {
   const { data: metrics } = usePortfolioMetrics();
   const prefersReducedMotion = useReducedMotion();
 
-  const autoYearsExperience =
-    experiences && experiences.length > 0
-      ? Math.max(
-          1,
-          new Date().getFullYear() -
-            new Date(
-              Math.min(...experiences.map((e) => new Date(e.start_date).getTime())),
-            ).getFullYear(),
-        )
-      : null;
-
-  const yearsExperience =
-    metrics?.yearsExperience !== null && metrics?.yearsExperience !== undefined
-      ? metrics.yearsExperience
-      : autoYearsExperience;
+  const yearsExperience = calculateExperienceYears(experiences, metrics?.yearsExperience);
 
   return (
     <section id="about" className="px-4 md:px-8 lg:px-12 py-16 md:py-32">

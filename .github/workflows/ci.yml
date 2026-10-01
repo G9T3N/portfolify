@@ -41,6 +41,9 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: Unit & Component tests (Vitest)
+        run: pnpm test
+
       - name: Build (smoke test)
         run: pnpm build
         env:

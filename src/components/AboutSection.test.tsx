@@ -8,13 +8,30 @@ vi.mock("framer-motion", () => ({
     div: ({ children, ...props }: React.PropsWithChildren<object>) => (
       <div {...props}>{children}</div>
     ),
+    h2: ({ children, ...props }: React.PropsWithChildren<object>) => <h2 {...props}>{children}</h2>,
   },
   useReducedMotion: () => false,
 }));
 
-// Mock lucide-react Sparkles
+// Mock lucide-react
 vi.mock("lucide-react", () => ({
   Sparkles: () => <span data-testid="sparkles-icon">✨</span>,
+  MapPin: () => <span>📍</span>,
+  Calendar: () => <span>📅</span>,
+  Briefcase: () => <span>💼</span>,
+  FileDown: () => <span>📄</span>,
+}));
+
+// Mock queries
+vi.mock("@/queries", () => ({
+  useWorkExperiences: () => ({ data: [{ start_date: "2020-01-01" }] }),
+  useSiteSetting: () => ({ data: "/cv.pdf" }),
+  usePortfolioMetrics: () => ({ data: { yearsExperience: 5 } }),
+}));
+
+// Mock LazyInView to render children immediately
+vi.mock("./common/LazyInView", () => ({
+  LazyInView: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
 
 // Mock the Lanyard component (it's lazy-loaded inside AboutSection)
@@ -33,7 +50,7 @@ describe("AboutSection – lazy loading Lanyard with Suspense (PR change)", () =
 
   it("renders the developer description text", () => {
     render(<AboutSection />);
-    expect(screen.getByText(/Full Stack Developer/)).toBeInTheDocument();
+    expect(screen.getByText(/Software Engineer/)).toBeInTheDocument();
   });
 
   it("renders the 'Get in touch' CTA button", () => {
@@ -48,17 +65,12 @@ describe("AboutSection – lazy loading Lanyard with Suspense (PR change)", () =
       </Suspense>,
     );
 
-    // With the mock, Lanyard should resolve immediately
     const lanyard = await screen.findByTestId("lanyard-component");
     expect(lanyard).toBeInTheDocument();
   });
 
-  it("Suspense fallback is a pulsing skeleton div", () => {
-    // Test that when the module isn't resolved yet, a fallback appears
-    // (We verify via the component's JSX structure via snapshot or class)
+  it("verifies the container layout min-h-[50vh] class", () => {
     render(<AboutSection />);
-    // The Lanyard is mocked to resolve synchronously, so fallback won't show,
-    // but we verify the container has min-h-[50vh] class
     const container = document.querySelector(".min-h-\\[50vh\\]");
     expect(container).toBeInTheDocument();
   });

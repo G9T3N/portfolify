@@ -1,99 +1,66 @@
 # Project Coding Rules & Standards
 
-This document serves as the "Source of Truth" for any AI coding assistant or developer working on the **wosol-web-console** project.
+This document serves as the **Source of Truth** for developers and AI coding assistants working on the **mrerr-portfolio** (`portfolify`) repository.
 
-## 1. Folder Architecture
+---
 
-Always follow the route-based domain splitting pattern. Reference: `src/routes/_home.main.statistics`.
+## 1. Separation of Concerns (Single Responsibility Principle - SRP)
 
-Each feature route should be structured as:
+Every file and feature must have a single, well-defined responsibility:
 
-- `components/`: React TSX components for this route.
-- `queries.ts`: TanStack Query hooks and API logic.
-- `utils/`:
-  - `constants/`: Route-specific constants.
-  - `functions/`: Route-specific utility functions.
-  - `hooks/`: Route-specific custom React hooks.
-- `route.tsx`: Entry point for the route.
+- **UI Components (`components/`)**:
+  - Declarative JSX presentation only.
+  - No embedded API fetching, direct database calls, or complex inline math.
+  - Consume logic via custom hooks or props.
 
-## 2. SOLID Separation of Concerns
+- **Custom Hooks (`hooks/` or `utils/hooks/`)**:
+  - Business logic, state management, event listeners, observers (scroll spy, media queries).
+  - Explicit, meaningful naming (e.g. `useLocale`, `useScrollSpy`, `useProjectsFilter`, `useAdminLoginForm`).
 
-Each file should have a single, clear focus:
+- **Data Fetching Layer (`queries/` or `queries.ts`)**:
+  - TanStack Query hooks, Supabase API calls, mutations, and cache invalidation.
 
-- **JSX**: Pure UI components in `components/`.
-- **API Logic**: Defined in `queries.ts` using `openapi-fetch`.
-- **Logic**: Move heavy logic to `utils/functions/` or `utils/hooks/`.
-- **Stores**: Business state in `src/stores/` using **Zustand**.
-- **Global Utils**: Frequently reused helpers in `src/utils/`.
+- **Pure Functions (`utils/functions/`)**:
+  - Side-effect-free data transformations, metric derivations, and validation helpers.
+  - Fully unit-testable in Vitest without mocking browser DOM.
 
-## 3. Technology Stack
+- **Constants (`utils/constants/`)**:
+  - Configuration, route lists, copy defaults, and metadata definitions.
 
-- **Framework**: React Router v7 (File-based routing).
-- **Styling**: UnoCSS (Utility-first). Use `@unocss/preset-shadcn` rules where applicable.
-- **State**: Zustand.
-- **Data Fetching**: TanStack Query + `openapi-fetch`.
-- **Tables**: TanStack Table.
-- **Validation**: Zod + React Hook Form.
+- **Types (`types/` or `*.d.ts`)**:
+  - Strict TypeScript definitions with no `any` assertions.
 
-## 4. API Handling & Error Management
+---
 
-- **Helper Component**: ALWAYS use the `Body` component from `@/utils/generator/BodyComponent` to wrap page content.
-  - It handles `loading`, `error`, `status`, and `hasData`.
-  - It provides consistent UI for 400, 401, 403, 404, and 500+ errors via `ApiErrorHandler`.
-- **Type Safety**: Use `openapi-fetch` and the generated schema from `src/config/api-schema.d.ts`.
+## 2. Tailwind CSS Best Practices
 
-## 5. Design System
+- **Flow-First Layout**:
+  - Rely on flexbox (`flex`, `flex-col`, `items-center`, `justify-between`), CSS Grid, `gap`, and auto-margins (`ms-auto`, `my-auto`).
+  - Do NOT wrap elements in `relative` containers solely to place children with `absolute inset-0` when modern flex/grid achieves the same or better responsive flow.
+  - Restrict `absolute` positioning to genuine overlays (e.g., floating badges, modal backdrops, dropdown popovers).
 
-- **Strict Rule**: DO NOT use external component libraries (like Radix directly) or hardcoded UI components.
-- **Internal Components**: Only use components from the `@design-system/yeds-components` package.
-- **Reference**: `.npmrc` registry `https://git.sofa.io/api/v4/projects/370/packages/npm/`.
+- **RTL & Logical Properties**:
+  - Use logical utilities (`ms-*`, `me-*`, `start-*`, `end-*`, `ps-*`, `pe-*`) to guarantee seamless English and Arabic layout mirroring.
 
-## 6. Auto-Imports (`unimport`)
+---
 
-The project uses `unimport` via `vite.config.ts`. You DO NOT need to manually import:
+## 3. Icons & Performance
 
-- standard React hooks (`useState`, `useEffect`, etc.).
-- React Router components (`Link`, `useNavigate`, `Outlet`).
-- TanStack Query hooks (`useQuery`, `useMutation`).
-- Common utils (`clsx`, `zodResolver`).
-- Lucide icons (some common ones).
-- Design system `Skeleton`.
+- **General UI Icons**: Lucide React (`lucide-react`).
+- **Brand & Tech Icons**: `TechIcon` (`src/components/common/TechIcon.tsx`) powered by the lightweight SVG registry (`src/components/common/tech-icons/tech-svg-registry.tsx`).
+- **Strict Rule**: NEVER link external font stylesheets (e.g. Devicon woff/css or FontAwesome) in `<head>`. All brand icons must be lightweight inline vector SVGs.
 
-Refer to `vite.config.ts` for the full list of presets and directories.
+---
 
-## 7. ESLint & Perfectionist
+## 4. Testing & Quality Assurance
 
-- Follow the rules in `eslint.config.js`.
-- **Strict Typing**: DO NOT use the `any` keyword. Use proper TypeScript interfaces or types generated by `openapi-fetch`.
-- Use **Alphabetical Sorting** for imports and object properties (enforced by `eslint-plugin-perfectionist`).
-- Use **CamelCase** for variables and **PascalCase** for components/types.
-- **Strict Rule**: DO NOT use wildcard imports (e.g., `import * as example from './example'`). Use named imports instead for better tree-shaking and clarity.
+- **Vitest**: Unit and component tests must pass 100% on every commit. Run with `pnpm test`.
+- **Linting & Formatting**: Enforced via `oxlint`, `eslint`, and `oxfmt`. Run with `pnpm lint` and `pnpm format:check`.
+- **Type Checking**: Strict TypeScript validation via `pnpm typecheck`.
 
-## 8. Internationalization (i18n)
+---
 
-- Use **LinguiJS** for translations.
-- Wrap user-facing strings with `<Trans>` component or `t` macro.
-- **Imports**:
-  - `import { Trans } from '@lingui/react/macro'`
-  - `import { t } from '@lingui/core/macro'`
-- Reference `src/locales/`.
+## 5. 3D & Performance Safeguards
 
-## 9. Icons
-
-- **Phosphor Icons**: Always use **Phosphor Icons** as the icon set via UnoCSS Iconify integration.
-- **Pattern**: `i-ph:<icon-name>` (e.g., `i-ph:fingerprint`, `i-ph:plus-circle`, `i-ph:user`, `i-ph:gear`).
-- **Variants**: Phosphor supports weight variants — append the variant suffix as needed:
-  - Regular (default): `i-ph:house`
-  - Bold: `i-ph:house-bold`
-  - Fill: `i-ph:house-fill`
-  - Duotone: `i-ph:house-duotone`
-  - Thin: `i-ph:house-thin`
-  - Light: `i-ph:house-light`
-- **Strict Rule**: Do NOT use icons from other collections (e.g., `mdi`, `lucide`, `prime`). Phosphor is the single source for all icons.
-- Reference `uno.config.ts` for configuration and safelist.
-
-## 10. Routing & Navigation
-
-- **`Link`**: Use for normal, standard navigation.
-- **`NavLink`**: Use ONLY when you need to style the link based on its active state (e.g., in sidebars, menus).
-- **`useNavigate`**: Reserve usage for situations where the user is **not** interacting but you need to navigate programmatically (e.g., logging them out after inactivity, timed UIs like quizzes, post-fetch redirects). Do not use this for regular button or link clicks.
+- 3D modules (`Lanyard.tsx`, Three.js, Rapier physics) MUST remain lazily loaded via `Suspense` and `LazyInView`.
+- Maintain stable references for default props in Three.js/React Three Fiber components to prevent memory leaks and unneeded re-renders.

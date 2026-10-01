@@ -12,6 +12,7 @@ vi.mock("framer-motion", () => ({
       <button {...props}>{children}</button>
     ),
   },
+  useInView: () => true,
   useReducedMotion: () => false,
 }));
 
@@ -32,8 +33,8 @@ vi.mock("./portfolio/Gauge", () => ({
   Gauge: () => <div data-testid="gauge-component">Gauge</div>,
 }));
 
-vi.mock("./portfolio/FeaturedCard", () => ({
-  FeaturedCard: () => <div data-testid="featured-card-component">FeaturedCard</div>,
+vi.mock("./card-swapping/features/ImageStack", () => ({
+  ImageCardStack: () => <div data-testid="image-card-stack-component">ImageCardStack</div>,
 }));
 
 vi.mock("./LogoCarousel", () => ({
@@ -49,13 +50,13 @@ describe("HeroSection – lazy loading with Suspense (PR change)", () => {
     expect(section).toBeInTheDocument();
   });
 
-  it("renders FeaturedCard inside Suspense boundary", async () => {
+  it("renders ImageCardStack inside Suspense boundary", async () => {
     render(
       <Suspense fallback={<div>Loading...</div>}>
         <HeroSection />
       </Suspense>,
     );
-    const card = await screen.findByTestId("featured-card-component");
+    const card = await screen.findByTestId("image-card-stack-component");
     expect(card).toBeInTheDocument();
   });
 
@@ -81,9 +82,9 @@ describe("HeroSection – lazy loading with Suspense (PR change)", () => {
 });
 
 describe("HeroSection – explicit Trans IDs (PR change)", () => {
-  it("renders Trans component with explicit ID for Full-Stack Developer title", () => {
+  it("renders Trans component with explicit ID for Software Engineer title", () => {
     render(<HeroSection />);
-    expect(screen.getByTestId("trans-Full-Stack Developer & UI Specialist")).toBeInTheDocument();
+    expect(screen.getByTestId("trans-Software Engineer · React & TypeScript")).toBeInTheDocument();
   });
 
   it("renders Trans component with explicit ID for name", () => {
@@ -100,18 +101,16 @@ describe("HeroSection – explicit Trans IDs (PR change)", () => {
     render(<HeroSection />);
     expect(
       screen.getByTestId(
-        "trans-Bridging the gap between robust system architecture and seamless, high-performance user interfaces.",
+        "trans-Software Engineer building maintainable web products, production architectures, delivery automation, and open-source tooling.",
       ),
     ).toBeInTheDocument();
   });
 });
 
-describe("HeroSection – skeleton fallbacks defined", () => {
-  it("CardSkeleton renders an animate-pulse element with correct classes", async () => {
-    // The skeletons are only shown when the lazy component hasn't resolved,
-    // but we can verify the component renders without errors
+describe("HeroSection – status badge", () => {
+  it("renders the live status pulse indicator", () => {
     render(<HeroSection />);
-    expect(document.querySelector(".animate-pulse")).not.toBeInTheDocument();
-    // (components resolve immediately with mocks)
+    const pulseDot = document.querySelector(".animate-pulse");
+    expect(pulseDot).toBeInTheDocument();
   });
 });

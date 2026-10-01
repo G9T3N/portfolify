@@ -1,7 +1,6 @@
-import { useSkills } from "@/queries";
 import { TechIcon } from "@/components/common/TechIcon";
 
-const FALLBACK_LOGOS = [
+const LOGO_NAMES = [
   "React",
   "TypeScript",
   "Next.js",
@@ -20,17 +19,11 @@ const FALLBACK_LOGOS = [
 ];
 
 export default function LogoCarousel() {
-  const { data: skills } = useSkills();
-
-  // Use dynamic skills if available, otherwise use curated fallback
-  const logoNames =
-    skills && skills.length > 0 ? skills.map((skill) => skill.name) : FALLBACK_LOGOS;
-
   return (
     <div className="w-full bg-[var(--color-bg-elevated)] py-3 overflow-hidden border-y border-[var(--color-border-default)]">
       <div className="relative flex max-w-[100vw] overflow-hidden group">
         <div className="flex w-max gap-16 animate-marquee group-hover:[animation-play-state:paused]">
-          {[...logoNames, ...logoNames, ...logoNames].map((name, index) => (
+          {[...LOGO_NAMES, ...LOGO_NAMES, ...LOGO_NAMES].map((name, index) => (
             <div
               key={index}
               className="flex items-center gap-2.5 flex-1 w-fit py-1 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-300"
