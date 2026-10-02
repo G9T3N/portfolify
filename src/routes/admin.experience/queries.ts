@@ -6,11 +6,13 @@ export interface WorkExperience {
   id: string;
   company: string;
   position: string;
+  position_ar?: string | null;
   location: string | null;
   start_date: string;
   end_date: string | null;
   is_current: boolean;
   description: string | null;
+  description_ar?: string | null;
   achievements: string[] | null;
   company_logo_url: string | null;
   display_order: number;

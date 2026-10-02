@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Suspense, lazy } from "react";
+import { Trans } from "@lingui/react/macro";
 import { usePortfolioMetrics, useSiteSetting, useWorkExperiences } from "@/queries";
 import { LazyInView } from "./common/LazyInView";
 import { Briefcase, Calendar, FileDown, MapPin, Sparkles } from "lucide-react";
@@ -19,14 +20,14 @@ const AboutSection = () => {
   return (
     <section id="about" className="px-4 md:px-8 lg:px-12 py-16 md:py-32">
       <div className="max-w-[1400px] 2xl:max-w-[1700px] mx-auto">
-        <div className="  z-10 flex justify-center">
+        <div className="z-10 flex justify-center">
           <motion.h2
-            className="section-label  text-center  "
+            className="section-heading text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
           >
-            About Me
+            <Trans>About Me</Trans>
           </motion.h2>
         </div>
         <div className="flex flex-col lg:flex-row items-center ">
@@ -58,27 +59,31 @@ const AboutSection = () => {
           >
             <div className="space-y-4 text-center md:text-left">
               <p className="text-2xl sm:text-3xl md:text-4xl leading-[1.3] text-[var(--color-text-primary)] font-medium">
-                Software Engineer based in Sana'a, Yemen & collaborating worldwide.
+                <Trans>Software Engineer based in Sana'a, Yemen & collaborating worldwide.</Trans>
               </p>
               <p className="text-base sm:text-lg leading-relaxed text-[var(--color-text-secondary)] font-normal">
-                I currently work at{" "}
-                <strong className="text-[var(--color-text-primary)]">Sofa</strong> and collaborate
-                remotely with{" "}
-                <strong className="text-[var(--color-text-primary)]">Sparksoft</strong> and{" "}
-                <strong className="text-[var(--color-text-primary)]">OnePlusOneTech</strong>. My
-                core domain is <strong className="text-[var(--color-text-primary)]">React</strong>{" "}
-                and <strong className="text-[var(--color-text-primary)]">TypeScript</strong>, with
-                extensive experience across REST APIs, backend integration, CI/CD, release
-                automation, debugging, architecture, and code quality.
+                <Trans>
+                  I currently work at{" "}
+                  <strong className="text-[var(--color-text-primary)]">Sofa</strong> and collaborate
+                  remotely with{" "}
+                  <strong className="text-[var(--color-text-primary)]">Sparksoft</strong> and{" "}
+                  <strong className="text-[var(--color-text-primary)]">OnePlusOneTech</strong>. My
+                  core domain is <strong className="text-[var(--color-text-primary)]">React</strong>{" "}
+                  and <strong className="text-[var(--color-text-primary)]">TypeScript</strong>, with
+                  extensive experience across REST APIs, backend integration, CI/CD, release
+                  automation, debugging, architecture, and code quality.
+                </Trans>
               </p>
               <p className="text-sm sm:text-base leading-relaxed text-[var(--color-text-muted)]">
-                I prioritize deep understanding of system architecture and business logic to ship
-                reliable, high-performance web products. Beyond commercial work, I publish reusable
-                NPM utilities under the{" "}
-                <code className="text-xs bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded text-[var(--color-text-primary)]">
-                  @g9t3n
-                </code>{" "}
-                namespace and contribute to open-source tooling.
+                <Trans>
+                  I prioritize deep understanding of system architecture and business logic to ship
+                  reliable, high-performance web products. Beyond commercial work, I publish
+                  reusable NPM utilities under the{" "}
+                  <code className="text-xs bg-[var(--color-bg-elevated)] px-1.5 py-0.5 rounded text-[var(--color-text-primary)]">
+                    @g9t3n
+                  </code>{" "}
+                  namespace and contribute to open-source tooling.
+                </Trans>
               </p>
             </div>
 
@@ -92,17 +97,17 @@ const AboutSection = () => {
             >
               <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-border-default)] text-sm text-[var(--color-text-secondary)]">
                 <MapPin className="w-4 h-4 text-[var(--color-mp-primary)]" />
-                Sana'a, Yemen & Remote
+                <Trans>Sana'a, Yemen & Remote</Trans>
               </div>
               {yearsExperience && (
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-border-default)] text-sm text-[var(--color-text-secondary)]">
                   <Calendar className="w-4 h-4 text-[var(--color-mp-primary)]" />
-                  {yearsExperience}+ Years Experience
+                  <Trans>{yearsExperience}+ Years Experience</Trans>
                 </div>
               )}
               <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-border-default)] text-sm text-[var(--color-text-secondary)]">
                 <Briefcase className="w-4 h-4 text-[var(--color-mp-primary)]" />
-                Open to Opportunities
+                <Trans>Open to Opportunities</Trans>
               </div>
             </motion.div>
 
@@ -125,7 +130,7 @@ const AboutSection = () => {
                 className="btn-pill text-white "
               >
                 <Sparkles className="w-4 h-4" />
-                Get in touch
+                <Trans>Get in touch</Trans>
                 <Sparkles className="w-4 h-4" />
               </a>
               <a
@@ -135,7 +140,7 @@ const AboutSection = () => {
                 className="flex items-center gap-2 px-6 py-3 rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)] transition-all text-sm font-medium"
               >
                 <FileDown className="w-4 h-4" />
-                View CV
+                <Trans>View CV</Trans>
               </a>
               <a
                 href="https://www.npmjs.com/~g9t3n"
@@ -143,7 +148,7 @@ const AboutSection = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-5 py-3 rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)] transition-all text-sm font-medium"
               >
-                NPM Profile
+                <Trans>NPM Profile</Trans>
               </a>
               <a
                 href="https://github.com/wael-amrany"
@@ -151,7 +156,7 @@ const AboutSection = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-5 py-3 rounded-full border border-[var(--color-border-default)] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)] transition-all text-sm font-medium"
               >
-                Secondary GitHub
+                <Trans>Secondary GitHub</Trans>
               </a>
             </motion.div>
           </motion.div>

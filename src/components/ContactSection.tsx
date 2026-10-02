@@ -3,6 +3,7 @@ import { Sparkles, Mail, Phone, MessageCircle, Eye, EyeOff, FileDown } from "luc
 import { useState } from "react";
 import { ContactForm } from "./ContactForm";
 import { useSiteSetting } from "@/queries";
+import { Trans } from "@lingui/react/macro";
 
 const ContactSection = () => {
   const [showNumbers, setShowNumbers] = useState(false);
@@ -23,11 +24,13 @@ const ContactSection = () => {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
               <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-[var(--color-text-primary)]">
-                Wanna create
-                <br />
-                something <span className="italic">awesome</span>
-                <br />
-                together?
+                <Trans>
+                  Wanna create
+                  <br />
+                  something <span className="italic">awesome</span>
+                  <br />
+                  together?
+                </Trans>
               </h2>
             </motion.div>
 
@@ -54,7 +57,7 @@ const ContactSection = () => {
             <div className="flex flex-col gap-5 max-w-sm">
               <div className="space-y-1">
                 <p className="text-sm text-[var(--color-text-secondary)]">
-                  Don&apos;t like forms? Reach out directly:
+                  <Trans>Don&apos;t like forms? Reach out directly:</Trans>
                 </p>
               </div>
 
@@ -82,7 +85,7 @@ const ContactSection = () => {
                       <span className="flex flex-col">
                         <span>+967 770 826 486</span>
                         <span className="text-xs text-[var(--color-text-muted)]">
-                          Call / WhatsApp / SMS
+                          <Trans>Call / WhatsApp / SMS</Trans>
                         </span>
                       </span>
                     </a>
@@ -99,7 +102,7 @@ const ContactSection = () => {
                       <span className="flex flex-col">
                         <span>+994 409 197 608</span>
                         <span className="text-xs text-[var(--color-text-muted)]">
-                          Business WhatsApp
+                          <Trans>Business WhatsApp</Trans>
                         </span>
                       </span>
                     </a>
@@ -113,7 +116,7 @@ const ContactSection = () => {
                       <Phone className="w-4 h-4" />
                     </span>
                     <span className="flex items-center gap-2">
-                      Click to reveal phone numbers
+                      <Trans>Click to reveal phone numbers</Trans>
                       <Eye className="w-3.5 h-3.5 opacity-50" />
                     </span>
                   </button>
@@ -165,7 +168,7 @@ const ContactSection = () => {
                 className="border border-[var(--color-border-default)] text-[var(--color-text-primary)] px-8 h-12 rounded-xl flex items-center justify-center gap-2 hover:bg-[var(--color-bg-elevated)] transition-colors"
               >
                 <FileDown className="w-4 h-4" />
-                Download CV
+                <Trans>Download CV</Trans>
               </a>
 
               {/* Let's talk */}
@@ -174,7 +177,7 @@ const ContactSection = () => {
                 className="bg-[var(--color-mp-text-primary)] text-[var(--color-bg-primary)] px-10 h-12 rounded-xl border flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
               >
                 <Sparkles className="w-4 h-4" />
-                Let&apos;s talk
+                <Trans>Let&apos;s talk</Trans>
                 <Sparkles className="w-4 h-4" />
               </a>
             </div>

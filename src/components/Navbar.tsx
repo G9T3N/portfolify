@@ -2,18 +2,18 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Sun, Moon, Languages, Menu, X } from "lucide-react";
-import { Trans } from "@lingui/react";
+import { Trans } from "@lingui/react/macro";
 import { useLocale } from "@/hooks/useLocale";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { useThemeSync } from "@/hooks/useThemeSync";
 import { NAV_SECTION_IDS } from "@/utils/constants/navigation";
 
 const navLinks = [
-  { href: "#projects", label: <Trans id="nav.projects">Projects</Trans> },
-  { href: "#experience", label: <Trans id="nav.experience">Experience</Trans> },
-  { href: "#about", label: <Trans id="nav.about">About</Trans> },
-  { href: "#skills", label: <Trans id="nav.skills">Skills</Trans> },
-  { href: "#contact", label: <Trans id="nav.contact">Contact</Trans> },
+  { href: "#projects", label: <Trans>Projects</Trans> },
+  { href: "#experience", label: <Trans>Experience</Trans> },
+  { href: "#about", label: <Trans>About</Trans> },
+  { href: "#skills", label: <Trans>Skills</Trans> },
+  { href: "#contact", label: <Trans>Contact</Trans> },
 ];
 
 export const Navbar = () => {
@@ -129,7 +129,7 @@ export const Navbar = () => {
           <button
             type="button"
             className="h-9 px-2.5 rounded-4xl flex items-center gap-1.5 text-xs font-mono font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-elevated)] transition-colors cursor-pointer"
-            aria-label={locale === "en" ? "عربي — Switch to Arabic" : "EN — Switch to English"}
+            aria-label={locale === "en" ? "Switch to Arabic" : "Switch to English"}
             onClick={toggleLanguage}
             title={locale === "en" ? "تبديل إلى العربية" : "Switch to English"}
           >

@@ -16,7 +16,8 @@ export default defineConfig({
     lingui(),
 
     babel({
-      filter: /\.[jt]sx?$/, // Targets JS, TS, JSX, and TSX files
+      include: /\.[jt]sx?$/, // Targets JS, TS, JSX, and TSX files
+      exclude: /node_modules/,
       babelConfig: {
         presets: [
           // Required so Babel can parse TypeScript types safely before macro execution

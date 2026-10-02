@@ -31,7 +31,7 @@ describe("ProjectCard and DEFAULT_PROJECTS", () => {
 
   it("renders live site links for navigable projects", () => {
     const sofa = DEFAULT_PROJECTS[0]!;
-    render(<ProjectCard project={sofa} index={0} total={5} />);
+    render(<ProjectCard project={sofa} />);
 
     expect(screen.getByText("Sofa Platform")).toBeInTheDocument();
     const liveLink = screen.getByRole("link", { name: /visit live site for sofa platform/i });
@@ -40,7 +40,7 @@ describe("ProjectCard and DEFAULT_PROJECTS", () => {
 
   it("HAJZAK does NOT render navigation link and displays internal dashboard indicator", () => {
     const hajzak = DEFAULT_PROJECTS.find((p) => p.id === "hajzak-dashboard")!;
-    render(<ProjectCard project={hajzak} index={3} total={5} />);
+    render(<ProjectCard project={hajzak} />);
 
     expect(screen.getByText("HAJZAK")).toBeInTheDocument();
     expect(screen.queryByText(/live site/i)).not.toBeInTheDocument();

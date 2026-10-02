@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { EllipsisVertical } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Trans } from "@lingui/react/macro";
 import { Metric, MetricsModal } from "./MetricsModal";
 import {
   useCertificates,
@@ -57,20 +58,29 @@ export const Gauge = () => {
   const certificateCount = certificates?.length ?? 0;
   const coreStats: Metric[] = [
     {
-      label: "Projects Delivered",
+      key: "projects",
+      label: <Trans>Projects Delivered</Trans>,
       value: projectCount,
       unit: "+",
       max: Math.max(100, Math.ceil((projectCount * 1.25) / 10) * 10),
     },
     {
-      label: "Years Experience",
+      key: "years",
+      label: <Trans>Years Experience</Trans>,
       value: yearsExperience,
       unit: "+",
       max: Math.max(20, Math.ceil(yearsExperience * 1.5)),
     },
-    { label: "Skills Mastered", value: skillCount > 0 ? skillCount : 40, unit: "+", max: 100 },
     {
-      label: "Certificates Earned",
+      key: "skills",
+      label: <Trans>Skills Mastered</Trans>,
+      value: skillCount > 0 ? skillCount : 40,
+      unit: "+",
+      max: 100,
+    },
+    {
+      key: "certificates",
+      label: <Trans>Certificates Earned</Trans>,
       value: certificateCount > 0 ? certificateCount : 5,
       unit: "",
       max: 20,
@@ -84,12 +94,37 @@ export const Gauge = () => {
 
   const allMetrics: Metric[] = [
     ...coreStats,
-    { label: "Code Commits", value: githubData?.commits ?? 3200, unit: "+", max: 5000 },
-    { label: "Lines of Code", value: githubData?.linesOfCode ?? 5000, unit: "", max: 10000 },
-    { label: "Hours Debugging", value: githubData?.hoursDebugging ?? 999, unit: "h+", max: 1000 },
-    { label: "Coffee Cups", value: githubData?.coffeeCups ?? 1250, unit: "", max: 2000 },
     {
-      label: "Happy Clients",
+      key: "commits",
+      label: <Trans>Code Commits</Trans>,
+      value: githubData?.commits ?? 3200,
+      unit: "+",
+      max: 5000,
+    },
+    {
+      key: "lines",
+      label: <Trans>Lines of Code</Trans>,
+      value: githubData?.linesOfCode ?? 5000,
+      unit: "",
+      max: 10000,
+    },
+    {
+      key: "debugging",
+      label: <Trans>Hours Debugging</Trans>,
+      value: githubData?.hoursDebugging ?? 999,
+      unit: "h+",
+      max: 1000,
+    },
+    {
+      key: "coffee",
+      label: <Trans>Coffee Cups</Trans>,
+      value: githubData?.coffeeCups ?? 1250,
+      unit: "",
+      max: 2000,
+    },
+    {
+      key: "clients",
+      label: <Trans>Happy Clients</Trans>,
       value: projectCount > 0 ? Math.max(1, Math.floor(projectCount * 0.9)) : 24,
       unit: "",
       max: 50,
@@ -110,7 +145,7 @@ export const Gauge = () => {
     >
       <div className="flex items-center justify-between mb-4 ">
         <span className="text-sm text-[var(--color-text-secondary)] mt-0 font-medium">
-          {"Metrics"}
+          <Trans>Metrics</Trans>
         </span>
         <div className="flex gap-2">
           <EllipsisVertical
@@ -184,9 +219,9 @@ export const Gauge = () => {
       {/* Secondary stats fill the remaining card height on tall screens
           (the sidebar stretches the card next to the hero image) */}
       <div className="mt-3 flex-1 flex flex-col justify-evenly gap-2">
-        {allMetrics.slice(4).map((m) => (
+        {allMetrics.slice(4).map((m, index) => (
           <div
-            key={m.label}
+            key={m.key || index}
             className="flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-elevated)]"
           >
             <span className="text-xs text-[var(--color-text-secondary)] font-medium truncate">

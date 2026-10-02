@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useProjects } from "@/queries";
+import { getContentLocale, applyDirectArabicColumns } from "@/queries/translations";
 import {
   DEFAULT_PROJECTS,
   FEATURED_PROJECTS_COUNT,
@@ -16,7 +17,16 @@ export function useProjectsFilter() {
     const filtered = (projects ?? []).filter(
       (p) => !isPlaceholderProject(p) && p.status === "live",
     );
-    return filtered.length > 0 ? filtered : DEFAULT_PROJECTS;
+    if (filtered.length > 0) {
+      return filtered;
+    }
+    const locale = getContentLocale();
+    if (locale === "ar") {
+      return DEFAULT_PROJECTS.map((p) =>
+        applyDirectArabicColumns(p as unknown as Record<string, unknown>),
+      ) as typeof DEFAULT_PROJECTS;
+    }
+    return DEFAULT_PROJECTS;
   }, [projects]);
 
   // Derived unique categories

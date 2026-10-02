@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Trans } from "@lingui/react/macro";
 import {
   Accordion,
   AccordionContent,
@@ -49,7 +50,9 @@ const FaqSection = () => (
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
       >
-        <span className="section-label">Frequently Asked Questions</span>
+        <h2 className="section-heading text-center">
+          <Trans>Frequently Asked Questions</Trans>
+        </h2>
       </motion.div>
 
       <motion.div
@@ -67,10 +70,53 @@ const FaqSection = () => (
               className="border-[var(--color-border-default)]"
             >
               <AccordionTrigger className="text-start text-base md:text-lg font-semibold text-[var(--color-text-primary)]">
-                {item.question}
+                {item.value === "who-is-wael" ? (
+                  <Trans>Who is Wael Alamrany?</Trans>
+                ) : item.value === "technologies" ? (
+                  <Trans>What technologies does he specialize in?</Trans>
+                ) : item.value === "products" ? (
+                  <Trans>What type of products has he worked on?</Trans>
+                ) : item.value === "remote-work" ? (
+                  <Trans>Does he work remotely?</Trans>
+                ) : item.value === "contact" ? (
+                  <Trans>How can companies contact him?</Trans>
+                ) : (
+                  item.question
+                )}
               </AccordionTrigger>
               <AccordionContent className="text-sm md:text-base text-[var(--color-text-secondary)] leading-relaxed">
-                {item.answer}
+                {item.value === "who-is-wael" ? (
+                  <Trans>
+                    Wael Alamrany (Mr.Err) is a software engineer and frontend-focused full-stack
+                    developer based in Sana'a, Yemen, working with companies worldwide. He is
+                    currently at Sofa and collaborates remotely with Sparksoft and OnePlusOneTech.
+                  </Trans>
+                ) : item.value === "technologies" ? (
+                  <Trans>
+                    His core specialization is React.js and TypeScript, with strong experience in
+                    Python/FastAPI backend development and Node.js. He also builds CI/CD pipelines
+                    with GitHub Actions and GitLab CI, including release automation and Conventional
+                    Commits.
+                  </Trans>
+                ) : item.value === "products" ? (
+                  <Trans>
+                    He has shipped web products ranging from dashboard-style admin consoles to
+                    public-facing sites, with a strong focus on performance, reliability, and code
+                    quality. He also contributes to open source and publishes reusable NPM packages.
+                  </Trans>
+                ) : item.value === "remote-work" ? (
+                  <Trans>
+                    Yes. Wael works fully remotely from Sana'a, Yemen, collaborating across time
+                    zones using Jira, pull requests, and code review workflows.
+                  </Trans>
+                ) : item.value === "contact" ? (
+                  <Trans>
+                    Companies can reach out via the contact form on this page or through his public
+                    profiles on GitHub and LinkedIn, which are linked in the footer.
+                  </Trans>
+                ) : (
+                  item.answer
+                )}
               </AccordionContent>
             </AccordionItem>
           ))}

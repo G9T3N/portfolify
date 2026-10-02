@@ -32,6 +32,11 @@ function writeLocale(next: Locale): void {
   if (typeof window !== "undefined") {
     localStorage.setItem(LOCALE_KEY, next);
   }
+  i18n.activate(next);
+  if (typeof document !== "undefined") {
+    document.documentElement.lang = next;
+    document.documentElement.dir = next === "ar" ? "rtl" : "ltr";
+  }
   for (const listener of localeListeners) {
     listener();
   }

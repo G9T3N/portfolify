@@ -63,7 +63,7 @@ const structuredData = {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
       url: SITE_URL,
-      name: "Wael Alamrany — Portfolio",
+      name: "Wael Alamrany Portfolio",
       description: SITE_DESCRIPTION,
       publisher: { "@id": `${SITE_URL}/#person` },
       inLanguage: "en",

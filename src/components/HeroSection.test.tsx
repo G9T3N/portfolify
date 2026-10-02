@@ -81,29 +81,34 @@ describe("HeroSection – lazy loading with Suspense (PR change)", () => {
   });
 });
 
-describe("HeroSection – explicit Trans IDs (PR change)", () => {
-  it("renders Trans component with explicit ID for Software Engineer title", () => {
+describe("HeroSection – localized copy", () => {
+  it("renders Trans component for Software Engineer title", () => {
     render(<HeroSection />);
-    expect(screen.getByTestId("trans-Software Engineer · React & TypeScript")).toBeInTheDocument();
+    expect(screen.getByText(/Software Engineer · React & TypeScript/)).toBeInTheDocument();
   });
 
-  it("renders Trans component with explicit ID for name", () => {
+  it("renders Trans component for name", () => {
     render(<HeroSection />);
-    expect(screen.getByTestId("trans-Wael Alamrany")).toBeInTheDocument();
+    expect(screen.getByText("Wael Alamrany")).toBeInTheDocument();
   });
 
-  it("renders Trans component with explicit ID for nickname", () => {
+  it("renders Trans component for nickname", () => {
     render(<HeroSection />);
-    expect(screen.getByTestId("trans-— Mr.Err")).toBeInTheDocument();
+    expect(screen.getByText("Mr.Err")).toBeInTheDocument();
   });
 
-  it("renders Trans component with explicit ID for description", () => {
+  it("renders Trans component for description", () => {
     render(<HeroSection />);
     expect(
-      screen.getByTestId(
-        "trans-Software Engineer building maintainable web products, production architectures, delivery automation, and open-source tooling.",
-      ),
+      screen.getByText(/Software Engineer building maintainable web products/i),
     ).toBeInTheDocument();
+  });
+});
+
+describe("HeroSection – copy hygiene", () => {
+  it("renders no em-dash or en-dash in the hero copy", () => {
+    const { container } = render(<HeroSection />);
+    expect(container.textContent).not.toMatch(/[—–]/);
   });
 });
 

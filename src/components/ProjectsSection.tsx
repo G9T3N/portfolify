@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { Trans } from "@lingui/react/macro";
 import { ProjectCard } from "./portfolio/ProjectCard";
 import { useProjectsFilter } from "@/routes/_index/utils/hooks/use-projects-filter";
 
@@ -38,13 +39,13 @@ export const ProjectsSection = () => {
         {/* Section label + category filters */}
         <div className="flex flex-col items-center gap-6 mb-24">
           <motion.h2
-            className="section-label"
+            className="section-heading text-center"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            Selected Work
+            <Trans>Selected Work</Trans>
           </motion.h2>
 
           {/* Category filter tabs */}
@@ -66,7 +67,7 @@ export const ProjectsSection = () => {
                       : "border-[var(--color-border-default)] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)]"
                   }`}
                 >
-                  {cat}
+                  {cat === "all" ? <Trans>All</Trans> : cat}
                 </button>
               ))}
             </motion.div>
@@ -86,7 +87,9 @@ export const ProjectsSection = () => {
             </div>
           ) : visibleProjects.length === 0 ? (
             <div className="flex items-center justify-center h-[50vh] text-[var(--color-text-muted)]">
-              <p className="text-lg">No projects to display yet.</p>
+              <p className="text-lg">
+                <Trans>No projects to display yet.</Trans>
+              </p>
             </div>
           ) : (
             visibleProjects.map((project, index) => (
@@ -95,7 +98,7 @@ export const ProjectsSection = () => {
                 className="sticky w-full"
                 style={{ top: `calc(10vh + ${Math.min(index, 4) * 20}px)` }}
               >
-                <ProjectCard project={project} index={index} total={visibleProjects.length} />
+                <ProjectCard project={project} />
               </div>
             ))
           )}
@@ -117,12 +120,16 @@ export const ProjectsSection = () => {
             >
               {isExpanded ? (
                 <>
-                  <span>Show Less</span>
+                  <span>
+                    <Trans>Show Less</Trans>
+                  </span>
                   <ChevronUp className="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-0.5" />
                 </>
               ) : (
                 <>
-                  <span>Read More Projects</span>
+                  <span>
+                    <Trans>Read More Projects</Trans>
+                  </span>
                   <span className="px-2.5 py-0.5 text-xs font-mono font-normal rounded-full bg-[var(--color-bg-card)] border border-[var(--color-border-default)] text-[var(--color-text-muted)] group-hover:text-[var(--color-text-primary)] transition-colors">
                     +{remainingCount}
                   </span>

@@ -11,6 +11,8 @@ import { messages as messagesEn } from "./locales/en/messages";
 import { messages as messagesAr } from "./locales/ar/messages";
 import { Analytics } from "@/lib/analytics";
 
+import { useLocale } from "@/hooks/useLocale";
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -23,9 +25,13 @@ const queryClient = new QueryClient({
 // Initialize Lingui
 i18n.load("en", messagesEn);
 i18n.load("ar", messagesAr);
-i18n.activate("en");
+const initialLocale =
+  typeof window !== "undefined" && localStorage.getItem("locale") === "ar" ? "ar" : "en";
+i18n.activate(initialLocale);
 
 export default function App() {
+  const { locale } = useLocale();
+
   return (
     <ThemeProvider
       attribute="data-theme"
@@ -39,7 +45,9 @@ export default function App() {
       <MotionConfig reducedMotion="user">
         <I18nProvider i18n={i18n}>
           <QueryClientProvider client={queryClient}>
-            <Outlet />
+            <div key={locale} dir={locale === "ar" ? "rtl" : "ltr"} className="min-h-screen">
+              <Outlet />
+            </div>
           </QueryClientProvider>
         </I18nProvider>
       </MotionConfig>

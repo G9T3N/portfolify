@@ -28,7 +28,7 @@ export default function LogoCarousel() {
               key={index}
               className="flex items-center gap-2.5 flex-1 w-fit py-1 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-300"
             >
-              <TechIcon name={name} className="text-2xl" />
+              <TechIcon name={name} className="w-6 h-6 text-2xl shrink-0" />
               <span className="font-mono w-full break-keep whitespace-nowrap text-sm uppercase tracking-wider font-semibold">
                 {name}
               </span>

@@ -21,6 +21,17 @@ create table if not exists public.translations (
 comment on table public.translations is
   'Localized field overrides for content tables. Base tables stay in English; this table holds per-locale values.';
 
+-- 1b. DEDICATED ARABIC COLUMNS ON CONTENT TABLES
+-- Allows editing English and Arabic side-by-side directly in Supabase Studio
+alter table public.projects
+  add column if not exists title_ar text,
+  add column if not exists description_ar text,
+  add column if not exists full_content_ar text;
+
+alter table public.work_experiences
+  add column if not exists position_ar text,
+  add column if not exists description_ar text;
+
 -- 2. ROW LEVEL SECURITY
 alter table public.translations enable row level security;
 
@@ -95,21 +106,21 @@ insert into public.translations (table_name, row_id, locale, field, value) value
 ('projects', 'e2b4f981-8b3d-4c3e-9c5e-7a1b3c5d7e90', 'ar', 'title',
   'منصة صوفا'),
 ('projects', 'e2b4f981-8b3d-4c3e-9c5e-7a1b3c5d7e90', 'ar', 'description',
-  'عمل إنتاجي على منتجات الويب يشمل واجهات React قابلة لإعادة الاستخدام، ودمج واجهات برمجة التطبيقات، وإدارة حالة التطبيق، وتصحيح الأخطاء، وتقديم ميزات قابلة للصيانة.'),
+  'تطوير منتجات ويب إنتاجية تشمل واجهات React قابلة لإعادة الاستخدام، وتكامل واجهات برمجة التطبيقات، وإدارة حالة التطبيق، وتتبع الأخطاء، وتسليم ميزات متماسكة قابلة للصيانة.'),
 ('projects', 'e2b4f981-8b3d-4c3e-9c5e-7a1b3c5d7e90', 'ar', 'full_content',
-  'هندسة المنصة الأساسية لتطبيقات الويب في شركة صوفا. بنيت وحافظت على واجهات عملاء تفاعلية ومعقدة ومتجاوبة باستخدام React وTypeScript، ودمجت واجهات برمجة تطبيقات REST عالية الإنتاجية، وأدرت حالة عميل معقدة، وضمنت إصدارات إنتاجية سلسة.'),
+  'هندسة المنصة الأساسية لتطبيقات الويب في شركة صوفا. بنيت وحافظت على واجهات تفاعلية متجاوبة وعالية الأداء بالاعتماد على React وTypeScript، وتكامل واجهات REST البرمجية، وإدارة حالة العميل، وضمان دورات إطلاق إنتاجية سلسة.'),
 ('projects', 'f3c5a092-9c4e-5d4f-ad6f-8b2c4d6e8f01', 'ar', 'title',
   'بورتفوليفاي'),
 ('projects', 'f3c5a092-9c4e-5d4f-ad6f-8b2c4d6e8f01', 'ar', 'description',
-  'مشروع عام مبني بلغة TypeScript يركز على العرض العصري للمحافظ والمنتجات وهيكلية واجهات أمامية قابلة لإعادة الاستخدام.'),
+  'مشروع عام مبني بلغة TypeScript يركز على العرض العصري للمشاريع والمنتجات، وهندسة واجهات أمامية نموذجية قابلة لإعادة الاستخدام.'),
 ('projects', 'f3c5a092-9c4e-5d4f-ad6f-8b2c4d6e8f01', 'ar', 'full_content',
-  'تطبيق محفظة حديث مبني باستخدام React Router v7 وTypeScript وTailwind CSS وFramer Motion مع دمج Supabase. يتميز بالوضع الداكن، وواجهات زجاجية متجاوبة، وتوجيه ديناميكي للمشاريع، وإدارة محتوى عبر لوحة تحكم.'),
+  'تطبيق محفظة أعمال حديث مبني باستخدام React Router v7 وTypeScript وTailwind CSS وFramer Motion مع دمج Supabase. يتميز بنمط داكن، وتصاميم زجاجية متجاوبة، وتوجيه ديناميكي للمشاريع، وإدارة محتوى عبر لوحة تحكم متكاملة.'),
 ('projects', 'a4d6b103-0d5f-6e5a-be70-9c3d5e7f9a12', 'ar', 'title',
-  'مصادر مفتوحة و npm'),
+  'برمجيات مفتوحة المصدر وnpm'),
 ('projects', 'a4d6b103-0d5f-6e5a-be70-9c3d5e7f9a12', 'ar', 'description',
-  'أدوات React قابلة لإعادة الاستخدام وأدوات Mapbox منشورة تحت مساحة g9t3n، بما في ذلك Skeletune وحزم متعلقة بالجغرافيا المكانية.'),
+  'أدوات React ومكتبات Mapbox منشورة تحت مساحة g9t3n، متضمنةً Skeletune وحزم جغرافية مكانية للمجتمع التقني.'),
 ('projects', 'a4d6b103-0d5f-6e5a-be70-9c3d5e7f9a12', 'ar', 'full_content',
-  'مساهمات في النظام البيئي للمصادر المفتوحة وحزم npm منشورة تحت @g9t3n. تشمل أدوات تحميل الهيكل Skeletune، وأدوات واجهات Mapbox الجغرافية المكانية، ومكتبات إنتاجية للمطورين منشورة للمجتمع.')
+  'مساهمات نشطة في منظومة المصادر المفتوحة وحزم npm منشورة تحت @g9t3n. تشمل أدوات هياكل التحميل Skeletune، ومكونات Mapbox الجغرافية المكانية، ومكتبات إنتاجية نُشرت للمطورين.')
 on conflict (table_name, row_id, locale, field) do update set
   value = excluded.value,
   updated_at = now();
@@ -117,17 +128,17 @@ on conflict (table_name, row_id, locale, field) do update set
 -- 3b. Work experiences
 insert into public.translations (table_name, row_id, locale, field, value) values
 ('work_experiences', 'c1a2b3c4-1111-4444-8888-000000000001', 'ar', 'position',
-  'مهندس منتجات أمامية / تطوير كامل'),
+  'مهندس واجهات أمامية ومطور Full-Stack'),
 ('work_experiences', 'c1a2b3c4-1111-4444-8888-000000000001', 'ar', 'description',
-  'هندسة منتجات أمامية وتطوير كامل باستخدام React وTypeScript، ودمج واجهات برمجة التطبيقات، وهندسة واجهات قابلة لإعادة الاستخدام، وتصحيح الأخطاء، والتسليم الإنتاجي.'),
+  'هندسة واجهات أمامية وتطوير برمجيات شامل باستخدام React وTypeScript، وتكامل واجهات REST البرمجية، وهندسة واجهات تفاعلية قابلة لإعادة الاستخدام، وتتبع الأخطاء، وإطلاق الإصدارات الإنتاجية.'),
 ('work_experiences', 'c1a2b3c4-2222-4444-8888-000000000002', 'ar', 'position',
   'مهندس برمجيات'),
 ('work_experiences', 'c1a2b3c4-2222-4444-8888-000000000002', 'ar', 'description',
-  'هندسة عن بُعد عبر قواعد أكواد إنتاجية خاصة، وسير عمل Git تعاوني، ولوحات تحكم، ومنتجات تجارية، وخطوط CI/CD، وبوابات جودة.'),
+  'تطوير برمجيات عن بُعد عبر قواعد كود إنتاجية، وسير عمل تعاوني عبر Git، ولوحات تحكم تفاعلية، ومنتجات تجارية، ومسارات CI/CD، وبوابات فحص الجودة.'),
 ('work_experiences', 'c1a2b3c4-3333-4444-8888-000000000003', 'ar', 'position',
   'مهندس برمجيات'),
 ('work_experiences', 'c1a2b3c4-3333-4444-8888-000000000003', 'ar', 'description',
-  'هندسة برمجيات عن بُعد في مستودعات خاصة مع تعاون موزّع، وتقديم ميزات، وتصحيح أخطاء، ومراجعات كود، وتطبيق قابل للصيانة.')
+  'تطوير برمجيات عن بُعد ضمن مستودعات خاصة بالتعاون مع فرق موزعة، وإنجاز الميزات البرمجية، وتتبع الأخطاء وحلها، ومراجعة الكود، وبناء حلول برمجية مستدامة.')
 on conflict (table_name, row_id, locale, field) do update set
   value = excluded.value,
   updated_at = now();
@@ -135,12 +146,46 @@ on conflict (table_name, row_id, locale, field) do update set
 -- 3c. Site settings (title + bio only; cv_url is language-neutral)
 insert into public.translations (table_name, row_id, locale, field, value) values
 ('site_settings', 'd8a1c2e3-f4b5-4a6b-8c7d-9e0f1a2b3c4d', 'ar', 'value',
-  'وليد العمراني — مهندس برمجيات | React وTypeScript'),
+  'وائل العمراني — مهندس برمجيات | React وTypeScript'),
 ('site_settings', 'b7a0b1c2-e3d4-4f5a-9b8c-0d1e2f3a4b5c', 'ar', 'value',
-  'مهندس برمجيات مقيم في صنعاء، اليمن. متخصص في React وTypeScript والبنى الإنتاجية وأدوات مفتوحة المصدر.')
+  'مهندس برمجيات مقيم في صنعاء باليمن. متخصص في React وTypeScript، وبناء المعماريات الإنتاجية، وتطوير الأدوات مفتوحة المصدر.')
 on conflict (table_name, row_id, locale, field) do update set
   value = excluded.value,
   updated_at = now();
 
+-- 3d. Direct column updates on base tables for side-by-side editing in Supabase Table Editor
+update public.projects set
+  title_ar = 'منصة صوفا',
+  description_ar = 'تطوير منتجات ويب إنتاجية تشمل واجهات React قابلة لإعادة الاستخدام، وتكامل واجهات برمجة التطبيقات، وإدارة حالة التطبيق، وتتبع الأخطاء، وتسليم ميزات متماسكة قابلة للصيانة.',
+  full_content_ar = 'هندسة المنصة الأساسية لتطبيقات الويب في شركة صوفا. بنيت وحافظت على واجهات تفاعلية متجاوبة وعالية الأداء بالاعتماد على React وTypeScript، وتكامل واجهات REST البرمجية، وإدارة حالة العميل، وضمان دورات إطلاق إنتاجية سلسة.'
+where id = 'e2b4f981-8b3d-4c3e-9c5e-7a1b3c5d7e90';
+
+update public.projects set
+  title_ar = 'بورتفوليفاي',
+  description_ar = 'مشروع عام مبني بلغة TypeScript يركز على العرض العصري للمشاريع والمنتجات، وهندسة واجهات أمامية نموذجية قابلة لإعادة الاستخدام.',
+  full_content_ar = 'تطبيق محفظة أعمال حديث مبني باستخدام React Router v7 وTypeScript وTailwind CSS وFramer Motion مع دمج Supabase. يتميز بنمط داكن، وتصاميم زجاجية متجاوبة، وتوجيه ديناميكي للمشاريع، وإدارة محتوى عبر لوحة تحكم متكاملة.'
+where id = 'f3c5a092-9c4e-5d4f-ad6f-8b2c4d6e8f01';
+
+update public.projects set
+  title_ar = 'برمجيات مفتوحة المصدر وnpm',
+  description_ar = 'أدوات React ومكتبات Mapbox منشورة تحت مساحة g9t3n، متضمنةً Skeletune وحزم جغرافية مكانية للمجتمع التقني.',
+  full_content_ar = 'مساهمات نشطة في منظومة المصادر المفتوحة وحزم npm منشورة تحت @g9t3n. تشمل أدوات هياكل التحميل Skeletune، ومكونات Mapbox الجغرافية المكانية، ومكتبات إنتاجية نُشرت للمطورين.'
+where id = 'a4d6b103-0d5f-6e5a-be70-9c3d5e7f9a12';
+
+update public.work_experiences set
+  position_ar = 'مهندس واجهات أمامية ومطور Full-Stack',
+  description_ar = 'هندسة واجهات أمامية وتطوير برمجيات شامل باستخدام React وTypeScript، وتكامل واجهات REST البرمجية، وهندسة واجهات تفاعلية قابلة لإعادة الاستخدام، وتتبع الأخطاء، وإطلاق الإصدارات الإنتاجية.'
+where id = 'c1a2b3c4-1111-4444-8888-000000000001';
+
+update public.work_experiences set
+  position_ar = 'مهندس برمجيات',
+  description_ar = 'تطوير برمجيات عن بُعد عبر قواعد كود إنتاجية، وسير عمل تعاوني عبر Git، ولوحات تحكم تفاعلية، ومنتجات تجارية، ومسارات CI/CD، وبوابات فحص الجودة.'
+where id = 'c1a2b3c4-2222-4444-8888-000000000002';
+
+update public.work_experiences set
+  position_ar = 'مهندس برمجيات',
+  description_ar = 'تطوير برمجيات عن بُعد ضمن مستودعات خاصة بالتعاون مع فرق موزعة، وإنجاز الميزات البرمجية، وتتبع الأخطاء وحلها، ومراجعة الكود، وبناء حلول برمجية مستدامة.'
+where id = 'c1a2b3c4-3333-4444-8888-000000000003';
+
 -- Output status summary
-select 'Localization enabled: translations table created and Arabic content seeded.' as status;
+select 'Localization enabled: direct Arabic columns created on base tables, translations table created, and content seeded.' as status;
