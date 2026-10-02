@@ -52,7 +52,14 @@ const ExperienceManager = () => {
                     <Briefcase className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-mono font-bold text-foreground">{exp.position}</h3>
+                    <h3 className="font-mono font-bold text-foreground">
+                      {exp.position}
+                      {exp.position_ar && (
+                        <span className="text-xs text-muted-foreground font-normal ml-2">
+                          ({exp.position_ar})
+                        </span>
+                      )}
+                    </h3>
                     <p className="text-primary">{exp.company}</p>
                     <p className="text-sm text-muted-foreground">
                       {exp.start_date} - {exp.is_current ? "Present" : exp.end_date}
@@ -61,6 +68,14 @@ const ExperienceManager = () => {
                     {exp.description && (
                       <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
                         {exp.description}
+                      </p>
+                    )}
+                    {exp.description_ar && (
+                      <p
+                        className="text-xs text-muted-foreground mt-1 line-clamp-1 italic"
+                        dir="rtl"
+                      >
+                        {exp.description_ar}
                       </p>
                     )}
                   </div>
@@ -118,7 +133,7 @@ const ExperienceManager = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Position / Job Title *</Label>
+                <Label>Position / Job Title (EN) *</Label>
                 <Input
                   value={formData.position}
                   onChange={(e) => setFormData({ ...formData, position: e.target.value })}
@@ -126,6 +141,17 @@ const ExperienceManager = () => {
                   required
                 />
               </div>
+              <div className="space-y-2">
+                <Label>المسمى الوظيفي (العربية)</Label>
+                <Input
+                  value={formData.position_ar}
+                  onChange={(e) => setFormData({ ...formData, position_ar: e.target.value })}
+                  placeholder="مهندس برمجيات أول"
+                  dir="rtl"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Company *</Label>
                 <Input
@@ -135,8 +161,6 @@ const ExperienceManager = () => {
                   required
                 />
               </div>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Location</Label>
                 <Input
@@ -145,6 +169,8 @@ const ExperienceManager = () => {
                   placeholder="San Francisco, CA"
                 />
               </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Company Logo URL</Label>
                 <Input
@@ -182,12 +208,22 @@ const ExperienceManager = () => {
               <Label>Currently working here</Label>
             </div>
             <div className="space-y-2">
-              <Label>Description</Label>
+              <Label>Description (EN)</Label>
               <Textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 placeholder="Brief description of your role..."
                 rows={3}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>الوصف الوظيفي (العربية)</Label>
+              <Textarea
+                value={formData.description_ar}
+                onChange={(e) => setFormData({ ...formData, description_ar: e.target.value })}
+                placeholder="نبذة موجزة عن دورك ومسؤولياتك باللغة العربية..."
+                rows={3}
+                dir="rtl"
               />
             </div>
             <div className="space-y-2">

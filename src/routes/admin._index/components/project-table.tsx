@@ -200,6 +200,11 @@ export default function ProjectTable({
                 <TableCell className="font-mono text-sm">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="font-medium text-foreground">{project.title as string}</span>
+                    {Boolean(project.title_ar) && (
+                      <span className="text-xs text-muted-foreground font-normal" dir="rtl">
+                        ({project.title_ar as string})
+                      </span>
+                    )}
                     {isHajzak && (
                       <span className="inline-flex items-center gap-1.5 text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />

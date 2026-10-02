@@ -23,10 +23,10 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 export function meta({ data }: Route.MetaArgs) {
   const project = data?.project;
   if (!project) {
-    return [{ title: "Project Not Found — Wael Alamrany" }];
+    return [{ title: "Project Not Found | Wael Alamrany" }];
   }
 
-  const title = `${project.title} — Wael Alamrany`;
+  const title = `${project.title} | Wael Alamrany`;
   const description = project.description || "A project by Wael Alamrany, Full-Stack Developer.";
   const url = `${SITE_URL}/project/${project.id}`;
   const image = project.thumbnail_url || OG_IMAGE;

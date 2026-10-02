@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "@/lib/utils";
 import { renderTechSvg } from "./tech-icons/tech-svg-registry";
 
 export interface TechIconProps {
@@ -16,6 +17,8 @@ const DefaultCodeIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    width="1em"
+    height="1em"
     {...props}
   >
     <polyline points="16 18 22 12 16 6" />
@@ -23,18 +26,20 @@ const DefaultCodeIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   </svg>
 );
 
-/**
- * Renders an official vector SVG icon for a given technology name.
- * Replaces the 1.5MB Devicon font with ultra-fast, zero-overhead inline vectors.
- * Falls back to an inline code icon if the brand logo is not in the registry.
- */
 export const TechIcon: React.FC<TechIconProps> = ({
   name,
   className = "w-4 h-4",
   fallbackIcon,
 }) => {
+  const hasExplicitSize = /\b(w-|size-)\S+/.test(className);
+  const resolvedClass = cn(
+    "inline-block shrink-0 align-middle",
+    !hasExplicitSize && "w-[1em] h-[1em]",
+    className,
+  );
+
   const iconNode = renderTechSvg(name, {
-    className: `inline-flex items-center justify-center shrink-0 align-middle ${className}`,
+    className: resolvedClass,
     "aria-hidden": "true",
     title: name,
   });
@@ -44,12 +49,16 @@ export const TechIcon: React.FC<TechIconProps> = ({
   }
 
   if (fallbackIcon) {
-    return <span className={`inline-flex items-center shrink-0 ${className}`}>{fallbackIcon}</span>;
+    return (
+      <span className={cn("inline-flex items-center justify-center shrink-0", resolvedClass)}>
+        {fallbackIcon}
+      </span>
+    );
   }
 
   return (
     <DefaultCodeIcon
-      className={`w-3.5 h-3.5 text-muted-foreground shrink-0 ${className}`}
+      className={cn("text-[var(--color-text-muted)]", resolvedClass)}
       aria-hidden="true"
     />
   );

@@ -7,8 +7,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 export const projectSchema = z.object({
   title: z.string().min(1, "Title is required").max(100, "Title is too long"),
+  title_ar: z.string().max(100, "Arabic title is too long").optional(),
   description: z.string().min(1, "Description is required"),
+  description_ar: z.string().optional(),
   full_content: z.string().optional(),
+  full_content_ar: z.string().optional(),
   category: z.string().min(1, "Category is required"),
   status: z.string().min(1, "Status is required"),
   thumbnail_url: z.string().url("Must be a valid URL").or(z.literal("")).optional(),
@@ -23,8 +26,11 @@ export type ProjectFormValues = z.infer<typeof projectSchema>;
 
 const getInitialFormData = (project?: Record<string, unknown>): ProjectFormValues => ({
   title: (project?.title as string) || "",
+  title_ar: (project?.title_ar as string) || "",
   description: (project?.description as string) || "",
+  description_ar: (project?.description_ar as string) || "",
   full_content: (project?.full_content as string) || "",
+  full_content_ar: (project?.full_content_ar as string) || "",
   category: (project?.category as string) || "web",
   status: (project?.status as string) || "draft",
   thumbnail_url: (project?.thumbnail_url as string) || "",

@@ -2,6 +2,7 @@ import { GitMerge, Dock, Mail, Package } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useState, useCallback, useRef, useEffect } from "react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Trans } from "@lingui/react/macro";
 
 const SOCIAL_LINKS = [
   { icon: GitMerge, href: "https://github.com/G9T3N", label: "GitHub" },
@@ -52,11 +53,11 @@ const Footer = () => {
             className="text-sm text-[var(--color-text-muted)] cursor-default select-none hover:text-[var(--color-text-secondary)] transition-colors"
             onClick={handleCopyrightClick}
           >
-            © {currentYear} Wael Alamrany. Built as Mr.Err.
+            <Trans>© {currentYear} Wael Alamrany. Built as Mr.Err.</Trans>
           </p>
           <span className="hidden sm:inline text-xs text-[var(--color-text-muted)]">•</span>
           <span className="text-xs text-[var(--color-text-muted)] font-mono">
-            Software Engineer · React & TypeScript
+            <Trans>Software Engineer · React & TypeScript</Trans>
           </span>
         </div>
 

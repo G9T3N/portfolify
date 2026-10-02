@@ -118,15 +118,18 @@ export type Database = {
           code_url: string | null;
           created_at: string;
           description: string;
+          description_ar: string | null;
           display_order: number | null;
           embed_url: string | null;
           full_content: string | null;
+          full_content_ar: string | null;
           id: string;
           live_url: string | null;
           status: string;
           tech_stack: string[] | null;
           thumbnail_url: string | null;
           title: string;
+          title_ar: string | null;
           updated_at: string;
         };
         Insert: {
@@ -134,15 +137,18 @@ export type Database = {
           code_url?: string | null;
           created_at?: string;
           description: string;
+          description_ar?: string | null;
           display_order?: number | null;
           embed_url?: string | null;
           full_content?: string | null;
+          full_content_ar?: string | null;
           id?: string;
           live_url?: string | null;
           status?: string;
           tech_stack?: string[] | null;
           thumbnail_url?: string | null;
           title: string;
+          title_ar?: string | null;
           updated_at?: string;
         };
         Update: {
@@ -150,15 +156,18 @@ export type Database = {
           code_url?: string | null;
           created_at?: string;
           description?: string;
+          description_ar?: string | null;
           display_order?: number | null;
           embed_url?: string | null;
           full_content?: string | null;
+          full_content_ar?: string | null;
           id?: string;
           live_url?: string | null;
           status?: string;
           tech_stack?: string[] | null;
           thumbnail_url?: string | null;
           title?: string;
+          title_ar?: string | null;
           updated_at?: string;
         };
         Relationships: [];
@@ -307,6 +316,7 @@ export type Database = {
           company_logo_url: string | null;
           created_at: string;
           description: string | null;
+          description_ar: string | null;
           display_order: number | null;
           end_date: string | null;
           id: string;
@@ -314,6 +324,7 @@ export type Database = {
           is_visible: boolean | null;
           location: string | null;
           position: string;
+          position_ar: string | null;
           start_date: string;
         };
         Insert: {
@@ -322,6 +333,7 @@ export type Database = {
           company_logo_url?: string | null;
           created_at?: string;
           description?: string | null;
+          description_ar?: string | null;
           display_order?: number | null;
           end_date?: string | null;
           id?: string;
@@ -329,6 +341,7 @@ export type Database = {
           is_visible?: boolean | null;
           location?: string | null;
           position: string;
+          position_ar?: string | null;
           start_date: string;
         };
         Update: {
@@ -337,6 +350,7 @@ export type Database = {
           company_logo_url?: string | null;
           created_at?: string;
           description?: string | null;
+          description_ar?: string | null;
           display_order?: number | null;
           end_date?: string | null;
           id?: string;
@@ -344,6 +358,7 @@ export type Database = {
           is_visible?: boolean | null;
           location?: string | null;
           position?: string;
+          position_ar?: string | null;
           start_date?: string;
         };
         Relationships: [];

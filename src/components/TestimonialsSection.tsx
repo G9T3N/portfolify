@@ -1,5 +1,6 @@
 import { Quote, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { Trans } from "@lingui/react/macro";
 
 // Placeholder testimonials — replace with Supabase data when ready
 const PLACEHOLDER_TESTIMONIALS = [
@@ -90,7 +91,9 @@ const TestimonialsSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-label">What Clients Say</span>
+          <h2 className="section-heading text-center">
+            <Trans>What Clients Say</Trans>
+          </h2>
         </motion.div>
 
         {/* Testimonials carousel */}

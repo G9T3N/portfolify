@@ -34,7 +34,7 @@ const sidebarItems = [
  */
 export function meta() {
   return [
-    { title: "Admin Panel — Wael Alamrany (Mr.Err)" },
+    { title: "Admin Panel | Wael Alamrany (Mr.Err)" },
     { name: "robots", content: "noindex, nofollow" },
   ];
 }

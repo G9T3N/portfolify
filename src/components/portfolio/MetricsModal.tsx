@@ -1,7 +1,10 @@
+import type { ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Trans } from "@lingui/react/macro";
 
 export interface Metric {
-  label: string;
+  key?: string;
+  label: ReactNode;
   value: number | string;
   unit: string;
   max?: number;
@@ -33,7 +36,7 @@ export const MetricsModal = ({ isOpen, onClose, metrics }: MetricsModalProps) =>
           >
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold tracking-tight text-[var(--color-text-primary)]">
-                All Metrics
+                <Trans>All Metrics</Trans>
               </h2>
               <button
                 onClick={onClose}

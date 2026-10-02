@@ -4,7 +4,7 @@ import { AuthForm } from "./components/AuthForm";
 
 export function meta() {
   return [
-    { title: "Admin Login — Wael Alamrany (Mr.Err)" },
+    { title: "Admin Login | Wael Alamrany (Mr.Err)" },
     { name: "robots", content: "noindex, nofollow" },
   ];
 }

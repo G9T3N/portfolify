@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
+@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -46,7 +47,6 @@
 
 .inverted-border-card {
   position: relative;
-  background-color: #fffdf7;
   background-color: var(--color-bg-primary);
   border-bottom-right-radius: var(--radius-4xl);
   width: fit-content;
@@ -60,7 +60,7 @@
   left: 0;
   background-color: transparent;
   border-radius: 0 0 var(--radius-4xl) 0;
-  box-shadow: 50px -50px 0 50px #fffdf7;
+  box-shadow: 50px -50px 0 50px var(--color-bg-primary);
   width: calc(var(--radius-4xl));
   height: calc(var(--radius-4xl));
   background-color: var(--color-bg-primary);
@@ -107,7 +107,7 @@
   left: auto;
   right: 0;
   border-radius: 0 0 0 var(--radius-4xl);
-  box-shadow: -50px -50px 0 50px #fffdf7;
+  box-shadow: -50px -50px 0 50px var(--color-bg-primary);
   mask-image: radial-gradient(
     circle at bottom left,
     transparent var(--radius-4xl),
@@ -422,6 +422,20 @@
     color: var(--color-text-muted);
   }
 
+  /* === Section heading ===
+     The visible headline for a section. Previously every section announced
+     itself with .section-label (12px uppercase), which left the page with no
+     typographic hierarchy below the hero. */
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 5vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    color: var(--color-text-primary);
+  }
+
   /* === Feature card === */
   .feature-card {
     background: var(--color-bg-card);
@@ -556,7 +570,7 @@
   --spacing-mp-component-gap: 32px;
 
   /* Typography font families */
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono-label: "JetBrains Mono", ui-monospace, monospace;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 }

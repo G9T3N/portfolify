@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Trans } from "@lingui/react";
+import { Trans } from "@lingui/react/macro";
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -50,24 +50,22 @@ const HeroSection = () => {
                 <div className="space-y-1">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-xs sm:text-sm font-semibold tracking-widest text-[var(--color-primary)] uppercase font-mono">
-                      <Trans id="Software Engineer · React & TypeScript">
-                        Software Engineer · React & TypeScript
-                      </Trans>
+                      <Trans>Software Engineer · React & TypeScript</Trans>
                     </span>
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)]">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      Building at Sofa + remote teams
+                      <Trans>Building at Sofa + remote teams</Trans>
                     </span>
                   </div>
                   <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight text-[var(--color-text-primary)]">
-                    <Trans id="Wael Alamrany">Wael Alamrany</Trans>
+                    <Trans>Wael Alamrany</Trans>
                     <span className="block text-xl sm:text-2xl md:text-3xl font-medium text-[var(--color-text-secondary)] mt-1 font-mono">
-                      <Trans id="— Mr.Err">— Mr.Err</Trans>
+                      <Trans>Mr.Err</Trans>
                     </span>
                   </h1>
                 </div>
                 <p className="text-sm sm:text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-lg font-sans">
-                  <Trans id="Software Engineer building maintainable web products, production architectures, delivery automation, and open-source tooling.">
+                  <Trans>
                     Software Engineer building maintainable web products, production architectures,
                     delivery automation, and open-source tooling with React &amp; TypeScript.
                   </Trans>
@@ -92,7 +90,7 @@ const HeroSection = () => {
                 whileHover={{ scale: 1.02 }}
               >
                 <p>
-                  <Trans id="Let's Build">Let's Build</Trans>
+                  <Trans>Let's Build</Trans>
                 </p>
                 <ArrowRight className="w-4 h-4 rtl:rotate-180 transition-transform" />
               </motion.button>

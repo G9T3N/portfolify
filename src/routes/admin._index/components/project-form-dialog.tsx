@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Upload, Loader2, Plus, X } from "lucide-react";
 import { AnimatedDialog } from "@/components/common/animated-dialog";
 import { useImageUpload } from "@/utils/hooks/use-image-upload";
@@ -43,6 +44,9 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
     }
   };
 
+  const [activeTab, setActiveTab] = useState<"en" | "ar">("en");
+  const hasArabic = Boolean(watch("title_ar") || watch("description_ar"));
+
   return (
     <AnimatedDialog
       isOpen={isOpen}
@@ -51,51 +55,144 @@ const ProjectFormDialog = ({ isOpen, onClose, project }: ProjectFormDialogProps)
     >
       {/* Form */}
       <form onSubmit={onSubmit} className="p-6 space-y-6">
-        {/* Title */}
-        <div>
-          <label className="block text-sm font-mono text-muted-foreground mb-2">
-            Title <span className="text-destructive">*</span>
-          </label>
-          <input
-            type="text"
-            id="title"
-            {...register("title")}
-            className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.title ? "border-destructive/50 focus:ring-destructive/50 focus:border-destructive" : "border-border/50 focus:ring-primary/50 focus:border-primary"} font-mono text-sm focus:outline-none focus:ring-2`}
-            placeholder="Project title"
-          />
-          {errors.title && <p className="text-destructive text-xs mt-1">{errors.title.message}</p>}
+        {/* Language Switcher Tabs */}
+        <div className="flex items-center gap-2 border-b border-border/50 pb-2">
+          <button
+            type="button"
+            onClick={() => setActiveTab("en")}
+            className={`px-3 py-1.5 rounded-md font-mono text-xs font-semibold transition-all ${
+              activeTab === "en"
+                ? "bg-primary text-primary-foreground shadow"
+                : "bg-muted/40 text-muted-foreground hover:bg-muted"
+            }`}
+          >
+            English (EN)
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("ar")}
+            className={`px-3 py-1.5 rounded-md font-mono text-xs font-semibold transition-all flex items-center gap-1.5 ${
+              activeTab === "ar"
+                ? "bg-primary text-primary-foreground shadow"
+                : "bg-muted/40 text-muted-foreground hover:bg-muted"
+            }`}
+          >
+            <span>العربية (AR)</span>
+            {hasArabic && (
+              <span
+                className="w-1.5 h-1.5 rounded-full bg-emerald-400"
+                title="Arabic content present"
+              />
+            )}
+          </button>
         </div>
 
-        {/* Description */}
-        <div>
-          <label className="block text-sm font-mono text-muted-foreground mb-2">
-            Short Description <span className="text-destructive">*</span>
-          </label>
-          <textarea
-            id="description"
-            {...register("description")}
-            rows={2}
-            className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.description ? "border-destructive/50 focus:ring-destructive/50 focus:border-destructive" : "border-border/50 focus:ring-primary/50 focus:border-primary"} font-mono text-sm resize-none focus:outline-none focus:ring-2`}
-            placeholder="Brief project description"
-          />
-          {errors.description && (
-            <p className="text-destructive text-xs mt-1">{errors.description.message}</p>
-          )}
+        {/* English Content Pane */}
+        <div className={activeTab === "en" ? "space-y-6" : "hidden"}>
+          {/* Title */}
+          <div>
+            <label className="block text-sm font-mono text-muted-foreground mb-2">
+              Title (EN) <span className="text-destructive">*</span>
+            </label>
+            <input
+              type="text"
+              id="title"
+              {...register("title")}
+              className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.title ? "border-destructive/50 focus:ring-destructive/50 focus:border-destructive" : "border-border/50 focus:ring-primary/50 focus:border-primary"} font-mono text-sm focus:outline-none focus:ring-2`}
+              placeholder="Project title"
+            />
+            {errors.title && (
+              <p className="text-destructive text-xs mt-1">{errors.title.message}</p>
+            )}
+          </div>
+
+          {/* Description */}
+          <div>
+            <label className="block text-sm font-mono text-muted-foreground mb-2">
+              Short Description (EN) <span className="text-destructive">*</span>
+            </label>
+            <textarea
+              id="description"
+              {...register("description")}
+              rows={2}
+              className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.description ? "border-destructive/50 focus:ring-destructive/50 focus:border-destructive" : "border-border/50 focus:ring-primary/50 focus:border-primary"} font-mono text-sm resize-none focus:outline-none focus:ring-2`}
+              placeholder="Brief project description"
+            />
+            {errors.description && (
+              <p className="text-destructive text-xs mt-1">{errors.description.message}</p>
+            )}
+          </div>
+
+          {/* Full Content */}
+          <div>
+            <label className="block text-sm font-mono text-muted-foreground mb-2">
+              Full Content (EN)
+            </label>
+            <textarea
+              id="full_content"
+              {...register("full_content")}
+              rows={5}
+              className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.full_content ? "border-destructive/50 focus:ring-destructive/50 focus:border-destructive" : "border-border/50 focus:ring-primary/50 focus:border-primary"} font-mono text-sm resize-none focus:outline-none focus:ring-2`}
+              placeholder="Detailed project description..."
+            />
+            {errors.full_content && (
+              <p className="text-destructive text-xs mt-1">{errors.full_content.message}</p>
+            )}
+          </div>
         </div>
 
-        {/* Full Content */}
-        <div>
-          <label className="block text-sm font-mono text-muted-foreground mb-2">Full Content</label>
-          <textarea
-            id="full_content"
-            {...register("full_content")}
-            rows={5}
-            className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.full_content ? "border-destructive/50 focus:ring-destructive/50 focus:border-destructive" : "border-border/50 focus:ring-primary/50 focus:border-primary"} font-mono text-sm resize-none focus:outline-none focus:ring-2`}
-            placeholder="Detailed project description..."
-          />
-          {errors.full_content && (
-            <p className="text-destructive text-xs mt-1">{errors.full_content.message}</p>
-          )}
+        {/* Arabic Content Pane */}
+        <div className={activeTab === "ar" ? "space-y-6" : "hidden"} dir="rtl">
+          {/* Title AR */}
+          <div>
+            <label className="block text-sm font-mono text-muted-foreground mb-2">
+              عنوان المشروع (العربية)
+            </label>
+            <input
+              type="text"
+              id="title_ar"
+              {...register("title_ar")}
+              className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.title_ar ? "border-destructive/50 focus:ring-destructive/50 focus:border-destructive" : "border-border/50 focus:ring-primary/50 focus:border-primary"} font-mono text-sm focus:outline-none focus:ring-2`}
+              placeholder="عنوان المشروع بالعربية"
+            />
+            {errors.title_ar && (
+              <p className="text-destructive text-xs mt-1">{errors.title_ar.message}</p>
+            )}
+          </div>
+
+          {/* Description AR */}
+          <div>
+            <label className="block text-sm font-mono text-muted-foreground mb-2">
+              الوصف الموجز (العربية)
+            </label>
+            <textarea
+              id="description_ar"
+              {...register("description_ar")}
+              rows={2}
+              className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.description_ar ? "border-destructive/50 focus:ring-destructive/50 focus:border-destructive" : "border-border/50 focus:ring-primary/50 focus:border-primary"} font-mono text-sm resize-none focus:outline-none focus:ring-2`}
+              placeholder="نبذة موجزة عن المشروع بالعربية..."
+            />
+            {errors.description_ar && (
+              <p className="text-destructive text-xs mt-1">{errors.description_ar.message}</p>
+            )}
+          </div>
+
+          {/* Full Content AR */}
+          <div>
+            <label className="block text-sm font-mono text-muted-foreground mb-2">
+              المحتوى الكامل (العربية)
+            </label>
+            <textarea
+              id="full_content_ar"
+              {...register("full_content_ar")}
+              rows={5}
+              className={`w-full px-4 py-3 rounded-lg bg-muted/30 border ${errors.full_content_ar ? "border-destructive/50 focus:ring-destructive/50 focus:border-destructive" : "border-border/50 focus:ring-primary/50 focus:border-primary"} font-mono text-sm resize-none focus:outline-none focus:ring-2`}
+              placeholder="تفاصيل المشروع الكاملة باللغة العربية..."
+            />
+            {errors.full_content_ar && (
+              <p className="text-destructive text-xs mt-1">{errors.full_content_ar.message}</p>
+            )}
+          </div>
         </div>
 
         {/* Category & Status */}

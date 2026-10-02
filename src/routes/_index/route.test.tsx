@@ -54,7 +54,7 @@ describe("HomeRoute – metadata for SEO and social previews", () => {
 
   it("returns the full title, description, and canonical URL", () => {
     expect(tags).toContainEqual({
-      title: "Wael Alamrany — Software Engineer | React & TypeScript",
+      title: "Wael Alamrany | Software Engineer, React & TypeScript",
     });
     expect(findTag("name", "description").content).toContain("Software Engineer");
     expect(findTag("rel", "canonical").href).toBe("https://mrerr.com/");

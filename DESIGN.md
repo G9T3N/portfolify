@@ -18,7 +18,7 @@ colors:
   neutral-border-hover: "#505050"
 typography:
   display:
-    fontFamily: "Space Grotesk, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Geist Variable, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(2.5rem, 7vw, 4.5rem)"
     fontWeight: 700
     lineHeight: 1.1
@@ -117,17 +117,17 @@ The palette is anchored by a deep green primary against an absolute black backgr
 
 ## 3. Typography
 
-**Display Font:** Space Grotesk (ui-sans-serif, system-ui, sans-serif)
+**Display Font:** Geist Variable (ui-sans-serif, system-ui, sans-serif)
 **Body Font:** Inter (ui-sans-serif, system-ui, sans-serif)
-**Label/Mono Font:** JetBrains Mono (ui-monospace, monospace)
+**Label/Mono Font:** JetBrains Mono (ui-monospace, monospace) — note: JetBrains Mono is not currently loaded; `font-mono` falls back to the system mono stack.
 
-**Character:** A two-axis pairing — Space Grotesk brings a geometric, technical confidence for display work while Inter provides warm, highly readable body text. JetBrains Mono adds a lab-instrument precision for labels, stats, and code-adjacent content. The trio reads as "built by someone who cares about type."
+**Character:** A two-axis pairing — Geist brings a geometric, technical confidence for display work while Inter provides warm, highly readable body text. The mono stack adds lab-instrument precision for labels, stats, and code-adjacent content. The trio reads as "built by someone who cares about type."
 
 ### Hierarchy
 
-- **Display** (700, `clamp(2.5rem, 7vw, 4.5rem)`, 1.1, `-0.03em`): Hero headlines, section headers. Space Grotesk only. Use `text-wrap: balance`.
-- **Headline** (600, `clamp(1.75rem, 5vw, 3.5rem)`, 1.2, `-0.02em`): Section titles. Space Grotesk.
-- **Title** (500, `1.25rem`, 1.4): Card titles, project names. Space Grotesk or Inter.
+- **Display** (700, `clamp(2.5rem, 7vw, 4.5rem)`, 1.1, `-0.03em`): Hero headlines, section headers. Geist only. Use `text-wrap: balance`.
+- **Headline** (600, `clamp(1.75rem, 5vw, 3.5rem)`, 1.2, `-0.02em`): Section titles. Geist. Applied via the `.section-heading` utility.
+- **Title** (500, `1.25rem`, 1.4): Card titles, project names. Geist or Inter.
 - **Body** (400, `1rem`, 1.6): Paragraphs, descriptions. Inter. Max line length 65–75ch.
 - **Label Mono** (500, `0.75rem`, 1.25, `0.1em` uppercase): Section labels, stat values, meta. JetBrains Mono.
 - **Label Caps** (700, `0.75rem`, 1, `0.1em` uppercase): Eyebrow labels. JetBrains Mono.
@@ -179,7 +179,7 @@ A hybrid approach: tonal layering defines the surface hierarchy (void → deep s
 - **Do** use accent glows (purple, cyan) for interactive feedback — hover, focus, selection.
 - **Do** keep body text at `#FFFFFF` (primary) or `#AAAAAA` (secondary) for sufficient contrast.
 - **Do** use rounded corners generously for interactive elements (pill buttons, pill chips).
-- **Do** use the three-font system deliberately — Space Grotesk for display, Inter for body, JetBrains Mono for labels.
+- **Do** use the three-font system deliberately — Geist for display, Inter for body, JetBrains Mono for labels.
 
 ### Don't:
 

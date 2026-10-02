@@ -13,113 +13,347 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:91
+#: src/components/AboutSection.tsx
+msgid "{yearsExperience}+ Years Experience"
+msgstr "{yearsExperience}+ أعوام من الخبرة"
+
+#: src/components/Footer.tsx
+msgid "© {currentYear} Wael Alamrany. Built as Mr.Err."
+msgstr "© {currentYear} وائل العمراني. طُوّر بهوية Mr.Err."
+
+#: src/components/ContactForm.tsx
+msgid "✨ Message sent! I'll get back to you soon."
+msgstr "✨ أُرسلت رسالتك بنجاح! سأتواصل معك في أقرب وقت."
+
+#: src/components/Navbar.tsx
+msgid "About"
+msgstr "نبذة"
+
+#: src/components/AboutSection.tsx
+msgid "About Me"
+msgstr "نبذة عني"
+
+#: src/components/ProjectsSection.tsx
+msgid "All"
+msgstr "الكل"
+
+#: src/components/portfolio/MetricsModal.tsx
+msgid "All Metrics"
+msgstr "كافة المؤشرات"
+
+#: src/components/SkillsSection.tsx
+msgid "and automation"
+msgstr "والأتمتة"
+
+#: src/components/SkillsSection.tsx
+msgid "APIs & Backend"
+msgstr "الواجهات البرمجية والأنظمة الخلفية"
+
+#: src/components/HeroSection.tsx
+msgid "Building at Sofa + remote teams"
+msgstr "أعمل في Sofa وأتعاون مع فرق عن بُعد"
+
+#: src/components/ContactSection.tsx
+msgid "Business WhatsApp"
+msgstr "واتساب الأعمال"
+
+#: src/components/ContactSection.tsx
+msgid "Call / WhatsApp / SMS"
+msgstr "اتصال / واتساب / رسائل"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Certificates Earned"
+msgstr "الشهادات المهنية"
+
+#: src/components/SkillsSection.tsx
+msgid "CI/CD & Delivery"
+msgstr "التكامل والنشر المستمر (CI/CD)"
+
+#: src/components/ContactSection.tsx
+msgid "Click to reveal phone numbers"
+msgstr "انقر لإظهار أرقام التواصل"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Code Commits"
+msgstr "المساهمات البرمجية (Commits)"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Coffee Cups"
+msgstr "أكواب القهوة"
+
+#: src/components/FaqSection.tsx
+msgid "Companies can reach out via the contact form on this page or through his public profiles on GitHub and LinkedIn, which are linked in the footer."
+msgstr "تستطيع الشركات التواصل عبر النموذج في هذه الصفحة، أو من خلال حساباته على GitHub وLinkedIn في أسفل الصفحة."
+
+#: src/components/Navbar.tsx
+msgid "Contact"
+msgstr "تواصل معي"
+
+#: src/components/ExperienceSection.tsx
+msgid "Current Role"
+msgstr "المنصب الحالي"
+
+#: src/components/SkillsSection.tsx
+msgid "design"
+msgstr "تصميم"
+
+#: src/components/SkillsSection.tsx
+msgid "development"
+msgstr "تطوير"
+
+#: src/components/SkillsSection.tsx
+msgid "DevOps"
+msgstr "الـ DevOps"
+
+#: src/components/FaqSection.tsx
+msgid "Does he work remotely?"
+msgstr "هل يعمل عن بُعد؟"
+
+#: src/components/ContactSection.tsx
+msgid "Don't like forms? Reach out directly:"
+msgstr "لا تفضّل تعبئة النماذج؟ تواصل معي مباشرة:"
+
+#: src/components/ContactSection.tsx
+msgid "Download CV"
+msgstr "تحميل السيرة الذاتية"
+
+#: src/components/ContactForm.tsx
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: src/components/SkillsSection.tsx
+msgid "engineering"
+msgstr "هندسة"
+
+#: src/components/SkillsSection.tsx
+msgid "Engineering Practices"
+msgstr "الممارسات الهندسية"
+
+#: src/components/Navbar.tsx
+msgid "Experience"
+msgstr "الخبرات"
+
+#: src/components/FaqSection.tsx
+msgid "Frequently Asked Questions"
+msgstr "الأسئلة الشائعة"
+
+#: src/components/SkillsSection.tsx
+msgid "Frontend"
+msgstr "الواجهات الأمامية"
+
+#: src/components/SkillsSection.tsx
+msgid "Full-stack"
+msgstr "الـ Full-Stack"
+
+#: src/components/AboutSection.tsx
+msgid "Get in touch"
+msgstr "تواصل معي"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Happy Clients"
+msgstr "عملاء راضون"
+
+#: src/components/FaqSection.tsx
+msgid "He has shipped web products ranging from dashboard-style admin consoles to public-facing sites, with a strong focus on performance, reliability, and code quality. He also contributes to open source and publishes reusable NPM packages."
+msgstr "طوّر وأطلق منتجات ويب تتنوع بين لوحات تحكم إدارية ومواقع وتطبيقات موجهة للجمهور، مع تركيز دقيق على سرعة الأداء والموثوقية وجودة الكود. كما يشارك بفعالية في البرمجيات مفتوحة المصدر ويطور حزم NPM عامة قابلة لإعادة الاستخدام."
+
+#: src/components/FaqSection.tsx
+msgid "His core specialization is React.js and TypeScript, with strong experience in Python/FastAPI backend development and Node.js. He also builds CI/CD pipelines with GitHub Actions and GitLab CI, including release automation and Conventional Commits."
+msgstr "يتخصص بصورة أساسية في React.js وTypeScript، ويمتلك خبرة متينة في تطوير الأنظمة الخلفية عبر Python/FastAPI وNode.js. كما يصمم مسارات CI/CD معتمداً على GitHub Actions وGitLab CI، شاملاً أتمتة الإصدارات والالتزام بمعايير Conventional Commits."
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Hours Debugging"
+msgstr "ساعات تتبع الأخطاء وحلها"
+
+#: src/components/FaqSection.tsx
+msgid "How can companies contact him?"
+msgstr "كيف تتواصل الشركات معه؟"
+
+#: src/components/AboutSection.tsx
+msgid "I currently work at <0>Sofa</0> and collaborate remotely with <1>Sparksoft</1> and <2>OnePlusOneTech</2>. My core domain is <3>React</3> and <4>TypeScript</4>, with extensive experience across REST APIs, backend integration, CI/CD, release automation, debugging, architecture, and code quality."
+msgstr "أعمل حالياً في <0>Sofa</0> وأتعاون عن بُعد مع <1>Sparksoft</1> و<2>OnePlusOneTech</2>. ينصب تركيزي الأساسي على <3>React</3> و<4>TypeScript</4>، مع خبرة واسعة في واجهات REST البرمجية، وتكامل الأنظمة الخلفية، ومسارات CI/CD، وأتمتة الإصدارات، وتتبع الأخطاء، وهندسة النظم، وجودة الكود."
+
+#: src/components/AboutSection.tsx
+msgid "I prioritize deep understanding of system architecture and business logic to ship reliable, high-performance web products. Beyond commercial work, I publish reusable NPM utilities under the <0>@g9t3n</0> namespace and contribute to open-source tooling."
+msgstr "أركز على الاستيعاب العميق لمعمارية الأنظمة ومنطق الأعمال لبناء منتجات ويب رصينة وفائقة الأداء. وبعيداً عن المشاريع التجارية، أنشر أدوات برمجية وحزم NPM قابلة لإعادة الاستخدام تحت نطاق <0>@g9t3n</0>، وأشارك بنشاط في تطوير الأدوات مفتوحة المصدر."
+
+#: src/components/SkillsSection.tsx
+msgid "Interface"
+msgstr "الواجهات"
+
+#: src/components/portfolio/ProjectCard.tsx
+msgid "Internal Dashboard"
+msgstr "لوحة تحكم داخلية"
+
+#: src/components/HeroSection.tsx
 msgid "Let's Build"
 msgstr "لنبدأ العمل"
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:50
+#: src/components/ContactSection.tsx
+msgid "Let's talk"
+msgstr "لنتواصل معاً"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Lines of Code"
+msgstr "الأسطر البرمجية"
+
+#: src/components/portfolio/ProjectCard.tsx
+msgid "Live Site"
+msgstr "زيارة الموقع"
+
+#: src/components/ContactForm.tsx
+msgid "Message"
+msgstr "الرسالة"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Metrics"
+msgstr "المؤشرات"
+
+#: src/components/HeroSection.tsx
+msgid "Mr.Err"
+msgstr "Mr.Err"
+
+#: src/components/ContactForm.tsx
+msgid "Name"
+msgstr "الاسم"
+
+#: src/components/ProjectsSection.tsx
+msgid "No projects to display yet."
+msgstr "لا توجد مشاريع لعرضها حالياً."
+
+#: src/components/AboutSection.tsx
+msgid "NPM Profile"
+msgstr "حساب NPM"
+
+#: src/components/AboutSection.tsx
+msgid "Open to Opportunities"
+msgstr "متاح لفرص العمل"
+
+#: src/components/portfolio/ProjectCard.tsx
+msgid "Private Access"
+msgstr "مشروع خاص"
+
+#: src/components/Navbar.tsx
+msgid "Projects"
+msgstr "المشاريع"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Projects Delivered"
+msgstr "المشاريع المنجزة"
+
+#: src/components/SkillsSection.tsx
+msgid "Quality & Testing"
+msgstr "الجودة والاختبارات"
+
+#: src/components/ProjectsSection.tsx
+msgid "Read More Projects"
+msgstr "استكشف المزيد من المشاريع"
+
+#: src/components/AboutSection.tsx
+msgid "Sana'a, Yemen & Remote"
+msgstr "صنعاء، اليمن وعن بُعد"
+
+#: src/components/AboutSection.tsx
+msgid "Secondary GitHub"
+msgstr "حساب GitHub الثانوي"
+
+#: src/components/ProjectsSection.tsx
+msgid "Selected Work"
+msgstr "أعمال مختارة"
+
+#: src/components/ContactForm.tsx
+msgid "Send message"
+msgstr "إرسال الرسالة"
+
+#: src/components/ContactForm.tsx
+msgid "Sending..."
+msgstr "جارٍ الإرسال..."
+
+#: src/components/ProjectsSection.tsx
+msgid "Show Less"
+msgstr "عرض أقل"
+
+#: src/components/Navbar.tsx
+msgid "Skills"
+msgstr "المهارات"
+
+#: src/components/SkillsSection.tsx
+msgid "Skills & Services"
+msgstr "الخبرات والخدمات"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Skills Mastered"
+msgstr "المهارات المتقنة"
+
+#: src/components/Footer.tsx
+#: src/components/HeroSection.tsx
 msgid "Software Engineer · React & TypeScript"
 msgstr "مهندس برمجيات · React & TypeScript"
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:60
+#: src/components/AboutSection.tsx
+msgid "Software Engineer based in Sana'a, Yemen & collaborating worldwide."
+msgstr "مهندس برمجيات مقيم في صنعاء، اليمن، وأتعاون مع فرق حول العالم."
+
+#: src/components/HeroSection.tsx
+msgid "Software Engineer building maintainable web products, production architectures, delivery automation, and open-source tooling with React & TypeScript."
+msgstr "مهندس برمجيات متخصص في بناء منتجات ويب مستدامة، ومعماريات أنظمة إنتاجية متماسكة، وأتمتة دورات النشر، وتطوير أدوات مفتوحة المصدر باستخدام React وTypeScript."
+
+#: src/components/portfolio/ProjectCard.tsx
+msgid "Source Code"
+msgstr "الكود المصدري"
+
+#: src/components/SkillsSection.tsx
+msgid "Tooling & Ecosystem"
+msgstr "الأدوات وبيئة العمل"
+
+#: src/components/AboutSection.tsx
+msgid "View CV"
+msgstr "اطّلع على السيرة الذاتية"
+
+#: src/components/ExperienceSection.tsx
+msgid "Visit Company"
+msgstr "زيارة موقع الشركة"
+
+#: src/components/HeroSection.tsx
 msgid "Wael Alamrany"
 msgstr "وائل العمراني"
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:62
-msgid "— Mr.Err"
-msgstr "— Mr.Err"
+#: src/components/FaqSection.tsx
+msgid "Wael Alamrany (Mr.Err) is a software engineer and frontend-focused full-stack developer based in Sana'a, Yemen, working with companies worldwide. He is currently at Sofa and collaborates remotely with Sparksoft and OnePlusOneTech."
+msgstr "وائل العمراني (Mr.Err) مهندس برمجيات ومطور Full-Stack يركز على الواجهات الأمامية، يقيم في صنعاء باليمن ويعمل مع شركات عالمية. يعمل حالياً في Sofa ويتعاون عن بُعد مع شركتي Sparksoft وOnePlusOneTech."
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:67
-msgid "Software Engineer building maintainable web products, production architectures, delivery automation, and open-source tooling."
-msgstr "مهندس برمجيات متخصص في بناء منتجات الويب، بنية الأنظمة، أتمتة النشر، والأدوات مفتوحة المصدر."
+#: src/components/ContactSection.tsx
+msgid "Wanna create<0/>something <1>awesome</1><2/>together?"
+msgstr "هل تود أن نبني<0/>شيئاً <1>استثنائياً</1><2/>معاً؟"
 
-#. js-lingui-explicit-id
-#: src/components/Navbar.tsx:160
-msgid "nav.projects"
-msgstr "المشاريع"
+#: src/components/SkillsSection.tsx
+msgid "Web"
+msgstr "الويب"
 
-#. js-lingui-explicit-id
-#: src/components/Navbar.tsx:161
-msgid "nav.experience"
-msgstr "الخبرات"
+#: src/components/TestimonialsSection.tsx
+msgid "What Clients Say"
+msgstr "آراء العملاء"
 
-#. js-lingui-explicit-id
-#: src/components/Navbar.tsx:162
-msgid "nav.about"
-msgstr "نبذة عني"
+#: src/components/FaqSection.tsx
+msgid "What technologies does he specialize in?"
+msgstr "ما التقنيات التي يختص بها؟"
 
-#. js-lingui-explicit-id
-#: src/components/Navbar.tsx:163
-msgid "nav.skills"
-msgstr "المهارات"
+#: src/components/FaqSection.tsx
+msgid "What type of products has he worked on?"
+msgstr "ما طبيعة المنتجات التي طوّرها؟"
 
-#. js-lingui-explicit-id
-#: src/components/Navbar.tsx:164
-msgid "nav.contact"
-msgstr "تواصل معي"
+#: src/components/FaqSection.tsx
+msgid "Who is Wael Alamrany?"
+msgstr "من هو وائل العمراني؟"
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:45
-#~ msgid "Full-Stack Developer & UI Specialist"
-#~ msgstr "مطور full-stack ومتخصص واجهات المستخدم"
+#: src/components/ExperienceSection.tsx
+msgid "Work Experience"
+msgstr "المسيرة المهنية"
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:55
-#~ msgid "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
-#~ msgstr "سد الفجوة بين بنية النظام القوية وواجهات المستخدم السلسة عالية الأداء."
+#: src/components/portfolio/Gauge.tsx
+msgid "Years Experience"
+msgstr "سنوات الخبرة"
 
-#: src/utils/helpers/ApiErrorHandler.tsx:110
-msgid "Access Denied!"
-msgstr "تم رفض الوصول!"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:91
-msgid "An error occurred while Sending the Request"
-msgstr "حدث خطأ أثناء إرسال الطلب"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:183
-msgid "An unexpected error occurred"
-msgstr "حدث خطأ غير متوقع"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:72
-msgid "Continue"
-msgstr "متابعة"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:170
-msgid "data will be displayed when available"
-msgstr "سيتم عرض البيانات عند توفرها"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:69
-msgid "Error"
-msgstr "خطأ"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:135
-#: src/utils/helpers/ApiErrorHandler.tsx:161
-msgid "The page is not found"
-msgstr "الصفحة غير موجودة"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:163
-msgid "There is no data to display at the moment"
-msgstr "لا توجد بيانات لعرضها في الوقت الحالي"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:92
-#: src/utils/helpers/ApiErrorHandler.tsx:184
-msgid "We were unable to load the data. Please try again later"
-msgstr "لم نتمكن من تحميل البيانات. يرجى المحاولة مرة أخرى لاحقًا"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:136
-#: src/utils/helpers/ApiErrorHandler.tsx:168
-msgid "Wrong Page Path or URL or Data is Not Found"
-msgstr "مسار الصفحة أو الرابط أو البيانات غير صحيح"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:115
-msgid "You Are Not Allowed To Access This Content!"
-msgstr "ليس لديك صلاحية الوصول إلى هذا المحتوى!"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:113
-msgid "You Are Not Allowed To Access This Page!"
-msgstr "ليس لديك صلاحية الوصول إلى هذه الصفحة!"
+#: src/components/FaqSection.tsx
+msgid "Yes. Wael works fully remotely from Sana'a, Yemen, collaborating across time zones using Jira, pull requests, and code review workflows."
+msgstr "نعم، يعمل وائل عن بُعد بالكامل من صنعاء في اليمن، وينسّق مع فرق عبر مختلف النطاقات الزمنية معتمداً على Jira وطلبات الدمج (Pull Requests) ومراجعات الكود المنتظمة."

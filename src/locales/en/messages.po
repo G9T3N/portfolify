@@ -13,129 +13,347 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:91
+#: src/components/AboutSection.tsx
+msgid "{yearsExperience}+ Years Experience"
+msgstr "{yearsExperience}+ Years Experience"
+
+#: src/components/Footer.tsx
+msgid "© {currentYear} Wael Alamrany. Built as Mr.Err."
+msgstr "© {currentYear} Wael Alamrany. Built as Mr.Err."
+
+#: src/components/ContactForm.tsx
+msgid "✨ Message sent! I'll get back to you soon."
+msgstr "✨ Message sent! I'll get back to you soon."
+
+#: src/components/Navbar.tsx
+msgid "About"
+msgstr "About"
+
+#: src/components/AboutSection.tsx
+msgid "About Me"
+msgstr "About Me"
+
+#: src/components/ProjectsSection.tsx
+msgid "All"
+msgstr "All"
+
+#: src/components/portfolio/MetricsModal.tsx
+msgid "All Metrics"
+msgstr "All Metrics"
+
+#: src/components/SkillsSection.tsx
+msgid "and automation"
+msgstr "and automation"
+
+#: src/components/SkillsSection.tsx
+msgid "APIs & Backend"
+msgstr "APIs & Backend"
+
+#: src/components/HeroSection.tsx
+msgid "Building at Sofa + remote teams"
+msgstr "Building at Sofa + remote teams"
+
+#: src/components/ContactSection.tsx
+msgid "Business WhatsApp"
+msgstr "Business WhatsApp"
+
+#: src/components/ContactSection.tsx
+msgid "Call / WhatsApp / SMS"
+msgstr "Call / WhatsApp / SMS"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Certificates Earned"
+msgstr "Certificates Earned"
+
+#: src/components/SkillsSection.tsx
+msgid "CI/CD & Delivery"
+msgstr "CI/CD & Delivery"
+
+#: src/components/ContactSection.tsx
+msgid "Click to reveal phone numbers"
+msgstr "Click to reveal phone numbers"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Code Commits"
+msgstr "Code Commits"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Coffee Cups"
+msgstr "Coffee Cups"
+
+#: src/components/FaqSection.tsx
+msgid "Companies can reach out via the contact form on this page or through his public profiles on GitHub and LinkedIn, which are linked in the footer."
+msgstr "Companies can reach out via the contact form on this page or through his public profiles on GitHub and LinkedIn, which are linked in the footer."
+
+#: src/components/Navbar.tsx
+msgid "Contact"
+msgstr "Contact"
+
+#: src/components/ExperienceSection.tsx
+msgid "Current Role"
+msgstr "Current Role"
+
+#: src/components/SkillsSection.tsx
+msgid "design"
+msgstr "design"
+
+#: src/components/SkillsSection.tsx
+msgid "development"
+msgstr "development"
+
+#: src/components/SkillsSection.tsx
+msgid "DevOps"
+msgstr "DevOps"
+
+#: src/components/FaqSection.tsx
+msgid "Does he work remotely?"
+msgstr "Does he work remotely?"
+
+#: src/components/ContactSection.tsx
+msgid "Don't like forms? Reach out directly:"
+msgstr "Don't like forms? Reach out directly:"
+
+#: src/components/ContactSection.tsx
+msgid "Download CV"
+msgstr "Download CV"
+
+#: src/components/ContactForm.tsx
+msgid "Email"
+msgstr "Email"
+
+#: src/components/SkillsSection.tsx
+msgid "engineering"
+msgstr "engineering"
+
+#: src/components/SkillsSection.tsx
+msgid "Engineering Practices"
+msgstr "Engineering Practices"
+
+#: src/components/Navbar.tsx
+msgid "Experience"
+msgstr "Experience"
+
+#: src/components/FaqSection.tsx
+msgid "Frequently Asked Questions"
+msgstr "Frequently Asked Questions"
+
+#: src/components/SkillsSection.tsx
+msgid "Frontend"
+msgstr "Frontend"
+
+#: src/components/SkillsSection.tsx
+msgid "Full-stack"
+msgstr "Full-stack"
+
+#: src/components/AboutSection.tsx
+msgid "Get in touch"
+msgstr "Get in touch"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Happy Clients"
+msgstr "Happy Clients"
+
+#: src/components/FaqSection.tsx
+msgid "He has shipped web products ranging from dashboard-style admin consoles to public-facing sites, with a strong focus on performance, reliability, and code quality. He also contributes to open source and publishes reusable NPM packages."
+msgstr "He has shipped web products ranging from dashboard-style admin consoles to public-facing sites, with a strong focus on performance, reliability, and code quality. He also contributes to open source and publishes reusable NPM packages."
+
+#: src/components/FaqSection.tsx
+msgid "His core specialization is React.js and TypeScript, with strong experience in Python/FastAPI backend development and Node.js. He also builds CI/CD pipelines with GitHub Actions and GitLab CI, including release automation and Conventional Commits."
+msgstr "His core specialization is React.js and TypeScript, with strong experience in Python/FastAPI backend development and Node.js. He also builds CI/CD pipelines with GitHub Actions and GitLab CI, including release automation and Conventional Commits."
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Hours Debugging"
+msgstr "Hours Debugging"
+
+#: src/components/FaqSection.tsx
+msgid "How can companies contact him?"
+msgstr "How can companies contact him?"
+
+#: src/components/AboutSection.tsx
+msgid "I currently work at <0>Sofa</0> and collaborate remotely with <1>Sparksoft</1> and <2>OnePlusOneTech</2>. My core domain is <3>React</3> and <4>TypeScript</4>, with extensive experience across REST APIs, backend integration, CI/CD, release automation, debugging, architecture, and code quality."
+msgstr "I currently work at <0>Sofa</0> and collaborate remotely with <1>Sparksoft</1> and <2>OnePlusOneTech</2>. My core domain is <3>React</3> and <4>TypeScript</4>, with extensive experience across REST APIs, backend integration, CI/CD, release automation, debugging, architecture, and code quality."
+
+#: src/components/AboutSection.tsx
+msgid "I prioritize deep understanding of system architecture and business logic to ship reliable, high-performance web products. Beyond commercial work, I publish reusable NPM utilities under the <0>@g9t3n</0> namespace and contribute to open-source tooling."
+msgstr "I prioritize deep understanding of system architecture and business logic to ship reliable, high-performance web products. Beyond commercial work, I publish reusable NPM utilities under the <0>@g9t3n</0> namespace and contribute to open-source tooling."
+
+#: src/components/SkillsSection.tsx
+msgid "Interface"
+msgstr "Interface"
+
+#: src/components/portfolio/ProjectCard.tsx
+msgid "Internal Dashboard"
+msgstr "Internal Dashboard"
+
+#: src/components/HeroSection.tsx
 msgid "Let's Build"
 msgstr "Let's Build"
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:50
+#: src/components/ContactSection.tsx
+msgid "Let's talk"
+msgstr "Let's talk"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Lines of Code"
+msgstr "Lines of Code"
+
+#: src/components/portfolio/ProjectCard.tsx
+msgid "Live Site"
+msgstr "Live Site"
+
+#: src/components/ContactForm.tsx
+msgid "Message"
+msgstr "Message"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Metrics"
+msgstr "Metrics"
+
+#: src/components/HeroSection.tsx
+msgid "Mr.Err"
+msgstr "Mr.Err"
+
+#: src/components/ContactForm.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/components/ProjectsSection.tsx
+msgid "No projects to display yet."
+msgstr "No projects to display yet."
+
+#: src/components/AboutSection.tsx
+msgid "NPM Profile"
+msgstr "NPM Profile"
+
+#: src/components/AboutSection.tsx
+msgid "Open to Opportunities"
+msgstr "Open to Opportunities"
+
+#: src/components/portfolio/ProjectCard.tsx
+msgid "Private Access"
+msgstr "Private Access"
+
+#: src/components/Navbar.tsx
+msgid "Projects"
+msgstr "Projects"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Projects Delivered"
+msgstr "Projects Delivered"
+
+#: src/components/SkillsSection.tsx
+msgid "Quality & Testing"
+msgstr "Quality & Testing"
+
+#: src/components/ProjectsSection.tsx
+msgid "Read More Projects"
+msgstr "Read More Projects"
+
+#: src/components/AboutSection.tsx
+msgid "Sana'a, Yemen & Remote"
+msgstr "Sana'a, Yemen & Remote"
+
+#: src/components/AboutSection.tsx
+msgid "Secondary GitHub"
+msgstr "Secondary GitHub"
+
+#: src/components/ProjectsSection.tsx
+msgid "Selected Work"
+msgstr "Selected Work"
+
+#: src/components/ContactForm.tsx
+msgid "Send message"
+msgstr "Send message"
+
+#: src/components/ContactForm.tsx
+msgid "Sending..."
+msgstr "Sending..."
+
+#: src/components/ProjectsSection.tsx
+msgid "Show Less"
+msgstr "Show Less"
+
+#: src/components/Navbar.tsx
+msgid "Skills"
+msgstr "Skills"
+
+#: src/components/SkillsSection.tsx
+msgid "Skills & Services"
+msgstr "Skills & Services"
+
+#: src/components/portfolio/Gauge.tsx
+msgid "Skills Mastered"
+msgstr "Skills Mastered"
+
+#: src/components/Footer.tsx
+#: src/components/HeroSection.tsx
 msgid "Software Engineer · React & TypeScript"
 msgstr "Software Engineer · React & TypeScript"
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:60
+#: src/components/AboutSection.tsx
+msgid "Software Engineer based in Sana'a, Yemen & collaborating worldwide."
+msgstr "Software Engineer based in Sana'a, Yemen & collaborating worldwide."
+
+#: src/components/HeroSection.tsx
+msgid "Software Engineer building maintainable web products, production architectures, delivery automation, and open-source tooling with React & TypeScript."
+msgstr "Software Engineer building maintainable web products, production architectures, delivery automation, and open-source tooling with React & TypeScript."
+
+#: src/components/portfolio/ProjectCard.tsx
+msgid "Source Code"
+msgstr "Source Code"
+
+#: src/components/SkillsSection.tsx
+msgid "Tooling & Ecosystem"
+msgstr "Tooling & Ecosystem"
+
+#: src/components/AboutSection.tsx
+msgid "View CV"
+msgstr "View CV"
+
+#: src/components/ExperienceSection.tsx
+msgid "Visit Company"
+msgstr "Visit Company"
+
+#: src/components/HeroSection.tsx
 msgid "Wael Alamrany"
 msgstr "Wael Alamrany"
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:62
-msgid "— Mr.Err"
-msgstr "— Mr.Err"
+#: src/components/FaqSection.tsx
+msgid "Wael Alamrany (Mr.Err) is a software engineer and frontend-focused full-stack developer based in Sana'a, Yemen, working with companies worldwide. He is currently at Sofa and collaborates remotely with Sparksoft and OnePlusOneTech."
+msgstr "Wael Alamrany (Mr.Err) is a software engineer and frontend-focused full-stack developer based in Sana'a, Yemen, working with companies worldwide. He is currently at Sofa and collaborates remotely with Sparksoft and OnePlusOneTech."
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:67
-msgid "Software Engineer building maintainable web products, production architectures, delivery automation, and open-source tooling."
-msgstr "Software Engineer building maintainable web products, production architectures, delivery automation, and open-source tooling."
+#: src/components/ContactSection.tsx
+msgid "Wanna create<0/>something <1>awesome</1><2/>together?"
+msgstr "Wanna create<0/>something <1>awesome</1><2/>together?"
 
-#. js-lingui-explicit-id
-#: src/components/Navbar.tsx:160
-msgid "nav.projects"
-msgstr "Projects"
+#: src/components/SkillsSection.tsx
+msgid "Web"
+msgstr "Web"
 
-#. js-lingui-explicit-id
-#: src/components/Navbar.tsx:161
-msgid "nav.experience"
-msgstr "Experience"
+#: src/components/TestimonialsSection.tsx
+msgid "What Clients Say"
+msgstr "What Clients Say"
 
-#. js-lingui-explicit-id
-#: src/components/Navbar.tsx:162
-msgid "nav.about"
-msgstr "About"
+#: src/components/FaqSection.tsx
+msgid "What technologies does he specialize in?"
+msgstr "What technologies does he specialize in?"
 
-#. js-lingui-explicit-id
-#: src/components/Navbar.tsx:163
-msgid "nav.skills"
-msgstr "Skills"
+#: src/components/FaqSection.tsx
+msgid "What type of products has he worked on?"
+msgstr "What type of products has he worked on?"
 
-#. js-lingui-explicit-id
-#: src/components/Navbar.tsx:164
-msgid "nav.contact"
-msgstr "Contact"
+#: src/components/FaqSection.tsx
+msgid "Who is Wael Alamrany?"
+msgstr "Who is Wael Alamrany?"
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:45
-#~ msgid "Full-Stack Developer & UI Specialist"
-#~ msgstr "Full-Stack Developer & UI Specialist"
+#: src/components/ExperienceSection.tsx
+msgid "Work Experience"
+msgstr "Work Experience"
 
-#. js-lingui-explicit-id
-#: src/components/HeroSection.tsx:55
-#~ msgid "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
-#~ msgstr "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
+#: src/components/portfolio/Gauge.tsx
+msgid "Years Experience"
+msgstr "Years Experience"
 
-#: src/components/HeroSection.tsx:46
-#~ msgid "— Mr.Err"
-#~ msgstr "— Mr.Err"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:110
-msgid "Access Denied!"
-msgstr "Access Denied!"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:91
-msgid "An error occurred while Sending the Request"
-msgstr "An error occurred while Sending the Request"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:183
-msgid "An unexpected error occurred"
-msgstr "An unexpected error occurred"
-
-#: src/components/HeroSection.tsx:51
-#~ msgid "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
-#~ msgstr "Bridging the gap between robust system architecture and seamless, high-performance user interfaces."
-
-#: src/utils/helpers/ApiErrorHandler.tsx:72
-msgid "Continue"
-msgstr "Continue"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:170
-msgid "data will be displayed when available"
-msgstr "data will be displayed when available"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:69
-msgid "Error"
-msgstr "Error"
-
-#: src/components/HeroSection.tsx:41
-#~ msgid "Full-Stack Developer & UI Specialist"
-#~ msgstr "Full-Stack Developer & UI Specialist"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:135
-#: src/utils/helpers/ApiErrorHandler.tsx:161
-msgid "The page is not found"
-msgstr "The page is not found"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:163
-msgid "There is no data to display at the moment"
-msgstr "There is no data to display at the moment"
-
-#: src/components/HeroSection.tsx:44
-#~ msgid "Wael Alamrany"
-#~ msgstr "Wael Alamrany"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:92
-#: src/utils/helpers/ApiErrorHandler.tsx:184
-msgid "We were unable to load the data. Please try again later"
-msgstr "We were unable to load the data. Please try again later"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:136
-#: src/utils/helpers/ApiErrorHandler.tsx:168
-msgid "Wrong Page Path or URL or Data is Not Found"
-msgstr "Wrong Page Path or URL or Data is Not Found"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:115
-msgid "You Are Not Allowed To Access This Content!"
-msgstr "You Are Not Allowed To Access This Content!"
-
-#: src/utils/helpers/ApiErrorHandler.tsx:113
-msgid "You Are Not Allowed To Access This Page!"
-msgstr "You Are Not Allowed To Access This Page!"
+#: src/components/FaqSection.tsx
+msgid "Yes. Wael works fully remotely from Sana'a, Yemen, collaborating across time zones using Jira, pull requests, and code review workflows."
+msgstr "Yes. Wael works fully remotely from Sana'a, Yemen, collaborating across time zones using Jira, pull requests, and code review workflows."

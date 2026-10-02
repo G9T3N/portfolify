@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useWorkExperiences } from "@/queries";
 import { ExternalLink, Briefcase, MapPin } from "lucide-react";
 import { useMemo } from "react";
+import { Trans } from "@lingui/react/macro";
 
 interface FallbackExperience {
   id: string;
@@ -90,13 +91,13 @@ const ExperienceSection = () => {
         {/* Section Label */}
         <div className="flex justify-center mb-16">
           <motion.h2
-            className="section-label text-center"
+            className="section-heading text-center"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            Work Experience
+            <Trans>Work Experience</Trans>
           </motion.h2>
         </div>
 
@@ -119,7 +120,7 @@ const ExperienceSection = () => {
                 <div className="flex items-center justify-between gap-2 mb-4">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)]">
                     <Briefcase className="w-3 h-3 text-[var(--color-mp-primary)]" />
-                    {exp.is_current ? "Current Role" : exp.start_date}
+                    {exp.is_current ? <Trans>Current Role</Trans> : exp.start_date}
                   </span>
                   <span className="inline-flex items-center gap-1 text-xs text-[var(--color-text-muted)]">
                     <MapPin className="w-3 h-3" />
@@ -161,7 +162,9 @@ const ExperienceSection = () => {
                     aria-label={`Visit ${exp.company} website`}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-text-primary)] hover:text-[var(--color-primary)] transition-colors pt-2 border-t border-[var(--color-border-default)] w-full"
                   >
-                    <span>Visit Company</span>
+                    <span>
+                      <Trans>Visit Company</Trans>
+                    </span>
                     <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                 )}
