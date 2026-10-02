@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.0](https://github.com/G9T3N/portfolify/compare/v1.7.0...v1.8.0) (2026-10-02)
+
+
+### Features
+
+* add Arabic localization support with Lingui ([b0c9486](https://github.com/G9T3N/portfolify/commit/b0c94867aabd2496314c95de9aedc2a9c1ca9fde))
+* add Arabic localization support with Lingui ([dbd06bd](https://github.com/G9T3N/portfolify/commit/dbd06bd0df1f0188d8545d64505888e62f96dbe3))
+
 ## [1.7.0](https://github.com/G9T3N/portfolify/compare/v1.6.0...v1.7.0) (2026-10-01)
 
 
